@@ -1,0 +1,3 @@
+imie_skills_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: ImieSkillsBundle:Default:index }

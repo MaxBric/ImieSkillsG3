@@ -1,3 +1,7 @@
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation
+# app:
+#     resource: "@AppBundle/Controller/"
+#     type:     annotation
+
+imie_skills:
+  resource: "@ImieSkillsBundle/Resources/config/routing.yml"
+  prefix: /
