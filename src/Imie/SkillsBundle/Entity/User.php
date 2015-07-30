@@ -387,7 +387,7 @@ class User
     /**
      * Get managedProjects
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getManagedProjects()
     {
@@ -420,7 +420,7 @@ class User
     /**
      * Get createdProjects
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCreatedProjects()
     {
@@ -453,7 +453,7 @@ class User
     /**
      * Get joinedProjects
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getJoinedProjects()
     {
@@ -486,7 +486,7 @@ class User
     /**
      * Get skills
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSkills()
     {
