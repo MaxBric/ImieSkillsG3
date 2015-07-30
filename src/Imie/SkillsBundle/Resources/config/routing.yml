@@ -1,3 +1,23 @@
 imie_skills_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: ImieSkillsBundle:Default:index }
+    path:     /
+    defaults: { _controller: ImieSkillsBundle:Article:publishedindex }
+
+imie_skills_my_profile:
+    path:     /profile/{id}
+    defaults: { _controller: ImieSkillsBundle:Profile:myProfile }
+
+imie_skills_project_my_project:
+    path:     /project/{id}
+    defaults: { _controller: ImieSkillsBundle:Project:myProject }
+
+imie_skills_project_index:
+    path:     /projects
+    defaults: { _controller: ImieSkillsBundle:Project:index }
+
+imie_skills_contact:
+    path:     /contact
+    defaults: { _controller: ImieSkillsBundle:Contact:index }
+
+imie_skills_search:
+    path:     /search
+    defaults: { _controller: ImieSkillsBundle:Search:newSearch }

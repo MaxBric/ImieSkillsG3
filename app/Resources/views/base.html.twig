@@ -2,12 +2,32 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <title>{% block title %}Bienvenue !{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('bundles/imieskills/css/bootstrap.min.css') }}" />
+        {% endblock %}
+        <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+        <div class="container">
+            <header>
+                {% block menu %}
+                    {% include 'menu.html.twig' %}
+                {% endblock menu %}
+                <h1>{% block page_title %}Bienvenue !{% endblock page_title %}</h1>
+            </header>
+            <hr />
+            <main>
+            {% block body %}{% endblock body %}
+        </main>
+        <hr />
+        <footer>
+            <p><small>IMIE Skills</small></p>
+        </footer>
+    </div>
+    {% block javascripts %}
+        <script src="{{ asset('bundles/imieskills/js/bootstrap.min.js') }}"></script>
+    {% endblock javascripts %}
+</body>
 </html>
