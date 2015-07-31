@@ -1,6 +1,14 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 {% block article %}
 <h2>Mon profil</h2>
+<a href="{{ path('imie_skills_user_addUser)' }}">Créer mon profil</a>
+<hr/>
+<a href="{{ app.request.headers.get('referer)' }}">Retour</a>
+<hr/>
 <p>
-
+  <b>{{ user.userFirstName }}</b><b>{{ user.userLastName }}</b><b>{{ user.userEnable }}</b>
+  <b>Né le {{ user.userAdress }}</b>
+  <b>Né le {{ user.userMail }}</b>
+  <b>Né le {{ user.userPhoneNumber }}</b>
+  <b>Né le {{ user.userBirthday }}</b>
 </p>
