@@ -6,9 +6,12 @@
 <a href="{{ app.request.headers.get('referer)' }}">Retour</a>
 <hr/>
 <p>
-  <b>{{ user.userFirstName }}</b><b>{{ user.userLastName }}</b><b>{{ user.userEnable }}</b>
-  <b>Né le {{ user.userAdress }}</b>
-  <b>Né le {{ user.userMail }}</b>
-  <b>Né le {{ user.userPhoneNumber }}</b>
-  <b>Né le {{ user.userBirthday }}</b>
+  <h3>{{ user.userFirstName }}</h3><h3>{{ user.userLastName }}</h3><p>{{ user.userEnable }}</p>
+  <p>{{ user.userAdress }}</p>
+  <p>{{ user.userMail }}</p>
+  <p>{{ user.userPhoneNumber }}</p>
+  <p>{{ user.userBirthday }}</p>
+  <hr/>
+  <p>{{ user.userDescription }}</p>
 </p>
+{% endblock article %}
