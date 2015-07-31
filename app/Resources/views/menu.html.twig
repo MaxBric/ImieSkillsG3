@@ -1,13 +1,13 @@
 <nav>
     <ul class="nav nav-tabs">
         <li role="presentation">
-            <a href="{{ path('imie_skills_home_index') }}">Accueil</a>
+            <a href="{{ path('imie_skills_home') }}">Accueil</a>
         </li>
         <li role="presentation">
-            <a href="{{ path('imie_skills_user_my_profile') }}">Mon profil</a>
+            <a href="{{ path('imie_skills_user_my_profile', {'id': 1}) }}">Mon profil</a>
         </li>
         <li role="presentation">
-            <a href="{{ path('imie_skills_poject_my_projects') }}">Mes projets</a>
+            <a href="{{ path('imie_skills_project_my_projects', {'id': 1}) }}">Mes projets</a>
         </li>
         <li role="presentation">
             <a href="{{ path('imie_skills_project_index') }}">Tous les projets</a>

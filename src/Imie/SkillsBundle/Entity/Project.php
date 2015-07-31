@@ -102,7 +102,7 @@ class Project
 
 
     public function __construct() {
-        $this->skills = \Doctrine\Common\Collections\ArrayCollection();
+        $this->skills = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

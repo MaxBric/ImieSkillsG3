@@ -25,7 +25,7 @@ class NotificationController extends Controller {
         return $this->render('ImieSkillsBundle:Notification:detail.html.twig', array('notification' => $notification));
     }
 
-  
+
     public function addAction(Request $req){
         $notification = new Notification();
 

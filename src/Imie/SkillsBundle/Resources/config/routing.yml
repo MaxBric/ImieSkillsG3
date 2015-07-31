@@ -5,6 +5,8 @@ imie_skills_home:
 imie_skills_user_my_profile:
     path:     /user/{id}
     defaults: { _controller: ImieSkillsBundle:User:myProfile }
+    requirements:
+      id: \d+
 
 imie_skills_user_add_profile:
     path:     /user/
