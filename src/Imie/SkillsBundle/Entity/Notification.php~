@@ -1,0 +1,58 @@
+<?php
+
+namespace Imie\SkillsBundle\Entity;
+use Imie\SkillsBundle\Entity\NotificationType;
+use Imie\SkillsBundle\Entity\User;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Notification
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Imie\SkillsBundle\Entity\NotificationRepository")
+ */
+class Notification {
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="notificationName", type="string", length=255)
+     */
+    private $notificationName;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="notificationDate", type="date")
+     */
+    private $notificationDate;
+
+    /**
+     * @var string
+     * @ORM\Column(name="notificationDescription", type="string")
+     */
+    private $notificationDescription;
+
+    /**
+     * @var NotificationType
+     * ORM\ManyToOne(targetEntity="NotificationType")
+     */
+    private $notificationType;
+
+    /**
+     * @var User
+     * ORM\ManyToOne(targetEntity="User", inversedBy="notifications")
+     */
+    private $notificationUser;
+
+}
