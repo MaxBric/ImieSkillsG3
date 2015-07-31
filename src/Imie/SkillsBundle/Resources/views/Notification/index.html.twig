@@ -1,0 +1,24 @@
+{# src/imie/TestBundle/Resources/views/User/index.html.twig #}
+
+{% extends 'ImieSkillsBundle::layout.html.twig' %}
+
+{% block article %}
+	<h2>Liste des notifications !</h2>
+        <p><a href="{{ path('imie_notification_add') }}">Ajouter un notification</a></p>
+        <hr />
+        <table class="table table-striped">
+            <thead>
+                <th>Nom</th>
+                <th>Description</th>
+            </thead>
+            <tbody>
+                {% for notification in notifications if notifications is defined %}
+                    <tr>
+                        <td><a href="{{ path('imie_notification_detail', {'id': notification.id}) }}">{{ notification.name }}</a></td>
+                        <td>{{ notification.description}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+{% endblock article %}
