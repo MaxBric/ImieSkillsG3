@@ -4,10 +4,10 @@ namespace Imie\SkillsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class DefaultController extends Controller
+class UserController extends Controller
 {
-    public function indexAction()
+    public function indexAction($id)
     {
-        return $this->render('ImieSkillsBundle:Default:index.html.twig');
+        return $this->render('ImieSkillsBundle:Profile:myProfile.html.twig', array('id' => $id));
     }
 }
