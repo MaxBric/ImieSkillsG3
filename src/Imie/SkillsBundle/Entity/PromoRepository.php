@@ -12,4 +12,18 @@ use Doctrine\ORM\EntityRepository;
  */
 class promoRepository extends EntityRepository
 {
+    public function getPromoOrderedById() {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.id')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getPromoById($id){
+        return $this->createQueryBuilder('p')
+            ->where('p.id =: id')
+            ->setParameter('id',$id)
+            ->getQuery()
+            ->getResult();
+    }
 }
