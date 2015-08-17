@@ -5,6 +5,7 @@ namespace Imie\SkillsBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Imie\SkillsBundle\Form\UserType;
 
 class NotificationType extends AbstractType {
 
@@ -16,6 +17,7 @@ class NotificationType extends AbstractType {
         $builder
                 ->add('notificationName')
                 ->add('notificationDescription')
+                ->add('notificationUser')
                 ->add('valider', 'submit')
         ;
     }

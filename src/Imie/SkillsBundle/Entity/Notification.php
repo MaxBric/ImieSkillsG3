@@ -33,7 +33,7 @@ class Notification {
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="notificationDate", type="date")
+     * @ORM\Column(name="notificationDate", type="datetime")
      */
     private $notificationDate;
 
@@ -44,14 +44,14 @@ class Notification {
     private $notificationDescription;
 
     /**
-     * @var NotificationType
-     * ORM\ManyToOne(targetEntity="NotificationType")
+     * @var \NotificationType
+     * @ORM\ManyToOne(targetEntity="NotificationType")
      */
     private $notificationType;
 
     /**
-     * @var User
-     * ORM\ManyToOne(targetEntity="User", inversedBy="notifications")
+     * @var \User
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="notifications")
      */
     private $notificationUser;
 
@@ -61,7 +61,7 @@ class Notification {
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -84,7 +84,7 @@ class Notification {
     /**
      * Get notificationName
      *
-     * @return string 
+     * @return string
      */
     public function getNotificationName()
     {
@@ -107,7 +107,7 @@ class Notification {
     /**
      * Get notificationDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getNotificationDate()
     {
@@ -130,10 +130,56 @@ class Notification {
     /**
      * Get notificationDescription
      *
-     * @return string 
+     * @return string
      */
     public function getNotificationDescription()
     {
         return $this->notificationDescription;
+    }
+
+    /**
+     * Set notificationType
+     *
+     * @param \Imie\SkillsBundle\Entity\NotificationType $notificationType
+     * @return Notification
+     */
+    public function setNotificationType(\Imie\SkillsBundle\Entity\NotificationType $notificationType = null)
+    {
+        $this->notificationType = $notificationType;
+
+        return $this;
+    }
+
+    /**
+     * Get notificationType
+     *
+     * @return \Imie\SkillsBundle\Entity\NotificationType
+     */
+    public function getNotificationType()
+    {
+        return $this->notificationType;
+    }
+
+    /**
+     * Get notificationUser
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNotificationUser()
+    {
+        return $this->notificationUser;
+    }
+
+    /**
+     * Set notificationUser
+     *
+     * @param \Imie\SkillsBundle\Entity\User $notificationUser
+     * @return Notification
+     */
+    public function setNotificationUser(\Imie\SkillsBundle\Entity\User $notificationUser = null)
+    {
+        $this->notificationUser = $notificationUser;
+
+        return $this;
     }
 }

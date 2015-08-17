@@ -3,6 +3,8 @@
 namespace Imie\SkillsBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Imie\SkillsBundle\Entity\Notification;
+use Imie\SkillsBundle\Entity\Promo;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -115,12 +117,25 @@ class User
     */
     private $skills;
 
+    /**
+    * @var \Notification
+    * @ORM\OneToMany(targetEntity="Notification", mappedBy="notificationUser")
+    */
+    private $notifications;
+
+    /**
+    *@var \Promo
+    * @ORM\OneToMany(targetEntity="Level", mappedBy="userId")
+    */
+    private $promo;
 
     public function __construct() {
       $this->createdProjects = new ArrayCollection();
       $this->managedProjects = new ArrayCollection();
       $this->joinedProjects = new ArrayCollection();
+      $this->notifications = new ArrayCollection();
     }
+
     /**
      * Get id
      *
@@ -491,5 +506,71 @@ class User
     public function getSkills()
     {
         return $this->skills;
+    }
+
+    /**
+     * Add notifications
+     *
+     * @param \Imie\SkillsBundle\Entity\Notification $notifications
+     * @return User
+     */
+    public function addNotification(\Imie\SkillsBundle\Entity\Notification $notifications)
+    {
+        $this->notifications[] = $notifications;
+
+        return $this;
+    }
+
+    /**
+     * Remove notifications
+     *
+     * @param \Imie\SkillsBundle\Entity\Notification $notifications
+     */
+    public function removeNotification(\Imie\SkillsBundle\Entity\Notification $notifications)
+    {
+        $this->notifications->removeElement($notifications);
+    }
+
+    /**
+     * Get notifications
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNotifications()
+    {
+        return $this->notifications;
+    }
+
+    /**
+     * Add promo
+     *
+     * @param \Imie\SkillsBundle\Entity\Level $promo
+     * @return User
+     */
+    public function addPromo(\Imie\SkillsBundle\Entity\Level $promo)
+    {
+        $this->promo[] = $promo;
+
+        return $this;
+    }
+
+    /**
+     * Remove promo
+     *
+     * @param \Imie\SkillsBundle\Entity\Level $promo
+     */
+    public function removePromo(\Imie\SkillsBundle\Entity\Level $promo)
+    {
+        $this->promo->removeElement($promo);
+    }
+
+    /**
+     * Get promo
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPromo()
+    {
+        return $this->promo;
     }
 }

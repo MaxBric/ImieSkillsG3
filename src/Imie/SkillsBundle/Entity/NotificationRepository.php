@@ -18,4 +18,11 @@ class NotificationRepository extends EntityRepository
                         ->getQuery()
                         ->getResult();
       }
+      public function getLastNotificationOrderedByDate(){
+        return $this->createQueryBuilder('n')
+                    ->setMaxResults(3)
+                    ->orderBy('n.notificationDate', 'DESC')
+                    ->getQuery()
+                    ->getResult();
+      }
 }

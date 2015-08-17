@@ -12,7 +12,7 @@ class NotificationController extends Controller {
     public function indexAction() {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('ImieSkillsBundle:Notification');
-        $notifications = $repo->getNotificationOrderedById();
+        $notifications = $repo->getLastNotificationOrderedByDate();
 
         return $this->render('ImieSkillsBundle:Notification:index.html.twig', array('notifications' => $notifications));
     }
@@ -56,10 +56,10 @@ class NotificationController extends Controller {
     public function removeAction($id, Request $req) {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('ImieSkillsBundle:Notification');
-        $prodToRemove = $repo->findOneById($id);
+        $notificationToRemove = $repo->findOneById($id);
 
         try {
-            $em->remove($prodToRemove);
+            $em->remove($notificationToRemove);
             $em->flush();
             $req->getSession()->getFlashBag()->add('success', 'Notification supprimé');
         } catch (\Doctrine\DBAL\DBALException $e) {

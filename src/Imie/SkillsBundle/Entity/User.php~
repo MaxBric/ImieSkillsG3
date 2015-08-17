@@ -3,6 +3,8 @@
 namespace Imie\SkillsBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Imie\SkillsBundle\Entity\Notification;
+use Imie\SkillsBundle\Entity\Promo;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -115,12 +117,25 @@ class User
     */
     private $skills;
 
+    /**
+    * @var \Notification
+    * @ORM\OneToMany(targetEntity="Notification", mappedBy="notificationUser")
+    */
+    private $notifications;
+
+    /**
+    *@var \Promo
+    * @ORM\OneToMany(targetEntity="Level", mappedBy="userId")
+    */
+    private $promo;
 
     public function __construct() {
       $this->createdProjects = new ArrayCollection();
       $this->managedProjects = new ArrayCollection();
       $this->joinedProjects = new ArrayCollection();
+      $this->notifications = new ArrayCollection();
     }
+
     /**
      * Get id
      *
@@ -359,5 +374,137 @@ class User
     public function getUserDescription()
     {
         return $this->userDescription;
+    }
+
+    /**
+     * Add managedProjects
+     *
+     * @param \Imie\SkillsBundle\Entity\Project $managedProjects
+     * @return User
+     */
+    public function addManagedProject(\Imie\SkillsBundle\Entity\Project $managedProjects)
+    {
+        $this->managedProjects[] = $managedProjects;
+
+        return $this;
+    }
+
+    /**
+     * Remove managedProjects
+     *
+     * @param \Imie\SkillsBundle\Entity\Project $managedProjects
+     */
+    public function removeManagedProject(\Imie\SkillsBundle\Entity\Project $managedProjects)
+    {
+        $this->managedProjects->removeElement($managedProjects);
+    }
+
+    /**
+     * Get managedProjects
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getManagedProjects()
+    {
+        return $this->managedProjects;
+    }
+
+    /**
+     * Add createdProjects
+     *
+     * @param \Imie\SkillsBundle\Entity\Project $createdProjects
+     * @return User
+     */
+    public function addCreatedProject(\Imie\SkillsBundle\Entity\Project $createdProjects)
+    {
+        $this->createdProjects[] = $createdProjects;
+
+        return $this;
+    }
+
+    /**
+     * Remove createdProjects
+     *
+     * @param \Imie\SkillsBundle\Entity\Project $createdProjects
+     */
+    public function removeCreatedProject(\Imie\SkillsBundle\Entity\Project $createdProjects)
+    {
+        $this->createdProjects->removeElement($createdProjects);
+    }
+
+    /**
+     * Get createdProjects
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCreatedProjects()
+    {
+        return $this->createdProjects;
+    }
+
+    /**
+     * Add joinedProjects
+     *
+     * @param \Imie\SkillsBundle\Entity\Project $joinedProjects
+     * @return User
+     */
+    public function addJoinedProject(\Imie\SkillsBundle\Entity\Project $joinedProjects)
+    {
+        $this->joinedProjects[] = $joinedProjects;
+
+        return $this;
+    }
+
+    /**
+     * Remove joinedProjects
+     *
+     * @param \Imie\SkillsBundle\Entity\Project $joinedProjects
+     */
+    public function removeJoinedProject(\Imie\SkillsBundle\Entity\Project $joinedProjects)
+    {
+        $this->joinedProjects->removeElement($joinedProjects);
+    }
+
+    /**
+     * Get joinedProjects
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getJoinedProjects()
+    {
+        return $this->joinedProjects;
+    }
+
+    /**
+     * Add skills
+     *
+     * @param \Imie\SkillsBundle\Entity\Level $skills
+     * @return User
+     */
+    public function addSkill(\Imie\SkillsBundle\Entity\Level $skills)
+    {
+        $this->skills[] = $skills;
+
+        return $this;
+    }
+
+    /**
+     * Remove skills
+     *
+     * @param \Imie\SkillsBundle\Entity\Level $skills
+     */
+    public function removeSkill(\Imie\SkillsBundle\Entity\Level $skills)
+    {
+        $this->skills->removeElement($skills);
+    }
+
+    /**
+     * Get skills
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSkills()
+    {
+        return $this->skills;
     }
 }

@@ -15,6 +15,8 @@ imie_skills_user_add_profile:
 imie_skills_project_my_projects:
     path:     /project/{id}
     defaults: { _controller: ImieSkillsBundle:Project:myProjects }
+    requirements:
+      id: \d+
 
 imie_skills_project_add_project:
     path:     /project/
