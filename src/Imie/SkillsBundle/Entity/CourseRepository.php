@@ -12,14 +12,18 @@ use Doctrine\ORM\EntityRepository;
  */
 class CourseRepository extends EntityRepository
 {
-
-    public function getCourse(){
-
+    public function getCourseOrderedById() {
+        return $this->createQueryBuilder('c')
+            ->orderBy('c.id')
+            ->getQuery()
+            ->getResult();
     }
-
+    
     public function getCourseById($id){
         return $this->createQueryBuilder('c')
-            ->addSelect('engid');
-
+            ->where('c.id =: id')
+            ->setParameter('id',$id)
+            ->getQuery()
+            ->getResult();
     }
 }
