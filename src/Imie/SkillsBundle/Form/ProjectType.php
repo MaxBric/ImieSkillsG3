@@ -16,18 +16,27 @@ class ProjectType extends AbstractType
     {
         $builder
             ->add('projectName')
-            ->add('projectEstimatedEnd')
-            ->add('projectStart')
-            ->add('projectEnd')
-            ->add('projectEstimatedStart')
-            ->add('projectProgress')
-            ->add('projectDescription')
-            ->add('manager')
-            ->add('creator')
-            ->add('users')
             ->add('state')
-            ->add('skills')
-            ->add('submit', 'submit')
+            ->add('projectEstimatedStart', 'date')
+            ->add('projectEstimatedEnd', 'date')
+            ->add('projectStart', 'date')
+            ->add('projectEnd', 'date')
+            ->add('projectDescription')
+            ->add('projectProgress', 'percent')
+            ->add('skills', 'entity', array(
+                'class'=> 'ImieSkillsBundle:Skill',
+                'choice_label' => 'skillName',
+                'multiple' => true
+            ))
+            ->add('manager', 'entity', array(
+                'class' => 'ImieSkillsBundle:User',
+                'choice_label' => 'userFullName'
+            ))
+            ->add('users', 'entity', array(
+                'class' => 'ImieSkillsBundle:User',
+                'choice_label' => 'userFullName'
+            ))
+            ->add('Valider', 'submit')
         ;
     }
 

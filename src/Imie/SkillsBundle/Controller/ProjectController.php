@@ -11,15 +11,34 @@ class ProjectController extends Controller
 {
     public function indexAction()
     {
-        // return $this->render('ImieSkillsBundle:Project:myProject.html.twig');
+        $projects = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('ImieSkillsBundle:Project')
+                ->getProjectOrderedById();
+        
+        return $this->render('ImieSkillsBundle:Project:index.html.twig', array(
+            'projects' => $projects
+        ));
+        
     }
 
-    public function addProjectAction()
+    public function addProjectAction(Request $req)
     {
       $project = new Project();
       $form = $this->createForm(new ProjectType(), $project, array(
           'action' => $this->generateUrl('imie_skills_project_add_project')
       ));
+      
+      $form->handleRequest($req);
+      
+      if ($form->isValid()) {
+          
+          $em = $this->getDoctrine()->getManager();
+          $em->persist($project);
+          $em->flush();
+          
+          return $this->redirect($this->generateUrl('imie_skills_project_add_project'));
+      }
       return $this->render('ImieSkillsBundle:Project:addProject.html.twig', array(
                   'form' => $form->createView()
       ));
@@ -34,4 +53,6 @@ class ProjectController extends Controller
       
       return $this->render('ImieSkillsBundle:Project:detailProject.html.twig', array('project' => $project));
     }
+    
+    
 }

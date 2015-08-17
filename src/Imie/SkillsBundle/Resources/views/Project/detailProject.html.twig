@@ -1,17 +1,26 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 {% block article %}
-<h2>Détail du projet</h2>
-<hr/>
-<a href="{{ app.request.headers.get('referer)' }}">Retour</a>
-<hr/>
-<p>
-  <h3>{{ project.projectName }}</h3><p>{{ project.projectEnable }}</p>
-  <ul>
-    {% for skill in project if project is defined %}
-      <li>{{ project.skills }}</li>
-      <li></li>
-    {% endfor %}
-  </ul>
-  <hr/>
-</p>
+    <h2>Détail du projet</h2>
+    <hr/>
+    <a href="{{ app.request.headers.get('referer)' }}">Retour</a>
+    <hr/>
+    <h3>{{ project.projectName }}</h3><p>{{ project.state }}</p>
+    <p>{{ project.projectEstimatedStart }}</p>
+    <p>{{ project.projectEstimatedEnd }}</p>
+    <p>{{ project.projectStart }}</p>
+    <p>{{ project.projectEnd }}</p>
+    <p>{{ project.projectDescription }}</p>
+    <p>{{ project.projectProgress }}</p>
+    <ul>
+        {% for skill in project if project is defined %}
+            <li>{{ project.skills }}</li>
+            {% endfor %}
+    </ul>
+    <p>{{ project.manager }}</p>
+    <ul>
+        {% for user in project if project is defined %}
+            <li>{{ project.users }}</li>
+            {% endfor %}
+    </ul>
+    <hr/>
 {% endblock article %}

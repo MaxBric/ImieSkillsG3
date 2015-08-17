@@ -5,15 +5,14 @@ namespace Imie\SkillsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
-
 /**
  * Project
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Imie\SkillsBundle\Entity\ProjectRepository")
  */
-class Project
-{
+class Project {
+
     /**
      * @var integer
      *
@@ -102,10 +101,13 @@ class Project
      */
     private $skills;
 
-
     public function __construct() {
         $this->skills = new ArrayCollection();
         $this->users = new ArrayCollection();
+        $this->projectEnd = new \DateTime('now');
+        $this->projectEstimatedEnd = new \DateTime('now');
+        $this->projectEstimatedStart = new \DateTime('now');
+            $this->projectStart = new \DateTime('now');
     }
 
     /**
@@ -113,8 +115,7 @@ class Project
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -124,8 +125,7 @@ class Project
      * @param string $projectName
      * @return Project
      */
-    public function setProjectName($projectName)
-    {
+    public function setProjectName($projectName) {
         $this->projectName = $projectName;
 
         return $this;
@@ -136,8 +136,7 @@ class Project
      *
      * @return string
      */
-    public function getProjectName()
-    {
+    public function getProjectName() {
         return $this->projectName;
     }
 
@@ -147,8 +146,7 @@ class Project
      * @param \DateTime $projectEstimatedEnd
      * @return Project
      */
-    public function setProjectEstimatedEnd($projectEstimatedEnd)
-    {
+    public function setProjectEstimatedEnd($projectEstimatedEnd) {
         $this->projectEstimatedEnd = $projectEstimatedEnd;
 
         return $this;
@@ -159,8 +157,7 @@ class Project
      *
      * @return \DateTime
      */
-    public function getProjectEstimatedEnd()
-    {
+    public function getProjectEstimatedEnd() {
         return $this->projectEstimatedEnd;
     }
 
@@ -170,8 +167,7 @@ class Project
      * @param \DateTime $projectStart
      * @return Project
      */
-    public function setProjectStart($projectStart)
-    {
+    public function setProjectStart($projectStart) {
         $this->projectStart = $projectStart;
 
         return $this;
@@ -182,8 +178,7 @@ class Project
      *
      * @return \DateTime
      */
-    public function getProjectStart()
-    {
+    public function getProjectStart() {
         return $this->projectStart;
     }
 
@@ -193,8 +188,7 @@ class Project
      * @param \DateTime $projectEnd
      * @return Project
      */
-    public function setProjectEnd($projectEnd)
-    {
+    public function setProjectEnd($projectEnd) {
         $this->projectEnd = $projectEnd;
 
         return $this;
@@ -205,8 +199,7 @@ class Project
      *
      * @return \DateTime
      */
-    public function getProjectEnd()
-    {
+    public function getProjectEnd() {
         return $this->projectEnd;
     }
 
@@ -216,8 +209,7 @@ class Project
      * @param \DateTime $projectEstimatedStart
      * @return Project
      */
-    public function setProjectEstimatedStart($projectEstimatedStart)
-    {
+    public function setProjectEstimatedStart($projectEstimatedStart) {
         $this->projectEstimatedStart = $projectEstimatedStart;
 
         return $this;
@@ -228,8 +220,7 @@ class Project
      *
      * @return \DateTime
      */
-    public function getProjectEstimatedStart()
-    {
+    public function getProjectEstimatedStart() {
         return $this->projectEstimatedStart;
     }
 
@@ -239,8 +230,7 @@ class Project
      * @param integer $projectProgress
      * @return Project
      */
-    public function setProjectProgress($projectProgress)
-    {
+    public function setProjectProgress($projectProgress) {
         $this->projectProgress = $projectProgress;
 
         return $this;
@@ -251,8 +241,7 @@ class Project
      *
      * @return integer
      */
-    public function getProjectProgress()
-    {
+    public function getProjectProgress() {
         return $this->projectProgress;
     }
 
@@ -262,8 +251,7 @@ class Project
      * @param string $projectDescription
      * @return Project
      */
-    public function setProjectDescription($projectDescription)
-    {
+    public function setProjectDescription($projectDescription) {
         $this->projectDescription = $projectDescription;
 
         return $this;
@@ -274,19 +262,16 @@ class Project
      *
      * @return string
      */
-    public function getProjectDescription()
-    {
+    public function getProjectDescription() {
         return $this->projectDescription;
     }
-
 
     /**
      * Remove manager
      *
      * @param \Imie\SkillsBundle\Entity\User $manager
      */
-    public function removeManager(\Imie\SkillsBundle\Entity\User $manager)
-    {
+    public function removeManager(\Imie\SkillsBundle\Entity\User $manager) {
         $this->manager->removeElement($manager);
     }
 
@@ -295,20 +280,16 @@ class Project
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getManager()
-    {
+    public function getManager() {
         return $this->manager;
     }
-
-
 
     /**
      * Remove creator
      *
      * @param \Imie\SkillsBundle\Entity\User $creator
      */
-    public function removeCreator(\Imie\SkillsBundle\Entity\User $creator)
-    {
+    public function removeCreator(\Imie\SkillsBundle\Entity\User $creator) {
         $this->creator->removeElement($creator);
     }
 
@@ -317,8 +298,7 @@ class Project
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCreator()
-    {
+    public function getCreator() {
         return $this->creator;
     }
 
@@ -328,8 +308,7 @@ class Project
      * @param \Imie\SkillsBundle\Entity\User $users
      * @return Project
      */
-    public function addUser(\Imie\SkillsBundle\Entity\User $users)
-    {
+    public function addUser(\Imie\SkillsBundle\Entity\User $users) {
         $this->users[] = $users;
 
         return $this;
@@ -340,8 +319,7 @@ class Project
      *
      * @param \Imie\SkillsBundle\Entity\User $users
      */
-    public function removeUser(\Imie\SkillsBundle\Entity\User $users)
-    {
+    public function removeUser(\Imie\SkillsBundle\Entity\User $users) {
         $this->users->removeElement($users);
     }
 
@@ -350,8 +328,7 @@ class Project
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getUsers()
-    {
+    public function getUsers() {
         return $this->users;
     }
 
@@ -361,8 +338,7 @@ class Project
      * @param \Imie\SkillsBundle\Entity\State $state
      * @return Project
      */
-    public function setState(\Imie\SkillsBundle\Entity\State $state = null)
-    {
+    public function setState(\Imie\SkillsBundle\Entity\State $state = null) {
         $this->state = $state;
 
         return $this;
@@ -373,8 +349,7 @@ class Project
      *
      * @return \Imie\SkillsBundle\Entity\State
      */
-    public function getState()
-    {
+    public function getState() {
         return $this->state;
     }
 
@@ -384,8 +359,7 @@ class Project
      * @param \Imie\SkillsBundle\Entity\Skill $skills
      * @return Project
      */
-    public function addSkill(\Imie\SkillsBundle\Entity\Skill $skills)
-    {
+    public function addSkill(\Imie\SkillsBundle\Entity\Skill $skills) {
         $this->skills[] = $skills;
 
         return $this;
@@ -396,8 +370,7 @@ class Project
      *
      * @param \Imie\SkillsBundle\Entity\Skill $skills
      */
-    public function removeSkill(\Imie\SkillsBundle\Entity\Skill $skills)
-    {
+    public function removeSkill(\Imie\SkillsBundle\Entity\Skill $skills) {
         $this->skills->removeElement($skills);
     }
 
@@ -406,8 +379,7 @@ class Project
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getSkills()
-    {
+    public function getSkills() {
         return $this->skills;
     }
 
@@ -417,8 +389,7 @@ class Project
      * @param \Imie\SkillsBundle\Entity\User $manager
      * @return Project
      */
-    public function setManager(\Imie\SkillsBundle\Entity\User $manager = null)
-    {
+    public function setManager(\Imie\SkillsBundle\Entity\User $manager = null) {
         $this->manager = $manager;
 
         return $this;
@@ -430,10 +401,10 @@ class Project
      * @param \Imie\SkillsBundle\Entity\User $creator
      * @return Project
      */
-    public function setCreator(\Imie\SkillsBundle\Entity\User $creator = null)
-    {
+    public function setCreator(\Imie\SkillsBundle\Entity\User $creator = null) {
         $this->creator = $creator;
 
         return $this;
     }
+
 }

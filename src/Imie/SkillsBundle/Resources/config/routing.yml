@@ -9,7 +9,7 @@ imie_skills_user_my_profile:
       id: \d+
 
 imie_skills_user_add_profile:
-    path:     /user/
+    path:     /user/add
     defaults: { _controller: ImieSkillsBundle:User:addProfile }
 
 imie_skills_project_detail_projects:
@@ -19,7 +19,7 @@ imie_skills_project_detail_projects:
       id: \d+
 
 imie_skills_project_add_project:
-    path:     /project/
+    path:     /project/add
     defaults: { _controller: ImieSkillsBundle:Project:addProject }
 
 imie_skills_project_index:
