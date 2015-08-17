@@ -10,4 +10,4 @@
 /vendor/
 /web/bundles/
 /symfony.phar
-/nbprojects
+/nbproject/
