@@ -18,7 +18,7 @@ class CourseRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
-    
+
     public function getCourseById($id){
         return $this->createQueryBuilder('c')
             ->where('c.id =: id')

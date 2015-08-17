@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class UserType extends AbstractType
+class CourseType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,27 +15,18 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('userFirstName')
-            ->add('userLastName')
-            ->add('userBirthday')
-            ->add('userPhoneNumber')
-            ->add('userMail', 'email')
-            ->add('userAddress')
-            ->add('userEnable')
-            ->add('userLogin')
-            ->add('userPassword', 'password')
-            ->add('userDescription')
-            ->add('Add', 'submit')
+            ->add('courseName')
+            ->add('promo')
         ;
     }
-
+    
     /**
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Imie\SkillsBundle\Entity\User'
+            'data_class' => 'Imie\SkillsBundle\Entity\Course'
         ));
     }
 
@@ -44,6 +35,6 @@ class UserType extends AbstractType
      */
     public function getName()
     {
-        return 'imie_skillsbundle_user';
+        return 'imie_skillsbundle_course';
     }
 }

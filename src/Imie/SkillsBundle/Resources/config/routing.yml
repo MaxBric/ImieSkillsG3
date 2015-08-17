@@ -8,9 +8,10 @@ imie_skills_user_my_profile:
     requirements:
       id: \d+
 
-imie_skills_user_add_profile:
+imie_skills_user_add:
     path:     /user/add
-    defaults: { _controller: ImieSkillsBundle:User:addProfile }
+    defaults: { _controller: ImieSkillsBundle:User:addUser }
+
 
 imie_skills_project_detail_projects:
     path:     /project/{id}

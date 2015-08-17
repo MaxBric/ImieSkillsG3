@@ -38,6 +38,12 @@ class User
      * @ORM\Column(name="userFirstName", type="string", length=255)
      */
     private $userFirstName;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="userFullName", type="string", length=255)
+     */
+    private $userFullName;
 
     /**
      * @var \DateTime
@@ -640,10 +646,20 @@ class User
     /**
      * Get rank
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getRank()
     {
         return $this->rank;
+    }
+
+    public function setFullName()
+    {
+      $this->userFullName = $this->userFirstName.' '.$this->userLastName;
+      return $this;
+    }
+    public function getFullName()
+    {
+      return $this->fullName;
     }
 }
