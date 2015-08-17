@@ -653,13 +653,13 @@ class User
         return $this->rank;
     }
 
-    public function setFullName()
+    public function setUserFullName()
     {
       $this->userFullName = $this->userFirstName.' '.$this->userLastName;
       return $this;
     }
-    public function getFullName()
+    public function getUserFullName()
     {
-      return $this->fullName;
+      return $this->userFullName;
     }
 }
