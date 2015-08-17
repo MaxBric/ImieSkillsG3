@@ -3,6 +3,8 @@
 namespace Imie\SkillsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
 
 /**
  * Project
@@ -102,7 +104,8 @@ class Project
 
 
     public function __construct() {
-        $this->skills = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->skills = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     /**
