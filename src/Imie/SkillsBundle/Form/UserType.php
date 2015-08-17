@@ -25,11 +25,9 @@ class UserType extends AbstractType
             ->add('userLogin')
             ->add('userPassword')
             ->add('userDescription')
-            ->add('joinedProjects')
-            ->add('notifications')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

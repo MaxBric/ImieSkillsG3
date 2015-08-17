@@ -5,12 +5,12 @@ namespace Imie\SkillsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Role
+ * Rank
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Imie\SkillsBundle\Entity\RoleRepository")
+ * @ORM\Entity
  */
-class Role
+class Rank
 {
     /**
      * @var integer
@@ -28,11 +28,16 @@ class Role
      */
     private $rank;
 
+    /**
+    * @var \User
+    * @ORM\ManyToOne(targetEntity="User", inversedBy="rank")
+    */
+    private $users;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -43,7 +48,7 @@ class Role
      * Set rank
      *
      * @param string $rank
-     * @return Role
+     * @return Rank
      */
     public function setRank($rank)
     {
@@ -55,10 +60,33 @@ class Role
     /**
      * Get rank
      *
-     * @return string 
+     * @return string
      */
     public function getRank()
     {
         return $this->rank;
+    }
+
+    /**
+     * Set users
+     *
+     * @param \Imie\SkillsBundle\Entity\User $users
+     * @return Rank
+     */
+    public function setUsers(\Imie\SkillsBundle\Entity\User $users = null)
+    {
+        $this->users = $users;
+
+        return $this;
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Imie\SkillsBundle\Entity\User
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

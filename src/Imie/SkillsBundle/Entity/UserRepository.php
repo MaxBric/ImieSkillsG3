@@ -12,10 +12,18 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository
 {
-  public function getUserOrderedBy(){
+  public function getUsersOrderedById(){
     return $this->createQueryBuilder('u')
                 ->orderBy('u.id')
                 ->getQuery()
                 ->getResult();
+  }
+
+  public function getUserById($id) {
+      return $qb = $this->createQueryBuilder('u')
+                      ->where('u.id = :id')
+                      ->setParameter('id', $id)
+                      ->getQuery()
+                      ->getSingleResult();
   }
 }
