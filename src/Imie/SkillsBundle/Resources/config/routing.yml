@@ -34,18 +34,23 @@ imie_skills_contact:
 imie_skills_search:
     path:     /search
     defaults: { _controller: ImieSkillsBundle:Search:newSearch }
+
 imie_skills_homepage:
     path:     /
     defaults: { _controller: ImieSkillsBundle:Notification:index }
+
 imie_notification_index:
     path:   /notification
     defaults: {_controller: ImieSkillsBundle:Notification:index}
+
 imie_notification_add:
     path:   /notification/add
     defaults: {_controller: ImieSkillsBundle:Notification:add}
+
 imie_notification_details:
     path:   /notification/details
     defaults: {_controller: ImieSkillsBundle:Notification:details}
+
 imie_notification_delete:
     path:    /notification/delete
     defaults : {_controller: ImieSkillsBundle:Notification:delete}
