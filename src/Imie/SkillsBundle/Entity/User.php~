@@ -129,6 +129,13 @@ class User
     */
     private $promo;
 
+
+    /**
+    * @var \Role
+    * @ORM\OneToMany(targetEntity="Rank", mappedBy="users")
+    */
+    private $rank;
+
     public function __construct() {
       $this->createdProjects = new ArrayCollection();
       $this->managedProjects = new ArrayCollection();
@@ -506,5 +513,104 @@ class User
     public function getSkills()
     {
         return $this->skills;
+    }
+
+    /**
+     * Add notifications
+     *
+     * @param \Imie\SkillsBundle\Entity\Notification $notifications
+     * @return User
+     */
+    public function addNotification(\Imie\SkillsBundle\Entity\Notification $notifications)
+    {
+        $this->notifications[] = $notifications;
+
+        return $this;
+    }
+
+    /**
+     * Remove notifications
+     *
+     * @param \Imie\SkillsBundle\Entity\Notification $notifications
+     */
+    public function removeNotification(\Imie\SkillsBundle\Entity\Notification $notifications)
+    {
+        $this->notifications->removeElement($notifications);
+    }
+
+    /**
+     * Get notifications
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNotifications()
+    {
+        return $this->notifications;
+    }
+
+    /**
+     * Add promo
+     *
+     * @param \Imie\SkillsBundle\Entity\Level $promo
+     * @return User
+     */
+    public function addPromo(\Imie\SkillsBundle\Entity\Level $promo)
+    {
+        $this->promo[] = $promo;
+
+        return $this;
+    }
+
+    /**
+     * Remove promo
+     *
+     * @param \Imie\SkillsBundle\Entity\Level $promo
+     */
+    public function removePromo(\Imie\SkillsBundle\Entity\Level $promo)
+    {
+        $this->promo->removeElement($promo);
+    }
+
+    /**
+     * Get promo
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPromo()
+    {
+        return $this->promo;
+    }
+
+    /**
+     * Add role
+     *
+     * @param \Imie\SkillsBundle\Entity\Role $role
+     * @return User
+     */
+    public function addRole(\Imie\SkillsBundle\Entity\Role $role)
+    {
+        $this->role[] = $role;
+
+        return $this;
+    }
+
+    /**
+     * Remove role
+     *
+     * @param \Imie\SkillsBundle\Entity\Role $role
+     */
+    public function removeRole(\Imie\SkillsBundle\Entity\Role $role)
+    {
+        $this->role->removeElement($role);
+    }
+
+    /**
+     * Get role
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRole()
+    {
+        return $this->role;
     }
 }

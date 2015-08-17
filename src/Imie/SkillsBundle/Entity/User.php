@@ -129,6 +129,13 @@ class User
     */
     private $promo;
 
+
+    /**
+    * @var \Role
+    * @ORM\OneToMany(targetEntity="Rank", mappedBy="users")
+    */
+    private $rank;
+
     public function __construct() {
       $this->createdProjects = new ArrayCollection();
       $this->managedProjects = new ArrayCollection();
@@ -534,7 +541,7 @@ class User
     /**
      * Get notifications
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getNotifications()
     {
@@ -567,10 +574,76 @@ class User
     /**
      * Get promo
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getPromo()
     {
         return $this->promo;
+    }
+
+    /**
+     * Add role
+     *
+     * @param \Imie\SkillsBundle\Entity\Role $role
+     * @return User
+     */
+    public function addRole(\Imie\SkillsBundle\Entity\Role $role)
+    {
+        $this->role[] = $role;
+
+        return $this;
+    }
+
+    /**
+     * Remove role
+     *
+     * @param \Imie\SkillsBundle\Entity\Role $role
+     */
+    public function removeRole(\Imie\SkillsBundle\Entity\Role $role)
+    {
+        $this->role->removeElement($role);
+    }
+
+    /**
+     * Get role
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * Add rank
+     *
+     * @param \Imie\SkillsBundle\Entity\Rank $rank
+     * @return User
+     */
+    public function addRank(\Imie\SkillsBundle\Entity\Rank $rank)
+    {
+        $this->rank[] = $rank;
+
+        return $this;
+    }
+
+    /**
+     * Remove rank
+     *
+     * @param \Imie\SkillsBundle\Entity\Rank $rank
+     */
+    public function removeRank(\Imie\SkillsBundle\Entity\Rank $rank)
+    {
+        $this->rank->removeElement($rank);
+    }
+
+    /**
+     * Get rank
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRank()
+    {
+        return $this->rank;
     }
 }
