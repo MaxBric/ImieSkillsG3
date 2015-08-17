@@ -12,4 +12,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class SkillRepository extends EntityRepository
 {
+    public function getSkillOrderedById() {
+        return $this->createQueryBuilder('s')
+                        ->orderBy('s.id')
+                        ->getQuery()
+                        ->getResult();
+      }
 }
