@@ -25,8 +25,13 @@ class ProjectController extends Controller
       ));
     }
 
-    public function myProjectAction($id=1)
+    public function detailProjectAction($id)
     {
-      // a definir
+      $em = $this->getDoctrine()->getManager();
+      $repo = $em->getRepository('ImieSkillsBundle:Project');
+
+      $project = $repo->findOneBy($id);
+      
+      return $this->render('ImieSkillsBundle:Project:detailProject.html.twig', array('project' => $project));
     }
 }

@@ -1,20 +1,17 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 {% block article %}
-<h2>Mes projets</h2>
-<a href="{{ path('imie_skills_project_addProject)' }}">Créer un projet</a>
+<h2>Détail du projet</h2>
 <hr/>
 <a href="{{ app.request.headers.get('referer)' }}">Retour</a>
 <hr/>
 <p>
-  {% for project in projects if projects is defined %}
   <h3>{{ project.projectName }}</h3><p>{{ project.projectEnable }}</p>
   <ul>
-    {% for skill in skills if skills is defined %}
-      <li>project.skills</li>
+    {% for skill in project if project is defined %}
+      <li>{{ project.skills }}</li>
       <li></li>
     {% endfor %}
   </ul>
   <hr/>
-  {% endfor %}
 </p>
 {% endblock article %}
