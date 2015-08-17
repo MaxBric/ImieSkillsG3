@@ -18,7 +18,7 @@ class SchoolRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
-    
+
     public function getSchoolById($id){
         return $this->createQueryBuilder('s')
             ->where('s.id =: id')
