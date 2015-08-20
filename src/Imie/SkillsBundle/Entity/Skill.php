@@ -34,17 +34,17 @@ class Skill
      * @ORM\Column(name="skillDescription", type="string", length=255)
      */
     private $skillDescription;
-    
+
     /**
      * @var integer
-     * @ORM\Column(name="skillParentId", type="integer")
+     * @ORM\Column(name="skillParentId", type="integer", nullable=true)
      */
     private $skillParentId;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -67,7 +67,7 @@ class Skill
     /**
      * Get skillName
      *
-     * @return string 
+     * @return string
      */
     public function getSkillName()
     {
@@ -90,7 +90,7 @@ class Skill
     /**
      * Get skillDescription
      *
-     * @return string 
+     * @return string
      */
     public function getSkillDescription()
     {
@@ -113,7 +113,7 @@ class Skill
     /**
      * Get skillParentId
      *
-     * @return integer 
+     * @return integer
      */
     public function getSkillParentId()
     {
