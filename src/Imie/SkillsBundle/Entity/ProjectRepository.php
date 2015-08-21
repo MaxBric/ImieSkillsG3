@@ -26,9 +26,9 @@ class ProjectRepository extends EntityRepository
 
   public function getProjectById($id){
     return $this->createQueryBuilder('p')
-    ->where('p.id =: id')
+    ->where('p.id = :id')
     ->setParameter('id',$id)
     ->getQuery()
-    ->getResult();
+    ->getSingleResult();
   }
 }

@@ -39,14 +39,14 @@ class Project {
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="projectStart", type="datetime")
+     * @ORM\Column(name="projectStart", type="datetime", nullable=true)
      */
     private $projectStart;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="projectEnd", type="datetime")
+     * @ORM\Column(name="projectEnd", type="datetime", nullable=true)
      */
     private $projectEnd;
 
@@ -91,7 +91,7 @@ class Project {
 
     /**
      * @var \State
-     * @ORM\OneToOne(targetEntity="State")
+     * @ORM\ManyToOne(targetEntity="State", inversedBy="projects")
      */
     private $state;
 
@@ -104,10 +104,8 @@ class Project {
     public function __construct() {
         $this->skills = new ArrayCollection();
         $this->users = new ArrayCollection();
-        $this->projectEnd = new \DateTime('now');
         $this->projectEstimatedEnd = new \DateTime('now');
         $this->projectEstimatedStart = new \DateTime('now');
-            $this->projectStart = new \DateTime('now');
     }
 
     /**
@@ -310,6 +308,7 @@ class Project {
      */
     public function addUser(\Imie\SkillsBundle\Entity\User $users) {
         $this->users[] = $users;
+  
 
         return $this;
     }

@@ -31,7 +31,12 @@ class ProjectController extends Controller {
         if ($form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
-            $em->persist($project->getState());
+            $users = $form->get('users')->getData();
+            
+            foreach ($users as $user){
+                $user->addJoinedProject($project);
+            }
+         
             $em->persist($project);
             $em->flush();
 
@@ -46,9 +51,11 @@ class ProjectController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('ImieSkillsBundle:Project');
 
-        $project = $repo->findOneBy($id);
+        $project = $repo->getProjectById($id);
 
         return $this->render('ImieSkillsBundle:Project:detailProject.html.twig', array('project' => $project));
     }
+    
+    
 
 }

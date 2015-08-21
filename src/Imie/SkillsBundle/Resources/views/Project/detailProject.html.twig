@@ -2,24 +2,27 @@
 {% block article %}
     <h2>Détail du projet</h2>
     <hr/>
-    <a href="{{ app.request.headers.get('referer)' }}">Retour</a>
+    <a href="{{ path('imie_skills_project_index') }}">Retour à la liste des projets</a>
     <hr/>
-    <h3>{{ project.projectName }}</h3><p>{{ project.state }}</p>
-    <p>{{ project.projectEstimatedStart }}</p>
-    <p>{{ project.projectEstimatedEnd }}</p>
-    <p>{{ project.projectStart }}</p>
-    <p>{{ project.projectEnd }}</p>
-    <p>{{ project.projectDescription }}</p>
-    <p>{{ project.projectProgress }}</p>
-    <ul>
-        {% for skill in project if project is defined %}
-            <li>{{ project.skills }}</li>
+    <h3>Nom du projet : {{ project.projectName }}</h3>
+    <p>Phase d'avancement : {{ project.state.statut }}</p>
+    <p>Progression de la phase en cours : {{ project.projectProgress }} %</p>
+    <p>Date de départ estimée : {{ project.projectEstimatedStart|date('d/m/y') }}</p>
+    <p>Date de fin estimée : {{ project.projectEstimatedEnd|date('d/m/y') }}</p>
+    <p>Date de départ réelle : </p>
+    <p>Date de fin réelle : </p>
+    <p>Description : {{ project.projectDescription }}</p>
+    <h3>Compétences demandées :</h3>
+    <ul> 
+        {% for skill in project.skills if project.skills is defined %}
+            <li>{{ skill.skillName }}</li>
             {% endfor %}
     </ul>
-    <p>{{ project.manager }}</p>
+    <h3>Chef de projet : {{ project.manager.userFullName }}</h3>
+    <h3>Équipe :</h3>
     <ul>
-        {% for user in project if project is defined %}
-            <li>{{ project.users }}</li>
+        {% for user in project.users if project.users is defined %}
+            <li>{{ user.userFullName }}</li>
             {% endfor %}
     </ul>
     <hr/>

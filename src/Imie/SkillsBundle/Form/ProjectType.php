@@ -16,13 +16,12 @@ class ProjectType extends AbstractType
     {
         $builder
             ->add('projectName')
-            ->add('state', 'choice', array(
-                'choices' => array('1' => 'Constitution de l\'équipe', '2' => 'Analyse et planification', '3' => 'Modélisation et maquettage', '4' => 'Développement', '5' => 'Phase de tests', '6' => 'Finalisation et déploiement', '7' => 'Suspendu', '8' => 'Abandonné')))
+            ->add('state', 'entity', array(
+                'class' => 'ImieSkillsBundle:State',
+                'choice_label' => 'statut'))                  
             ->add('projectProgress', 'percent')
             ->add('projectEstimatedStart', 'date')
             ->add('projectEstimatedEnd', 'date')
-            ->add('projectStart', 'date')
-            ->add('projectEnd', 'date')
             ->add('projectDescription')
             ->add('skills', 'entity', array(
                 'class'=> 'ImieSkillsBundle:Skill',
@@ -35,7 +34,9 @@ class ProjectType extends AbstractType
             ))
             ->add('users', 'entity', array(
                 'class' => 'ImieSkillsBundle:User',
-                'choice_label' => 'userFullName'
+                'choice_label' => 'userFullName',
+                'choice_value' => 'id',
+                'multiple' => true
             ))
             ->add('Valider', 'submit')
         ;

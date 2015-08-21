@@ -1,0 +1,29 @@
+{% extends 'ImieSkillsBundle::layout.html.twig' %}
+{% block article %}
+    <h2>Liste des projets</h2>
+    <hr/>
+    <button><a href="{{ path('imie_skills_project_add_project') }}">Ajouter un article</a></button>
+    <hr/>
+    <table>
+        <thead>
+        <td>Nom</td>
+        <td>Chef de projet</td>
+        <td>Phase</td>
+        <td>Compétences demandées</td>
+    </thead>
+    <tbody>
+        {% for project in projects %}
+            <tr>
+                <td><a href="{{ path('imie_skills_project_detail_projects', {id:project.id})}}">{{ project.projectName }}</a></td>
+                <td>{{ project.manager.userFullName }}</td>
+                <td>{{ project.state.statut }}</td>
+                <td><ul> 
+                        {% for skill in project.skills if project.skills is defined %}
+                            <li>{{ skill.skillName }}</li>
+                            {% endfor %}
+                    </ul></td>
+                {% endfor %}
+    </tbody>
+</table>
+<hr/>
+{% endblock article %}

@@ -137,7 +137,7 @@ class User
 
 
     /**
-    * @var \Role
+    * @var \Rank
     * @ORM\OneToMany(targetEntity="Rank", mappedBy="users")
     */
     private $rank;
@@ -464,6 +464,7 @@ class User
     public function addJoinedProject(\Imie\SkillsBundle\Entity\Project $joinedProjects)
     {
         $this->joinedProjects[] = $joinedProjects;
+        $joinedProjects->addUser($this);
 
         return $this;
     }
@@ -588,36 +589,26 @@ class User
     }
 
     /**
-     * Add role
+     * Add rank
      *
-     * @param \Imie\SkillsBundle\Entity\Role $role
+     * @param \Imie\SkillsBundle\Entity\Rank $rank
      * @return User
      */
-    public function addRole(\Imie\SkillsBundle\Entity\Role $role)
+    public function addRole(\Imie\SkillsBundle\Entity\Rank $rank)
     {
-        $this->role[] = $role;
+        $this->rank[] = $rank;
 
         return $this;
     }
 
     /**
-     * Remove role
+     * Remove rank
      *
-     * @param \Imie\SkillsBundle\Entity\Role $role
+     * @param \Imie\SkillsBundle\Entity\Rank $rank
      */
-    public function removeRole(\Imie\SkillsBundle\Entity\Role $role)
+    public function removeRole(\Imie\SkillsBundle\Entity\Rank $rank)
     {
-        $this->role->removeElement($role);
-    }
-
-    /**
-     * Get role
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getRole()
-    {
-        return $this->role;
+        $this->rank->removeElement($rank);
     }
 
     /**

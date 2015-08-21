@@ -2,7 +2,7 @@
 
 {% block article %}
   <h2>Création de projet</h2>
-  <a href="{{ app.request.headers.get('referer') }}">Retour</a>
+  <a href="{{ app.request.headers.get('referer') }}">Retour à la liste des projets</a>
   <hr/>
   <form method="post" action="{{ path('imie_skills_project_add_project') }}" {{ form_enctype(form) }}>
     {{ form(form) }}
