@@ -11,10 +11,10 @@ class SkillController extends Controller
 {
     public function indexAction($id)
     {
-        //return $this->render('ImieSkillsBundle:Profile:myProfile.html.twig', array('id' => $id));
+        //return $this->render('ImieSkillsBundle:User:me.html.twig', array('id' => $id));
     }
 
-    public function addSkillAction(Request $req)
+    public function addAction(Request $req)
     {
       $skill = new Skill();
 
