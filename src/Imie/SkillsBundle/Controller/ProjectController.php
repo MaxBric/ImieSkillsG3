@@ -56,6 +56,17 @@ class ProjectController extends Controller {
         return $this->render('ImieSkillsBundle:Project:details.html.twig', array('project' => $project));
     }
     
+    public function deleteAction($id) {
+        $em = $this->getDoctrine()->getManager();
+        
+        $repo = $em->getRepository('ImieSkillsBundle:Project');
+        
+        $project = $repo->find($id);
+        
+        $em->remove($project);
+        $em->flush();
+        
+        return $this->redirect($this->generateUrl('imie_skills_user_me'));
+    }
     
-
 }
