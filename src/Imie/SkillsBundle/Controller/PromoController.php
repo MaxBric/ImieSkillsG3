@@ -33,7 +33,7 @@ class PromoController extends Controller
                 echo $e->getMessage();
             }
         }
-        return $this->render('ImieSkillsBundle:Formation:addFormation.html.twig', array(
+        return $this->render('ImieSkillsBundle:Formation:add.html.twig', array(
             'form' => $form->createView()
         ));
     }
