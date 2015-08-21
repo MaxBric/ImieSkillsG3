@@ -1,9 +1,23 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-    <h2>Creation institut</h2>
+    <h2>Creation Ecole</h2>
     <hr/>
+<<<<<<< HEAD:src/Imie/SkillsBundle/Resources/views/Formation/addFormation.html.twig
+    <form method="post" action="{{ path('imie_skills_school_add') }}" {{ form_enctype(form) }}>
+        {{ form(form) }}
+    </form>
+    <h2>Creation Formation</h2>
+    <hr/>
+    <form method="post" action="{{ path('imie_skills_course_add') }}" {{ form_enctype(form) }}>
+        {{ form(form) }}
+    </form>
+    <h2>Creation classe</h2>
+    <hr/>
+    <form method="post" action="{{ path('imie_skills_promo_add') }}" {{ form_enctype(form) }}>
+=======
     <form method="post" action="{{ path('imie_skills_formation_add') }}" {{ form_enctype(form) }}>
+>>>>>>> origin/master:src/Imie/SkillsBundle/Resources/views/Formation/add.html.twig
         {{ form(form) }}
     </form>
 {% endblock article %}

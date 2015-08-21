@@ -6,7 +6,7 @@
 	<h2>Ajouter une notification</h2>
         <a href="{{ app.request.headers.get('referer') }}">Retour</a>
         <hr />
-        <form method="post" action="{{ path('imie_notification_add') }}"
+        <form method="post" action="{{ path('imie_skills_notification_add') }}"
               {{ form_enctype(form) }}>
             {{ form(form) }}
         </form>
