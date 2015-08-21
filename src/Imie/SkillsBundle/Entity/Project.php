@@ -315,6 +315,18 @@ class Project {
     }
 
     /**
+     * Set users
+     *
+     * @param \Imie\SkillsBundle\Entity\User $users
+     * @return Project
+     */
+    public function setUser(\Imie\SkillsBundle\Entity\User $users) {
+        $this->users[] = $users;
+
+        return $this;
+    }
+
+    /**
      * Remove users
      *
      * @param \Imie\SkillsBundle\Entity\User $users
