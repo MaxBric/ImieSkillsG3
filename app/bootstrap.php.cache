@@ -1031,30 +1031,6 @@ return in_array($this->getMethod(), array('GET','HEAD'));
 }
 public function getContent($asResource = false)
 {
-<<<<<<< HEAD
-$currentContentIsResource = is_resource($this->content);
-if (PHP_VERSION_ID < 50600 && false === $this->content) {
-throw new \LogicException('getContent() can only be called once when using the resource return type and PHP below 5.6.');
-}
-if (true === $asResource) {
-if ($currentContentIsResource) {
-rewind($this->content);
-return $this->content;
-}
-if (is_string($this->content)) {
-$resource = fopen('php://temp','r+');
-fwrite($resource, $this->content);
-rewind($resource);
-return $resource;
-}
-$this->content = false;
-return fopen('php://input','rb');
-}
-if ($currentContentIsResource) {
-rewind($this->content);
-return stream_get_contents($this->content);
-}
-=======
 if (PHP_VERSION_ID < 50600 && (false === $this->content || (true === $asResource && null !== $this->content))) {
 throw new \LogicException('getContent() can only be called once when using the resource return type and PHP below 5.6.');
 }
@@ -1062,7 +1038,6 @@ if (true === $asResource) {
 $this->content = false;
 return fopen('php://input','rb');
 }
->>>>>>> 0f7e6b4feded5a43265c5667323aa3d6631c8ce5
 if (null === $this->content) {
 $this->content = file_get_contents('php://input');
 }
@@ -1252,12 +1227,7 @@ $pathInfo ='/';
 if ($pos = strpos($requestUri,'?')) {
 $requestUri = substr($requestUri, 0, $pos);
 }
-<<<<<<< HEAD
-$pathInfo = substr($requestUri, strlen($baseUrl));
-if (null !== $baseUrl && (false === $pathInfo ||''=== $pathInfo)) {
-=======
 if (null !== $baseUrl && false === $pathInfo = substr($requestUri, strlen($baseUrl))) {
->>>>>>> 0f7e6b4feded5a43265c5667323aa3d6631c8ce5
 return'/';
 } elseif (null === $baseUrl) {
 return $requestUri;
@@ -1826,11 +1796,7 @@ public static function closeOutputBuffers($targetLevel, $flush)
 {
 $status = ob_get_status(true);
 $level = count($status);
-<<<<<<< HEAD
-$flags = defined('PHP_OUTPUT_HANDLER_REMOVABLE') ? PHP_OUTPUT_HANDLER_REMOVABLE | ($flush ? PHP_OUTPUT_HANDLER_FLUSHABLE : PHP_OUTPUT_HANDLER_CLEANABLE) : -1;
-=======
 $flags = PHP_VERSION_ID >= 50400 ? PHP_OUTPUT_HANDLER_REMOVABLE | ($flush ? PHP_OUTPUT_HANDLER_FLUSHABLE : PHP_OUTPUT_HANDLER_CLEANABLE) : -1;
->>>>>>> 0f7e6b4feded5a43265c5667323aa3d6631c8ce5
 while ($level-- > $targetLevel && ($s = $status[$level]) && (!isset($s['del']) ? !isset($s['flags']) || $flags === ($s['flags'] & $flags) : $s['del'])) {
 if ($flush) {
 ob_end_flush();
@@ -2381,19 +2347,11 @@ protected $booted = false;
 protected $name;
 protected $startTime;
 protected $loadClassCache;
-<<<<<<< HEAD
-const VERSION ='2.7.3';
-const VERSION_ID ='20703';
-const MAJOR_VERSION ='2';
-const MINOR_VERSION ='7';
-const RELEASE_VERSION ='3';
-=======
 const VERSION ='2.7.2';
 const VERSION_ID ='20702';
 const MAJOR_VERSION ='2';
 const MINOR_VERSION ='7';
 const RELEASE_VERSION ='2';
->>>>>>> 0f7e6b4feded5a43265c5667323aa3d6631c8ce5
 const EXTRA_VERSION ='';
 const END_OF_MAINTENANCE ='05/2018';
 const END_OF_LIFE ='05/2019';
