@@ -12,7 +12,7 @@ class NotificationController extends Controller {
     public function indexAction() {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('ImieSkillsBundle:Notification');
-        $notifications = $repo->getLastNotificationOrderedByDate();
+        $notifications = $repo->getLastNotificationsOrderedByDate();
 
         return $this->render('ImieSkillsBundle:Notification:index.html.twig', array('notifications' => $notifications));
     }
