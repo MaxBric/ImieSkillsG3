@@ -25,7 +25,7 @@ class UserController extends Controller
       $form->handleRequest($req);
       if ($form->isValid()) {
           try {
-              $user->setFullName();
+              $user->setUserFullName();
               $em = $this->getDoctrine()->getManager();
               $em->persist($user);
               $em->flush();

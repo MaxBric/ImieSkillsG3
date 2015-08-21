@@ -31,6 +31,7 @@ class ProjectController extends Controller {
         if ($form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
+            $em->persist($project->getState());
             $em->persist($project);
             $em->flush();
 

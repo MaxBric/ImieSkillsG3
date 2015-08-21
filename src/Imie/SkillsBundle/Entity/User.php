@@ -167,7 +167,7 @@ class User
      */
     public function setUserLastName($userLastName)
     {
-        $this->userLastName = $userLastName;
+        $this->userLastName = ucfirst($userLastName);
 
         return $this;
     }
@@ -190,7 +190,7 @@ class User
      */
     public function setUserFirstName($userFirstName)
     {
-        $this->userFirstName = $userFirstName;
+        $this->userFirstName = ucfirst($userFirstName);
 
         return $this;
     }
