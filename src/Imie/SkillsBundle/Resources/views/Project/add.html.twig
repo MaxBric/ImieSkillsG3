@@ -4,7 +4,7 @@
   <h2>Création de projet</h2>
   <a href="{{ app.request.headers.get('referer') }}">Retour</a>
   <hr/>
-  <form method="post" action="{{ path('imie_skills_project_add_project') }}" {{ form_enctype(form) }}>
+  <form method="post" action="{{ path('imie_skills_project_add') }}" {{ form_enctype(form) }}>
     {{ form(form) }}
   </form>
 {% endblock article %}

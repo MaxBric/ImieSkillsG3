@@ -14,7 +14,7 @@
             <tbody>
                 {% for notification in notifications if notifications is defined %}
                     <tr>
-                        <td><a href="{{ path('imie_notification_detail', {'id': notification.id}) }}">{{ notification.name }}</a></td>
+                        <td><a href="{{ path('imie_notification_details', {'id': notification.id}) }}">{{ notification.name }}</a></td>
                         <td>{{ notification.description}}</td>
                     </tr>
                 {% endfor %}

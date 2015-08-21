@@ -3,7 +3,7 @@
 {% block article %}
     <h2>Creation institut</h2>
     <hr/>
-    <form method="post" action="{{ path('imie_skills_user_add_formation') }}" {{ form_enctype(form) }}>
+    <form method="post" action="{{ path('imie_skills_formation_add') }}" {{ form_enctype(form) }}>
         {{ form(form) }}
     </form>
 {% endblock article %}
