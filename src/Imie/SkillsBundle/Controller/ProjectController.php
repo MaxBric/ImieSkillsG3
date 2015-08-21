@@ -14,7 +14,7 @@ class ProjectController extends Controller
         $projects = $this->getDoctrine()
                 ->getManager()
                 ->getRepository('ImieSkillsBundle:Project')
-                ->getProjectOrderedById();
+                ->getProjectsOrderedById();
         
         return $this->render('ImieSkillsBundle:Project:index.html.twig', array(
             'projects' => $projects
