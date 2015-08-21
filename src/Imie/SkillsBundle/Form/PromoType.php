@@ -15,12 +15,12 @@ class PromoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('course')
             ->add('promoName')
             ->add('users')
-            ->add('course')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

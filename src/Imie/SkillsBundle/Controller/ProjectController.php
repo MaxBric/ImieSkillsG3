@@ -32,11 +32,11 @@ class ProjectController extends Controller {
 
             $em = $this->getDoctrine()->getManager();
             $users = $form->get('users')->getData();
-            
+
             foreach ($users as $user){
                 $user->addJoinedProject($project);
             }
-         
+
             $em->persist($project);
             $em->flush();
 
@@ -56,6 +56,16 @@ class ProjectController extends Controller {
         return $this->render('ImieSkillsBundle:Project:details.html.twig', array('project' => $project));
     }
     
-    
-
+    public function deleteAction($id) {
+        $em = $this->getDoctrine()->getManager();
+        
+        $repo = $em->getRepository('ImieSkillsBundle:Project');
+        
+        $project = $repo->find($id);
+        
+        $em->remove($project);
+        $em->flush();
+        
+        return $this->redirect($this->generateUrl('imie_skills_user_me'));
+    }
 }
