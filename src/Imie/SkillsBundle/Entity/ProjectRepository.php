@@ -12,10 +12,23 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProjectRepository extends EntityRepository
 {
-    public function getProjectsOrderedById() {
-        return $this->createQueryBuilder('p')
-                        ->orderBy('p.id')
-                        ->getQuery()
-                        ->getResult();
-      }
+  public function getProjectsOrderedById() {
+    return $this->createQueryBuilder('p')
+    ->orderBy('p.id')
+    ->getQuery()
+    ->getResult();
+  }
+  public function getProjectsById($ids) {
+    $qb = $this->createQueryBuilder('p');
+    $qb->where($qb->expr()->in('p.id', $ids));
+    return $qb->getQuery()->getResult();
+  }
+
+  public function getProjectById($id){
+    return $this->createQueryBuilder('p')
+    ->where('p.id =: id')
+    ->setParameter('id',$id)
+    ->getQuery()
+    ->getResult();
+  }
 }

@@ -12,4 +12,23 @@ use Doctrine\ORM\EntityRepository;
  */
 class LevelRepository extends EntityRepository
 {
+  public function getLevelsOrderedById() {
+    return $this->createQueryBuilder('l')
+    ->orderBy('l.id')
+    ->getQuery()
+    ->getResult();
+  }
+  public function getLevelsById($ids) {
+    $qb = $this->createQueryBuilder('l');
+    $qb->where($qb->expr()->in('l.id', $ids));
+    return $qb->getQuery()->getResult();
+  }
+
+  public function getLevelById($id){
+    return $this->createQueryBuilder('l')
+    ->where('l.id =: id')
+    ->setParameter('id',$id)
+    ->getQuery()
+    ->getResult();
+  }
 }

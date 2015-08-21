@@ -12,11 +12,16 @@ use Doctrine\ORM\EntityRepository;
  */
 class SchoolRepository extends EntityRepository
 {
-    public function getSchoolOrderedById() {
+    public function getSchoolsOrderedById() {
         return $this->createQueryBuilder('s')
             ->orderBy('s.id')
             ->getQuery()
             ->getResult();
+    }
+    public function getSchoolsById($ids) {
+      $qb = $this->createQueryBuilder('s');
+      $qb->where($qb->expr()->in('s.id', $ids));
+      return $qb->getQuery()->getResult();
     }
 
     public function getSchoolById($id){
