@@ -12,7 +12,7 @@ class PromoController extends Controller
     public function indexAction($id){
 
     }
-    public function addPromoAction(Request $req){
+    public function addAction(Request $req){
 
         $promo = new Promo();
 

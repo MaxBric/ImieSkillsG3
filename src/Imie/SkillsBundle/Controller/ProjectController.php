@@ -32,11 +32,11 @@ class ProjectController extends Controller {
 
             $em = $this->getDoctrine()->getManager();
             $users = $form->get('users')->getData();
-            
+
             foreach ($users as $user){
                 $user->addJoinedProject($project);
             }
-         
+
             $em->persist($project);
             $em->flush();
 
@@ -68,5 +68,4 @@ class ProjectController extends Controller {
         
         return $this->redirect($this->generateUrl('imie_skills_user_me'));
     }
-    
 }

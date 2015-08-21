@@ -12,7 +12,7 @@ class CourseController extends Controller
     public function indexAction($id){
 
     }
-    public function addCourseAction(Request $req){
+    public function addAction(Request $req){
 
         $course = new Course();
 

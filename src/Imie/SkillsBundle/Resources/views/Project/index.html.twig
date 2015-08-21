@@ -2,7 +2,7 @@
 {% block article %}
     <h2>Liste des projets</h2>
     <hr/>
-    <button><a href="{{ path('imie_skills_project_add_project') }}">Ajouter un article</a></button>
+    <button><a href="{{ path('imie_skills_project_add') }}">Ajouter un projet</a></button>
     <hr/>
     <table>
         <thead>
@@ -14,10 +14,10 @@
     <tbody>
         {% for project in projects %}
             <tr>
-                <td><a href="{{ path('imie_skills_project_detail_projects', {id:project.id})}}">{{ project.projectName }}</a></td>
+                <td><a href="{{ path('imie_skills_project_details', {id:project.id})}}">{{ project.projectName }}</a></td>
                 <td>{{ project.manager.userFullName }}</td>
                 <td>{{ project.state.statut }}</td>
-                <td><ul> 
+                <td><ul>
                         {% for skill in project.skills if project.skills is defined %}
                             <li>{{ skill.skillName }}</li>
                             {% endfor %}

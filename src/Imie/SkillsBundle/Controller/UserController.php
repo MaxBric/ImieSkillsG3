@@ -11,10 +11,10 @@ class UserController extends Controller
 {
   public function indexAction($id)
   {
-    return $this->render('ImieSkillsBundle:Profile:myProfile.html.twig', array('id' => $id));
+    return $this->render('ImieSkillsBundle:User:me.html.twig', array('id' => $id));
   }
 
-  public function addUserAction(Request $req)
+  public function addAction(Request $req)
   {
     $user = new User();
 
@@ -39,7 +39,7 @@ class UserController extends Controller
       'form' => $form->createView()
     ));
   }
-  public function detailUserAction($id) {
+  public function detailsAction($id) {
     $em = $this->getDoctrine()->getManager();
     $repo = $em->getRepository('ImieSkillsBundle:User');
 
@@ -47,7 +47,7 @@ class UserController extends Controller
 
     return $this->render('ImieSkillsBundle:User:detailUser.html.twig', array('user' => $user));
   }
-  public function removeUserAction(Request $req, $id)
+  public function deleteAction(Request $req, $id)
   {
     $em = $this->getDoctrine()->getManager();
     $userRepo = $em->getRepository('ImieSkillsBundle:User');
@@ -61,6 +61,6 @@ class UserController extends Controller
       $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de la suppression :'
       . PHP_EOL . $e->getMessage());
     }
-    return $this->redirect($this->generateUrl('imie_skills_homepage'));
+    return $this->redirect($this->generateUrl('imie_skills_home'));
   }
 }

@@ -2,6 +2,36 @@ imie_skills_home:
     path:     /
     defaults: { _controller: ImieSkillsBundle:Home:index }
 
+
+# -------- FORMATION --------
+
+imie_skills_school_add:
+    path:    /school/add
+    defaults : {_controller: ImieSkillsBundle:School:add }
+
+imie_skills_school_delete:
+    path:    /school/delete
+    defaults : {_controller: ImieSkillsBundle:School:delete }
+
+imie_skills_course_add:
+    path:    /course/add
+    defaults : {_controller: ImieSkillsBundle:Course:add }
+
+imie_skills_course_delete:
+    path:    /course/delete
+    defaults : {_controller: ImieSkillsBundle:Course:delete }
+
+imie_skills_promo_add:
+    path:    /promo/add
+    defaults : {_controller: ImieSkillsBundle:Promo:add }
+
+imie_skills_promo_delete:
+    path:    /course/delete
+    defaults : {_controller: ImieSkillsBundle:Promo:delete }
+
+
+# -------- USER --------
+
 imie_skills_user_me:
     path:     /user/{id}
     defaults: { _controller: ImieSkillsBundle:User:me }
@@ -12,19 +42,25 @@ imie_skills_user_add:
     path:     /user/add
     defaults: { _controller: ImieSkillsBundle:User:add }
 
+
+# -------- SKILL --------
+
 imie_skills_skill_add:
     path:     /skill/add
-    defaults: { _controller: ImieSkillsBundle:Skill:addSkill }
+    defaults: { _controller: ImieSkillsBundle:Skill:add }
 
-imie_skills_project_detail_projects:
+
+# -------- PROJECT --------
+
+imie_skills_project_details:
     path:     /project/{id}
-    defaults: { _controller: ImieSkillsBundle:Project:detailProject }
+    defaults: { _controller: ImieSkillsBundle:Project:details }
     requirements:
       id: \d+
 
 imie_skills_project_add_project:
     path:     /project/add
-    defaults: { _controller: ImieSkillsBundle:Project:addProject }
+    defaults: { _controller: ImieSkillsBundle:Project:add }
 
 imie_skills_project_index:
     path:     /projects
@@ -40,45 +76,27 @@ imie_skills_project_add:
     path:     /project/add
     defaults: { _controller: ImieSkillsBundle:Project:add }
 
+
+# -------- NOTIFICATION --------
+
 imie_skills_notification_index:
     path:   /notification
-    defaults: {_controller: ImieSkillsBundle:Notification:index}
+    defaults: {_controller: ImieSkillsBundle:Notification:index }
 
 imie_skills_notification_details:
     path:   /notification/details
-    defaults: {_controller: ImieSkillsBundle:Notification:details}
+    defaults: {_controller: ImieSkillsBundle:Notification:details }
 
 imie_skills_notification_add:
     path:   /notification/add
-    defaults: {_controller: ImieSkillsBundle:Notification:add}
+    defaults: {_controller: ImieSkillsBundle:Notification:add }
 
 imie_skills_notification_delete:
     path:    /notification/delete
-    defaults : {_controller: ImieSkillsBundle:Notification:delete}
+    defaults : {_controller: ImieSkillsBundle:Notification:delete }
 
-imie_skills_school_add:
-    path:    /school/add
-    defaults : {_controller: ImieSkillsBundle:School:addSchool}
 
-imie_skills_school_delete:
-    path:    /school/delete
-    defaults : {_controller: ImieSkillsBundle:School:deleteSchool}
-
-imie_skills_course_add:
-    path:    /course/add
-    defaults : {_controller: ImieSkillsBundle:Course:addCourse}
-
-imie_skills_course_delete:
-    path:    /course/delete
-    defaults : {_controller: ImieSkillsBundle:Course:deleteCourse}
-
-imie_skills_promo_add:
-    path:    /promo/add
-    defaults : {_controller: ImieSkillsBundle:Promo:addPromo}
-
-imie_skills_promo_delete:
-    path:    /course/delete
-    defaults : {_controller: ImieSkillsBundle:Promo:deletePromo}
+# -------- MISC. --------
 
 imie_skills_contact:
     path:     /contact
@@ -86,5 +104,4 @@ imie_skills_contact:
 
 imie_skills_search:
     path:     /search
-    defaults: { _controller: ImieSkillsBundle:Search:newSearch }
-
+    defaults: { _controller: ImieSkillsBundle:Search:index }
