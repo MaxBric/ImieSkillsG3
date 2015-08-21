@@ -57,3 +57,27 @@ imie_notification_details:
 imie_notification_delete:
     path:    /notification/delete
     defaults : {_controller: ImieSkillsBundle:Notification:delete}
+
+imie_skills_school_add:
+    path:    /school/add
+    defaults : {_controller: ImieSkillsBundle:School:addSchool}
+
+imie_skills_school_delete:
+    path:    /school/delete
+    defaults : {_controller: ImieSkillsBundle:School:deleteSchool}
+
+imie_skills_course_add:
+    path:    /course/add
+    defaults : {_controller: ImieSkillsBundle:Course:addCourse}
+
+imie_skills_course_delete:
+    path:    /course/delete
+    defaults : {_controller: ImieSkillsBundle:Course:deleteCourse}
+
+imie_skills_promo_add:
+    path:    /promo/add
+    defaults : {_controller: ImieSkillsBundle:Promo:addPromo}
+
+imie_skills_promo_delete:
+    path:    /course/delete
+    defaults : {_controller: ImieSkillsBundle:Promo:deletePromo}
