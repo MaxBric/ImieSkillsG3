@@ -53,9 +53,11 @@ imie_skills_notification_add:
     defaults: {_controller: ImieSkillsBundle:Notification:add}
 
 imie_skills_notification_delete:
-    path:    /notification/delete
-    defaults : {_controller: ImieSkillsBundle:Notification:delete}
-
+    path:    /notification/delete{id}
+    defaults : {_controller: ImieSkillsBundle:Notification:remove}
+    requirements:
+        id: \d+
+       
 imie_skills_school_add:
     path:    /school/add
     defaults : {_controller: ImieSkillsBundle:School:addSchool}

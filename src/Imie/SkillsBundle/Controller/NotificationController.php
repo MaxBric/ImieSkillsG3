@@ -39,7 +39,6 @@ class NotificationController extends Controller {
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($notification);
                 $em->flush();
-                return new Response('Slug généré : ' . $advert->getSlug());
                 $req->getSession()->getFlashBag()->add('success', 'Produit ajouté');
                 return $this->redirect($this->generateUrl('imie_skills_notification_index'));
             } catch (\Doctrine\DBAL\DBALException $e) {
