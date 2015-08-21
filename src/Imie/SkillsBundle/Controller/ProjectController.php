@@ -20,10 +20,10 @@ class ProjectController extends Controller {
         ));
     }
 
-    public function addProjectAction(Request $req) {
+    public function addAction(Request $req) {
         $project = new Project();
         $form = $this->createForm(new ProjectType(), $project, array(
-            'action' => $this->generateUrl('imie_skills_project_add_project')
+            'action' => $this->generateUrl('imie_skills_project_add')
         ));
 
         $form->handleRequest($req);
@@ -35,20 +35,20 @@ class ProjectController extends Controller {
             $em->persist($project);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('imie_skills_project_add_project'));
+            return $this->redirect($this->generateUrl('imie_skills_project_add'));
         }
-        return $this->render('ImieSkillsBundle:Project:addProject.html.twig', array(
+        return $this->render('ImieSkillsBundle:Project:add.html.twig', array(
                     'form' => $form->createView()
         ));
     }
 
-    public function detailProjectAction($id) {
+    public function detailsAction($id) {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('ImieSkillsBundle:Project');
 
         $project = $repo->findOneBy($id);
 
-        return $this->render('ImieSkillsBundle:Project:detailProject.html.twig', array('project' => $project));
+        return $this->render('ImieSkillsBundle:Project:details.html.twig', array('project' => $project));
     }
 
 }
