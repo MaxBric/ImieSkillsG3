@@ -2,10 +2,6 @@ imie_skills_home:
     path:     /
     defaults: { _controller: ImieSkillsBundle:Home:index }
 
-imie_skills_homepage:
-    path:     /
-    defaults: { _controller: ImieSkillsBundle:Homepage:index }
-
 imie_skills_user_me:
     path:     /user/{id}
     defaults: { _controller: ImieSkillsBundle:User:me }

@@ -17,12 +17,12 @@ class NotificationController extends Controller {
         return $this->render('ImieSkillsBundle:Notification:index.html.twig', array('notifications' => $notifications));
     }
 
-    public function detailAction($id) {
+    public function detailsAction($id) {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('ImieSkillsBundle:Notification');
         $notification = $repo->findOneById($id);
 
-        return $this->render('ImieSkillsBundle:Notification:detail.html.twig', array('notification' => $notification));
+        return $this->render('ImieSkillsBundle:Notification:details.html.twig', array('notification' => $notification));
     }
 
 
@@ -30,7 +30,7 @@ class NotificationController extends Controller {
         $notification = new Notification();
 
         $form = $this->createForm(new NotificationType(), $notification, array(
-            'action' => $this->generateUrl('imie_notification_add')
+            'action' => $this->generateUrl('imie_skills_notification_add')
         ));
 
         $form->handleRequest($req);
@@ -41,7 +41,7 @@ class NotificationController extends Controller {
                 $em->flush();
                 return new Response('Slug généré : ' . $advert->getSlug());
                 $req->getSession()->getFlashBag()->add('success', 'Produit ajouté');
-                return $this->redirect($this->generateUrl('imie_notification_index'));
+                return $this->redirect($this->generateUrl('imie_skills_notification_index'));
             } catch (\Doctrine\DBAL\DBALException $e) {
                 $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de l\'ajout :'
                         . PHP_EOL . $e->getMessage());
@@ -66,7 +66,7 @@ class NotificationController extends Controller {
             $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de la suppression :'
                     . PHP_EOL . $e->getMessage());
         }
-        return $this->redirect($this->generateUrl('imie_notification_index'));
+        return $this->redirect($this->generateUrl('imie_skills_notification_index'));
     }
 
 }
