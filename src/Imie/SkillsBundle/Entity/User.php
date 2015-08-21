@@ -76,7 +76,7 @@ class User
     /**
      * @var boolean
      *
-     * @ORM\Column(name="userEnable", type="boolean")
+     * @ORM\Column(name="userEnable", type="boolean", nullable=true)
      */
     private $userEnable;
 

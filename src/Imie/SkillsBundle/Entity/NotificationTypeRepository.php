@@ -12,4 +12,23 @@ use Doctrine\ORM\EntityRepository;
  */
 class NotificationTypeRepository extends EntityRepository
 {
+  public function getNotificationTypesOrderedById() {
+    return $this->createQueryBuilder('nt')
+    ->orderBy('nt.id')
+    ->getQuery()
+    ->getResult();
+  }
+  public function getNotificationTypesById($ids) {
+    $qb = $this->createQueryBuilder('nt');
+    $qb->where($qb->expr()->in('nt.id', $ids));
+    return $qb->getQuery()->getResult();
+  }
+
+  public function getNotificationTypeById($id){
+    return $this->createQueryBuilder('nt')
+    ->where('nt.id =: id')
+    ->setParameter('id',$id)
+    ->getQuery()
+    ->getResult();
+  }
 }
