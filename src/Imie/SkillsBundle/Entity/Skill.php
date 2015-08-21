@@ -105,7 +105,7 @@ class Skill
      */
     public function setSkillParentId($skillParentId)
     {
-        $this->skillParentId = $skillParentId;
+        $this->skillParentId = $skillParentId->getId();
 
         return $this;
     }
