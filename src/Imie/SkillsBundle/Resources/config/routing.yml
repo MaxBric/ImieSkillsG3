@@ -34,9 +34,15 @@ imie_skills_promo_delete:
 
 imie_skills_user_me:
     path:     /user/{id}
-    defaults: { _controller: ImieSkillsBundle:User:me }
+    defaults: { _controller: ImieSkillsBundle:User:details }
     requirements:
       id: \d+
+
+imie_skills_user_modify:
+    path:     /user/modify/{id}
+    defaults: { _controller: ImieSkillsBundle:User:modify }
+    requirements:
+        id: \d+
 
 imie_skills_user_add:
     path:     /user/add
@@ -96,7 +102,7 @@ imie_skills_notification_delete:
     defaults : {_controller: ImieSkillsBundle:Notification:remove }
     requirements:
         id: \d+
-       
+
 imie_skills_school_add:
     path:    /school/add
     defaults : {_controller: ImieSkillsBundle:School:addSchool}

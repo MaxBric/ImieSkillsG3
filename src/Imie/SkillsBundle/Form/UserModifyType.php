@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class UserType extends AbstractType
+class UserModifyType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -23,9 +23,6 @@ class UserType extends AbstractType
             ->add('userPhoneNumber', 'text')
             ->add('userMail', 'email')
             ->add('userAddress')
-            ->add('userEnable')
-            ->add('userLogin')
-            ->add('userPassword', 'password')
             ->add('userDescription')
             ->add('image',  new ImageType())
             ->add('Add', 'submit')

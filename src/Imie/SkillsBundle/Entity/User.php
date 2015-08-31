@@ -141,12 +141,12 @@ class User
     * @ORM\OneToMany(targetEntity="Rank", mappedBy="users")
     */
     private $rank;
-    
+
     /**
      * @var string
      *
      * @ORM\OneToOne(targetEntity="Image", cascade={"persist", "remove"})
-     * 
+     *
      */
     protected $image;
 
@@ -155,6 +155,7 @@ class User
       $this->managedProjects = new ArrayCollection();
       $this->joinedProjects = new ArrayCollection();
       $this->notifications = new ArrayCollection();
+      $this->userBirthday = new \DateTime('now');
     }
 
     /**
@@ -219,7 +220,7 @@ class User
      * @param \DateTime $userBirthday
      * @return User
      */
-    public function setUserBirthday($userBirthday)
+    public function setUserBirthday(Datetime $userBirthday)
     {
         $this->userBirthday = $userBirthday;
 
@@ -233,6 +234,7 @@ class User
      */
     public function getUserBirthday()
     {
+      // var_dump($this->userBirthday);die();
         return $this->userBirthday;
     }
 
@@ -661,7 +663,7 @@ class User
     {
       return $this->userFullName;
     }
-    
+
     /**
      * Set image
      *
@@ -677,7 +679,7 @@ class User
     /**
      * Get image
      *
-     * @return \Imie\SkillsBundle\Entity\Image 
+     * @return \Imie\SkillsBundle\Entity\Image
      */
     public function getImage() {
         return $this->image;

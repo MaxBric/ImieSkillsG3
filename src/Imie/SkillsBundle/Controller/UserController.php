@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Imie\SkillsBundle\Entity\User;
 use Imie\SkillsBundle\Form\UserType;
+use Imie\SkillsBundle\Form\UserModifyType;
 
 class UserController extends Controller
 {
@@ -43,10 +44,39 @@ class UserController extends Controller
     $em = $this->getDoctrine()->getManager();
     $repo = $em->getRepository('ImieSkillsBundle:User');
 
-    $user = $repo->findOneBy($id);
+    $user = $repo->getUserById($id);
 
-    return $this->render('ImieSkillsBundle:User:detailUser.html.twig', array('user' => $user));
+    return $this->render('ImieSkillsBundle:User:me.html.twig', array('user' => $user));
   }
+
+  public function modifyAction(Request $req, $id)
+  {
+    $em = $this->getDoctrine()->getManager();
+    $repo = $em->getRepository('ImieSkillsBundle:User');
+    $userToModify = $repo->findOneById($id);
+    $form = $this->createForm(new UserModifyType(), $userToModify, array(
+      'action' => $this->generateUrl('imie_skills_user_modify', array(
+        'id' => $id
+      ))
+    ));
+    $form->handleRequest($req);
+    if ($form->isValid()) {
+      try {
+        $em->persist($userToModify);
+        $em->flush();
+        $req->getSession()->getFlashBag()->add('success', 'Utilisateur modifié');
+        return $this->redirect($this->generateUrl('imie_skills_user_index'));
+      } catch (\Doctrine\DBAL\DBALException $e) {
+        $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de l\'ajout :'
+        . PHP_EOL . $e->getMessage());
+      }
+    }
+
+    return $this->render('ImieSkillsBundle:User:add.html.twig', array(
+      'form' => $form->createView()
+    ));
+  }
+
   public function deleteAction(Request $req, $id)
   {
     $em = $this->getDoctrine()->getManager();
