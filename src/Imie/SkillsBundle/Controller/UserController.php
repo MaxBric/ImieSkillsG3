@@ -57,7 +57,7 @@ class UserController extends Controller
     $form = $this->createForm(new UserModifyType(), $userToModify, array(
       'action' => $this->generateUrl('imie_skills_user_modify', array(
         'id' => $id
-      ))
+      ))  
     ));
     $form->handleRequest($req);
     if ($form->isValid()) {
