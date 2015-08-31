@@ -70,6 +70,6 @@ class ProjectController extends Controller {
         
         $req->getSession()->getFlashBag()->add('success', 'Projet supprimé !');
         
-        return $this->redirect($this->generateUrl('imie_skills_user_me'));
+        return $this->redirect($this->generateUrl('imie_skills_project_index'));
     }
 }

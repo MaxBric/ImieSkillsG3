@@ -35,7 +35,7 @@ class Image
      */
     private $imageName;
     
-    private $imageFile;
+    private $file;
 
     private $imageFileToDelete;
 
@@ -58,6 +58,7 @@ class Image
     public function setImageAlt($imageAlt)
     {
         $this->imageAlt = $imageAlt;
+      
 
         return $this;
     }
@@ -86,11 +87,11 @@ class Image
      * @ORM\PreUpdate()
      */
     public function preUpload(){
-        if (null === $this->imageFile) {
+        if (null === $this->file) {
             return;
         }
         
-        $this->imageAlt = $this->imageFile->guessExtension();
+        $this->imageAlt = $this->file->guessExtension();
     }
     
     /**
@@ -98,11 +99,11 @@ class Image
      * @ORM\PostUpdate()
      */
     public function upload(){
-        if (null === $this->imageFile) {
+        if (null === $this->file) {
             return;
         }
         
-        $this->imageFile->move($this->getUploadRootDir(),
+        $this->file->move($this->getUploadRootDir(),
                 $this->id.'.'.$this->imageName);
     }
     
@@ -123,12 +124,12 @@ class Image
         }
     }
     
-    function getImageFile() {
-        return $this->imageFile;
+    function getFile() {
+        return $this->file;
     }
 
-    function setImageFile($imageFile) {
-        $this->imageFile = $imageFile;
+    function setFile($file) {
+        $this->file = $file;
         return $this;
     }
     
@@ -142,9 +143,9 @@ class Image
      * @param string $imageName
      * @return Image
      */
-    public function setImageName($imageName)
+    public function setImageName()
     {
-        $this->imagename = $imageName;
+        $this->imageName = $this->imageAlt;
 
         return $this;
     }

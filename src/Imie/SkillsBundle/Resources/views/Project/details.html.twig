@@ -2,7 +2,7 @@
 {% block article %}
     <h2>Détail du projet</h2>
     <hr/>
-    <a href="{{ path('imie_skills_project_index') }}">Retour à la liste des projets</a> <a href="#">Modifier</a> <a href="#">Supprimer</a>
+    <a href="{{ path('imie_skills_project_index') }}">Retour à la liste des projets</a> <a href="{{ path('imie_skills_project_modify', {id:project.id}) }}">Modifier</a> <a href="{{ path('imie_skills_project_delete', {id:project.id}) }}">Supprimer</a>
     <hr/>
     <h3>Nom du projet : {{ project.projectName }}</h3>
     <p>Phase d'avancement : {{ project.state.statut }}</p>

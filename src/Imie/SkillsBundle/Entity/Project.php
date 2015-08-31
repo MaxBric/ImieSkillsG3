@@ -434,6 +434,7 @@ class Project {
      */
     public function setImage(\Imie\SkillsBundle\Entity\Image $image = null) {
         $this->image = $image;
+        $image->setImageAlt($this->getProjectName());
 
         return $this;
     }

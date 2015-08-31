@@ -64,19 +64,21 @@ imie_skills_project_details:
     requirements:
       id: \d+
 
-imie_skills_project_add_project:
-    path:     /project/add
-    defaults: { _controller: ImieSkillsBundle:Project:add }
+imie_skills_project_delete:
+    path:     /project/delete/{id}
+    defaults: { _controller: ImieSkillsBundle:Project:delete }
+    requirements:
+      id: \d+
+
+imie_skills_project_modify:
+    path:     /project/modify/{id}
+    defaults: { _controller: ImieSkillsBundle:Project:modify }
+    requirements:
+      id: \d+
 
 imie_skills_project_index:
     path:     /projects
     defaults: { _controller: ImieSkillsBundle:Project:index }
-
-imie_skills_project_details:
-    path:     /project/{id}
-    defaults: { _controller: ImieSkillsBundle:Project:details }
-    requirements:
-      id: \d+
 
 imie_skills_project_add:
     path:     /project/add
