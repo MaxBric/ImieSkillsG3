@@ -38,6 +38,7 @@ class ProjectType extends AbstractType
                 'choice_value' => 'id',
                 'multiple' => true
             ))
+            ->add('image',  new ImageType())
             ->add('Valider', 'submit')
         ;
     }

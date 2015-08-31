@@ -100,6 +100,14 @@ class Project {
      * @ORM\ManyToMany(targetEntity="Skill")
      */
     private $skills;
+    
+    /**
+     * @var string
+     *
+     * @ORM\OneToOne(targetEntity="Image", cascade={"persist", "remove"})
+     * 
+     */
+    protected $image;
 
     public function __construct() {
         $this->skills = new ArrayCollection();
@@ -416,6 +424,27 @@ class Project {
         $this->creator = $creator;
 
         return $this;
+    }
+    
+    /**
+     * Set image
+     *
+     * @param \Imie\SkillsBundle\Entity\Image $image
+     * @return Produit
+     */
+    public function setImage(\Imie\SkillsBundle\Entity\Image $image = null) {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Imie\SkillsBundle\Entity\Image 
+     */
+    public function getImage() {
+        return $this->image;
     }
 
 }
