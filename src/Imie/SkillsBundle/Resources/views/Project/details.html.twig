@@ -4,7 +4,7 @@
     <hr/>
     <a href="{{ path('imie_skills_project_index') }}">Retour à la liste des projets</a> <a href="{{ path('imie_skills_project_modify', {id:project.id}) }}">Modifier</a> <a href="{{ path('imie_skills_project_delete', {id:project.id}) }}">Supprimer</a>
     <hr/>
-    <h3>Nom du projet : {{ project.projectName }}</h3>
+    <h3>Nom du projet : {{ project.projectName }}</h3><img src="{{ asset(project.image.imgsrc) }}" alt="{{ asset(project.image.imageAlt)}}" width="100" height="100">
     <p>Phase d'avancement : {{ project.state.statut }}</p>
     <p>Progression de la phase en cours : {{ project.projectProgress }} %</p>
     <p>Date de départ estimée : {{ project.projectEstimatedStart|date('d/m/y') }}</p>

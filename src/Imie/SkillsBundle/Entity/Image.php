@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Imie\SkillsBundle\Entity\ImageRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Image
 {
@@ -58,6 +59,7 @@ class Image
     public function setImageAlt($imageAlt)
     {
         $this->imageAlt = $imageAlt;
+        $this->setImageName();
       
 
         return $this;
@@ -78,7 +80,7 @@ class Image
         
     }
     
-    public function getUploadDirUser(){
+    public function getUploadDir(){
         return 'uploads/img';
     }
     

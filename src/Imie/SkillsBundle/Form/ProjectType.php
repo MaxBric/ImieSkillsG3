@@ -20,8 +20,12 @@ class ProjectType extends AbstractType
                 'class' => 'ImieSkillsBundle:State',
                 'choice_label' => 'statut'))                  
             ->add('projectProgress', 'percent')
-            ->add('projectEstimatedStart', 'date')
-            ->add('projectEstimatedEnd', 'date')
+            ->add('projectEstimatedStart', 'date', array(
+                'format' => 'ddMMyyyy',
+            ))
+            ->add('projectEstimatedEnd', 'date', array(
+                'format' => 'ddMMyyyy',
+            ))
             ->add('projectDescription')
             ->add('skills', 'entity', array(
                 'class'=> 'ImieSkillsBundle:Skill',
