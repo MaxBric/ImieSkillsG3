@@ -92,9 +92,8 @@ imie_skills_notification_add:
     defaults: {_controller: ImieSkillsBundle:Notification:add }
 
 imie_skills_notification_delete:
-<<<<<<< HEAD
-    path:    /notification/delete{id}
-    defaults : {_controller: ImieSkillsBundle:Notification:remove}
+    path:    /notification/delete/{id}
+    defaults : {_controller: ImieSkillsBundle:Notification:remove }
     requirements:
         id: \d+
        
@@ -113,10 +112,6 @@ imie_skills_course_add:
 imie_skills_course_delete:
     path:    /course/delete
     defaults : {_controller: ImieSkillsBundle:Course:deleteCourse}
-=======
-    path:    /notification/delete
-    defaults : {_controller: ImieSkillsBundle:Notification:delete }
->>>>>>> 7ec947af9ec5cfb67a3a7e44a3e3a415aef55581
 
 
 # -------- MISC. --------

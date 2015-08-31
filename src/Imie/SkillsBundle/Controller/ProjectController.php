@@ -39,6 +39,8 @@ class ProjectController extends Controller {
 
             $em->persist($project);
             $em->flush();
+            
+            $req->getSession()->getFlashBag()->add('success', 'Projet créé !');
 
             return $this->redirect($this->generateUrl('imie_skills_project_add'));
         }
@@ -56,7 +58,7 @@ class ProjectController extends Controller {
         return $this->render('ImieSkillsBundle:Project:details.html.twig', array('project' => $project));
     }
     
-    public function deleteAction($id) {
+    public function deleteAction(Request $req, $id) {
         $em = $this->getDoctrine()->getManager();
         
         $repo = $em->getRepository('ImieSkillsBundle:Project');
@@ -65,6 +67,8 @@ class ProjectController extends Controller {
         
         $em->remove($project);
         $em->flush();
+        
+        $req->getSession()->getFlashBag()->add('success', 'Projet supprimé !');
         
         return $this->redirect($this->generateUrl('imie_skills_user_me'));
     }
