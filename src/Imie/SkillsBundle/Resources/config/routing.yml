@@ -31,6 +31,9 @@ imie_skills_promo_delete:
 
 
 # -------- USER --------
+imie_skills_users:
+    path:     /users
+    defaults: { _controller: ImieSkillsBundle:User:index }
 
 imie_skills_user_me:
     path:     /user/{id}
@@ -41,6 +44,12 @@ imie_skills_user_me:
 imie_skills_user_modify:
     path:     /user/modify/{id}
     defaults: { _controller: ImieSkillsBundle:User:modify }
+    requirements:
+        id: \d+
+
+imie_skills_user_delete:
+    path:     /user/delete/{id}
+    defaults: { _controller: ImieSkillsBundle:User:delete }
     requirements:
         id: \d+
 
