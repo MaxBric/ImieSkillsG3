@@ -141,6 +141,14 @@ class User
     * @ORM\OneToMany(targetEntity="Rank", mappedBy="users")
     */
     private $rank;
+    
+    /**
+     * @var string
+     *
+     * @ORM\OneToOne(targetEntity="Image", cascade={"persist", "remove"})
+     * 
+     */
+    protected $image;
 
     public function __construct() {
       $this->createdProjects = new ArrayCollection();
@@ -652,5 +660,26 @@ class User
     public function getUserFullName()
     {
       return $this->userFullName;
+    }
+    
+    /**
+     * Set image
+     *
+     * @param \Imie\SkillsBundle\Entity\Image $image
+     * @return Produit
+     */
+    public function setImage(\Imie\SkillsBundle\Entity\Image $image = null) {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Imie\SkillsBundle\Entity\Image 
+     */
+    public function getImage() {
+        return $this->image;
     }
 }
