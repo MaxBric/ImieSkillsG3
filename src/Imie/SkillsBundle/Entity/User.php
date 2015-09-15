@@ -672,7 +672,7 @@ class User
      */
     public function setImage(\Imie\SkillsBundle\Entity\Image $image = null) {
         $this->image = $image;
-        $image->setImageAlt($this->getUserFullName());
+        $image->setImageAlt($this->getUserFirstName().$this->getUserLastName());
 
         return $this;
     }

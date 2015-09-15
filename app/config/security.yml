@@ -10,12 +10,8 @@ security:
         in_memory:
             memory:
                 users:
-                    user:
-                        password : userpass
-                        roles: 'ROLE_USER'
-                    admin:
-                        password : adminpass
-                        roles: 'ROLE_ADMIN'
+                    user: { password : userpass, roles: 'ROLE_USER'}
+                    admin: {password : adminpass,  roles: 'ROLE_ADMIN'}
 
     firewalls:
         dev:
@@ -26,9 +22,9 @@ security:
             pattern: ^/
             anonymous: true
             provider: in_memory
-            form_login:
+            form_login: 
                 login_path: /login
-                check_path: login_check
+                check_path: /login_check
             logout:
                 path: /logout
                 target: /
@@ -38,5 +34,6 @@ security:
         
             
     access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/users, roles: ROLE_SUPER_ADMIN }
         - { path: ^/admin, roles: ROLE_ADMIN }

@@ -10,9 +10,12 @@ use Imie\SkillsBundle\Form\UserModifyType;
 
 class UserController extends Controller
 {
-  public function indexAction($id)
+  public function indexAction()
   {
-    return $this->render('ImieSkillsBundle:User:me.html.twig', array('id' => $id));
+    $em = $this->getDoctrine()->getManager();
+    $repo = $em->getRepository('ImieSkillsBundle:User');
+    $users = $repo->getUsersOrderedById();
+    return $this->render('ImieSkillsBundle:User:index.html.twig', array('users' => $users));
   }
 
   public function addAction(Request $req)
@@ -57,11 +60,12 @@ class UserController extends Controller
     $form = $this->createForm(new UserModifyType(), $userToModify, array(
       'action' => $this->generateUrl('imie_skills_user_modify', array(
         'id' => $id
-      ))  
+      ))
     ));
     $form->handleRequest($req);
     if ($form->isValid()) {
       try {
+        $user->setUserFullName();
         $em->persist($userToModify);
         $em->flush();
         $req->getSession()->getFlashBag()->add('success', 'Utilisateur modifié');
@@ -81,7 +85,7 @@ class UserController extends Controller
   {
     $em = $this->getDoctrine()->getManager();
     $userRepo = $em->getRepository('ImieSkillsBundle:User');
-    $userToDelete = $userRepo->findUserById($id);
+    $userToDelete = $userRepo->getUserById($id);
 
     try {
       $em->remove($userToDelete);

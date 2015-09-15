@@ -18,4 +18,11 @@
         <li role="presentation">
             <a href="{{ path('imie_skills_search') }}">Recherche</a>
         </li>
+        <li role="presentation">
+            {% if app.user %}
+                <a href="{{ path('imie_skills_logout') }}">Logout</a>
+            {% else %}
+                <a href="{{ path('imie_skills_login') }}">Login</a>
+            {% endif %}
+        </li>
     </ul>
