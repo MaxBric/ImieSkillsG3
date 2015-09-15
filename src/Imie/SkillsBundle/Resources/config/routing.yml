@@ -97,7 +97,7 @@ imie_skills_project_add:
 # -------- NOTIFICATION --------
 
 imie_skills_notification_index:
-    path:   /notification
+    path:   /admin/notification
     defaults: {_controller: ImieSkillsBundle:Notification:index }
 
 imie_skills_notification_details:
@@ -113,6 +113,8 @@ imie_skills_notification_delete:
     defaults : {_controller: ImieSkillsBundle:Notification:remove }
     requirements:
         id: \d+
+        
+#-------------- SCHOOL---------------
 
 imie_skills_school_add:
     path:    /school/add
@@ -140,3 +142,12 @@ imie_skills_contact:
 imie_skills_search:
     path:     /search
     defaults: { _controller: ImieSkillsBundle:Search:index }
+# --------------SECURITY -------------------
+imie_skills_login: 
+    pattern:   /login
+    defaults:  { _controller: ImieSkillsBundle:Security:login }
+imie_skills_login_check:
+    pattern:   /login_check
+    
+imie_skills_logout:
+    pattern:   /logout
