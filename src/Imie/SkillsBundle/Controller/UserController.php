@@ -85,7 +85,7 @@ class UserController extends Controller
   {
     $em = $this->getDoctrine()->getManager();
     $userRepo = $em->getRepository('ImieSkillsBundle:User');
-    $userToDelete = $userRepo->findUserById($id);
+    $userToDelete = $userRepo->getUserById($id);
 
     try {
       $em->remove($userToDelete);

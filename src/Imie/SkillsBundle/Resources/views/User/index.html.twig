@@ -1,37 +1,38 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
+
 {% block article %}
-    <h2>Liste des projets</h2>
-    <hr/>
-    <a href="{{ path('imie_skills_user_add') }}">Ajouter un  utilisateur</a>
-    <hr/>
-    <table>
-        <thead>
-        <td>Nom</td>
-        <td>Adresse</td>
-        <td>Mail</td>
-        <td>Telephone</td>
-        <td>Anniversaire</td>
-        <td>Description</td>
-        <td>Skills</td>
-    </thead>
-    <tbody>
-        {% for user in users %}
-            <tr>
-                <td><a href="{{ path('imie_skills_user_me', {id:user.id})}}">{{ user.userFullName }}</a></td>
-                <td>{{ user.userAddress }}</td>
-                <td>{{ user.userMail }}</td>
-                <td>{{ user.userPhoneNumber }}</td>
-                <td>{{ user.userBirthday|date('d/m/Y') }}</td>
-                <td>{{ user.userDescription }}</td>
-                <td><ul>
-                {% for skill in user.skills if user.skills is defined %}
-                    <li>{{ skill.skillName }}</li>
-                    {% endfor %}
-                    </ul></td>
-                <td><a href="{{ path('imie_skills_user_modify', {id:user.id}) }}">Modifier</a></td>
-                <td><a href="{{ path('imie_skills_user_delete', {id:user.id}) }}">Supprimer</a></td>
-                {% endfor %}
-    </tbody>
-</table>
+<h2>Liste des projets</h2>
 <hr/>
-{% endblock article %}
+<a href="{{ path('imie_skills_user_add') }}">Ajouter un  utilisateur</a>
+<hr/>
+<table>
+  <thead>
+    <td>Nom</td>
+    <td>Adresse</td>
+    <td>Mail</td>
+    <td>Telephone</td>
+    <td>Anniversaire</td>
+    <td>Description</td>
+    <td>Skills</td>
+  </thead>
+  <tbody>
+    {% for user in users %}
+    <tr>
+      <td><a href="{{ path('imie_skills_user_me', {id:user.id})}}">{{ user.userFullName }}</a></td>
+      <td>{{ user.userAddress }}</td>
+      <td>{{ user.userMail }}</td>
+      <td>{{ user.userPhoneNumber }}</td>
+      <td>{{ user.userBirthday|date('d/m/Y') }}</td>
+      <td>{{ user.userDescription }}</td>
+      <td><ul>
+        {% for skill in user.skills if user.skills is defined %}
+        <li>{{ skill.skillName }}</li>
+        {% endfor %}
+      </ul></td>
+      <td><a href="{{ path('imie_skills_user_modify', {id:user.id}) }}">Modifier</a></td>
+      <td><a href="{{ path('imie_skills_user_delete', {id:user.id}) }}">Supprimer</a></td>
+      {% endfor %}
+    </tbody>
+  </table>
+  <hr/>
+  {% endblock article %}
