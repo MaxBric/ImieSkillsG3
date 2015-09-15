@@ -5,7 +5,7 @@ imie_skills_home:
 
 # -------- FORMATION --------
 
-imie_skills_school_add:
+imie_skills_school_add: 
     path:    /school/add
     defaults : {_controller: ImieSkillsBundle:School:add }
 
@@ -54,6 +54,18 @@ imie_skills_user_add:
 imie_skills_skill_add:
     path:     /skill/add
     defaults: { _controller: ImieSkillsBundle:Skill:add }
+    
+imie_skills_skill_modify:
+    path:     /skill/modify/{id}
+    defaults: { _controller: ImieSkillsBundle:Skill:modify }
+    requirements:
+        id: \d+
+
+imie_skills_skill_delete:
+    path:     /skill/delete/{id}
+    defaults: { _controller: ImieSkillsBundle:Skill:delete }
+    requirements:
+        id: \d+
 
 
 # -------- PROJECT --------

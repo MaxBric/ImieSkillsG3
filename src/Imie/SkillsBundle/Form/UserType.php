@@ -27,7 +27,9 @@ class UserType extends AbstractType
             ->add('userLogin')
             ->add('userPassword', 'password')
             ->add('userDescription')
-            ->add('image',  new ImageType())
+            ->add('image',  new ImageType(), array(
+                'required' => false
+            ))
             ->add('Add', 'submit')
         ;
     }

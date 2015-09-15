@@ -19,7 +19,7 @@ class ProjectType extends AbstractType
             ->add('state', 'entity', array(
                 'class' => 'ImieSkillsBundle:State',
                 'choice_label' => 'statut'))                  
-            ->add('projectProgress', 'percent')
+            ->add('projectProgress')
             ->add('projectEstimatedStart', 'date', array(
                 'format' => 'ddMMyyyy',
             ))
@@ -42,7 +42,9 @@ class ProjectType extends AbstractType
                 'choice_value' => 'id',
                 'multiple' => true
             ))
-            ->add('image',  new ImageType())
+            ->add('image',  new ImageType(), array(
+                'required' => false
+            ))
             ->add('Valider', 'submit')
         ;
     }
