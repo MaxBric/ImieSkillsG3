@@ -220,7 +220,7 @@ class User
      * @param \DateTime $userBirthday
      * @return User
      */
-    public function setUserBirthday(Datetime $userBirthday)
+    public function setUserBirthday($userBirthday)
     {
         $this->userBirthday = $userBirthday;
 
