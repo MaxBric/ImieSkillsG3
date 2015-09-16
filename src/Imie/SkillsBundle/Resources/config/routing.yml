@@ -36,7 +36,7 @@ imie_skills_users:
     defaults: { _controller: ImieSkillsBundle:User:index }
 
 imie_skills_user_me:
-    path:     /user/{id}
+    path:     /user
     defaults: { _controller: ImieSkillsBundle:User:details }
     requirements:
       id: \d+
@@ -59,6 +59,10 @@ imie_skills_user_add:
 
 
 # -------- SKILL --------
+
+imie_skills_skills:
+    path:     /skills
+    defaults: { _controller: ImieSkillsBundle:Skill:index }
 
 imie_skills_skill_add:
     path:     /skill/add

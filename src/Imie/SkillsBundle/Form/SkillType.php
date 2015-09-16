@@ -20,7 +20,9 @@ class SkillType extends AbstractType
             ->add('skillParentId', 'entity', array(
               'class' => 'ImieSkillsBundle:Skill',
               'choice_label' => 'skillName',
-            //'choice_value' => 'id'
+              'choice_value' => 'ParentId',
+              'empty_value' => 'Choisissez une option',
+              'required' => false
             ))
             ->add('Add', 'submit')
         ;

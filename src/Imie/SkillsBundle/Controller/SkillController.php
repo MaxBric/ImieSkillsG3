@@ -9,9 +9,16 @@ use Imie\SkillsBundle\Form\SkillType;
 
 class SkillController extends Controller
 {
-  public function indexAction($id)
+  public function indexAction()
   {
-    //return $this->render('ImieSkillsBundle:User:me.html.twig', array('id' => $id));
+    $skills = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('ImieSkillsBundle:Skill')
+                ->getSkillsOrderedById();
+
+        return $this->render('ImieSkillsBundle:Skill:index.html.twig', array(
+                    'skills' => $skills
+        ));
   }
 
   public function addAction(Request $req)
@@ -55,15 +62,16 @@ class SkillController extends Controller
         $em->persist($skill);
         $em->flush();
         $req->getSession()->getFlashBag()->add('success', 'Compétence modifiée');
-        return $this->redirect($this->generateUrl('imie_skills_skill_index'));
+        return $this->redirect($this->generateUrl('imie_skills_skills'));
       } catch (\Doctrine\DBAL\DBALException $e) {
         $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de l\'ajout :'
         . PHP_EOL . $e->getMessage());
       }
     }
 
-    return $this->render('ImieSkillsBundle:Skill:add.html.twig', array(
-      'form' => $form->createView()
+    return $this->render('ImieSkillsBundle:Skill:update.html.twig', array(
+      'form' => $form->createView(),
+      'id' => $id
     ));
   }
   
@@ -81,7 +89,7 @@ class SkillController extends Controller
       $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de la suppression :'
       . PHP_EOL . $e->getMessage());
     }
-    return $this->redirect($this->generateUrl('imie_skills_home'));
+    return $this->redirect($this->generateUrl('imie_skills_skills'));
   }
 
 }

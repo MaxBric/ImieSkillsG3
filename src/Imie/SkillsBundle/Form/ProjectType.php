@@ -34,13 +34,16 @@ class ProjectType extends AbstractType
             ))
             ->add('manager', 'entity', array(
                 'class' => 'ImieSkillsBundle:User',
-                'choice_label' => 'userFullName'
+                'choice_label' => 'userFullName',
+                'empty_value' => 'Choisissez une option',
+                'required' => false
             ))
             ->add('users', 'entity', array(
                 'class' => 'ImieSkillsBundle:User',
                 'choice_label' => 'userFullName',
                 'choice_value' => 'id',
-                'multiple' => true
+                'multiple' => true,
+                'required' => false
             ))
             ->add('image',  new ImageType(), array(
                 'required' => false
