@@ -6,16 +6,20 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Imie\SkillsBundle\Entity\Notification;
 use Imie\SkillsBundle\Entity\Promo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * User
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Imie\SkillsBundle\Entity\UserRepository")
+ * @UniqueEntity("userMail")
+ * @UniqueEntity("userPhone")
  */
-class User
+class User extends BaseUser
 {
     /**
      * @var integer
@@ -24,7 +28,7 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
@@ -64,7 +68,7 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="userMail", type="string", length=255)
+     * @ORM\Column(name="userMail", type="string", length=255, unique=true)
      * @Assert\Email(
      *     message = "'{{ value }}' n'est pas un email valide.",
      *     checkMX = true)
@@ -603,62 +607,7 @@ class User
         return $this->promo;
     }
 
-    /**
-     * Add rank
-     *
-     * @param \Imie\SkillsBundle\Entity\Rank $rank
-     * @return User
-     */
-    public function addRole(\Imie\SkillsBundle\Entity\Rank $rank)
-    {
-        $this->rank[] = $rank;
-
-        return $this;
-    }
-
-    /**
-     * Remove rank
-     *
-     * @param \Imie\SkillsBundle\Entity\Rank $rank
-     */
-    public function removeRole(\Imie\SkillsBundle\Entity\Rank $rank)
-    {
-        $this->rank->removeElement($rank);
-    }
-
-    /**
-     * Add rank
-     *
-     * @param \Imie\SkillsBundle\Entity\Rank $rank
-     * @return User
-     */
-    public function addRank(\Imie\SkillsBundle\Entity\Rank $rank)
-    {
-        $this->rank[] = $rank;
-
-        return $this;
-    }
-
-    /**
-     * Remove rank
-     *
-     * @param \Imie\SkillsBundle\Entity\Rank $rank
-     */
-    public function removeRank(\Imie\SkillsBundle\Entity\Rank $rank)
-    {
-        $this->rank->removeElement($rank);
-    }
-
-    /**
-     * Get rank
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getRank()
-    {
-        return $this->rank;
-    }
-
+ 
     public function setUserFullName()
     {
       $this->userFullName = $this->userFirstName.' '.$this->userLastName;

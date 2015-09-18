@@ -1,10 +1,10 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-  <h2>Ajout d'une compétence</h2>
-  <a href="{{ path('imie_skills_skills') }}">Retour à la liste</a>
-  <hr/>
-  <form method="post" action="{{ path('imie_skills_skill_add') }}" {{ form_enctype(form) }}>
-    {{ form(form) }}
-  </form>
+<h2>Ajout d'une compétence</h2>
+<a href="{{ path('imie_skills_skills') }}">Retour à la liste</a>
+<hr/>
+<form method="post" action="{{ path('imie_skills_skill_add') }}" {{ form_enctype(form) }}>
+  {{ form(form) }}
+</form>
 {% endblock article %}
