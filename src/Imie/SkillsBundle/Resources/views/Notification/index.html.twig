@@ -1,12 +1,12 @@
-{# src/imie/TestBundle/Resources/views/User/index.html.twig #}
-
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
+
 {% block article %}
-<h2>Liste des notifications !</h2>
-<p><a href="{{ path('imie_skills_notification_add') }}">Ajouter un notification</a></p>
+<h2>Liste des notifications</h2>
+<hr/>
+<a href="{{ path('imie_skills_notification_add') }}">Ajouter une notification</a>
 {%if notifications%}
 <div class="notification">
-  <hr />
+  <hr/>
   <table class="table table-striped">
     <thead>
       <th>Nom</th>

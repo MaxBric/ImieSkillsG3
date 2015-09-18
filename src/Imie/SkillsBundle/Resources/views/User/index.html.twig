@@ -3,17 +3,17 @@
 {% block article %}
 <h2>Liste des projets</h2>
 <hr/>
-<a href="{{ path('imie_skills_user_add') }}">Ajouter un  utilisateur</a>
+<a href="{{ path('imie_skills_user_add') }}">Ajouter un utilisateur</a>
 <hr/>
 <table>
   <thead>
     <td>Nom</td>
     <td>Adresse</td>
     <td>Mail</td>
-    <td>Telephone</td>
+    <td>Téléphone</td>
     <td>Anniversaire</td>
     <td>Description</td>
-    <td>Skills</td>
+    <td>Compétences</td>
   </thead>
   <tbody>
     {% for user in users %}
