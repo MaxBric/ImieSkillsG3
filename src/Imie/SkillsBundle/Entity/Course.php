@@ -24,81 +24,28 @@ class Course
     /**
      * @var string
      *
-     * @ORM\Column(name="courseName", type="string", length=255)
+     * @ORM\Column(name="course", type="string", length=255)
      */
-    private $courseName;
+    private $course;
     /**
-     *  @ORM\ManyToOne(targetEntity="Promo", inversedBy="course")
+     * @ORM\OneToMany(targetEntity="Promo", mappedBy="course")
      */
-    private $promo;
+    private $promos;
     /**
-     * @ORM\OneToMany(targetEntity="School", mappedBy="course")
+     * @ORM\ManyToOne(targetEntity="School", inversedBy="courses")
      */
     private $school;
-
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * Set courseName
-     *
-     * @param string $courseName
-     * @return course
-     */
-    public function setCourseName($courseName)
-    {
-        $this->courseName = $courseName;
-
-        return $this;
-    }
-
-    /**
-     * Get courseName
-     *
-     * @return string 
-     */
-    public function getCourseName()
-    {
-        return $this->courseName;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->school = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Set promo
-     *
-     * @param \Imie\SkillsBundle\Entity\Promo $promo
-     * @return Course
-     */
-    public function setPromo(\Imie\SkillsBundle\Entity\Promo $promo = null)
-    {
-        $this->promo = $promo;
-
-        return $this;
-    }
-
-    /**
-     * Get promo
-     *
-     * @return \Imie\SkillsBundle\Entity\Promo 
-     */
-    public function getPromo()
-    {
-        return $this->promo;
-    }
 
     /**
      * Add school
@@ -106,30 +53,90 @@ class Course
      * @param \Imie\SkillsBundle\Entity\School $school
      * @return Course
      */
-    public function addSchool(\Imie\SkillsBundle\Entity\School $school)
+
+    /**
+     * Set school
+     *
+     * @param \Imie\SkillsBundle\Entity\School $school
+     * @return Course
+     */
+    public function setSchool(\Imie\SkillsBundle\Entity\School $school)
     {
-        $this->school[] = $school;
+        $this->school = $school;
 
         return $this;
     }
 
     /**
-     * Remove school
-     *
-     * @param \Imie\SkillsBundle\Entity\School $school
-     */
-    public function removeSchool(\Imie\SkillsBundle\Entity\School $school)
-    {
-        $this->school->removeElement($school);
-    }
-
-    /**
      * Get school
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Imie\SkillsBundle\Entity\School
      */
     public function getSchool()
     {
         return $this->school;
+    }
+
+    /**
+     * Set course
+     *
+     * @param string $course
+     * @return Course
+     */
+    public function setCourse($course)
+    {
+        $this->course = $course;
+
+        return $this;
+    }
+
+    /**
+     * Get course
+     *
+     * @return string
+     */
+    public function getCourse()
+    {
+        return $this->course;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->promos = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add promos
+     *
+     * @param \Imie\SkillsBundle\Entity\Promo $promos
+     * @return Course
+     */
+    public function addPromo(\Imie\SkillsBundle\Entity\Promo $promos)
+    {
+        $this->promos[] = $promos;
+
+        return $this;
+    }
+
+    /**
+     * Remove promos
+     *
+     * @param \Imie\SkillsBundle\Entity\Promo $promos
+     */
+    public function removePromo(\Imie\SkillsBundle\Entity\Promo $promos)
+    {
+        $this->promos->removeElement($promos);
+    }
+
+    /**
+     * Get promos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPromos()
+    {
+        return $this->promos;
     }
 }

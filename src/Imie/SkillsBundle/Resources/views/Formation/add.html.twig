@@ -1,19 +1,20 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-<h2>Ajout centre des formation</h2>
+<h2>Ajout d'un centre de formation</h2>
+<a href="{{ app.request.headers.get('referer') }}">Retour</a>
 <hr/>
 <form method="post" action="{{ path('imie_skills_school_add') }}" {{ form_enctype(form) }}>
   {{ form(form) }}
 </form>
 
-<h2>Ajout type de formation</h2>
+<h2>Ajout d'un type de formation</h2>
 <hr/>
 <form method="post" action="{{ path('imie_skills_course_add') }}" {{ form_enctype(form) }}>
   {{ form(form) }}
 </form>
 
-<h2>ajout d'une promo</h2>
+<h2>Ajout d'une promotion</h2>
 <hr/>
 <form method="post" action="{{ path('imie_skills_promo_add') }}" {{ form_enctype(form) }}>
   {{ form(form) }}

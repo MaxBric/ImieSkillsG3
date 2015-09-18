@@ -1,0 +1,31 @@
+{% extends 'ImieSkillsBundle::layout.html.twig' %}
+
+{% block article %}
+<<<<<<< HEAD
+<h2>Connexion</h2>
+=======
+<h2>Login</h2>
+>>>>>>> 004564b52bacbae79368340289489da91f5743ed
+{% if error %}
+<div>{{ error.message }}</div>
+{% endif %}
+<form action="{{ path('imie_skills_login_check') }}" method="post">
+  <label for="username">Identifiant :</label>
+  <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" />
+  <label for="password">Mot de passe :</label>
+  <input type="password" class="form-control" id="password" name="_password" />
+  {#
+    Si vous voulez contrôler l'URL vers laquelle l'utilisateur est redirigé en cas de succès
+<<<<<<< HEAD
+    (plus de détails ci-dessous) :
+    <input type="hidden" name="_target_path" value="/account" />
+    #}
+    <button type="submit" class="btn btn-default">OK</button>
+=======
+    (plus de détails ci-dessous)
+    <input type="hidden" name="_target_path" value="/account" />
+    #}
+    <button type="submit" class="btn btn-default">Login</button>
+>>>>>>> 004564b52bacbae79368340289489da91f5743ed
+  </form>
+  {% endblock article %}

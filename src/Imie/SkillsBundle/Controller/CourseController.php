@@ -25,7 +25,7 @@ class CourseController extends Controller
         if($form->isValid()){
             try{
                 $em = $this->getDoctrine()->getManager();
-                $em->persit($course);
+                $em->persist($course);
                 $em->flush();
                 return $this->redirect($this->generateUrl('imie_skills_course_add'));
             }
@@ -33,7 +33,7 @@ class CourseController extends Controller
                 echo $e->getMessage();
             }
         }
-        return $this->render('ImieSkillsBundle:Formation:add.html.twig', array(
+        return $this->render('ImieSkillsBundle:Course:add.html.twig', array(
             'form' => $form->createView()
         ));
     }

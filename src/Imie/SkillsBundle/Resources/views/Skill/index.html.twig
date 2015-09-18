@@ -2,17 +2,17 @@
 
 {% block article %}
 <h2>Liste des compétences</h2>
-<hr/>
+<a href="{{ app.request.headers.get('referer') }}">Retour</a>
 <a href="{{ path('imie_skills_skill_add') }}">Ajouter une compétence</a>
 <hr/>
-<table>
+<table class="table table-striped">
   <thead>
     <td>Nom</td>
     <td>Parent</td>
     <td>Description</td>
   </thead>
   <tbody>
-    {% for skill in skills %}
+    {% for skill in skills if skills is defined%}
     <tr>
       <td>{{ skill.skillName }}</a></td>
       <td>{% if skill.skillParentId is not null %}{{ skill.skillParentId}}{% else %} ????{%endif %}</td>
@@ -22,5 +22,4 @@
       {% endfor %}
     </tbody>
   </table>
-  <hr/>
   {% endblock article %}

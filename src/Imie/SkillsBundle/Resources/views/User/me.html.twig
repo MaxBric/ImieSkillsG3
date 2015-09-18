@@ -2,9 +2,8 @@
 
 {% block article %}
 <h2>Mon profil</h2>
-<a href="{{ path('imie_skills_user_modify', {id: user.id}) }}">Modifier mon profil</a>
-<hr/>
 <a href="{{ app.request.headers.get('referer') }}">Retour</a>
+<a href="{{ path('imie_skills_user_modify', {id: user.id}) }}">Modifier mon profil</a>
 <hr/>
 <p>
   <h3>{{ user.userFirstName }}</h3><h3>{{ user.userLastName }}</h3><p>{{ user.userEnable }}</p>

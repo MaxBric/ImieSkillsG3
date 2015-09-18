@@ -1,11 +1,11 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-<h2>Liste des projets</h2>
-<hr/>
+<h2>Liste des utilisateurs</h2>
+<a href="{{ app.request.headers.get('referer') }}">Retour</a>
 <a href="{{ path('imie_skills_user_add') }}">Ajouter un utilisateur</a>
 <hr/>
-<table>
+<table class="table table-striped">
   <thead>
     <td>Nom</td>
     <td>Adresse</td>
@@ -16,7 +16,7 @@
     <td>Compétences</td>
   </thead>
   <tbody>
-    {% for user in users %}
+    {% for user in users if users is defined%}
     <tr>
       <td><a href="{{ path('imie_skills_user_me', {id:user.id})}}">{{ user.userFullName }}</a></td>
       <td>{{ user.userAddress }}</td>
@@ -34,5 +34,4 @@
       {% endfor %}
     </tbody>
   </table>
-  <hr/>
   {% endblock article %}

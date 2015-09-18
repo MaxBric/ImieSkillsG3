@@ -2,7 +2,7 @@
 
 {% block article %}
 <h2>Modification de la compétence</h2>
-<a href="{{ path('imie_skills_skills') }}">Retour à la liste</a>
+<a href="{{ app.request.headers.get('referer') }}">Retour</a>
 <hr/>
 <form method="post" action="{{ path('imie_skills_skill_modify', {id: id}) }}" {{ form_enctype(form) }}>
   {{ form(form) }}
