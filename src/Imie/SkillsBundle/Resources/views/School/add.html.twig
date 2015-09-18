@@ -1,10 +1,10 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-<h2>Création d'un projet</h2>
+<h2>Ajout d'un centre de formation</h2>
 <a href="{{ app.request.headers.get('referer') }}">Retour</a>
 <hr/>
-<form method="post" action="{{ path('imie_skills_project_add') }}" {{ form_enctype(form) }}>
+<form method="post" action="{{ path('imie_skills_school_add') }}" {{ form_enctype(form) }}>
   {{ form(form) }}
 </form>
 {% endblock article %}

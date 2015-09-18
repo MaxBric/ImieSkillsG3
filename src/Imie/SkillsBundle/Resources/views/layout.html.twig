@@ -1,31 +1,32 @@
 {% extends '::base.html.twig' %}
 
-{% block title %}Imie Skills{% endblock title %}
-{% block page_title %}Imie Skills{% endblock page_title %}
+{% block title %}IMIE Skills{% endblock title %}
+{% block page_title %}IMIE Skills{% endblock page_title %}
 {% block body %}
-    {% for key, message in app.session.flashbag.all() %}
-        <div class="alert alert-{{ key }}">
-            {{ message|trans({}, 'FOSUserBundle') }}
-        </div>
+{% for key, message in app.session.flashbag.all() %}
+<div class="alert alert-{{ key }}">
+  {{ message|trans({}, 'FOSUserBundle') }}
+</div>
+{% endfor %}
+{% if app.session.flashbag.get('success') is not empty or app.session.flashbag.get('info') is not empty %}
+<section>
+  <ul>
+    {% for msg in app.session.flashbag.get('success') %}
+    <li class="text-success">{{ msg|nl2br }}</li>
     {% endfor %}
-    {% if app.session.flashbag.get('success') is not empty or app.session.flashbag.get('info') is not empty %}
-        <section>
-            <ul>
-                {% for msg in app.session.flashbag.get('success') %}
-                    <p class="text-success">{{ msg|nl2br }}</p>
-                {% endfor %}
-            </ul>
-            <ul>
-                {% for msg in app.session.flashbag.get('danger') %}
-                    <p class="text-danger">{{ msg|nl2br }}</p>
-                {% endfor %}
-            </ul>
-        </section>
-    {% endif %}
-    <section>
-        <article>
-        {% block article %}{% endblock article %}
-    </article>
+  </ul>
+  <ul>
+    {% for msg in app.session.flashbag.get('danger') %}
+    <li class="text-danger">{{ msg|nl2br }}</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+<section>
+  <article>
+    {% block article %}
+    {% endblock article %}
+  </article>
 </section>
 {% block fos_user_content %}
 {% endblock fos_user_content %}
