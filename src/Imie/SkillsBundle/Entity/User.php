@@ -17,7 +17,7 @@ use FOS\UserBundle\Model\User as BaseUser;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Imie\SkillsBundle\Entity\UserRepository")
  * @UniqueEntity("userMail")
- * @UniqueEntity("userPhone")
+ * @UniqueEntity("userPhoneNumber")
  */
 class User extends BaseUser
 {
@@ -638,5 +638,38 @@ class User extends BaseUser
      */
     public function getImage() {
         return $this->image;
+    }
+
+    /**
+     * Add rank
+     *
+     * @param \Imie\SkillsBundle\Entity\Rank $rank
+     * @return User
+     */
+    public function addRank(\Imie\SkillsBundle\Entity\Rank $rank)
+    {
+        $this->rank[] = $rank;
+
+        return $this;
+    }
+
+    /**
+     * Remove rank
+     *
+     * @param \Imie\SkillsBundle\Entity\Rank $rank
+     */
+    public function removeRank(\Imie\SkillsBundle\Entity\Rank $rank)
+    {
+        $this->rank->removeElement($rank);
+    }
+
+    /**
+     * Get rank
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRank()
+    {
+        return $this->rank;
     }
 }
