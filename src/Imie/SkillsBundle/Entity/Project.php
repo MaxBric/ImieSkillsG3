@@ -5,12 +5,14 @@ namespace Imie\SkillsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Project
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Imie\SkillsBundle\Entity\ProjectRepository")
+ * @UniqueEntity("projectName")
  */
 class Project {
 
@@ -27,6 +29,7 @@ class Project {
      * @var string
      *
      * @ORM\Column(name="projectName", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $projectName;
 
@@ -35,6 +38,7 @@ class Project {
      *
      * @ORM\Column(name="projectEstimatedEnd", type="datetime")
      * @Assert\Date()
+     * @Assert\NotBlank()
      */
     private $projectEstimatedEnd;
 
@@ -43,6 +47,7 @@ class Project {
      *
      * @ORM\Column(name="projectStart", type="datetime", nullable=true)
      * @Assert\Date()
+     * 
      */
     private $projectStart;
 
@@ -59,6 +64,7 @@ class Project {
      *
      * @ORM\Column(name="projectEstimatedStart", type="datetime")
      * @Assert\Date()
+     * @Assert\NotBlank()
      */
     private $projectEstimatedStart;
 
@@ -66,6 +72,7 @@ class Project {
      * @var integer
      *
      * @ORM\Column(name="projectProgress", type="integer")
+     * @Assert\NotBlank()
      *
      */
     private $projectProgress;
@@ -74,6 +81,7 @@ class Project {
      * @var string
      *
      * @ORM\Column(name="projectDescription", type="text")
+     * @Assert\NotBlank()
      */
     private $projectDescription;
 
@@ -98,12 +106,14 @@ class Project {
     /**
      * @var \State
      * @ORM\ManyToOne(targetEntity="State", inversedBy="projects")
+     * @Assert\NotBlank()
      */
     private $state;
 
     /**
      * @var \Skill
      * @ORM\ManyToMany(targetEntity="Skill")
+     * @Assert\NotBlank()
      */
     private $skills;
     

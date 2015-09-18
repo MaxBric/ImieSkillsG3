@@ -10,8 +10,8 @@
     <p>Progression de la phase en cours : {{ project.projectProgress }} %</p>
     <p>Date de départ estimée : {{ project.projectEstimatedStart|date('d/m/y') }}</p>
     <p>Date de fin estimée : {{ project.projectEstimatedEnd|date('d/m/y') }}</p>
-    <p>Date de départ réelle : </p>
-    <p>Date de fin réelle : </p>
+    <p>Date de départ réelle :  {{ project.projectStart|date('d/m/y') }}</p>
+    <p>Date de fin réelle : {{ project.projectEnd|date('d/m/y') }}</p>
     <p>Description : {{ project.projectDescription }}</p>
     <h3>Compétences demandées :</h3>
     <ul>
@@ -22,7 +22,7 @@
     <h3>Chef de projet : {% if project.manager is not null %}{{ project.manager.userFullName }}{% else %}A recruter{% endif %}</h3>
     <h3>Équipe :</h3>
     <ul>
-        {% if project.manager is not null %}
+        {% if project.users is not null %}
         {% for user in project.users if project.users is defined %}
             <li>{{ user.userFullName }}</li>
             {% endfor %}

@@ -41,7 +41,6 @@ class Image
      */
     public $path;
     
-    private $imgsrc;
     private $file;
     
 
@@ -59,7 +58,7 @@ class Image
 
     public function getAbsolutePath()
     {
-        return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->path;
+        return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->id.'.'.$this->path;
     }
 
     public function getWebPath()
@@ -109,7 +108,6 @@ class Image
             return;
         }
         $this->path = $this->file->guessExtension();
-        $this->imageAlt = $this->file->guessExtension();
     }
     
     /**
