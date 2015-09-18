@@ -11,29 +11,12 @@ use Imie\SkillsBundle\Form\UserModifyType;
 class UserController extends Controller {
 
     public function indexAction() {
-        // Pour récupérer le service UserManager du bundle
-        $userManager = $this->get('fos_user.user_manager');
 
-// Pour charger un utilisateur
-        $user = $userManager->findUserBy(array('username' => 'winzou'));
-
-// Pour modifier un utilisateur
-        $user->setEmail('cetemail@nexiste.pas');
-        $userManager->updateUser($user); // Pas besoin de faire un flush avec l'EntityManager, cette méthode le fait toute seule !
-// Pour supprimer un utilisateur
-//        $userManager->deleteUser($user);
-
-// Pour récupérer la liste de tous les utilisateurs
-//        $users = $userManager->findUsers();
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('ImieSkillsBundle:User');
+        $users = $repo->getUsersOrderedById();
+        return $this->render('ImieSkillsBundle:User:index.html.twig', array('users' => $users));
     }
-
-//  public function indexAction()
-//  {
-//    $em = $this->getDoctrine()->getManager();
-//    $repo = $em->getRepository('ImieSkillsBundle:User');
-//    $users = $repo->getUsersOrderedById();
-//    return $this->render('ImieSkillsBundle:User:index.html.twig', array('users' => $users));
-//  }
 
     public function addAction(Request $req) {
         $user = new User();
