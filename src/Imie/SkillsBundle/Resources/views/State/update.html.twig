@@ -1,0 +1,10 @@
+{% extends 'ImieSkillsBundle::layout.html.twig' %}
+
+{% block article %}
+<h2>Modification de l'étape</h2>
+<a href="{{ path('imie_skills_states') }}">Retour à la liste</a>
+<hr/>
+<form method="post" action="{{ path('imie_skills_state_modify', {id: id}) }}" {{ form_enctype(form) }}>
+  {{ form(form) }}
+</form>
+{% endblock article %}

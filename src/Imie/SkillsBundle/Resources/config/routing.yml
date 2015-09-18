@@ -80,6 +80,28 @@ imie_skills_skill_delete:
     requirements:
         id: \d+
 
+# -------- STATE --------
+
+imie_skills_states:
+    path:     /states
+    defaults: { _controller: ImieSkillsBundle:State:index }
+
+imie_skills_state_add:
+    path:     /state/add
+    defaults: { _controller: ImieSkillsBundle:State:add }
+    
+imie_skills_state_modify:
+    path:     /state/modify/{id}
+    defaults: { _controller: ImieSkillsBundle:State:modify }
+    requirements:
+        id: \d+
+
+imie_skills_state_delete:
+    path:     /state/delete/{id}
+    defaults: { _controller: ImieSkillsBundle:State:delete }
+    requirements:
+        id: \d+
+
 
 # -------- PROJECT --------
 

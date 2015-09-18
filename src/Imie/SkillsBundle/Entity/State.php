@@ -3,12 +3,15 @@
 namespace Imie\SkillsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * State
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Imie\SkillsBundle\Entity\StateRepository")
+ * @UniqueEntity("statut")
  */
 class State {
 
@@ -25,6 +28,7 @@ class State {
      * @var string
      *
      * @ORM\Column(name="statut", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $statut;
 
