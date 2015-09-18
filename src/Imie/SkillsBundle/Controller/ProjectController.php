@@ -6,7 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Imie\SkillsBundle\Entity\Project;
 use Imie\SkillsBundle\Form\ProjectType;
-use Imie\SkillsBundle\Form\ProjectUpdateType;
 
 class ProjectController extends Controller {
 
@@ -71,8 +70,9 @@ class ProjectController extends Controller {
         $form->handleRequest($req);
 
         if ($form->isValid()) {
-            //MAXENCEEEEEEEEEEEEEEEE FAIT LE GETDATA MERCI !!!!!!!!!!!!!
-            $em->persist($projectToModify);
+//            if($projectToModify->image != null){
+//                unset($projectToModify->image);
+//            }
             $em->flush();
             $req->getSession()->getFlashBag()->add('success', 'Projet modifié');
             return $this->redirect($this->generateUrl('imie_skills_project_index'));
@@ -82,6 +82,7 @@ class ProjectController extends Controller {
         'form' => $form->createView(),
         'id' => $id
         ));
+        
     }
 
     public function deleteAction(Request $req, $id) {

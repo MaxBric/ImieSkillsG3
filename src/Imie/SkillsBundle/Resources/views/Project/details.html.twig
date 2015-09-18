@@ -19,12 +19,15 @@
             <li>{{ skill.skillName }}</li>
             {% endfor %}
     </ul>
-    <h3>Chef de projet : {{ project.manager.userFullName }}</h3>
+    <h3>Chef de projet : {% if project.manager is not null %}{{ project.manager.userFullName }}{% else %}A recruter{% endif %}</h3>
     <h3>Équipe :</h3>
     <ul>
+        {% if project.manager is not null %}
         {% for user in project.users if project.users is defined %}
             <li>{{ user.userFullName }}</li>
             {% endfor %}
+        {% else %}A recruter
+        {% endif %}
     </ul>
     <hr/>
 {% endblock article %}

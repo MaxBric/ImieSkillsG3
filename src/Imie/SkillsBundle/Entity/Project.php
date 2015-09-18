@@ -4,6 +4,7 @@ namespace Imie\SkillsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Project
@@ -33,6 +34,7 @@ class Project {
      * @var \DateTime
      *
      * @ORM\Column(name="projectEstimatedEnd", type="datetime")
+     * @Assert\Date()
      */
     private $projectEstimatedEnd;
 
@@ -40,6 +42,7 @@ class Project {
      * @var \DateTime
      *
      * @ORM\Column(name="projectStart", type="datetime", nullable=true)
+     * @Assert\Date()
      */
     private $projectStart;
 
@@ -47,6 +50,7 @@ class Project {
      * @var \DateTime
      *
      * @ORM\Column(name="projectEnd", type="datetime", nullable=true)
+     * @Assert\Date()
      */
     private $projectEnd;
 
@@ -54,6 +58,7 @@ class Project {
      * @var \DateTime
      *
      * @ORM\Column(name="projectEstimatedStart", type="datetime")
+     * @Assert\Date()
      */
     private $projectEstimatedStart;
 
@@ -61,6 +66,7 @@ class Project {
      * @var integer
      *
      * @ORM\Column(name="projectProgress", type="integer")
+     *
      */
     private $projectProgress;
 

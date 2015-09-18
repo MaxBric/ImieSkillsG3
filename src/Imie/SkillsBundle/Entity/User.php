@@ -5,6 +5,7 @@ namespace Imie\SkillsBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Imie\SkillsBundle\Entity\Notification;
 use Imie\SkillsBundle\Entity\Promo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -49,6 +50,7 @@ class User
      * @var \DateTime
      *
      * @ORM\Column(name="userBirthday", type="datetime")
+     * @Assert\Date()
      */
     private $userBirthday;
 
@@ -63,6 +65,9 @@ class User
      * @var string
      *
      * @ORM\Column(name="userMail", type="string", length=255)
+     * @Assert\Email(
+     *     message = "'{{ value }}' n'est pas un email valide.",
+     *     checkMX = true)
      */
     private $userMail;
 

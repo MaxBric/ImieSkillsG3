@@ -20,6 +20,13 @@ class UserModifyType extends AbstractType
             ->add('userBirthday', 'date', array(
               'format' => "ddMMyyyy"
             ))
+            ->add('skills', 'entity', array(
+                'class' => 'ImieSkillsBundle:Skill',
+                'choice_label' => 'skillName',
+                'choice_value' => 'id',
+                'multiple' => true,
+                'required' => false
+            ))
             ->add('userPhoneNumber', 'text')
             ->add('userMail', 'email')
             ->add('userAddress')

@@ -24,20 +24,22 @@ class Rank
     /**
      * @var string
      *
-     * @ORM\Column(name="rank", type="string", length=255)
+     * @ORM\Column(name="rankName", type="string", length=255)
      */
-    private $rank;
+    private $rankName;
 
     /**
     * @var \User
-    * @ORM\ManyToOne(targetEntity="User", inversedBy="rank")
+    * @ORM\ManyToOne(targetEntity="User", inversedBy="ranks")
     */
-    private $users;
+    private $user;
+
+ 
 
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -45,48 +47,48 @@ class Rank
     }
 
     /**
-     * Set rank
+     * Set rankName
      *
-     * @param string $rank
+     * @param string $rankName
      * @return Rank
      */
-    public function setRank($rank)
+    public function setRankName($rankName)
     {
-        $this->rank = $rank;
+        $this->rankName = $rankName;
 
         return $this;
     }
 
     /**
-     * Get rank
+     * Get rankName
      *
-     * @return string
+     * @return string 
      */
-    public function getRank()
+    public function getRankName()
     {
-        return $this->rank;
+        return $this->rankName;
     }
 
     /**
-     * Set users
+     * Set user
      *
-     * @param \Imie\SkillsBundle\Entity\User $users
+     * @param \Imie\SkillsBundle\Entity\User $user
      * @return Rank
      */
-    public function setUsers(\Imie\SkillsBundle\Entity\User $users = null)
+    public function setUser(\Imie\SkillsBundle\Entity\User $user = null)
     {
-        $this->users = $users;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get users
+     * Get user
      *
-     * @return \Imie\SkillsBundle\Entity\User
+     * @return \Imie\SkillsBundle\Entity\User 
      */
-    public function getUsers()
+    public function getUser()
     {
-        return $this->users;
+        return $this->user;
     }
 }
