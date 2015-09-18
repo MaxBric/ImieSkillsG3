@@ -25,7 +25,7 @@ class PromoController extends Controller
         if($form->isValid()){
             try{
                 $em = $this->getDoctrine()->getManager();
-                $em->persit($promo);
+                $em->persist($promo);
                 $em->flush();
                 return $this->redirect($this->generateUrl('imie_skills_promo_add'));
             }
@@ -33,7 +33,7 @@ class PromoController extends Controller
                 echo $e->getMessage();
             }
         }
-        return $this->render('ImieSkillsBundle:Formation:add.html.twig', array(
+        return $this->render('ImieSkillsBundle:Promo:add.html.twig', array(
             'form' => $form->createView()
         ));
     }

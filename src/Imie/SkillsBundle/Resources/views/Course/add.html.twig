@@ -1,0 +1,9 @@
+{% extends 'ImieSkillsBundle::layout.html.twig' %}
+
+        {% block article %}
+            <h2>Ajout course</h2>
+            <hr/>
+            <form method="post" action="{{ path('imie_skills_course_add') }}" {{ form_enctype(form) }}>
+                {{ form(form) }}
+            </form>
+        {% endblock article %}

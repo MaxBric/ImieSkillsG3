@@ -1,0 +1,9 @@
+{% extends 'ImieSkillsBundle::layout.html.twig' %}
+
+        {% block article %}
+            <h2>ajout d'une promo</h2>
+            <hr/>
+            <form method="post" action="{{ path('imie_skills_promo_add') }}" {{ form_enctype(form) }}>
+                {{ form(form) }}
+            </form>
+        {% endblock article %}

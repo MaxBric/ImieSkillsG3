@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Imie\SkillsBundle\Entity\School;
 use Imie\SkillsBundle\Form\SchoolType;
+use Imie\SkillsBundle\Entity\Course;
+
 
 class SchoolController extends Controller
 {
@@ -21,11 +23,12 @@ class SchoolController extends Controller
             array('action' => $this->generateUrl('imie_skills_school_add'))
         );
 
+
         $form->handleRequest($req);
         if($form->isValid()){
             try{
                 $em = $this->getDoctrine()->getManager();
-                $em->persit($school);
+                $em->persist($school);
                 $em->flush();
                 return $this->redirect($this->generateUrl('imie_skills_school_add'));
             }
@@ -33,7 +36,8 @@ class SchoolController extends Controller
                 echo $e->getMessage();
             }
         }
-        return $this->render('ImieSkillsBundle:Formation:add.html.twig', array(
+
+        return $this->render('ImieSkillsBundle:School:add.html.twig', array(
             'form' => $form->createView()
         ));
     }

@@ -3,12 +3,13 @@
 namespace Imie\SkillsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * school
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Imie\SkillsBundle\Entity\schoolRepository")
+ * @ORM\Entity(repositoryClass="Imie\SkillsBundle\Entity\SchoolRepository")
  */
 class School
 {
@@ -28,15 +29,21 @@ class School
      */
     private $schoolName;
     /**
-     *  @ORM\ManyToOne(targetEntity="Course", inversedBy="school")
+     * @var \Courses
+     * @ORM\OneToMany(targetEntity="Course", mappedBy="school")
      */
-    private $course;
+    private $courses;
+
+    public function __construct()
+    {
+        $this->courses = new ArrayCollection();
+    }
 
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -59,33 +66,68 @@ class School
     /**
      * Get schoolName
      *
-     * @return string 
+     * @return string
      */
     public function getSchoolName()
     {
         return $this->schoolName;
     }
 
+
+
     /**
-     * Set course
+     * Add courses
      *
-     * @param \Imie\SkillsBundle\Entity\Course $course
+     * @param \Imie\SkillsBundle\Entity\Course $courses
      * @return School
      */
-    public function setCourse(\Imie\SkillsBundle\Entity\Course $course = null)
+    public function setCourses(\Imie\SkillsBundle\Entity\Course $courses)
     {
-        $this->course = $course;
+        $this->courses[] = $courses;
 
         return $this;
     }
 
     /**
-     * Get course
+     * Remove courses
      *
-     * @return \Imie\SkillsBundle\Entity\Course 
+     * @param \Imie\SkillsBundle\Entity\Course $courses
      */
-    public function getCourse()
+    public function removeCourses(\Imie\SkillsBundle\Entity\Course $courses)
     {
-        return $this->course;
+        $this->courses->removeElement($courses);
+    }
+
+    /**
+     * Get courses
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCourses()
+    {
+        return $this->courses;
+    }
+
+    /**
+     * Add courses
+     *
+     * @param \Imie\SkillsBundle\Entity\Course $courses
+     * @return School
+     */
+    public function addCourse(\Imie\SkillsBundle\Entity\Course $courses)
+    {
+        $this->courses[] = $courses;
+
+        return $this;
+    }
+
+    /**
+     * Remove courses
+     *
+     * @param \Imie\SkillsBundle\Entity\Course $courses
+     */
+    public function removeCourse(\Imie\SkillsBundle\Entity\Course $courses)
+    {
+        $this->courses->removeElement($courses);
     }
 }
