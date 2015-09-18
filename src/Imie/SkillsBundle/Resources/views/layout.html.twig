@@ -5,7 +5,7 @@
 {% block body %}
     {% for key, message in app.session.flashbag.all() %}
         <div class="alert alert-{{ key }}">
-            {{ message|trans({}, 'FOSUserBundle') }}
+    {#        {{ message|trans({}, 'FOSUserBundle') }}#}
         </div>
     {% endfor %}
     {% if app.session.flashbag.get('success') is not empty or app.session.flashbag.get('info') is not empty %}

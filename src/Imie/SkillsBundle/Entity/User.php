@@ -34,6 +34,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="userLastName", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $userLastName;
 
@@ -41,12 +42,14 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="userFirstName", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $userFirstName;
     /**
      * @var string
      *
      * @ORM\Column(name="userFullName", type="string", length=255)
+     * 
      */
     private $userFullName;
 
@@ -55,13 +58,15 @@ class User extends BaseUser
      *
      * @ORM\Column(name="userBirthday", type="datetime")
      * @Assert\Date()
+     * @Assert\NotBlank()
      */
     private $userBirthday;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="userPhoneNumber", type="integer")
+     * @ORM\Column(name="userPhoneNumber", type="integer", unique=true)
+     * @Assert\NotBlank()
      */
     private $userPhoneNumber;
 
@@ -72,6 +77,7 @@ class User extends BaseUser
      * @Assert\Email(
      *     message = "'{{ value }}' n'est pas un email valide.",
      *     checkMX = true)
+     * @Assert\NotBlank()
      */
     private $userMail;
 
@@ -79,6 +85,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="userAddress", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $userAddress;
 
@@ -93,6 +100,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="userLogin", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $userLogin;
 
@@ -100,6 +108,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="userPassword", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $userPassword;
 
