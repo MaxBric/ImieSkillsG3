@@ -41,9 +41,7 @@ class Image
      */
     public $path;
     
-    private $imgsrc;
     private $file;
-    
 
     private $imageFileToDelete;
 
@@ -59,13 +57,14 @@ class Image
 
     public function getAbsolutePath()
     {
-        return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->path;
+        return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->id.'.'.$this->path;
     }
 
     public function getWebPath()
     {
         return $this->getUploadDir().'/'.$this->id.'.'.$this->path;
     }
+
     /**
      * Set imageAlt
      *
@@ -109,7 +108,7 @@ class Image
             return;
         }
         $this->path = $this->file->guessExtension();
-        $this->imageAlt = $this->file->guessExtension();
+
     }
     
     /**
@@ -121,15 +120,16 @@ class Image
             return;
         }
         
-        $this->file->move($this->getUploadRootDir(), $this->id.'.'.$this->file->guessExtension());
-        
+        $this->file->move($this->getUploadRootDir(),
+                $this->id.'.'.$this->imageName);
     }
     
     /**
      * @ORM\PreRemove()
      */
     public function preRemoveUpload(){
-        $this->imageFileToDelete = $this->getAbsolutePath();
+        $this->imageFileToDelete = $this->getUploadRootDir().'/'.
+                $this->id.'.'.$this->imageName;
     }
     
     /**
@@ -149,7 +149,6 @@ class Image
         $this->file = $file;
         return $this;
     }
-    
 
     /**
      * Set imageName

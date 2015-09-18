@@ -15,7 +15,7 @@
     {% for skill in skills %}
     <tr>
       <td>{{ skill.skillName }}</a></td>
-      <td>{% if skill.skillParentId is not null %}{{ skill.skillParentId }}{%endif %}</td>
+      <td>{% if skill.skillParentId is not null %}{{ skill.skillParentId}}{% else %} ????{%endif %}</td>
       <td>{{ skill.skillDescription }}</td>
       <td><a href="{{ path('imie_skills_skill_modify', {id:skill.id}) }}">Modifier</a></td>
       <td><a href="{{ path('imie_skills_skill_delete', {id:skill.id}) }}">Supprimer</a></td>

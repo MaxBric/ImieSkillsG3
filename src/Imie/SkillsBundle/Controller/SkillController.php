@@ -35,7 +35,7 @@ class SkillController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->persist($skill);
         $em->flush();
-        return $this->redirect($this->generateUrl('imie_skills_skill_add'));
+        return $this->redirect($this->generateUrl('imie_skills_skills'));
       } catch (\Doctrine\DBAL\DBALException $e) {
         echo $e->getMessage();
       }
@@ -59,7 +59,6 @@ class SkillController extends Controller
     $form->handleRequest($req);
     if ($form->isValid()) {
       try {
-        $em->persist($skill);
         $em->flush();
         $req->getSession()->getFlashBag()->add('success', 'Compétence modifiée');
         return $this->redirect($this->generateUrl('imie_skills_skills'));

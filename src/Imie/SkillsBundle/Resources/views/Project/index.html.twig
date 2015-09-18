@@ -19,13 +19,9 @@
       <td>{% if project.manager is not null %}{{ project.manager.userFullName }}{% else %}A recruter{% endif %}</td>
       <td>{{ project.state.statut }}</td>
       <td><ul>
-        {% if project.manager is not null %}
         {% for skill in project.skills if project.skills is defined %}
         <li>{{ skill.skillName }}</li>
         {% endfor %}
-        {% else %}
-        A recruter
-        {% endif %}
       </ul></td>
       <td><a href="{{ path('imie_skills_project_modify', {id:project.id}) }}">Modifier</a></td>
       <td><a href="{{ path('imie_skills_project_delete', {id:project.id}) }}">Supprimer</a></td>

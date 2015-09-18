@@ -70,9 +70,6 @@ class ProjectController extends Controller {
         $form->handleRequest($req);
 
         if ($form->isValid()) {
-//            if($projectToModify->image != null){
-//                unset($projectToModify->image);
-//            }
             $em->flush();
             $req->getSession()->getFlashBag()->add('success', 'Projet modifié');
             return $this->redirect($this->generateUrl('imie_skills_project_index'));
