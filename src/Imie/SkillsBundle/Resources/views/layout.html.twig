@@ -1,25 +1,24 @@
 {% extends '::base.html.twig' %}
 
-{% block title %}Imie Skills{% endblock title %}
-{% block page_title %}Imie Skills{% endblock page_title %}
 {% block body %}
-    {% if app.session.flashbag.get('success') is not empty or app.session.flashbag.get('info') is not empty %}
-        <section>
-            <ul>
-                {% for msg in app.session.flashbag.get('success') %}
-                    <p class="text-success">{{ msg|nl2br }}</p>
-                {% endfor %}
-            </ul>
-            <ul>
-                {% for msg in app.session.flashbag.get('danger') %}
-                    <p class="text-danger">{{ msg|nl2br }}</p>
-                {% endfor %}
-            </ul>
-        </section>
-    {% endif %}
-    <section>
-        <article>
-        {% block article %}{% endblock article %}
-    </article>
+{% if app.session.flashbag.get('success') is not empty or app.session.flashbag.get('info') is not empty %}
+<section>
+  <ul>
+    {% for msg in app.session.flashbag.get('success') %}
+    <li class="text-success">{{ msg|nl2br }}</li>
+    {% endfor %}
+  </ul>
+  <ul>
+    {% for msg in app.session.flashbag.get('danger') %}
+    <li class="text-danger">{{ msg|nl2br }}</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+<section>
+  <article>
+    {% block article %}
+    {% endblock article %}
+  </article>
 </section>
 {% endblock body %}
