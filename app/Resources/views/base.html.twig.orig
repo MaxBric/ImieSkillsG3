@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>{% block title %}Bienvenue{% endblock %}</title>
+  {% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('bundles/imieskills/css/bootstrap.min.css') }}" />
+  <link rel="stylesheet" href="{{ asset('bundles/imieskills/css/styles.css') }}" />
+  {% endblock %}
+  <meta name="viewport" content="width=device-width" />
+  <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+<<<<<<< HEAD
+  <nav class="navbar navbar-default navbar-fixed-top" id="imie-header">
+=======
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+>>>>>>> 004564b52bacbae79368340289489da91f5743ed
+    {% block menu %}
+    {% include 'menu.html.twig' %}
+    {% endblock menu %}
+  </nav>
+<<<<<<< HEAD
+  <main class="container" id="imie-main">
+    {% block body %}
+    {% endblock body %}
+  </main>
+  <nav class="navbar navbar-default navbar-fixed-bottom" id="imie-footer">
+    <div class="container">
+      <span>IMIE Skills</span>
+      <span> - </span>
+      <a href="{{ path('imie_skills_contact') }}">Contact</a>
+    </div>
+=======
+  <hr/>
+  <main id="main">
+    {% block body %}
+    {% endblock body %}
+  </main>
+  <hr/>
+  <nav class="navbar navbar-default navbar-fixed-bottom" id="footer">
+    <span>IMIE Skills</span>
+    <span> - </span>
+    <a href="{{ path('imie_skills_contact') }}">Contact</a>
+>>>>>>> 004564b52bacbae79368340289489da91f5743ed
+  </nav>
+  {% block javascripts %}
+  <script src="{{ asset('bundles/imieskills/js/bootstrap.min.js') }}"></script>
+  {% endblock javascripts %}
+</body>
+</html>

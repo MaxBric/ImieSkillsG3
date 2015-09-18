@@ -1,5 +1,6 @@
 {% extends '::base.html.twig' %}
 
+<<<<<<< HEAD
 {% block title %}IMIE Skills{% endblock title %}
 {% block page_title %}IMIE Skills{% endblock page_title %}
 {% block body %}
@@ -8,11 +9,21 @@
   {{ message|trans({}, 'FOSUserBundle') }}
 </div>
 {% endfor %}
+=======
+{% block body %}
+>>>>>>> 004564b52bacbae79368340289489da91f5743ed
 {% if app.session.flashbag.get('success') is not empty or app.session.flashbag.get('info') is not empty %}
 <section>
   <ul>
     {% for msg in app.session.flashbag.get('success') %}
     <li class="text-success">{{ msg|nl2br }}</li>
+<<<<<<< HEAD
+=======
+    {% for key, message in app.session.flashbag.all() %}
+        <div class="alert alert-{{ key }}">
+    {#        {{ message|trans({}, 'FOSUserBundle') }}#}
+        </div>
+>>>>>>> 004564b52bacbae79368340289489da91f5743ed
     {% endfor %}
   </ul>
   <ul>
@@ -28,6 +39,4 @@
     {% endblock article %}
   </article>
 </section>
-{% block fos_user_content %}
-{% endblock fos_user_content %}
 {% endblock body %}

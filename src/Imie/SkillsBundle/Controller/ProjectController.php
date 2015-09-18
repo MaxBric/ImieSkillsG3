@@ -36,7 +36,8 @@ class ProjectController extends Controller {
             foreach ($users as $user) {
                 $user->addJoinedProject($project);
             }
-
+            
+//            $project->setCreator($req->getSession()->get('security.context')->getToken()->getUser());
             $em->persist($project);
             $em->flush();
 

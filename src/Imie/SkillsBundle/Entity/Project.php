@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * Project
@@ -116,7 +117,7 @@ class Project {
      * @Assert\NotBlank()
      */
     private $skills;
-    
+
     /**
      * @var string
      *
@@ -332,7 +333,7 @@ class Project {
      */
     public function addUser(\Imie\SkillsBundle\Entity\User $users) {
         $this->users[] = $users;
-  
+
 
         return $this;
     }
@@ -441,7 +442,7 @@ class Project {
 
         return $this;
     }
-    
+
     /**
      * Set image
      *
@@ -462,6 +463,23 @@ class Project {
      */
     public function getImage() {
         return $this->image;
+    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContextInterface $context) {
+        if ($this->projectEstimatedStart > $this->projectEstimatedEnd) {
+            $context->addViolationAt(
+                    'projectEstimatedEnd', 'Cette date est invalide', array(), null
+            );
+        }
+
+        if ($this->projectStart > $this->projectEnd) {
+            $context->addViolationAt(
+                    'projectEnd', 'Cette date est invalide', array(), null
+            );
+        }
     }
 
 }

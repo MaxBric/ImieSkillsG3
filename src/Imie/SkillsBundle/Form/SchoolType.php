@@ -5,6 +5,7 @@ namespace Imie\SkillsBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Imie\SkillsBundle\Form\CourseType;
 
 class SchoolType extends AbstractType
 {
@@ -16,10 +17,16 @@ class SchoolType extends AbstractType
     {
         $builder
             ->add('schoolName')
-            ->add('course')
+            ->add('courses', 'entity', array(
+                'class' => 'ImieSkillsBundle:Course',
+                'choice_label' => 'course',
+                'multiple' =>true,
+                'required'=>false
+            ))
+            ->add('envoyer','submit')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

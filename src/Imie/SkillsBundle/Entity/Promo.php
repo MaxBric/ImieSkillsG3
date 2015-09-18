@@ -29,19 +29,20 @@ class Promo
     private $promoName;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="promo")
+     * @ORM\OneToMany(targetEntity="User", mappedBy="promo")
+     * @ORM\Column(nullable=true)
      */
     private $users;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Course", inversedBy="promo")
+     * @ORM\ManyToOne(targetEntity="Course", inversedBy="promos")
      */
     private $course;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -64,7 +65,7 @@ class Promo
     /**
      * Get promoName
      *
-     * @return string 
+     * @return string
      */
     public function getPromoName()
     {
@@ -87,7 +88,7 @@ class Promo
     /**
      * Get users
      *
-     * @return \Imie\SkillsBundle\Entity\User 
+     * @return \Imie\SkillsBundle\Entity\User
      */
     public function getUsers()
     {
