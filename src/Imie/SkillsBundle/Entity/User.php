@@ -5,7 +5,8 @@ namespace Imie\SkillsBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Imie\SkillsBundle\Entity\Notification;
 use Imie\SkillsBundle\Entity\Promo;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -14,8 +15,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Imie\SkillsBundle\Entity\UserRepository")
  */
-class User implements UserInterface {
-
+class User
+{
     /**
      * @var integer
      *
@@ -30,7 +31,7 @@ class User implements UserInterface {
      *
      * @ORM\Column(name="userLastName", type="string", length=255)
      */
-    protected $userLastName;
+    private $userLastName;
 
     /**
      * @var string
@@ -38,7 +39,6 @@ class User implements UserInterface {
      * @ORM\Column(name="userFirstName", type="string", length=255)
      */
     private $userFirstName;
-
     /**
      * @var string
      *
@@ -50,6 +50,7 @@ class User implements UserInterface {
      * @var \DateTime
      *
      * @ORM\Column(name="userBirthday", type="datetime")
+     * @Assert\Date()
      */
     private $userBirthday;
 
@@ -64,6 +65,9 @@ class User implements UserInterface {
      * @var string
      *
      * @ORM\Column(name="userMail", type="string", length=255)
+     * @Assert\Email(
+     *     message = "'{{ value }}' n'est pas un email valide.",
+     *     checkMX = true)
      */
     private $userMail;
 
@@ -101,47 +105,46 @@ class User implements UserInterface {
      * @ORM\Column(name="userDescription", type="text")
      */
     private $userDescription;
-
-    /**
-     *  @var \Project
-     *  @ORM\OneToMany(targetEntity="Project", mappedBy="manager")
-     */
+  /**
+  *  @var \Project
+  *  @ORM\OneToMany(targetEntity="Project", mappedBy="manager")
+  */
     private $managedProjects;
-
     /**
-     * @var \Project
-     * @ORM\OneToMany(targetEntity="Project", mappedBy="creator")
-     */
+    * @var \Project
+    * @ORM\OneToMany(targetEntity="Project", mappedBy="creator")
+    */
     private $createdProjects;
 
     /**
-     * @var \Project
-     * @ORM\ManyToMany(targetEntity="Project", inversedBy="users")
-     */
+    *@var \Project
+    * @ORM\ManyToMany(targetEntity="Project", inversedBy="users")
+    */
     private $joinedProjects;
 
     /**
-     * @var \Level
-     * @ORM\OneToMany(targetEntity="Level", mappedBy="userId")
-     */
+    * @var \Level
+    * @ORM\OneToMany(targetEntity="Level", mappedBy="userId")
+    */
     private $skills;
 
     /**
-     * @var \Notification
-     * @ORM\OneToMany(targetEntity="Notification", mappedBy="notificationUser")
-     */
+    * @var \Notification
+    * @ORM\OneToMany(targetEntity="Notification", mappedBy="notificationUser")
+    */
     private $notifications;
 
     /**
-     * @var \Promo
-     * @ORM\OneToMany(targetEntity="Level", mappedBy="userId")
-     */
+    *@var \Promo
+    * @ORM\OneToMany(targetEntity="Level", mappedBy="userId")
+    */
     private $promo;
 
+
     /**
-     * @var \Rank
-     * @ORM\OneToMany(targetEntity="Rank", mappedBy="users")
-     */
+    * @var \Rank
+    * @ORM\OneToMany(targetEntity="Rank", mappedBy="users")
+    */
     private $rank;
 
     /**
@@ -152,24 +155,12 @@ class User implements UserInterface {
      */
     protected $image;
 
-    /**
-     * @ORM\Column(name="salt", type="string", length=255, nullable=true)
-     */
-    private $salt;
-
-    /**
-     * @ORM\Column(name="roles", type="array")
-     */
-    private $roles;
-
     public function __construct() {
-        $this->createdProjects = new ArrayCollection();
-        $this->managedProjects = new ArrayCollection();
-        $this->joinedProjects = new ArrayCollection();
-        $this->notifications = new ArrayCollection();
-        $this->userBirthday = new \DateTime('now');
-        $this->roles = array();
-        $this->salt = null;
+      $this->createdProjects = new ArrayCollection();
+      $this->managedProjects = new ArrayCollection();
+      $this->joinedProjects = new ArrayCollection();
+      $this->notifications = new ArrayCollection();
+      $this->userBirthday = new \DateTime('now');
     }
 
     /**
@@ -177,7 +168,8 @@ class User implements UserInterface {
      *
      * @return integer
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -187,7 +179,8 @@ class User implements UserInterface {
      * @param string $userLastName
      * @return User
      */
-    public function setUserLastName($userLastName) {
+    public function setUserLastName($userLastName)
+    {
         $this->userLastName = ucfirst($userLastName);
 
         return $this;
@@ -198,7 +191,8 @@ class User implements UserInterface {
      *
      * @return string
      */
-    public function getUserLastName() {
+    public function getUserLastName()
+    {
         return $this->userLastName;
     }
 
@@ -208,7 +202,8 @@ class User implements UserInterface {
      * @param string $userFirstName
      * @return User
      */
-    public function setUserFirstName($userFirstName) {
+    public function setUserFirstName($userFirstName)
+    {
         $this->userFirstName = ucfirst($userFirstName);
 
         return $this;
@@ -219,7 +214,8 @@ class User implements UserInterface {
      *
      * @return string
      */
-    public function getUserFirstName() {
+    public function getUserFirstName()
+    {
         return $this->userFirstName;
     }
 
@@ -229,7 +225,8 @@ class User implements UserInterface {
      * @param \DateTime $userBirthday
      * @return User
      */
-    public function setUserBirthday($userBirthday) {
+    public function setUserBirthday($userBirthday)
+    {
         $this->userBirthday = $userBirthday;
 
         return $this;
@@ -240,8 +237,9 @@ class User implements UserInterface {
      *
      * @return \DateTime
      */
-    public function getUserBirthday() {
-// var_dump($this->userBirthday);die();
+    public function getUserBirthday()
+    {
+      // var_dump($this->userBirthday);die();
         return $this->userBirthday;
     }
 
@@ -251,7 +249,8 @@ class User implements UserInterface {
      * @param integer $userPhoneNumber
      * @return User
      */
-    public function setUserPhoneNumber($userPhoneNumber) {
+    public function setUserPhoneNumber($userPhoneNumber)
+    {
         $this->userPhoneNumber = $userPhoneNumber;
 
         return $this;
@@ -262,7 +261,8 @@ class User implements UserInterface {
      *
      * @return integer
      */
-    public function getUserPhoneNumber() {
+    public function getUserPhoneNumber()
+    {
         return $this->userPhoneNumber;
     }
 
@@ -272,7 +272,8 @@ class User implements UserInterface {
      * @param string $userMail
      * @return User
      */
-    public function setUserMail($userMail) {
+    public function setUserMail($userMail)
+    {
         $this->userMail = $userMail;
 
         return $this;
@@ -283,7 +284,8 @@ class User implements UserInterface {
      *
      * @return string
      */
-    public function getUserMail() {
+    public function getUserMail()
+    {
         return $this->userMail;
     }
 
@@ -293,7 +295,8 @@ class User implements UserInterface {
      * @param string $userAddress
      * @return User
      */
-    public function setUserAddress($userAddress) {
+    public function setUserAddress($userAddress)
+    {
         $this->userAddress = $userAddress;
 
         return $this;
@@ -304,7 +307,8 @@ class User implements UserInterface {
      *
      * @return string
      */
-    public function getUserAddress() {
+    public function getUserAddress()
+    {
         return $this->userAddress;
     }
 
@@ -314,7 +318,8 @@ class User implements UserInterface {
      * @param boolean $userEnable
      * @return User
      */
-    public function setUserEnable($userEnable) {
+    public function setUserEnable($userEnable)
+    {
         $this->userEnable = $userEnable;
 
         return $this;
@@ -325,7 +330,8 @@ class User implements UserInterface {
      *
      * @return boolean
      */
-    public function getUserEnable() {
+    public function getUserEnable()
+    {
         return $this->userEnable;
     }
 
@@ -335,7 +341,8 @@ class User implements UserInterface {
      * @param string $userLogin
      * @return User
      */
-    public function setUserLogin($userLogin) {
+    public function setUserLogin($userLogin)
+    {
         $this->userLogin = $userLogin;
 
         return $this;
@@ -346,7 +353,8 @@ class User implements UserInterface {
      *
      * @return string
      */
-    public function getUserLogin() {
+    public function getUserLogin()
+    {
         return $this->userLogin;
     }
 
@@ -356,7 +364,8 @@ class User implements UserInterface {
      * @param string $userPassword
      * @return User
      */
-    public function setUserPassword($userPassword) {
+    public function setUserPassword($userPassword)
+    {
         $this->userPassword = $userPassword;
 
         return $this;
@@ -367,7 +376,8 @@ class User implements UserInterface {
      *
      * @return string
      */
-    public function getUserPassword() {
+    public function getUserPassword()
+    {
         return $this->userPassword;
     }
 
@@ -377,7 +387,8 @@ class User implements UserInterface {
      * @param string $userDescription
      * @return User
      */
-    public function setUserDescription($userDescription) {
+    public function setUserDescription($userDescription)
+    {
         $this->userDescription = $userDescription;
 
         return $this;
@@ -388,7 +399,8 @@ class User implements UserInterface {
      *
      * @return string
      */
-    public function getUserDescription() {
+    public function getUserDescription()
+    {
         return $this->userDescription;
     }
 
@@ -398,7 +410,8 @@ class User implements UserInterface {
      * @param \Imie\SkillsBundle\Entity\Project $managedProjects
      * @return User
      */
-    public function addManagedProject(\Imie\SkillsBundle\Entity\Project $managedProjects) {
+    public function addManagedProject(\Imie\SkillsBundle\Entity\Project $managedProjects)
+    {
         $this->managedProjects[] = $managedProjects;
 
         return $this;
@@ -409,7 +422,8 @@ class User implements UserInterface {
      *
      * @param \Imie\SkillsBundle\Entity\Project $managedProjects
      */
-    public function removeManagedProject(\Imie\SkillsBundle\Entity\Project $managedProjects) {
+    public function removeManagedProject(\Imie\SkillsBundle\Entity\Project $managedProjects)
+    {
         $this->managedProjects->removeElement($managedProjects);
     }
 
@@ -418,7 +432,8 @@ class User implements UserInterface {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getManagedProjects() {
+    public function getManagedProjects()
+    {
         return $this->managedProjects;
     }
 
@@ -428,7 +443,8 @@ class User implements UserInterface {
      * @param \Imie\SkillsBundle\Entity\Project $createdProjects
      * @return User
      */
-    public function addCreatedProject(\Imie\SkillsBundle\Entity\Project $createdProjects) {
+    public function addCreatedProject(\Imie\SkillsBundle\Entity\Project $createdProjects)
+    {
         $this->createdProjects[] = $createdProjects;
 
         return $this;
@@ -439,7 +455,8 @@ class User implements UserInterface {
      *
      * @param \Imie\SkillsBundle\Entity\Project $createdProjects
      */
-    public function removeCreatedProject(\Imie\SkillsBundle\Entity\Project $createdProjects) {
+    public function removeCreatedProject(\Imie\SkillsBundle\Entity\Project $createdProjects)
+    {
         $this->createdProjects->removeElement($createdProjects);
     }
 
@@ -448,7 +465,8 @@ class User implements UserInterface {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCreatedProjects() {
+    public function getCreatedProjects()
+    {
         return $this->createdProjects;
     }
 
@@ -458,7 +476,8 @@ class User implements UserInterface {
      * @param \Imie\SkillsBundle\Entity\Project $joinedProjects
      * @return User
      */
-    public function addJoinedProject(\Imie\SkillsBundle\Entity\Project $joinedProjects) {
+    public function addJoinedProject(\Imie\SkillsBundle\Entity\Project $joinedProjects)
+    {
         $this->joinedProjects[] = $joinedProjects;
         $joinedProjects->addUser($this);
 
@@ -470,7 +489,8 @@ class User implements UserInterface {
      *
      * @param \Imie\SkillsBundle\Entity\Project $joinedProjects
      */
-    public function removeJoinedProject(\Imie\SkillsBundle\Entity\Project $joinedProjects) {
+    public function removeJoinedProject(\Imie\SkillsBundle\Entity\Project $joinedProjects)
+    {
         $this->joinedProjects->removeElement($joinedProjects);
     }
 
@@ -479,7 +499,8 @@ class User implements UserInterface {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getJoinedProjects() {
+    public function getJoinedProjects()
+    {
         return $this->joinedProjects;
     }
 
@@ -489,7 +510,8 @@ class User implements UserInterface {
      * @param \Imie\SkillsBundle\Entity\Level $skills
      * @return User
      */
-    public function addSkill(\Imie\SkillsBundle\Entity\Level $skills) {
+    public function addSkill(\Imie\SkillsBundle\Entity\Level $skills)
+    {
         $this->skills[] = $skills;
 
         return $this;
@@ -500,7 +522,8 @@ class User implements UserInterface {
      *
      * @param \Imie\SkillsBundle\Entity\Level $skills
      */
-    public function removeSkill(\Imie\SkillsBundle\Entity\Level $skills) {
+    public function removeSkill(\Imie\SkillsBundle\Entity\Level $skills)
+    {
         $this->skills->removeElement($skills);
     }
 
@@ -509,7 +532,8 @@ class User implements UserInterface {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getSkills() {
+    public function getSkills()
+    {
         return $this->skills;
     }
 
@@ -519,7 +543,8 @@ class User implements UserInterface {
      * @param \Imie\SkillsBundle\Entity\Notification $notifications
      * @return User
      */
-    public function addNotification(\Imie\SkillsBundle\Entity\Notification $notifications) {
+    public function addNotification(\Imie\SkillsBundle\Entity\Notification $notifications)
+    {
         $this->notifications[] = $notifications;
 
         return $this;
@@ -530,7 +555,8 @@ class User implements UserInterface {
      *
      * @param \Imie\SkillsBundle\Entity\Notification $notifications
      */
-    public function removeNotification(\Imie\SkillsBundle\Entity\Notification $notifications) {
+    public function removeNotification(\Imie\SkillsBundle\Entity\Notification $notifications)
+    {
         $this->notifications->removeElement($notifications);
     }
 
@@ -539,7 +565,8 @@ class User implements UserInterface {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getNotifications() {
+    public function getNotifications()
+    {
         return $this->notifications;
     }
 
@@ -549,7 +576,8 @@ class User implements UserInterface {
      * @param \Imie\SkillsBundle\Entity\Level $promo
      * @return User
      */
-    public function addPromo(\Imie\SkillsBundle\Entity\Level $promo) {
+    public function addPromo(\Imie\SkillsBundle\Entity\Level $promo)
+    {
         $this->promo[] = $promo;
 
         return $this;
@@ -560,7 +588,8 @@ class User implements UserInterface {
      *
      * @param \Imie\SkillsBundle\Entity\Level $promo
      */
-    public function removePromo(\Imie\SkillsBundle\Entity\Level $promo) {
+    public function removePromo(\Imie\SkillsBundle\Entity\Level $promo)
+    {
         $this->promo->removeElement($promo);
     }
 
@@ -569,7 +598,8 @@ class User implements UserInterface {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPromo() {
+    public function getPromo()
+    {
         return $this->promo;
     }
 
@@ -579,7 +609,8 @@ class User implements UserInterface {
      * @param \Imie\SkillsBundle\Entity\Rank $rank
      * @return User
      */
-    public function addRole(\Imie\SkillsBundle\Entity\Rank $rank) {
+    public function addRole(\Imie\SkillsBundle\Entity\Rank $rank)
+    {
         $this->rank[] = $rank;
 
         return $this;
@@ -590,7 +621,8 @@ class User implements UserInterface {
      *
      * @param \Imie\SkillsBundle\Entity\Rank $rank
      */
-    public function removeRole(\Imie\SkillsBundle\Entity\Rank $rank) {
+    public function removeRole(\Imie\SkillsBundle\Entity\Rank $rank)
+    {
         $this->rank->removeElement($rank);
     }
 
@@ -600,7 +632,8 @@ class User implements UserInterface {
      * @param \Imie\SkillsBundle\Entity\Rank $rank
      * @return User
      */
-    public function addRank(\Imie\SkillsBundle\Entity\Rank $rank) {
+    public function addRank(\Imie\SkillsBundle\Entity\Rank $rank)
+    {
         $this->rank[] = $rank;
 
         return $this;
@@ -611,7 +644,8 @@ class User implements UserInterface {
      *
      * @param \Imie\SkillsBundle\Entity\Rank $rank
      */
-    public function removeRank(\Imie\SkillsBundle\Entity\Rank $rank) {
+    public function removeRank(\Imie\SkillsBundle\Entity\Rank $rank)
+    {
         $this->rank->removeElement($rank);
     }
 
@@ -620,17 +654,19 @@ class User implements UserInterface {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getRank() {
+    public function getRank()
+    {
         return $this->rank;
     }
 
-    public function setUserFullName() {
-        $this->userFullName = $this->userFirstName . ' ' . $this->userLastName;
-        return $this;
+    public function setUserFullName()
+    {
+      $this->userFullName = $this->userFirstName.' '.$this->userLastName;
+      return $this;
     }
-
-    public function getUserFullName() {
-        return $this->userFullName;
+    public function getUserFullName()
+    {
+      return $this->userFullName;
     }
 
     /**
@@ -641,7 +677,7 @@ class User implements UserInterface {
      */
     public function setImage(\Imie\SkillsBundle\Entity\Image $image = null) {
         $this->image = $image;
-        $image->setImageAlt($this->getUserFirstName() . $this->getUserLastName());
+        $image->setImageAlt($this->getUserFirstName().$this->getUserLastName());
 
         return $this;
     }
@@ -654,46 +690,4 @@ class User implements UserInterface {
     public function getImage() {
         return $this->image;
     }
-
-    /*
-     * 
-     */
-
-    public function getRoles() {
-        
-    }
-
-    /*
-     * 
-     */
-
-    public function getSalt() {
-        return $this->salt;
-    }
-
-    /*
-     * 
-     */
-
-    public function getPassword() {
-        return $this->userPassword;
-    }
-
-    /*
-     * 
-     */
-
-    public function getUsername() {
-        return $this->userLastName;
-    }
-
-    /*
-     * 
-     */
-
-    public function eraseCredentials() {
-        $this->userPassword = null;
-        return $this;
-    }
-
 }

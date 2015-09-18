@@ -2,7 +2,7 @@
 
 {% block article %}
   <h2>Ajout d'un utilisateur</h2>
-  <a href="{{ app.request.headers.get('referer') }}">Retour</a>
+  <a href="{{ path('imie_skills_users') }}">Retour</a>
   <hr/>
   <form method="post" action="{{ path('imie_skills_user_add') }}" {{ form_enctype(form) }}>
     {{ form(form) }}

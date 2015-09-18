@@ -19,7 +19,7 @@ class ProjectType extends AbstractType
             ->add('state', 'entity', array(
                 'class' => 'ImieSkillsBundle:State',
                 'choice_label' => 'statut'))                  
-            ->add('projectProgress', 'percent')
+            ->add('projectProgress')
             ->add('projectEstimatedStart', 'date', array(
                 'format' => 'ddMMyyyy',
             ))
@@ -34,15 +34,20 @@ class ProjectType extends AbstractType
             ))
             ->add('manager', 'entity', array(
                 'class' => 'ImieSkillsBundle:User',
-                'choice_label' => 'userFullName'
+                'choice_label' => 'userFullName',
+                'empty_value' => 'Choisissez une option',
+                'required' => false
             ))
             ->add('users', 'entity', array(
                 'class' => 'ImieSkillsBundle:User',
                 'choice_label' => 'userFullName',
                 'choice_value' => 'id',
-                'multiple' => true
+                'multiple' => true,
+                'required' => false
             ))
-            ->add('image',  new ImageType())
+            ->add('image',  new ImageType(), array(
+                'required' => false
+            ))
             ->add('Valider', 'submit')
         ;
     }
