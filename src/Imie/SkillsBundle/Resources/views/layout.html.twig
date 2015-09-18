@@ -6,6 +6,10 @@
   <ul>
     {% for msg in app.session.flashbag.get('success') %}
     <li class="text-success">{{ msg|nl2br }}</li>
+    {% for key, message in app.session.flashbag.all() %}
+        <div class="alert alert-{{ key }}">
+    {#        {{ message|trans({}, 'FOSUserBundle') }}#}
+        </div>
     {% endfor %}
   </ul>
   <ul>
