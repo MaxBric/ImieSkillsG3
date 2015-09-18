@@ -1,6 +1,5 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
-<<<<<<< HEAD
 {% block article %}
 <h2>Ajout d'une formation</h2>
 <a href="{{ app.request.headers.get('referer') }}">Retour</a>
@@ -9,12 +8,3 @@
   {{ form(form) }}
 </form>
 {% endblock article %}
-=======
-        {% block article %}
-            <h2>Ajout course</h2>
-            <hr/>
-            <form method="post" action="{{ path('imie_skills_course_add') }}" {{ form_enctype(form) }}>
-                {{ form(form) }}
-            </form>
-        {% endblock article %}
->>>>>>> 004564b52bacbae79368340289489da91f5743ed
