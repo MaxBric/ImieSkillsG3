@@ -3,6 +3,11 @@
 {% block title %}Imie Skills{% endblock title %}
 {% block page_title %}Imie Skills{% endblock page_title %}
 {% block body %}
+    {% for key, message in app.session.flashbag.all() %}
+        <div class="alert alert-{{ key }}">
+            {{ message|trans({}, 'FOSUserBundle') }}
+        </div>
+    {% endfor %}
     {% if app.session.flashbag.get('success') is not empty or app.session.flashbag.get('info') is not empty %}
         <section>
             <ul>
@@ -22,4 +27,6 @@
         {% block article %}{% endblock article %}
     </article>
 </section>
+{% block fos_user_content %}
+{% endblock fos_user_content %}
 {% endblock body %}

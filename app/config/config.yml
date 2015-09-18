@@ -9,8 +9,9 @@ parameters:
     locale: en
 
 framework:
+    
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -81,3 +82,11 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+
+# fos user
+
+fos_user:
+    db_driver:     orm                       
+    firewall_name: main                      
+    user_class:    Imie\SkillsBundle\Entity\User
