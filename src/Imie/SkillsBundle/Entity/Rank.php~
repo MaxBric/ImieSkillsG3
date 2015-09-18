@@ -24,69 +24,15 @@ class Rank
     /**
      * @var string
      *
-     * @ORM\Column(name="rank", type="string", length=255)
+     * @ORM\Column(name="rankName", type="string", length=255)
      */
-    private $rank;
+    private $rankName;
 
     /**
     * @var \User
-    * @ORM\ManyToOne(targetEntity="User", inversedBy="rank")
+    * @ORM\ManyToOne(targetEntity="User", inversedBy="ranks")
     */
-    private $users;
+    private $user;
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set rank
-     *
-     * @param string $rank
-     * @return Rank
-     */
-    public function setRank($rank)
-    {
-        $this->rank = $rank;
-
-        return $this;
-    }
-
-    /**
-     * Get rank
-     *
-     * @return string
-     */
-    public function getRank()
-    {
-        return $this->rank;
-    }
-
-    /**
-     * Set users
-     *
-     * @param \Imie\SkillsBundle\Entity\User $users
-     * @return Rank
-     */
-    public function setUsers(\Imie\SkillsBundle\Entity\User $users = null)
-    {
-        $this->users = $users;
-
-        return $this;
-    }
-
-    /**
-     * Get users
-     *
-     * @return \Imie\SkillsBundle\Entity\User
-     */
-    public function getUsers()
-    {
-        return $this->users;
-    }
+ 
 }
