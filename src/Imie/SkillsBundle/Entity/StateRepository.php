@@ -12,4 +12,18 @@ use Doctrine\ORM\EntityRepository;
  */
 class StateRepository extends EntityRepository
 {
+    public function getStatesOrderedById() {
+        return $this->createQueryBuilder('s')
+                        ->orderBy('s.id')
+                        ->getQuery()
+                        ->getResult();
+    }
+
+    public function getStateById($id) {
+        return $this->createQueryBuilder('s')
+                        ->where('s.id = :id')
+                        ->setParameter('id', $id)
+                        ->getQuery()
+                        ->getSingleResult();
+    }
 }

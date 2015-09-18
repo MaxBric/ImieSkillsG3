@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class UserModifyType extends AbstractType
+class StateType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,30 +15,18 @@ class UserModifyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('userFirstName')
-            ->add('userLastName')
-            ->add('userBirthday', 'date', array(
-              'format' => "ddMMyyyy"
-            ))
-            ->add('skills', new SkillType(), array(
-                'required' => false
-            ))
-            ->add('userPhoneNumber', 'text')
-            ->add('userMail', 'email')
-            ->add('userAddress')
-            ->add('userDescription')
-            ->add('image',  new ImageType())
-            ->add('Add', 'submit')
+            ->add('statut')
+            ->add('Valider', 'submit')
         ;
     }
-
+    
     /**
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Imie\SkillsBundle\Entity\User'
+            'data_class' => 'Imie\SkillsBundle\Entity\State'
         ));
     }
 
@@ -47,6 +35,6 @@ class UserModifyType extends AbstractType
      */
     public function getName()
     {
-        return 'imie_skillsbundle_user';
+        return 'imie_skillsbundle_state';
     }
 }
