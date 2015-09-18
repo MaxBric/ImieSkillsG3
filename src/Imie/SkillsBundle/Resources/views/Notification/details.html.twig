@@ -1,10 +1,9 @@
-{# src/imie/TestBundle/Resources/views/User/detail.html.twig #}
-
 {% extends 'ImieTestBundle::layout.html.twig' %}
+
 {% block article %}
 <h2>Utilisateur {{ user.name }}</h2>
 <a href="{{ app.request.headers.get('referer') }}">Retour</a>
-<hr />
+<hr/>
 <p><b>Id :</b> {{ user.id }}</p>
 <p><b>Email :</b> {{ user.email }}</p>
 <img style="max-width: 500px;" src="{{ user.image.name }}" alt="{{ user.name }}" title="{{ user.name }}" />
