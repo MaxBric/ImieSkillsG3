@@ -16,7 +16,7 @@ use FOS\UserBundle\Model\User as BaseUser;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Imie\SkillsBundle\Entity\UserRepository")
- * @UniqueEntity("userMail")
+ * @UniqueEntity("email")
  * @UniqueEntity("userPhoneNumber")
  */
 class User extends BaseUser
@@ -73,17 +73,6 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="userMail", type="string", length=255, unique=true)
-     * @Assert\Email(
-     *     message = "'{{ value }}' n'est pas un email valide.",
-     *     checkMX = true)
-     * @Assert\NotBlank()
-     */
-    private $userMail;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="userAddress", type="string", length=255)
      * @Assert\NotBlank()
      */
@@ -96,21 +85,6 @@ class User extends BaseUser
      */
     private $userEnable;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="userLogin", type="string", length=255)
-     * @Assert\NotBlank()
-     */
-    private $userLogin;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="userPassword", type="string", length=255)
-     * @Assert\NotBlank()
-     */
-    private $userPassword;
 
     /**
      * @var string
@@ -279,28 +253,6 @@ class User extends BaseUser
         return $this->userPhoneNumber;
     }
 
-    /**
-     * Set userMail
-     *
-     * @param string $userMail
-     * @return User
-     */
-    public function setUserMail($userMail)
-    {
-        $this->userMail = $userMail;
-
-        return $this;
-    }
-
-    /**
-     * Get userMail
-     *
-     * @return string
-     */
-    public function getUserMail()
-    {
-        return $this->userMail;
-    }
 
     /**
      * Set userAddress
@@ -348,51 +300,6 @@ class User extends BaseUser
         return $this->userEnable;
     }
 
-    /**
-     * Set userLogin
-     *
-     * @param string $userLogin
-     * @return User
-     */
-    public function setUserLogin($userLogin)
-    {
-        $this->userLogin = $userLogin;
-
-        return $this;
-    }
-
-    /**
-     * Get userLogin
-     *
-     * @return string
-     */
-    public function getUserLogin()
-    {
-        return $this->userLogin;
-    }
-
-    /**
-     * Set userPassword
-     *
-     * @param string $userPassword
-     * @return User
-     */
-    public function setUserPassword($userPassword)
-    {
-        $this->userPassword = $userPassword;
-
-        return $this;
-    }
-
-    /**
-     * Get userPassword
-     *
-     * @return string
-     */
-    public function getUserPassword()
-    {
-        return $this->userPassword;
-    }
 
     /**
      * Set userDescription

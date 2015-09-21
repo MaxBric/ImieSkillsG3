@@ -1,23 +1,24 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-<h2>Liste des utilisateurs</h2>
+<h2><span class="glyphicon glyphicon-user"></span> Liste des utilisateurs</h2>
+<hr/>
 <a href="{{ path('imie_skills_user_add') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter un utilisateur</a>
 <hr/>
 <table class="table table-striped">
   <thead>
-    <td>Nom</td>
-    <td>Adresse</td>
-    <td>Mail</td>
-    <td>Téléphone</td>
-    <td>Anniversaire</td>
-    <td>Description</td>
-    <td>Compétences</td>
+    <th>Nom</th>
+    <th>Adresse</th>
+    <th>Mail</th>
+    <th>Téléphone</th>
+    <th>Anniversaire</th>
+    <th>Description</th>
+    <th>Compétences</th>
   </thead>
   <tbody>
     {% for user in users if users is defined%}
     <tr>
-      <td><a href="{{ path('imie_skills_user_me', {id:user.id})}}">{{ user.userFullName }}</a></td>
+      <td><a href="{{ path('imie_skills_user_details', {id:user.id})}}">{{ user.userFullName }}</a></td>
       <td>{{ user.userAddress }}</td>
       <td>{{ user.userMail }}</td>
       <td>{{ user.userPhoneNumber }}</td>
@@ -30,8 +31,9 @@
       </ul></td>
       <td><a href="{{ path('imie_skills_user_modify', {id:user.id}) }}"><span class="glyphicon glyphicon-cog"></span></a></td>
       <td><a href="{{ path('imie_skills_user_delete', {id:user.id}) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
-      {% endfor %}
       <hr/>
-    </tbody>
-  </table>
-  {% endblock article %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock article %}

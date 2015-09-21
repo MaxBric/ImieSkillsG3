@@ -3,6 +3,8 @@
 namespace Imie\SkillsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Image
@@ -10,9 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Imie\SkillsBundle\Entity\ImageRepository")
  * @ORM\HasLifecycleCallbacks
+ * 
  */
-class Image
-{
+class Image {
+
     /**
      * @var integer
      *
@@ -28,41 +31,120 @@ class Image
      * @ORM\Column(name="imageAlt", type="string", length=255)
      */
     private $imageAlt;
-    
+
     /**
      * @var string
      *
      * @ORM\Column(name="imageName", type="string", length=255)
      */
     private $imageName;
-    
+
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    public $path;
-    
-    private $file;
+    private $path;
 
-    private $imageFileToDelete;
+    /**
+     * @Assert\File(maxSize="6000000")
+     */
+    private $file;
+    
+    private $filenameForRemove;
+    
+    private $temp;
+
+    public function getAbsolutePath() {
+        return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->id.'.'.$this->path;
+    }
+
+    public function getWebPath() {
+        return null === $this->path ? null : $this->getUploadDir() . '/' .$this->id.'.'. $this->path;
+    }
+
+    protected function getUploadRootDir() {
+        return __DIR__ . '/../../../../web/' . $this->getUploadDir();
+    }
+
+    protected function getUploadDir() {
+        return 'uploads/img';
+    }
+
+    /**
+     * Sets file.
+     *
+     * @param UploadedFile $file
+     */
+    public function setFile(UploadedFile $file = null) {
+        $this->file = $file;
+        // check if we have an old image path
+        if (isset($this->path)) {
+            // store the old name to delete after the update
+            $this->temp = $this->path;
+            $this->path = null;
+        } else {
+            $this->path = 'initial';
+        }
+    }
+
+    /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getFile() {
+        return $this->file;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload() {
+       if (null !== $this->file) {
+            $this->path = $this->file->guessExtension();
+        }
+    }
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function upload() {
+       if (null === $this->file) {
+            return;
+        }
+
+        // vous devez lancer une exception ici si le fichier ne peut pas
+        // être déplacé afin que l'entité ne soit pas persistée dans la
+        // base de données comme le fait la méthode move() de UploadedFile
+        $this->file->move($this->getUploadRootDir(), $this->id.'.'.$this->file->guessExtension());
+
+        unset($this->file);
+    }
+
+    /**
+     * @ORM\PreRemove()
+     */
+    public function storeFilenameForRemove() {
+        $this->filenameForRemove = $this->getAbsolutePath();
+    }
+
+    /**
+     * @ORM\PostRemove()
+     */
+    public function removeUpload() {
+        if ($this->filenameForRemove) {
+            unlink($this->filenameForRemove);
+        }
+    }
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
-    }
-
-    public function getAbsolutePath()
-    {
-        return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->id.'.'.$this->path;
-    }
-
-    public function getWebPath()
-    {
-        return $this->getUploadDir().'/'.$this->id.'.'.$this->path;
     }
 
     /**
@@ -71,11 +153,9 @@ class Image
      * @param string $imageAlt
      * @return Image
      */
-    public function setImageAlt($imageAlt)
-    {
+    public function setImageAlt($imageAlt) {
         $this->imageAlt = $imageAlt;
         $this->setImageName();
-      
 
         return $this;
     }
@@ -85,69 +165,8 @@ class Image
      *
      * @return string 
      */
-    public function getImageAlt()
-    {
+    public function getImageAlt() {
         return $this->imageAlt;
-    }
-    
-    public function getUploadRootDir(){
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
-        
-    }
-    
-    public function getUploadDir(){
-        return 'uploads/img';
-    }
-    
-    /**
-     * @ORM\Prepersist()
-     * @ORM\PreUpdate()
-     */
-    public function preUpload(){
-        if (null === $this->file) {
-            return;
-        }
-        $this->path = $this->file->guessExtension();
-
-    }
-    
-    /**
-     * @ORM\PostPersist()
-     * @ORM\PostUpdate()
-     */
-    public function upload(){
-        if (null === $this->file) {
-            return;
-        }
-        
-        $this->file->move($this->getUploadRootDir(),
-                $this->id.'.'.$this->imageName);
-    }
-    
-    /**
-     * @ORM\PreRemove()
-     */
-    public function preRemoveUpload(){
-        $this->imageFileToDelete = $this->getUploadRootDir().'/'.
-                $this->id.'.'.$this->imageName;
-    }
-    
-    /**
-     * @ORM\PostRemove()
-     */
-    public function removeUpload(){
-        if (file_exists($this->imageFileToDelete)) {
-            unlink($this->imageFileToDelete);
-        }
-    }
-    
-    function getFile() {
-        return $this->file;
-    }
-
-    function setFile($file) {
-        $this->file = $file;
-        return $this;
     }
 
     /**
@@ -156,8 +175,7 @@ class Image
      * @param string $imageName
      * @return Image
      */
-    public function setImageName()
-    {
+    public function setImageName() {
         $this->imageName = $this->imageAlt;
 
         return $this;
@@ -168,8 +186,29 @@ class Image
      *
      * @return string 
      */
-    public function getImageName()
-    {
+    public function getImageName() {
         return $this->imageName;
     }
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return Image
+     */
+    public function setPath($path) {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath() {
+        return $this->path;
+    }
+
 }

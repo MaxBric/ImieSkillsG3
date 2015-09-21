@@ -1,17 +1,19 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-<h2>Liste des projets</h2>
-<a href="{{ path('imie_skills_project_add') }}"><span class="glyphicon glyphicon-plus"></span> Créer un projet</a>
+<h2><span class="glyphicon glyphicon-blackboard"></span> Liste des projets</h2>
+<hr/>
+<a href="{{ path('imie_skills_project_add') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter un projet</a>
 <hr/>
 <table class="table table-striped">
   <thead>
-    <td>Nom</td>
-    <td>Chef de projet</td>
-    <td>Phase</td>
-    <td>Compétences demandées</td>
+    <th>Nom</th>
+    <th>Chef de projet</th>
+    <th>Phase</th>
+    <th>Compétences demandées</th>
   </thead>
   <tbody>
+    {% if projects %}
     {% for project in projects if projects is defined %}
     <tr>
       <td><a href="{{ path('imie_skills_project_details', {id:project.id})}}">{{ project.projectName }}</a></td>
@@ -25,7 +27,11 @@
       <td><a href="{{ path('imie_skills_project_modify', {id:project.id}) }}"><span class="glyphicon glyphicon-cog"></span></a></td>
       <td><a href="{{ path('imie_skills_project_delete', {id:project.id}) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
     </tr>
+    <hr/>
     {% endfor %}
   </tbody>
 </table>
+{% else %}
+Il n'y a aucun projet actuellement.
+{% endif %}
 {% endblock article %}

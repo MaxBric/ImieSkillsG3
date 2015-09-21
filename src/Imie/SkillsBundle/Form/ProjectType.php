@@ -5,6 +5,8 @@ namespace Imie\SkillsBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Imie\SkillsBundle\Form\ImageType;
+
 
 class ProjectType extends AbstractType {
 
@@ -14,49 +16,64 @@ class ProjectType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-                ->add('projectName')
+                ->add('projectName', null, array(
+                    'label' => 'Nom du projet'
+                ))
                 ->add('state', 'entity', array(
                     'class' => 'ImieSkillsBundle:State',
-                    'choice_label' => 'statut'))
-                ->add('projectProgress')
+                    'choice_label' => 'statut',
+                    'label' => 'Etape du projet'
+                ))
+                ->add('projectProgress',null, array(
+                    'label' => 'Progression de l\'étape (%)'
+                ))
                 ->add('projectEstimatedStart', 'date', array(
                     'format' => 'ddMMyyyy',
+                    'label' => 'Date de départ estimée'
                 ))
                 ->add('projectEstimatedEnd', 'date', array(
                     'format' => 'ddMMyyyy',
+                    'label' => 'Date de fin estimée'
                 ))
                 ->add('projectStart', 'date', array(
                     'format' => 'ddMMyyyy',
-                    'required' => false
+                    'required' => false,
+                    'label' => 'Date de départ réelle'
                 ))
                 ->add('projectEnd', 'date', array(
                     'format' => 'ddMMyyyy',
-                    'required' => false
+                    'required' => false,
+                    'label' => 'Date de fin réelle'
                 ))
-                ->add('projectDescription')
+                ->add('projectDescription',null, array(
+                    'label' => 'Description'
+                ))
                 ->add('skills', 'entity', array(
                     'class' => 'ImieSkillsBundle:Skill',
                     'choice_label' => 'skillName',
-                    'multiple' => true
+                    'multiple' => true,
+                    'label' => 'Compétences requises'
                 ))
                 ->add('manager', 'entity', array(
                     'class' => 'ImieSkillsBundle:User',
                     'choice_label' => 'userFullName',
                     'choice_value' => 'id',
-                    'empty_value' => 'Choisissez une option',
-                    'required' => false
+                    'empty_value' => 'Choisissez...',
+                    'required' => false,
+                    'label' => 'Chef de projet'
                 ))
                 ->add('users', 'entity', array(
                     'class' => 'ImieSkillsBundle:User',
                     'choice_label' => 'userFullName',
                     'choice_value' => 'id',
                     'multiple' => true,
-                    'required' => false
+                    'required' => false,
+                    'label' => 'Equipe'
                 ))
                 ->add('image', new ImageType(), array(
                     'required' => false
                 ))
-                ->add('Valider', 'submit')
+                ->add('Ajouter', 'submit')
         ;
     }
 
