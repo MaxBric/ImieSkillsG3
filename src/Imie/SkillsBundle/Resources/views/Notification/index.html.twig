@@ -2,8 +2,7 @@
 
 {% block article %}
 <h2>Liste des notifications</h2>
-<a href="{{ app.request.headers.get('referer') }}">Retour</a>
-<a href="{{ path('imie_skills_notification_add') }}">Ajouter une notification</a>
+<a href="{{ path('imie_skills_notification_add') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter une notification</a>
 <hr/>
 <table class="table table-striped">
   <thead>
@@ -13,13 +12,12 @@
   <tbody>
     {% for notification in notifications if notifications is defined %}
     <tr>
-      <td><a href="{{ path('imie_skills_notification_details', {'id': notification.id}) }}">{{ notification.notificationName }}</a></td>
+      <td><a href="{{ path('imie_skills_notification_details', {'id':notification.id}) }}">{{ notification.notificationName }}</a></td>
       <td>{{ notification.notificationDescription}}</td>
-      <td><a href="{{ path('imie_skills_notification_delete', {'id': notification.id}) }}"><button>X</button></a></td>
+      <td><a href="{{ path('imie_skills_notification_delete', {'id':notification.id}) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
-</div>
 {%endif%}
 {% endblock article %}

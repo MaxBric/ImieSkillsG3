@@ -2,40 +2,35 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="{{ path('imie_skills_home') }}">IMIE Skills</a>
+      <a href="{{ path('imie_skills_home') }}"><img src="{{ asset('bundles/imieskills/images/ImieLogo.png') }}" alt="ImieLogo" width="50" height="50"></a>
     </div>
-    <div id="navbar" class="navbar-collapse collapse">
+    <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
-        <li><a href="{{ path('imie_skills_user_me', {'id': 1}) }}">Mon profil</a></li>
-        <li><a href="{{ path('imie_skills_user_me', {'id': 1}) }}">Mes projets</a></li>
-        <li><a href="{{ path('imie_skills_project_index') }}">Tous les projets</a></li>
+        <li><a href="{{ path('imie_skills_home') }}"><span class="glyphicon glyphicon-home"></span> Accueil</a></li>
+        <li><a href="{{ path('imie_skills_project_index') }}"><span class="glyphicon glyphicon-blackboard"></span> Tous les projets</a></li>
+        <li><a href="{{ path('imie_skills_user_me', {'id': 1}) }}"><span class="glyphicon glyphicon-star"></span> Mes projets</a></li>
+        <li><a href="{{ path('imie_skills_user_me', {'id': 1}) }}"><span class="glyphicon glyphicon-user"></span> Mon profil</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li><a href="{{ path('imie_skills_notification_index') }}"><span class="glyphicon glyphicon-bell"></span></a></li>
         <li>
           <form action="{{ path('imie_skills_search') }}" class="navbar-form navbar-right" role="search">
             <div class="form-group">
               <input type="text" class="form-control" placeholder="Rechercher...">
             </div>
-            <button type="submit" class="btn btn-default">OK</button>
-          </form>
-        </li>
-        <li>
-          {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-          <span>Connecté en tant que {{ app.user.username }}</span>
-          <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
-          {% else %}
-          <a href="{{ path('fos_user_security_login') }}">Connexion</a>
-          {% endif %}
-        </li>
-      </ul>
+            <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></button>
+            </form>
+          </li>
+          <li>
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <span>Connecté en tant que {{ app.user.username }}</span>
+            <a href="{{ path('fos_user_security_logout') }}"><span class="glyphicon glyphicon-log-out"></span> Déconnexion</a>
+            {% else %}
+            <a href="{{ path('fos_user_security_login') }}"><span class="glyphicon glyphicon-log-in"></span> Connexion</a>
+            {% endif %}
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
-{% endblock menu %}
+  </nav>
+  {% endblock menu %}

@@ -1,7 +1,14 @@
 #imie-main {
   padding-top: 70px;
+  padding-bottom: 70px;
 }
 
 #imie-footer {
   text-align: center;
+  padding-top: 15px;
+
+}
+
+a:hover {
+  text-decoration: none;
 }

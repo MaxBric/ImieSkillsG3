@@ -52,15 +52,15 @@ class NotificationController extends Controller {
         ));
     }
 
-    public function removeAction($id, Request $req) {
+    public function deleteAction($id, Request $req) {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('ImieSkillsBundle:Notification');
-        $notificationToRemove = $repo->findOneById($id);
+        $notificationToDelete = $repo->findOneById($id);
 
         try {
-            $em->remove($notificationToRemove);
+            $em->delete($notificationToDelete);
             $em->flush();
-            $req->getSession()->getFlashBag()->add('success', 'Notification supprimé');
+            $req->getSession()->getFlashBag()->add('success', 'Notification supprimée');
         } catch (\Doctrine\DBAL\DBALException $e) {
             $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de la suppression :'
                     . PHP_EOL . $e->getMessage());

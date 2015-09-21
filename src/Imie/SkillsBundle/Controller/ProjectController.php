@@ -100,7 +100,7 @@ class ProjectController extends Controller {
             $em->remove($project);
             $em->flush();
 
-            $req->getSession()->getFlashBag()->add('success', 'Projet supprimé !');
+            $req->getSession()->getFlashBag()->add('success', 'Projet supprimé');
         } catch (\Doctrine\DBAL\DBALException $e) {
             $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de la suppression :'
                     . PHP_EOL . $e->getMessage());
