@@ -1,30 +1,41 @@
-<nav>
-    <ul class="nav nav-tabs">
-        <li role="presentation">
-            <a href="{{ path('imie_skills_home') }}">Accueil</a>
+{% block menu %}
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{{ path('imie_skills_home') }}">IMIE Skills</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
+        <li><a href="{{ path('imie_skills_user_me', {'id': 1}) }}">Mon profil</a></li>
+        <li><a href="{{ path('imie_skills_user_me', {'id': 1}) }}">Mes projets</a></li>
+        <li><a href="{{ path('imie_skills_project_index') }}">Tous les projets</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <form action="{{ path('imie_skills_search') }}" class="navbar-form navbar-right" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Rechercher...">
+            </div>
+            <button type="submit" class="btn btn-default">OK</button>
+          </form>
         </li>
-        <li role="presentation">
-            <a href="{{ path('imie_skills_user_me', {'id': 1}) }}">Mon profil</a>
+        <li>
+          {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+          <span>Connecté en tant que {{ app.user.username }}</span>
+          <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+          {% else %}
+          <a href="{{ path('fos_user_security_login') }}">Connexion</a>
+          {% endif %}
         </li>
-        <li role="presentation">
-            <a href="{{ path('imie_skills_user_me', {'id': 1}) }}">Mes projets</a>
-        </li>
-        <li role="presentation">
-            <a href="{{ path('imie_skills_project_index') }}">Tous les projets</a>
-        </li>
-        <li role="presentation">
-            <a href="{{ path('imie_skills_contact') }}">Contact</a>
-        </li>
-        <li role="presentation">
-            <a href="{{ path('imie_skills_search') }}">Recherche</a>
-        </li>
-        <li role="presentation">
-            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                Connecté en tant que {{ app.user.username }}
-                -
-                <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
-            {% else %}
-                <a href="{{ path('fos_user_security_login') }}">Connexion</a>
-            {% endif %}
-        </li>
-    </ul>
+      </ul>
+    </div>
+  </div>
+</nav>
+{% endblock menu %}

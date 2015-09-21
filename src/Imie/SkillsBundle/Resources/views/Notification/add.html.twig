@@ -1,11 +1,10 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-<h2>Ajouter une notification</h2>
+<h2>Ajout d'une notification</h2>
 <a href="{{ app.request.headers.get('referer') }}">Retour</a>
-<hr />
-<form method="post" action="{{ path('imie_skills_notification_add') }}"
-{{ form_enctype(form) }}>
-{{ form(form) }}
+<hr/>
+<form method="post" action="{{ path('imie_skills_notification_add') }}" {{ form_enctype(form) }}>
+  {{ form(form) }}
 </form>
 {% endblock article %}

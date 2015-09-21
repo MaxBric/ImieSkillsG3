@@ -5,6 +5,9 @@ namespace Imie\SkillsBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Imie\SkillsBundle\Form\PromoType;
+use Imie\SkillsBundle\Form\SchoolType;
+
 
 class CourseType extends AbstractType
 {
@@ -15,11 +18,20 @@ class CourseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('courseName')
-            ->add('promo')
+            ->add('course')
+            ->add('promos', 'entity', array(
+                'class' => 'ImieSkillsBundle:Promo',
+                'choice_label' => 'promoName',
+                'multiple' => true
+            ))
+            ->add('school', 'entity', array(
+                'class' => 'ImieSkillsBundle:School',
+                'choice_label' => 'schoolName'
+            ))
+            ->add('envoyer','submit')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

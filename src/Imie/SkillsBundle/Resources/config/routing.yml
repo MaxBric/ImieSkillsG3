@@ -5,7 +5,7 @@ imie_skills_home:
 
 # -------- FORMATION --------
 
-imie_skills_school_add: 
+imie_skills_school_add:
     path:    /school/add
     defaults : {_controller: ImieSkillsBundle:School:add }
 
@@ -31,7 +31,7 @@ imie_skills_promo_delete:
 
 
 # -------- USER --------
-imie_skills_users:
+imie_skills_user_index:
     path:     /users
     defaults: { _controller: ImieSkillsBundle:User:index }
 
@@ -40,6 +40,10 @@ imie_skills_user_me:
     defaults: { _controller: ImieSkillsBundle:User:details }
     requirements:
       id: \d+
+
+imie_skills_user_add:
+    path:     /user/add
+    defaults: { _controller: ImieSkillsBundle:User:add }
 
 imie_skills_user_modify:
     path:     /user/modify/{id}
@@ -53,21 +57,17 @@ imie_skills_user_delete:
     requirements:
         id: \d+
 
-imie_skills_user_add:
-    path:     /user/add
-    defaults: { _controller: ImieSkillsBundle:User:add }
-
 
 # -------- SKILL --------
 
-imie_skills_skills:
+imie_skills_skill_index:
     path:     /skills
     defaults: { _controller: ImieSkillsBundle:Skill:index }
 
 imie_skills_skill_add:
     path:     /skill/add
     defaults: { _controller: ImieSkillsBundle:Skill:add }
-    
+
 imie_skills_skill_modify:
     path:     /skill/modify/{id}
     defaults: { _controller: ImieSkillsBundle:Skill:modify }
@@ -80,12 +80,48 @@ imie_skills_skill_delete:
     requirements:
         id: \d+
 
+# -------- STATE --------
+
+imie_skills_states:
+    path:     /states
+    defaults: { _controller: ImieSkillsBundle:State:index }
+
+imie_skills_state_add:
+    path:     /state/add
+    defaults: { _controller: ImieSkillsBundle:State:add }
+    
+imie_skills_state_modify:
+    path:     /state/modify/{id}
+    defaults: { _controller: ImieSkillsBundle:State:modify }
+    requirements:
+        id: \d+
+
+imie_skills_state_delete:
+    path:     /state/delete/{id}
+    defaults: { _controller: ImieSkillsBundle:State:delete }
+    requirements:
+        id: \d+
+
 
 # -------- PROJECT --------
+
+imie_skills_project_index:
+    path:     /projects
+    defaults: { _controller: ImieSkillsBundle:Project:index }
 
 imie_skills_project_details:
     path:     /project/{id}
     defaults: { _controller: ImieSkillsBundle:Project:details }
+    requirements:
+      id: \d+
+
+imie_skills_project_add:
+    path:     /project/add
+    defaults: { _controller: ImieSkillsBundle:Project:add }
+
+imie_skills_project_modify:
+    path:     /project/modify/{id}
+    defaults: { _controller: ImieSkillsBundle:Project:modify }
     requirements:
       id: \d+
 
@@ -94,20 +130,6 @@ imie_skills_project_delete:
     defaults: { _controller: ImieSkillsBundle:Project:delete }
     requirements:
       id: \d+
-
-imie_skills_project_modify:
-    path:     /project/modify/{id}
-    defaults: { _controller: ImieSkillsBundle:Project:modify }
-    requirements:
-      id: \d+
-
-imie_skills_project_index:
-    path:     /projects
-    defaults: { _controller: ImieSkillsBundle:Project:index }
-
-imie_skills_project_add:
-    path:     /project/add
-    defaults: { _controller: ImieSkillsBundle:Project:add }
 
 
 # -------- NOTIFICATION --------
@@ -129,8 +151,9 @@ imie_skills_notification_delete:
     defaults : {_controller: ImieSkillsBundle:Notification:remove }
     requirements:
         id: \d+
-        
-#-------------- SCHOOL---------------
+
+
+# -------- SCHOOL --------
 
 imie_skills_school_add:
     path:    /school/add
@@ -151,17 +174,16 @@ imie_skills_course_delete:
 
 # -------- MISC. --------
 
-
+imie_skills_search:
+    path:     /search
+    defaults: { _controller: ImieSkillsBundle:Search:index }
 
 imie_skills_contact:
     path:     /contact
     defaults: { _controller: ImieSkillsBundle:Contact:index }
 
-imie_skills_search:
-    path:     /search
-    defaults: { _controller: ImieSkillsBundle:Search:index }
 
-#---------------FOSUser
+# -------- FOSUser --------
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
@@ -174,10 +196,10 @@ fos_user_register:
     resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
     prefix: /register
 
-fos_user_resetting:
-    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
-    prefix: /resetting
-
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting

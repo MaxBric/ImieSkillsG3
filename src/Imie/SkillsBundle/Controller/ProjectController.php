@@ -29,20 +29,24 @@ class ProjectController extends Controller {
         $form->handleRequest($req);
 
         if ($form->isValid()) {
+            try {
+                $em = $this->getDoctrine()->getManager();
+                $users = $form->get('users')->getData();
 
-            $em = $this->getDoctrine()->getManager();
-            $users = $form->get('users')->getData();
+                foreach ($users as $user) {
+                    $user->addJoinedProject($project);
+                }
 
-            foreach ($users as $user) {
-                $user->addJoinedProject($project);
+//            $project->setCreator($req->getSession()->get('security.context')->getToken()->getUser());
+                $em->persist($project);
+                $em->flush();
+
+                $req->getSession()->getFlashBag()->add('success', 'Projet créé !');
+
+                return $this->redirect($this->generateUrl('imie_skills_project_index'));
+            } catch (\Doctrine\DBAL\DBALException $e) {
+                echo $e->getMessage();
             }
-
-            $em->persist($project);
-            $em->flush();
-
-            $req->getSession()->getFlashBag()->add('success', 'Projet créé !');
-
-            return $this->redirect($this->generateUrl('imie_skills_project_index'));
         }
         return $this->render('ImieSkillsBundle:Project:add.html.twig', array(
                     'form' => $form->createView()
@@ -70,16 +74,20 @@ class ProjectController extends Controller {
         $form->handleRequest($req);
 
         if ($form->isValid()) {
-            $em->flush();
-            $req->getSession()->getFlashBag()->add('success', 'Projet modifié');
-            return $this->redirect($this->generateUrl('imie_skills_project_index'));
+            try {
+                $em->flush();
+                $req->getSession()->getFlashBag()->add('success', 'Projet modifié');
+                return $this->redirect($this->generateUrl('imie_skills_project_index'));
+            } catch (\Doctrine\DBAL\DBALException $e) {
+                $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de la suppression :'
+                        . PHP_EOL . $e->getMessage());
+            }
         }
 
         return $this->render('ImieSkillsBundle:Project:update.html.twig', array(
-        'form' => $form->createView(),
-        'id' => $id
+                    'form' => $form->createView(),
+                    'id' => $id
         ));
-        
     }
 
     public function deleteAction(Request $req, $id) {
@@ -88,11 +96,15 @@ class ProjectController extends Controller {
         $repo = $em->getRepository('ImieSkillsBundle:Project');
 
         $project = $repo->find($id);
+        try {
+            $em->remove($project);
+            $em->flush();
 
-        $em->remove($project);
-        $em->flush();
-
-        $req->getSession()->getFlashBag()->add('success', 'Projet supprimé !');
+            $req->getSession()->getFlashBag()->add('success', 'Projet supprimé !');
+        } catch (\Doctrine\DBAL\DBALException $e) {
+            $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de la suppression :'
+                    . PHP_EOL . $e->getMessage());
+        }
 
         return $this->redirect($this->generateUrl('imie_skills_project_index'));
     }
