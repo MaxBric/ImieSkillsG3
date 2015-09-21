@@ -36,7 +36,7 @@ class StateController extends Controller {
 
                 $req->getSession()->getFlashBag()->add('success', 'Etape créée !');
 
-                return $this->redirect($this->generateUrl('imie_skills_states'));
+                return $this->redirect($this->generateUrl('imie_skills_state_index'));
             } catch (\Doctrine\DBAL\DBALException $e) {
                 echo $e->getMessage();
             }
@@ -70,7 +70,7 @@ class StateController extends Controller {
             try {
                 $em->flush();
                 $req->getSession()->getFlashBag()->add('success', 'Etape modifiée');
-                return $this->redirect($this->generateUrl('imie_skills_states'));
+                return $this->redirect($this->generateUrl('imie_skills_state_index'));
             } catch (\Doctrine\DBAL\DBALException $e) {
                 $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de la suppression :'
                         . PHP_EOL . $e->getMessage());
@@ -99,7 +99,7 @@ class StateController extends Controller {
                     . PHP_EOL . $e->getMessage());
         }
 
-        return $this->redirect($this->generateUrl('imie_skills_states'));
+        return $this->redirect($this->generateUrl('imie_skills_state_index'));
     }
 
 }

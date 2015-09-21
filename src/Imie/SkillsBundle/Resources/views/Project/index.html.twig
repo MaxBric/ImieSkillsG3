@@ -2,8 +2,7 @@
 
 {% block article %}
 <h2>Liste des projets</h2>
-<a href="{{ app.request.headers.get('referer') }}">Retour</a>
-<a href="{{ path('imie_skills_project_add') }}">Ajouter un projet</a>
+<a href="{{ path('imie_skills_project_add') }}"><span class="glyphicon glyphicon-plus"></span> Créer un projet</a>
 <hr/>
 <table class="table table-striped">
   <thead>
@@ -13,7 +12,7 @@
     <td>Compétences demandées</td>
   </thead>
   <tbody>
-    {% for project in projects if projects is defined%}
+    {% for project in projects if projects is defined %}
     <tr>
       <td><a href="{{ path('imie_skills_project_details', {id:project.id})}}">{{ project.projectName }}</a></td>
       <td>{% if project.manager is not null %}{{ project.manager.userFullName }}{% else %}A recruter{% endif %}</td>
@@ -23,8 +22,8 @@
         <li>{{ skill.skillName }}</li>
         {% endfor %}
       </ul></td>
-      <td><a href="{{ path('imie_skills_project_modify', {id:project.id}) }}">Modifier</a></td>
-      <td><a href="{{ path('imie_skills_project_delete', {id:project.id}) }}">Supprimer</a></td>
+      <td><a href="{{ path('imie_skills_project_modify', {id:project.id}) }}"><span class="glyphicon glyphicon-cog"></span></a></td>
+      <td><a href="{{ path('imie_skills_project_delete', {id:project.id}) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
     </tr>
     {% endfor %}
   </tbody>
