@@ -36,7 +36,7 @@ class StateController extends Controller {
 
                 $req->getSession()->getFlashBag()->add('success', 'Etape créée !');
 
-                return $this->redirect($this->generateUrl('imie_skills_state_index'));
+                return $this->redirect($this->generateUrl('imie_skills_state_add'));
             } catch (\Doctrine\DBAL\DBALException $e) {
                 echo $e->getMessage();
             }

@@ -11,6 +11,7 @@
     <th>Compétences demandées</th>
   </thead>
   <tbody>
+    {% if projects %}
     {% for project in projects if projects is defined %}
     <tr>
       <td><a href="{{ path('imie_skills_project_details', {id:project.id})}}">{{ project.projectName }}</a></td>
@@ -28,4 +29,7 @@
     {% endfor %}
   </tbody>
 </table>
+    {% else %}
+        Il n'y a aucun projet actuellement.
+    {% endif %}
 {% endblock article %}
