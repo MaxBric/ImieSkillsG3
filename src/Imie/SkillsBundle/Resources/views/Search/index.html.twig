@@ -1,0 +1,21 @@
+{% extends 'ImieSkillsBundle::layout.html.twig' %}
+
+{% block article %}
+<h2>Recherche</h2>
+<hr/>
+<form method="post" action="{{ path('imie_skills_search') }}" {{ form_enctype(form) }}>
+  {{ form(form) }}
+</form>
+  {% if search %}
+<table class="table table-striped">
+  <thead>
+    <!-- <td></td> -->
+    <td>Parent</td>
+    <td>Description</td>
+  </thead>
+  <tbody>
+
+  </tbody>
+</table>
+{% endif %}
+{% endblock article %}
