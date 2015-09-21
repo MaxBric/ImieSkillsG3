@@ -35,7 +35,7 @@ class SkillController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->persist($skill);
         $em->flush();
-        return $this->redirect($this->generateUrl('imie_skills_skill_index'));
+        return $this->redirect($this->generateUrl('imie_skills_skill_add'));
       } catch (\Doctrine\DBAL\DBALException $e) {
         echo $e->getMessage();
       }

@@ -1,10 +1,11 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-<h2>Ajout d'un utilisateur</h2>
-<a href="{{ path('imie_skills_user_index') }}"><span class="glyphicon glyphicon-menu-left"> Retour</a>
+<h2><span class="glyphicon glyphicon-user"></span> Ajout d'un utilisateur</h2>
 <hr/>
-<form method="post" action="{{ path('imie_skills_user_add') }}" {{ form_enctype(form) }}>
-  {{ form(form) }}
-</form>
-{% endblock article %}
+<a class="btn btn-primary" href="{{ path('imie_skills_user_index') }}"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
+  <hr/>
+  <form method="post" action="{{ path('imie_skills_user_add') }}" {{ form_enctype(form) }}>
+    {{ form(form) }}
+  </form>
+  {% endblock article %}

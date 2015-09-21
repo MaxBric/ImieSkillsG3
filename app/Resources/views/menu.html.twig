@@ -2,25 +2,19 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
-      <a href="{{ path('imie_skills_home') }}"><img src="{{ asset('bundles/imieskills/images/ImieLogo.png') }}" alt="ImieLogo" width="50" height="50"></a>
+      <a href="{{ path('imie_skills_home') }}"><img src="{{ asset('bundles/imieskills/images/ImieLogo.png') }}" alt="ImieLogo" width="52" height="52"></a>
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li><a href="{{ path('imie_skills_home') }}"><span class="glyphicon glyphicon-home"></span> Accueil</a></li>
         <li><a href="{{ path('imie_skills_project_index') }}"><span class="glyphicon glyphicon-blackboard"></span> Tous les projets</a></li>
-        <li><a href="{{ path('imie_skills_user_me', {'id': 1}) }}"><span class="glyphicon glyphicon-star"></span> Mes projets</a></li>
-        <li><a href="{{ path('imie_skills_user_me', {'id': 1}) }}"><span class="glyphicon glyphicon-user"></span> Mon profil</a></li>
+        <li><a href="{{ path('imie_skills_user_details', {'id': 1}) }}"><span class="glyphicon glyphicon-star"></span> Mes projets</a></li>
+        <li><a href="{{ path('imie_skills_user_details', {'id': 1}) }}"><span class="glyphicon glyphicon-user"></span> Mon profil</a></li>
+        <li><a href="{{ path('imie_skills_panel') }}"><span class="glyphicon glyphicon-wrench"></span> Panneau d'administration</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="{{ path('imie_skills_notification_index') }}"><span class="glyphicon glyphicon-bell"></span></a></li>
-        <li>
-          <form action="{{ path('imie_skills_search') }}" class="navbar-form navbar-right" role="search">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Rechercher...">
-            </div>
-            <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></button>
-            </form>
-          </li>
+        <li><a class="btn btn-default" href="{{ path('imie_skills_search') }} role="button"><span class="glyphicon glyphicon-search"></span> Recherche</a></li>
           <li>
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
             <span>Connecté en tant que {{ app.user.username }}</span>

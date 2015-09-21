@@ -1,10 +1,11 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-<h2>Ajout d'une promotion</h2>
-<a href="{{ path('imie_skills_promo_index') }}"><span class="glyphicon glyphicon-menu-left"> Retour</a>
+<h2><span class="glyphicon glyphicon-education"></span> Ajout d'une promotion</h2>
 <hr/>
-<form method="post" action="{{ path('imie_skills_promo_add') }}" {{ form_enctype(form) }}>
-  {{ form(form) }}
-</form>
-{% endblock article %}
+<a class="btn btn-primary" href="{{ path('imie_skills_promo_index') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
+  <hr/>
+  <form method="post" action="{{ path('imie_skills_promo_add') }}" {{ form_enctype(form) }}>
+    {{ form(form) }}
+  </form>
+  {% endblock article %}

@@ -7,12 +7,20 @@ use Symfony\Component\HttpFoundation\Request;
 use Imie\SkillsBundle\Entity\School;
 use Imie\SkillsBundle\Form\SchoolType;
 use Imie\SkillsBundle\Entity\Course;
+//use Imie\SkillsBundle\Entity\SchoolRepository;
 
 
 class SchoolController extends Controller
 {
-    public function indexAction($id){
+    public function indexAction(){
+        $schools = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('ImieSkillsBundle:School')
+            ->getSchoolsOrderedById();
 
+        return $this->render('ImieSkillsBundle:School:index.html.twig', array(
+            'school' => $schools
+        ));
     }
     public function addAction(Request $req){
 

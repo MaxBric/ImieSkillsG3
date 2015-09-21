@@ -18,7 +18,7 @@ class NotificationType extends AbstractType {
                 ->add('notificationName')
                 ->add('notificationDescription')
                 ->add('notificationUser')
-                ->add('valider', 'submit')
+                ->add('Envoyer', 'submit')
         ;
     }
 
