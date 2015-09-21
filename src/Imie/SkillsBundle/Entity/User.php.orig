@@ -74,14 +74,6 @@ class User extends BaseUser
     private $userAddress;
 
     /**
-     * @var boolean
-     *
-     * @ORM\Column(name="userEnable", type="boolean", nullable=true)
-     */
-    private $userEnable;
-
-
-    /**
      * @var string
      *
      * @ORM\Column(name="userDescription", type="text")
@@ -124,12 +116,6 @@ class User extends BaseUser
 
 
     /**
-    * @var \Rank
-    * @ORM\OneToMany(targetEntity="Rank", mappedBy="users")
-    */
-    private $rank;
-
-    /**
      * @var string
      *
      * @ORM\OneToOne(targetEntity="Image", cascade={"persist", "remove"})
@@ -138,6 +124,12 @@ class User extends BaseUser
     protected $image;
 
     public function __construct() {
+        parent::__construct();
+//      $this->salt= null;
+//      $this->usernameCanonical= getUserName()->toLowerCase();
+//      $this->emailCanonical= getEmail()->toLowerCase();
+//      $this->salt= null;
+//      $this->roles = new Array   Collection();
       $this->createdProjects = new ArrayCollection();
       $this->managedProjects = new ArrayCollection();
       $this->joinedProjects = new ArrayCollection();
@@ -272,30 +264,7 @@ class User extends BaseUser
         return $this->userAddress;
     }
 
-    /**
-     * Set userEnable
-     *
-     * @param boolean $userEnable
-     * @return User
-     */
-    public function setUserEnable($userEnable)
-    {
-        $this->userEnable = $userEnable;
-
-        return $this;
-    }
-
-    /**
-     * Get userEnable
-     *
-     * @return boolean
-     */
-    public function getUserEnable()
-    {
-        return $this->userEnable;
-    }
-
-
+   
     /**
      * Set userDescription
      *

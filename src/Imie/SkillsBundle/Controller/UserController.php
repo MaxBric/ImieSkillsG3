@@ -18,6 +18,7 @@ class UserController extends Controller {
         return $this->render('ImieSkillsBundle:User:index.html.twig', array('users' => $users));
     }
 
+
     public function addAction(Request $req) {
         $user = new User();
 
