@@ -2,8 +2,10 @@
 
 {% block article %}
 <h2><span class="glyphicon glyphicon-bell"></span> Ajout d'une notification</h2>
+<hr/>
 <a href="{{ path('imie_skills_notification_index') }}"><span class="glyphicon glyphicon-menu-left"> Retour</a>
-<form method="post" action="{{ path('imie_skills_notification_add') }}" {{ form_enctype(form) }}>
-  {{ form(form) }}
-</form>
-{% endblock article %}
+  <hr/>
+  <form method="post" action="{{ path('imie_skills_notification_add') }}" {{ form_enctype(form) }}>
+    {{ form(form) }}
+  </form>
+  {% endblock article %}

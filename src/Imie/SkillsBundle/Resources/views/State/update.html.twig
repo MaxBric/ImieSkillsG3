@@ -2,8 +2,10 @@
 
 {% block article %}
 <h2><span class="glyphicon glyphicon-tasks"></span> Modification de l'étape</h2>
+<hr/>
 <a href="{{ path('imie_skills_state_modify', {id: state.id}) }}"><span class="glyphicon glyphicon-menu-left"> Retour</a>
-<form method="post" action="{{ path('imie_skills_state_modify', {id: id}) }}" {{ form_enctype(form) }}>
-  {{ form(form) }}
-</form>
-{% endblock article %}
+  <hr/>
+  <form method="post" action="{{ path('imie_skills_state_modify', {id: id}) }}" {{ form_enctype(form) }}>
+    {{ form(form) }}
+  </form>
+  {% endblock article %}
