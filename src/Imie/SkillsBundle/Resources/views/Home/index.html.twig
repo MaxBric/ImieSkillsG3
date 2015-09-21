@@ -1,7 +1,10 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-<h1><span class="glyphicon glyphicon-home"></span> IMIE Skills</h1>
+<h2><span class="glyphicon glyphicon-home"></span> Bienvenue</h2>
 <hr/>
-<h2>Bienvenue</h2>
+<div id="imie-logo">
+  <img src="{{ asset('bundles/imieskills/images/ImieLogo.png') }}" alt="ImieLogo" width="256" height="256">
+</div>
+<h1 id="home-title">IMIE Skills</h1>
 {% endblock article %}

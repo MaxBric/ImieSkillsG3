@@ -45,5 +45,5 @@ class PromoController extends Controller
             'form' => $form->createView()
         ));
     }
-    
+
 }
