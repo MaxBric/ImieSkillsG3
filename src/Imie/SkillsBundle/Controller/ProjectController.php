@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Imie\SkillsBundle\Entity\Project;
 use Imie\SkillsBundle\Form\ProjectType;
+use Imie\SkillsBundle\Entity\Image;
 
 class ProjectController extends Controller {
 
@@ -22,6 +23,7 @@ class ProjectController extends Controller {
 
     public function addAction(Request $req) {
         $project = new Project();
+
         $form = $this->createForm(new ProjectType(), $project, array(
             'action' => $this->generateUrl('imie_skills_project_add')
         ));
@@ -36,8 +38,6 @@ class ProjectController extends Controller {
                 foreach ($users as $user) {
                     $user->addJoinedProject($project);
                 }
-
-//            $project->setCreator($req->getSession()->get('security.context')->getToken()->getUser());
                 $em->persist($project);
                 $em->flush();
 

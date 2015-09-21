@@ -14,16 +14,21 @@ class SkillType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-                ->add('skillName')
-                ->add('skillDescription')
+                ->add('skillName', null, array(
+                    'label' => 'Nom de la compétence'
+                ))
+                ->add('skillDescription', null, array(
+                    'label' => 'Description'
+                ))
                 ->add('skillParentId', 'entity', array(
                     'class' => 'ImieSkillsBundle:Skill',
                     'choice_label' => 'skillName',
                     'choice_value' => 'id',
-                    'empty_value' => 'Choisir...',
-                    'required' => false
+                    'empty_value' => 'Choisissez...',
+                    'required' => false,
+                    'label' => 'Domaine de la compétence'
                 ))
-                ->add('Add', 'submit')
+                ->add('Valider', 'submit')
         ;
     }
 

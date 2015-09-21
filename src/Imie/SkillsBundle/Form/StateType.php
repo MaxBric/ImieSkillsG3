@@ -15,7 +15,9 @@ class StateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('statut')
+            ->add('statut', null, array(
+                    'label' => 'Etape des projets'
+                ))
             ->add('Valider', 'submit')
         ;
     }
