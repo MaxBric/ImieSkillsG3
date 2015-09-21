@@ -6,7 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Imie\SkillsBundle\Entity\Project;
 use Imie\SkillsBundle\Form\ProjectType;
-use Imie\SkillsBundle\Entity\Image;
 
 class ProjectController extends Controller {
 
@@ -29,7 +28,6 @@ class ProjectController extends Controller {
         ));
 
         $form->handleRequest($req);
-
         if ($form->isValid()) {
             try {
                 $em = $this->getDoctrine()->getManager();
@@ -38,12 +36,14 @@ class ProjectController extends Controller {
                 foreach ($users as $user) {
                     $user->addJoinedProject($project);
                 }
+                $project->getImage()->setImageAlt($project->getProjectName());
+                var_dump($project);
                 $em->persist($project);
                 $em->flush();
 
                 $req->getSession()->getFlashBag()->add('success', 'Projet créé !');
 
-                return $this->redirect($this->generateUrl('imie_skills_project_index'));
+//                return $this->redirect($this->generateUrl('imie_skills_project_index'));
             } catch (\Doctrine\DBAL\DBALException $e) {
                 echo $e->getMessage();
             }
@@ -95,12 +95,12 @@ class ProjectController extends Controller {
 
         $repo = $em->getRepository('ImieSkillsBundle:Project');
 
-        $project = $repo->find($id);
+        $project = $repo->findOneById($id);
         try {
             $em->remove($project);
             $em->flush();
 
-            $req->getSession()->getFlashBag()->add('success', 'Projet supprimé !');
+            $req->getSession()->getFlashBag()->add('success', 'Projet supprimé');
         } catch (\Doctrine\DBAL\DBALException $e) {
             $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de la suppression :'
                     . PHP_EOL . $e->getMessage());

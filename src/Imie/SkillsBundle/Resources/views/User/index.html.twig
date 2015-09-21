@@ -2,8 +2,7 @@
 
 {% block article %}
 <h2>Liste des utilisateurs</h2>
-<a href="{{ app.request.headers.get('referer') }}">Retour</a>
-<a href="{{ path('imie_skills_user_add') }}">Ajouter un utilisateur</a>
+<a href="{{ path('imie_skills_user_add') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter un utilisateur</a>
 <hr/>
 <table class="table table-striped">
   <thead>
@@ -29,9 +28,10 @@
         <li>{{ skill.skillName }}</li>
         {% endfor %}
       </ul></td>
-      <td><a href="{{ path('imie_skills_user_modify', {id:user.id}) }}">Modifier</a></td>
-      <td><a href="{{ path('imie_skills_user_delete', {id:user.id}) }}">Supprimer</a></td>
+      <td><a href="{{ path('imie_skills_user_modify', {id:user.id}) }}"><span class="glyphicon glyphicon-cog"></span></a></td>
+      <td><a href="{{ path('imie_skills_user_delete', {id:user.id}) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
       {% endfor %}
+      <hr/>
     </tbody>
   </table>
   {% endblock article %}

@@ -35,7 +35,7 @@ class SkillController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->persist($skill);
         $em->flush();
-        return $this->redirect($this->generateUrl('imie_skills_skill_index'));
+        return $this->redirect($this->generateUrl('imie_skills_skill_add'));
       } catch (\Doctrine\DBAL\DBALException $e) {
         echo $e->getMessage();
       }
@@ -45,7 +45,7 @@ class SkillController extends Controller
       'form' => $form->createView()
     ));
   }
-  
+
   public function modifyAction(Request $req, $id)
   {
     $em = $this->getDoctrine()->getManager();
@@ -54,14 +54,14 @@ class SkillController extends Controller
     $form = $this->createForm(new SkillType(), $skill, array(
       'action' => $this->generateUrl('imie_skills_skill_modify', array(
         'id' => $id
-      ))  
+      ))
     ));
     $form->handleRequest($req);
     if ($form->isValid()) {
       try {
         $em->flush();
         $req->getSession()->getFlashBag()->add('success', 'Compétence modifiée');
-        return $this->redirect($this->generateUrl('imie_skills_skills'));
+        return $this->redirect($this->generateUrl('imie_skills_skill_index'));
       } catch (\Doctrine\DBAL\DBALException $e) {
         $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de l\'ajout :'
         . PHP_EOL . $e->getMessage());
@@ -73,7 +73,7 @@ class SkillController extends Controller
       'id' => $id
     ));
   }
-  
+
   public function deleteAction(Request $req, $id)
   {
     $em = $this->getDoctrine()->getManager();
@@ -88,7 +88,7 @@ class SkillController extends Controller
       $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de la suppression :'
       . PHP_EOL . $e->getMessage());
     }
-    return $this->redirect($this->generateUrl('imie_skills_skills'));
+    return $this->redirect($this->generateUrl('imie_skills_skill_index'));
   }
 
 }

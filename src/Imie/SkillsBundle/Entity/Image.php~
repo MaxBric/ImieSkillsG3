@@ -42,7 +42,7 @@ class Image {
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    public $path;
+    private $path;
 
     /**
      * @Assert\File(maxSize="6000000")
@@ -103,9 +103,7 @@ class Image {
     public function preUpload()
     {
         if (null !== $this->getFile()) {
-            // do whatever you want to generate a unique name
-            $filename = sha1(uniqid(mt_rand(), true));
-            $this->path = $filename.'.'.$this->getFile()->guessExtension();
+            $this->path = $this->id.'.'.$this->getFile()->guessExtension();
         }
     }
 
@@ -115,7 +113,7 @@ class Image {
      */
     public function upload()
     {
-        if (null === $this->getFile()) {
+        if ($this->getFile() === null) {
             return;
         }
 
@@ -198,4 +196,27 @@ class Image {
     }
 
 
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return Image
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
 }

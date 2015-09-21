@@ -93,7 +93,7 @@ class UserController extends Controller {
             $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de la suppression :'
                     . PHP_EOL . $e->getMessage());
         }
-        return $this->redirect($this->generateUrl('imie_skills_home'));
+        return $this->redirect($this->generateUrl('imie_skills_user_index'));
     }
 
 }

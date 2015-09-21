@@ -2,8 +2,7 @@
 
 {% block article %}
 <h2>Liste des compétences</h2>
-<a href="{{ app.request.headers.get('referer') }}">Retour</a>
-<a href="{{ path('imie_skills_skill_add') }}">Ajouter une compétence</a>
+<a href="{{ path('imie_skills_skill_add') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter une compétence</a>
 <hr/>
 <table class="table table-striped">
   <thead>
@@ -12,14 +11,15 @@
     <td>Description</td>
   </thead>
   <tbody>
-    {% for skill in skills if skills is defined%}
+    {% for skill in skills if skills is defined %}
     <tr>
       <td>{{ skill.skillName }}</a></td>
       <td>{% if skill.skillParentId is not null %}{{ skill.skillParentId}}{% else %} ????{%endif %}</td>
       <td>{{ skill.skillDescription }}</td>
-      <td><a href="{{ path('imie_skills_skill_modify', {id:skill.id}) }}">Modifier</a></td>
-      <td><a href="{{ path('imie_skills_skill_delete', {id:skill.id}) }}">Supprimer</a></td>
+      <td><a href="{{ path('imie_skills_skill_modify', {id:skill.id}) }}"><span class="glyphicon glyphicon-cog"></span></a></td>
+      <td><a href="{{ path('imie_skills_skill_delete', {id:skill.id}) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
       {% endfor %}
-    </tbody>
-  </table>
-  {% endblock article %}
+    </tr>
+  </tbody>
+</table>
+{% endblock article %}

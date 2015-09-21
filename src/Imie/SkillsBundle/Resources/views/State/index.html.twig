@@ -2,21 +2,20 @@
 
 {% block article %}
 <h2>Liste des étapes</h2>
+<a href="{{ path('imie_skills_state_add') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter une étape</a>
 <hr/>
-<a href="{{ path('imie_skills_state_add') }}">Ajouter une étape</a>
-<hr/>
-<table>
+<table class="table table-striped">
   <thead>
     <td>Nom</td>
   </thead>
   <tbody>
-    {% for state in states %}
+    {% for state in states if states is defined %}
     <tr>
       <td>{{ state.statut }}</a></td>
-      <td><a href="{{ path('imie_skills_state_modify', {id:state.id}) }}">Modifier</a></td>
-      <td><a href="{{ path('imie_skills_state_delete', {id:state.id}) }}">Supprimer</a></td>
+      <td><a href="{{ path('imie_skills_state_modify', {id:state.id}) }}"><span class="glyphicon glyphicon-cog"></span></a></td>
+      <td><a href="{{ path('imie_skills_state_delete', {id:state.id}) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
       {% endfor %}
     </tbody>
-  </table>
-  <hr/>
-  {% endblock article %}
+  </tr>
+</table>
+{% endblock article %}

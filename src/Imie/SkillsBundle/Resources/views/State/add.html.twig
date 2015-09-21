@@ -2,7 +2,7 @@
 
 {% block article %}
 <h2>Ajout d'une étape</h2>
-<a href="{{ path('imie_skills_states') }}">Retour à la liste</a>
+<a href="{{ path('imie_skills_state_index') }}"><span class="glyphicon glyphicon-menu-left"> Retour</a>
 <hr/>
 <form method="post" action="{{ path('imie_skills_state_add') }}" {{ form_enctype(form) }}>
   {{ form(form) }}
