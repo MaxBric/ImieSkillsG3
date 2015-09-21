@@ -3,7 +3,7 @@
 {% block article %}
 <h2><span class="glyphicon glyphicon-education"></span> Ajout d'un centre de formation</h2>
 <hr/>
-<a href="{{ path('imie_skills_school_index') }}"><span class="glyphicon glyphicon-menu-left"> Retour</a>
+<a class="btn btn-primary" href="{{ path('imie_skills_school_index') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
   <hr/>
   <form method="post" action="{{ path('imie_skills_school_add') }}" {{ form_enctype(form) }}>
     {{ form(form) }}
