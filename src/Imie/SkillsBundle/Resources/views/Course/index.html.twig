@@ -1,7 +1,8 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-<h2>Liste des formations</h2>
+<h2><span class="glyphicon glyphicon-education"></span> Liste des formations</h2>
+<hr/>
 <a href="{{ path('imie_skills_course_add') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter une formation</a>
 <hr/>
 <table class="table table-striped">
@@ -14,8 +15,8 @@
       <td><a href="{{ path('imie_skills_course_details', {'id': course.id}) }}">{{ course.courseName }}</a></td>
       <td><a href="{{ path('imie_skills_course_delete', {'id': course.id}) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
     </tr>
+    <hr/>
     {% endfor %}
   </tbody>
 </table>
-{%endif%}
 {% endblock article %}

@@ -1,0 +1,17 @@
+{% extends 'ImieSkillsBundle::layout.html.twig' %}
+
+{% block article %}
+<h2><span class="glyphicon glyphicon-user"></span> Détails de l'utilisateur</h2>
+<hr/>
+<a href="{{ path('imie_skills_user_index') }}"><span class="glyphicon glyphicon-menu-left"> Retour</a>
+  <a href="{{ path('imie_skills_user_modify', {id: user.id}) }}"><span class="glyphicon glyphicon-cog"> Modifier</a>
+    <hr/>
+    <span><h3>{{ user.userFirstName }}{{ user.userLastName }}</h3></span><span>{{ user.userEnable }}</span>
+    <hr/>
+    <p>{{ user.userAddress }}</p>
+    <p>{{ user.userMail }}</p>
+    <p>{{ user.userPhoneNumber }}</p>
+    <p>{{ user.userBirthday|date('d/m/Y') }}</p>
+    <hr/>
+    <p>{{ user.userDescription }}</p>
+    {% endblock article %}

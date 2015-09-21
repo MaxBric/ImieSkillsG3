@@ -50,7 +50,7 @@ class UserController extends Controller {
 
         $user = $repo->getUserById($id);
 
-        return $this->render('ImieSkillsBundle:User:me.html.twig', array('user' => $user));
+        return $this->render('ImieSkillsBundle:User:details.html.twig', array('user' => $user));
     }
 
     public function modifyAction(Request $req, $id) {
