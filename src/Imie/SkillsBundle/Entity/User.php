@@ -260,26 +260,6 @@ class User extends BaseUser {
         return $this->userAddress;
     }
 
-    /**
-     * Set userEnable
-     *
-     * @param boolean $userEnable
-     * @return User
-     */
-    public function setUserEnable($userEnable) {
-        $this->userEnable = $userEnable;
-
-        return $this;
-    }
-
-    /**
-     * Get userEnable
-     *
-     * @return boolean
-     */
-    public function getUserEnable() {
-        return $this->userEnable;
-    }
 
     /**
      * Set userDescription

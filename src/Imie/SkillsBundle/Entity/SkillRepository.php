@@ -18,6 +18,15 @@ class SkillRepository extends EntityRepository
     ->getQuery()
     ->getResult();
   }
+
+  public function getSkillsByNames($name) {
+    return $this->createQueryBuilder('s')
+    ->where('s.SkillName LIKE :name')
+    ->setParameter('name', $name)
+    ->getQuery()
+    ->getResult();
+  }
+
   public function getSkillsById($ids) {
       $qb = $this->createQueryBuilder('s');
       $qb->where($qb->expr()->in('s.id', $ids));

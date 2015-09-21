@@ -12,3 +12,7 @@
 a:hover {
   text-decoration: none;
 }
+
+#home-title, #imie-logo {
+  text-align: center;
+}

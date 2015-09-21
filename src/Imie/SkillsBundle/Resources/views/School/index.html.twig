@@ -1,0 +1,24 @@
+{% extends 'ImieSkillsBundle::layout.html.twig' %}
+
+{% block article %}
+<h2>Liste des ecoles</h2>
+<a href="{{ path('imie_skills_school_add') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter une formation</a>
+<hr/>
+<table class="table table-striped">
+  <thead>
+    <th>Nom</th>
+  </thead>
+  <tbody>
+
+    {% for schools in school %}
+    <tr>
+        <td>{{ schools.promoName }}</td>
+      <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
+      <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock article %}
+
+

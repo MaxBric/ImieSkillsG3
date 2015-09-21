@@ -9,7 +9,15 @@ use Imie\SkillsBundle\Form\CourseType;
 
 class CourseController extends Controller
 {
-    public function indexAction($id){
+    public function indexAction(){
+        $courses = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('ImieSkillsBundle:Course')
+            ->getCoursesOrderedById();
+
+        return $this->render('ImieSkillsBundle:Course:index.html.twig', array(
+            'courses' => $courses
+        ));
 
     }
     public function addAction(Request $req){
@@ -33,6 +41,7 @@ class CourseController extends Controller
                 echo $e->getMessage();
             }
         }
+
         return $this->render('ImieSkillsBundle:Course:add.html.twig', array(
             'form' => $form->createView()
         ));

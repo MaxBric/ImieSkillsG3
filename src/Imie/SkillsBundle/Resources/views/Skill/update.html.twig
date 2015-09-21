@@ -3,7 +3,7 @@
 {% block article %}
 <h2><span class="glyphicon glyphicon-blackboard"> Modification de la compétence</h2>
   <hr/>
-  <a href="{{ path('imie_skills_skill_modify'), {id: skill.id}}}"><span class="glyphicon glyphicon-menu-left"> Retour</a>
+  <a class="btn btn-primary" href="{{ path('imie_skills_skill_modify'), {id: skill.id}}}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
     <hr/>
     <form method="post" action="{{ path('imie_skills_skill_modify', {id: id}) }}" {{ form_enctype(form) }}>
       {{ form(form) }}

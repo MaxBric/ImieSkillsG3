@@ -3,7 +3,7 @@ imie_skills_home:
     defaults: { _controller: ImieSkillsBundle:Home:index }
 
 
-# -------- FORMATION --------
+# -------- SCHOOL --------
 
 imie_skills_school_index:
     path:    /school/index
@@ -17,6 +17,9 @@ imie_skills_school_delete:
     path:    /school/delete
     defaults : {_controller: ImieSkillsBundle:School:delete }
 
+
+# -------- COURSE --------
+
 imie_skills_course_index:
     path:    /course/index
     defaults : {_controller: ImieSkillsBundle:Course:index }
@@ -29,6 +32,9 @@ imie_skills_course_delete:
     path:    /course/delete
     defaults : {_controller: ImieSkillsBundle:Course:delete }
 
+
+# -------- PROMO --------
+
 imie_skills_promo_index:
     path:    /promo/index
     defaults : {_controller: ImieSkillsBundle:Promo:index }
@@ -40,6 +46,81 @@ imie_skills_promo_add:
 imie_skills_promo_delete:
     path:    /promo/delete
     defaults : {_controller: ImieSkillsBundle:Promo:delete }
+
+
+# -------- PROJECT --------
+
+imie_skills_project_index:
+    path:    /project/index
+    defaults: { _controller: ImieSkillsBundle:Project:index }
+
+imie_skills_project_details:
+    path:    /project/{id}
+    defaults: { _controller: ImieSkillsBundle:Project:details }
+    requirements:
+        id: \d+
+
+imie_skills_project_add:
+    path:    /project/add
+    defaults: { _controller: ImieSkillsBundle:Project:add }
+
+imie_skills_project_modify:
+    path:    /project/modify/{id}
+    defaults: { _controller: ImieSkillsBundle:Project:modify }
+    requirements:
+        id: \d+
+
+imie_skills_project_delete:
+    path:    /project/delete/{id}
+    defaults: { _controller: ImieSkillsBundle:Project:delete }
+    requirements:
+        id: \d+
+
+
+# -------- STATE --------
+
+imie_skills_state_index:
+    path:    /state/index
+    defaults: { _controller: ImieSkillsBundle:State:index }
+
+imie_skills_state_add:
+    path:    /state/add
+    defaults: { _controller: ImieSkillsBundle:State:add }
+
+imie_skills_state_modify:
+    path:    /state/modify/{id}
+    defaults: { _controller: ImieSkillsBundle:State:modify }
+    requirements:
+        id: \d+
+
+imie_skills_state_delete:
+    path:    /state/delete/{id}
+    defaults: { _controller: ImieSkillsBundle:State:delete }
+    requirements:
+        id: \d+
+
+
+# -------- SKILL --------
+
+imie_skills_skill_index:
+    path:    /skill/index
+    defaults: { _controller: ImieSkillsBundle:Skill:index }
+
+imie_skills_skill_add:
+    path:    /skill/add
+    defaults: { _controller: ImieSkillsBundle:Skill:add }
+
+imie_skills_skill_modify:
+    path:    /skill/modify/{id}
+    defaults: { _controller: ImieSkillsBundle:Skill:modify }
+    requirements:
+        id: \d+
+
+imie_skills_skill_delete:
+    path:    /skill/delete/{id}
+    defaults: { _controller: ImieSkillsBundle:Skill:delete }
+    requirements:
+        id: \d+
 
 
 # -------- USER --------
@@ -71,78 +152,11 @@ imie_skills_user_delete:
         id: \d+
 
 
-# -------- SKILL --------
-
-imie_skills_skill_index:
-    path:    /skill/index
-    defaults: { _controller: ImieSkillsBundle:Skill:index }
-
-imie_skills_skill_add:
-    path:    /skill/add
-    defaults: { _controller: ImieSkillsBundle:Skill:add }
-
-imie_skills_skill_modify:
-    path:    /skill/modify/{id}
-    defaults: { _controller: ImieSkillsBundle:Skill:modify }
-    requirements:
-        id: \d+
-
-imie_skills_skill_delete:
-    path:    /skill/delete/{id}
-    defaults: { _controller: ImieSkillsBundle:Skill:delete }
-    requirements:
-        id: \d+
-
-# -------- STATE --------
-
-imie_skills_state_index:
-    path:    /state/index
-    defaults: { _controller: ImieSkillsBundle:State:index }
-
-imie_skills_state_add:
-    path:    /state/add
-    defaults: { _controller: ImieSkillsBundle:State:add }
-
-imie_skills_state_modify:
-    path:    /state/modify/{id}
-    defaults: { _controller: ImieSkillsBundle:State:modify }
-    requirements:
-        id: \d+
-
-imie_skills_state_delete:
-    path:    /state/delete/{id}
-    defaults: { _controller: ImieSkillsBundle:State:delete }
-    requirements:
-        id: \d+
-
-
-# -------- PROJECT --------
-
-imie_skills_project_index:
-    path:    /project/index
-    defaults: { _controller: ImieSkillsBundle:Project:index }
-
-imie_skills_project_details:
-    path:    /project/{id}
-    defaults: { _controller: ImieSkillsBundle:Project:details }
-    requirements:
-      id: \d+
-
-imie_skills_project_add:
-    path:    /project/add
-    defaults: { _controller: ImieSkillsBundle:Project:add }
-
-imie_skills_project_modify:
-    path:    /project/modify/{id}
-    defaults: { _controller: ImieSkillsBundle:Project:modify }
-    requirements:
-      id: \d+
-
 imie_skills_project_delete:
     path:    /project/delete/{id}
     defaults: { _controller: ImieSkillsBundle:Project:delete }
     requirements:
-      id: \d+
+        id: \d+
 
 
 # -------- NOTIFICATION --------
