@@ -7,7 +7,6 @@ use Imie\SkillsBundle\Entity\Notification;
 use Imie\SkillsBundle\Entity\Promo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 
@@ -16,11 +15,10 @@ use FOS\UserBundle\Model\User as BaseUser;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Imie\SkillsBundle\Entity\UserRepository")
- * @UniqueEntity("email")
  * @UniqueEntity("userPhoneNumber")
  */
-class User extends BaseUser
-{
+class User extends BaseUser {
+
     /**
      * @var integer
      *
@@ -45,6 +43,7 @@ class User extends BaseUser
      * @Assert\NotBlank()
      */
     private $userFirstName;
+
     /**
      * @var string
      *
@@ -67,6 +66,8 @@ class User extends BaseUser
      *
      * @ORM\Column(name="userPhoneNumber", type="integer", unique=true)
      * @Assert\NotBlank()
+     * @Assert\Length(
+     *      max = "10")
      */
     private $userPhoneNumber;
 
@@ -79,59 +80,52 @@ class User extends BaseUser
     private $userAddress;
 
     /**
-     * @var boolean
-     *
-     * @ORM\Column(name="userEnable", type="boolean", nullable=true)
-     */
-    private $userEnable;
-
-
-    /**
      * @var string
      *
-     * @ORM\Column(name="userDescription", type="text")
+     * @ORM\Column(name="userDescription", type="text", nullable=true)
      */
     private $userDescription;
-  /**
-  *  @var \Project
-  *  @ORM\OneToMany(targetEntity="Project", mappedBy="manager")
-  */
-    private $managedProjects;
+
     /**
-    * @var \Project
-    * @ORM\OneToMany(targetEntity="Project", mappedBy="creator")
-    */
+     *  @var \Project
+     *  @ORM\OneToMany(targetEntity="Project", mappedBy="manager")
+     */
+    private $managedProjects;
+
+    /**
+     * @var \Project
+     * @ORM\OneToMany(targetEntity="Project", mappedBy="creator")
+     */
     private $createdProjects;
 
     /**
-    *@var \Project
-    * @ORM\ManyToMany(targetEntity="Project", inversedBy="users")
-    */
+     * @var \Project
+     * @ORM\ManyToMany(targetEntity="Project", inversedBy="users")
+     */
     private $joinedProjects;
 
     /**
-    * @var \Level
-    * @ORM\OneToMany(targetEntity="Level", mappedBy="userId")
-    */
+     * @var \Level
+     * @ORM\OneToMany(targetEntity="Level", mappedBy="userId")
+     */
     private $skills;
 
     /**
-    * @var \Notification
-    * @ORM\OneToMany(targetEntity="Notification", mappedBy="notificationUser")
-    */
+     * @var \Notification
+     * @ORM\OneToMany(targetEntity="Notification", mappedBy="notificationUser")
+     */
     private $notifications;
 
     /**
-    *@var \Promo
-    * @ORM\OneToMany(targetEntity="Level", mappedBy="userId")
-    */
+     * @var \Promo
+     * @ORM\OneToMany(targetEntity="Level", mappedBy="userId")
+     */
     private $promo;
 
-
     /**
-    * @var \Rank
-    * @ORM\OneToMany(targetEntity="Rank", mappedBy="users")
-    */
+     * @var \Rank
+     * @ORM\OneToMany(targetEntity="Rank", mappedBy="users")
+     */
     private $rank;
 
     /**
@@ -143,11 +137,12 @@ class User extends BaseUser
     protected $image;
 
     public function __construct() {
-      $this->createdProjects = new ArrayCollection();
-      $this->managedProjects = new ArrayCollection();
-      $this->joinedProjects = new ArrayCollection();
-      $this->notifications = new ArrayCollection();
-      $this->userBirthday = new \DateTime('now');
+        parent::__construct();
+        $this->createdProjects = new ArrayCollection();
+        $this->managedProjects = new ArrayCollection();
+        $this->joinedProjects = new ArrayCollection();
+        $this->notifications = new ArrayCollection();
+        $this->userBirthday = new \DateTime('now');
     }
 
     /**
@@ -155,8 +150,7 @@ class User extends BaseUser
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -166,8 +160,7 @@ class User extends BaseUser
      * @param string $userLastName
      * @return User
      */
-    public function setUserLastName($userLastName)
-    {
+    public function setUserLastName($userLastName) {
         $this->userLastName = ucfirst($userLastName);
 
         return $this;
@@ -178,8 +171,7 @@ class User extends BaseUser
      *
      * @return string
      */
-    public function getUserLastName()
-    {
+    public function getUserLastName() {
         return $this->userLastName;
     }
 
@@ -189,8 +181,7 @@ class User extends BaseUser
      * @param string $userFirstName
      * @return User
      */
-    public function setUserFirstName($userFirstName)
-    {
+    public function setUserFirstName($userFirstName) {
         $this->userFirstName = ucfirst($userFirstName);
 
         return $this;
@@ -201,8 +192,7 @@ class User extends BaseUser
      *
      * @return string
      */
-    public function getUserFirstName()
-    {
+    public function getUserFirstName() {
         return $this->userFirstName;
     }
 
@@ -212,8 +202,7 @@ class User extends BaseUser
      * @param \DateTime $userBirthday
      * @return User
      */
-    public function setUserBirthday($userBirthday)
-    {
+    public function setUserBirthday($userBirthday) {
         $this->userBirthday = $userBirthday;
 
         return $this;
@@ -224,9 +213,8 @@ class User extends BaseUser
      *
      * @return \DateTime
      */
-    public function getUserBirthday()
-    {
-      // var_dump($this->userBirthday);die();
+    public function getUserBirthday() {
+        // var_dump($this->userBirthday);die();
         return $this->userBirthday;
     }
 
@@ -236,8 +224,7 @@ class User extends BaseUser
      * @param integer $userPhoneNumber
      * @return User
      */
-    public function setUserPhoneNumber($userPhoneNumber)
-    {
+    public function setUserPhoneNumber($userPhoneNumber) {
         $this->userPhoneNumber = $userPhoneNumber;
 
         return $this;
@@ -248,11 +235,9 @@ class User extends BaseUser
      *
      * @return integer
      */
-    public function getUserPhoneNumber()
-    {
+    public function getUserPhoneNumber() {
         return $this->userPhoneNumber;
     }
-
 
     /**
      * Set userAddress
@@ -260,8 +245,7 @@ class User extends BaseUser
      * @param string $userAddress
      * @return User
      */
-    public function setUserAddress($userAddress)
-    {
+    public function setUserAddress($userAddress) {
         $this->userAddress = $userAddress;
 
         return $this;
@@ -272,8 +256,7 @@ class User extends BaseUser
      *
      * @return string
      */
-    public function getUserAddress()
-    {
+    public function getUserAddress() {
         return $this->userAddress;
     }
 
@@ -283,8 +266,7 @@ class User extends BaseUser
      * @param boolean $userEnable
      * @return User
      */
-    public function setUserEnable($userEnable)
-    {
+    public function setUserEnable($userEnable) {
         $this->userEnable = $userEnable;
 
         return $this;
@@ -295,11 +277,9 @@ class User extends BaseUser
      *
      * @return boolean
      */
-    public function getUserEnable()
-    {
+    public function getUserEnable() {
         return $this->userEnable;
     }
-
 
     /**
      * Set userDescription
@@ -307,8 +287,7 @@ class User extends BaseUser
      * @param string $userDescription
      * @return User
      */
-    public function setUserDescription($userDescription)
-    {
+    public function setUserDescription($userDescription) {
         $this->userDescription = $userDescription;
 
         return $this;
@@ -319,8 +298,7 @@ class User extends BaseUser
      *
      * @return string
      */
-    public function getUserDescription()
-    {
+    public function getUserDescription() {
         return $this->userDescription;
     }
 
@@ -330,8 +308,7 @@ class User extends BaseUser
      * @param \Imie\SkillsBundle\Entity\Project $managedProjects
      * @return User
      */
-    public function addManagedProject(\Imie\SkillsBundle\Entity\Project $managedProjects)
-    {
+    public function addManagedProject(\Imie\SkillsBundle\Entity\Project $managedProjects) {
         $this->managedProjects[] = $managedProjects;
 
         return $this;
@@ -342,8 +319,7 @@ class User extends BaseUser
      *
      * @param \Imie\SkillsBundle\Entity\Project $managedProjects
      */
-    public function removeManagedProject(\Imie\SkillsBundle\Entity\Project $managedProjects)
-    {
+    public function removeManagedProject(\Imie\SkillsBundle\Entity\Project $managedProjects) {
         $this->managedProjects->removeElement($managedProjects);
     }
 
@@ -352,8 +328,7 @@ class User extends BaseUser
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getManagedProjects()
-    {
+    public function getManagedProjects() {
         return $this->managedProjects;
     }
 
@@ -363,8 +338,7 @@ class User extends BaseUser
      * @param \Imie\SkillsBundle\Entity\Project $createdProjects
      * @return User
      */
-    public function addCreatedProject(\Imie\SkillsBundle\Entity\Project $createdProjects)
-    {
+    public function addCreatedProject(\Imie\SkillsBundle\Entity\Project $createdProjects) {
         $this->createdProjects[] = $createdProjects;
 
         return $this;
@@ -375,8 +349,7 @@ class User extends BaseUser
      *
      * @param \Imie\SkillsBundle\Entity\Project $createdProjects
      */
-    public function removeCreatedProject(\Imie\SkillsBundle\Entity\Project $createdProjects)
-    {
+    public function removeCreatedProject(\Imie\SkillsBundle\Entity\Project $createdProjects) {
         $this->createdProjects->removeElement($createdProjects);
     }
 
@@ -385,8 +358,7 @@ class User extends BaseUser
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCreatedProjects()
-    {
+    public function getCreatedProjects() {
         return $this->createdProjects;
     }
 
@@ -396,8 +368,7 @@ class User extends BaseUser
      * @param \Imie\SkillsBundle\Entity\Project $joinedProjects
      * @return User
      */
-    public function addJoinedProject(\Imie\SkillsBundle\Entity\Project $joinedProjects)
-    {
+    public function addJoinedProject(\Imie\SkillsBundle\Entity\Project $joinedProjects) {
         $this->joinedProjects[] = $joinedProjects;
         $joinedProjects->addUser($this);
 
@@ -409,8 +380,7 @@ class User extends BaseUser
      *
      * @param \Imie\SkillsBundle\Entity\Project $joinedProjects
      */
-    public function removeJoinedProject(\Imie\SkillsBundle\Entity\Project $joinedProjects)
-    {
+    public function removeJoinedProject(\Imie\SkillsBundle\Entity\Project $joinedProjects) {
         $this->joinedProjects->removeElement($joinedProjects);
     }
 
@@ -419,8 +389,7 @@ class User extends BaseUser
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getJoinedProjects()
-    {
+    public function getJoinedProjects() {
         return $this->joinedProjects;
     }
 
@@ -430,8 +399,7 @@ class User extends BaseUser
      * @param \Imie\SkillsBundle\Entity\Level $skills
      * @return User
      */
-    public function addSkill(\Imie\SkillsBundle\Entity\Level $skills)
-    {
+    public function addSkill(\Imie\SkillsBundle\Entity\Level $skills) {
         $this->skills[] = $skills;
 
         return $this;
@@ -442,8 +410,7 @@ class User extends BaseUser
      *
      * @param \Imie\SkillsBundle\Entity\Level $skills
      */
-    public function removeSkill(\Imie\SkillsBundle\Entity\Level $skills)
-    {
+    public function removeSkill(\Imie\SkillsBundle\Entity\Level $skills) {
         $this->skills->removeElement($skills);
     }
 
@@ -452,8 +419,7 @@ class User extends BaseUser
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getSkills()
-    {
+    public function getSkills() {
         return $this->skills;
     }
 
@@ -463,8 +429,7 @@ class User extends BaseUser
      * @param \Imie\SkillsBundle\Entity\Notification $notifications
      * @return User
      */
-    public function addNotification(\Imie\SkillsBundle\Entity\Notification $notifications)
-    {
+    public function addNotification(\Imie\SkillsBundle\Entity\Notification $notifications) {
         $this->notifications[] = $notifications;
 
         return $this;
@@ -475,8 +440,7 @@ class User extends BaseUser
      *
      * @param \Imie\SkillsBundle\Entity\Notification $notifications
      */
-    public function removeNotification(\Imie\SkillsBundle\Entity\Notification $notifications)
-    {
+    public function removeNotification(\Imie\SkillsBundle\Entity\Notification $notifications) {
         $this->notifications->removeElement($notifications);
     }
 
@@ -485,8 +449,7 @@ class User extends BaseUser
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getNotifications()
-    {
+    public function getNotifications() {
         return $this->notifications;
     }
 
@@ -496,8 +459,7 @@ class User extends BaseUser
      * @param \Imie\SkillsBundle\Entity\Level $promo
      * @return User
      */
-    public function addPromo(\Imie\SkillsBundle\Entity\Level $promo)
-    {
+    public function addPromo(\Imie\SkillsBundle\Entity\Level $promo) {
         $this->promo[] = $promo;
 
         return $this;
@@ -508,8 +470,7 @@ class User extends BaseUser
      *
      * @param \Imie\SkillsBundle\Entity\Level $promo
      */
-    public function removePromo(\Imie\SkillsBundle\Entity\Level $promo)
-    {
+    public function removePromo(\Imie\SkillsBundle\Entity\Level $promo) {
         $this->promo->removeElement($promo);
     }
 
@@ -518,20 +479,17 @@ class User extends BaseUser
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPromo()
-    {
+    public function getPromo() {
         return $this->promo;
     }
 
- 
-    public function setUserFullName()
-    {
-      $this->userFullName = $this->userFirstName.' '.$this->userLastName;
-      return $this;
+    public function setUserFullName() {
+        $this->userFullName = $this->userFirstName . ' ' . $this->userLastName;
+        return $this;
     }
-    public function getUserFullName()
-    {
-      return $this->userFullName;
+
+    public function getUserFullName() {
+        return $this->userFullName;
     }
 
     /**
@@ -542,7 +500,7 @@ class User extends BaseUser
      */
     public function setImage(\Imie\SkillsBundle\Entity\Image $image = null) {
         $this->image = $image;
-        $image->setImageAlt($this->getUserFirstName().$this->getUserLastName());
+        $image->setImageAlt($this->getUserFirstName() . $this->getUserLastName());
 
         return $this;
     }
@@ -562,8 +520,7 @@ class User extends BaseUser
      * @param \Imie\SkillsBundle\Entity\Rank $rank
      * @return User
      */
-    public function addRank(\Imie\SkillsBundle\Entity\Rank $rank)
-    {
+    public function addRank(\Imie\SkillsBundle\Entity\Rank $rank) {
         $this->rank[] = $rank;
 
         return $this;
@@ -574,8 +531,7 @@ class User extends BaseUser
      *
      * @param \Imie\SkillsBundle\Entity\Rank $rank
      */
-    public function removeRank(\Imie\SkillsBundle\Entity\Rank $rank)
-    {
+    public function removeRank(\Imie\SkillsBundle\Entity\Rank $rank) {
         $this->rank->removeElement($rank);
     }
 
@@ -584,8 +540,8 @@ class User extends BaseUser
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getRank()
-    {
+    public function getRank() {
         return $this->rank;
     }
+
 }
