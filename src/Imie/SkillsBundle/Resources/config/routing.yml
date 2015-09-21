@@ -9,10 +9,6 @@ imie_skills_school_index:
     path:    /schools
     defaults : {_controller: ImieSkillsBundle:School:index }
 
-imie_skills_school_index:
-    path:    /school/index
-    defaults : {_controller: ImieSkillsBundle:School:index }
-
 imie_skills_school_add:
     path:    /school/add
     defaults : {_controller: ImieSkillsBundle:School:add }
@@ -21,14 +17,9 @@ imie_skills_school_delete:
     path:    /school/delete
     defaults : {_controller: ImieSkillsBundle:School:delete }
 
-<<<<<<< HEAD
 # ------ COURSE ------
 imie_skills_course_index:
-    path:    /promos
-=======
-imie_skills_course_index:
-    path:    /course/index
->>>>>>> origin/master
+    path:    /course
     defaults : {_controller: ImieSkillsBundle:Course:index }
 
 imie_skills_course_add:
@@ -39,14 +30,10 @@ imie_skills_course_delete:
     path:    /course/delete
     defaults : {_controller: ImieSkillsBundle:Course:delete }
 
-<<<<<<< HEAD
+
 # ------ PROMO ------
 imie_skills_Promo_index:
-    path:    /promos
-=======
-imie_skills_promo_index:
-    path:    /promo/index
->>>>>>> origin/master
+    path:    /promo
     defaults : {_controller: ImieSkillsBundle:Promo:index }
 
 imie_skills_promo_add:

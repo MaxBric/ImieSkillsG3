@@ -12,7 +12,7 @@
 
     {% for schools in school %}
     <tr>
-        <td>{{ schools.schoolName }}</td>
+        <td>{{ schools.promoName }}</td>
       <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
       <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
     </tr>
@@ -21,7 +21,4 @@
 </table>
 {% endblock article %}
 
-{#{{ path('imie_skills_course_details', {'id': course.id}) }}#}
-{#{{ course.courseName }}#}
 
-{#{{ path('imie_skills_course_delete', {'id': course.id}) }}#}

@@ -9,7 +9,15 @@ use Imie\SkillsBundle\Form\PromoType;
 
 class PromoController extends Controller
 {
-    public function indexAction($id){
+    public function indexAction(){
+        $promos = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('ImieSkillsBundle:Promo')
+            ->getPromosOrderedById();
+
+        return $this->render('ImieSkillsBundle:Promo:index.html.twig', array(
+            'promos' => $promos
+        ));
 
     }
     public function addAction(Request $req){
@@ -37,4 +45,5 @@ class PromoController extends Controller
             'form' => $form->createView()
         ));
     }
+    
 }
