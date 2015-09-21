@@ -162,7 +162,11 @@ imie_skills_project_delete:
 # -------- NOTIFICATION --------
 
 imie_skills_notification_index:
+<<<<<<< HEAD
+    path:   /admin/notification/index
+=======
     path:    /notification/index
+>>>>>>> 2c3dddfd08bdae7d356d8f205388765545a3f4bc
     defaults: {_controller: ImieSkillsBundle:Notification:index }
 
 imie_skills_notification_details:

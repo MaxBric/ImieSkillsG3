@@ -18,12 +18,20 @@ class UserRepository extends EntityRepository
     ->getQuery()
     ->getResult();
   }
+
+  public function getUsersByNames($name) {
+    return $this->createQueryBuilder('u')
+    ->where('u.userFullName LIKE :name')
+    ->setParameter('name', $name)
+    ->getQuery()
+    ->getResult();
+  }
+
   public function getUsersById($ids) {
       $qb = $this->createQueryBuilder('u');
       $qb->where($qb->expr()->in('u.id', $ids));
       return $qb->getQuery()->getResult();
   }
-
 
   public function getUserById($id) {
     return $qb = $this->createQueryBuilder('u')
