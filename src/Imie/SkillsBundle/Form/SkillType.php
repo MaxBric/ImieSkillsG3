@@ -23,7 +23,7 @@ class SkillType extends AbstractType {
                     'empty_value' => 'Choisir...',
                     'required' => false
                 ))
-                ->add('Add', 'submit')
+                ->add('Ajouter', 'submit')
         ;
     }
 

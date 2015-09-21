@@ -1,10 +1,8 @@
-{% extends 'ImieTestBundle::layout.html.twig' %}
+{% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-<h2>Profil de {{ user.name }}</h2>
+<h2><span class="glyphicon glyphicon-bell"></span> Détail de la notification</h2>
 <a href="{{ path('imie_skills_notification_index') }}"><span class="glyphicon glyphicon-menu-left"> Retour</a>
-<hr/>
-<p><b>Id :</b> {{ user.id }}</p>
-<p><b>Email :</b> {{ user.email }}</p>
-<img style="max-width: 500px;" src="{{ user.image.name }}" alt="{{ user.name }}" title="{{ user.name }}" />
-{% endblock article %}
+  <h3>{{ notification.notificationName }}</h3>
+  <p>{{ notification.notificationDescription }}</p>
+  {% endblock article %}

@@ -1,14 +1,13 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-<h2>Liste des compétences</h2>
+<h2><span class="glyphicon glyphicon-knight"></span> Liste des compétences</h2>
 <a href="{{ path('imie_skills_skill_add') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter une compétence</a>
-<hr/>
 <table class="table table-striped">
   <thead>
-    <td>Nom</td>
-    <td>Parent</td>
-    <td>Description</td>
+    <th>Nom</th>
+    <th>Parent</th>
+    <th>Description</th>
   </thead>
   <tbody>
     {% for skill in skills if skills is defined %}
@@ -18,8 +17,9 @@
       <td>{{ skill.skillDescription }}</td>
       <td><a href="{{ path('imie_skills_skill_modify', {id:skill.id}) }}"><span class="glyphicon glyphicon-cog"></span></a></td>
       <td><a href="{{ path('imie_skills_skill_delete', {id:skill.id}) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
-      {% endfor %}
     </tr>
+    <hr/>
+    {% endfor %}
   </tbody>
 </table>
 {% endblock article %}

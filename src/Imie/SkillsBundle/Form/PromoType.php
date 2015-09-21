@@ -21,7 +21,7 @@ class PromoType extends AbstractType
                 'class' => 'ImieSkillsBundle:Course',
                 'choice_label' => 'course'
             ))
-            ->add('envoyer','submit')
+            ->add('Ajouter','submit')
         ;
     }
     /**

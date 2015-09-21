@@ -56,7 +56,7 @@ class ProjectType extends AbstractType {
                 ->add('image', new ImageType(), array(
                     'required' => false
                 ))
-                ->add('Valider', 'submit')
+                ->add('Ajouter', 'submit')
         ;
     }
 

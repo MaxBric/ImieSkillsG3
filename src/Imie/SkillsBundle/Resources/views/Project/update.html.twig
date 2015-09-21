@@ -1,9 +1,8 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-<h2>Modification du projet</h2>
+<h2><span class="glyphicon glyphicon-blackboard"></span> Modification du projet</h2>
 <a href="{{ path('imie_skills_project_index') }}"><span class="glyphicon glyphicon-menu-left"> Retour</a>
-  <hr/>
   <form method="post" action="{{ path('imie_skills_project_modify', {id: id}) }}" {{ form_enctype(form) }}>
     {{ form(form) }}
   </form>

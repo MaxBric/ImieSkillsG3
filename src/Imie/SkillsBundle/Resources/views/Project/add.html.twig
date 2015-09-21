@@ -1,9 +1,8 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-<h2>Création d'un projet</h2>
+<h2><span class="glyphicon glyphicon-blackboard"></span> Ajout d'un projet</h2>
 <a href="{{ path('imie_skills_project_index') }}"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
-<hr/>
 <form method="post" action="{{ path('imie_skills_project_add') }}" {{ form_enctype(form) }}>
   {{ form(form) }}
 </form>

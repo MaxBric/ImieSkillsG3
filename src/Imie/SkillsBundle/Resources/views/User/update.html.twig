@@ -1,0 +1,9 @@
+{% extends 'ImieSkillsBundle::layout.html.twig' %}
+
+{% block article %}
+<h2><span class="glyphicon glyphicon-user"></span> Modification de l'utilisateur</h2>
+<a href="{{ path('imie_skills_user_me') }}"><span class="glyphicon glyphicon-menu-left"> Retour</a>
+  <form method="post" action="{{ path('imie_skills_user_modify', {id: id}) }}" {{ form_enctype(form) }}>
+    {{ form(form) }}
+  </form>
+  {% endblock article %}

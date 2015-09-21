@@ -30,7 +30,7 @@ class UserType extends AbstractType
             ->add('image',  new ImageType(), array(
                 'required' => false
             ))
-            ->add('Add', 'submit')
+            ->add('Ajouter', 'submit')
         ;
     }
 

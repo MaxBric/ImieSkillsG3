@@ -1,12 +1,11 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-<h2>Liste des étapes</h2>
+<h2><span class="glyphicon glyphicon-tasks"></span> Liste des étapes</h2>
 <a href="{{ path('imie_skills_state_add') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter une étape</a>
-<hr/>
 <table class="table table-striped">
   <thead>
-    <td>Nom</td>
+    <th>Nom</th>
   </thead>
   <tbody>
     {% for state in states if states is defined %}
@@ -14,8 +13,9 @@
       <td>{{ state.statut }}</a></td>
       <td><a href="{{ path('imie_skills_state_modify', {id:state.id}) }}"><span class="glyphicon glyphicon-cog"></span></a></td>
       <td><a href="{{ path('imie_skills_state_delete', {id:state.id}) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
-      {% endfor %}
-    </tbody>
-  </tr>
+    </tr>
+    <hr/>
+    {% endfor %}
+  </tbody>
 </table>
 {% endblock article %}

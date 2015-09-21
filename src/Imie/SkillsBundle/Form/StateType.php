@@ -16,10 +16,10 @@ class StateType extends AbstractType
     {
         $builder
             ->add('statut')
-            ->add('Valider', 'submit')
+            ->add('Ajouter', 'submit')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

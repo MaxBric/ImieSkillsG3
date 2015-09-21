@@ -23,7 +23,7 @@ class SchoolType extends AbstractType
                 'multiple' =>true,
                 'required'=>false
             ))
-            ->add('envoyer','submit')
+            ->add('Ajouter','submit')
         ;
     }
 

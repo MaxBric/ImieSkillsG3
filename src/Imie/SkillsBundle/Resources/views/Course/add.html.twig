@@ -1,9 +1,8 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-<h2>Ajout d'une formation</h2>
+<h2><span class="glyphicon glyphicon-education"></span> Ajout d'une formation</h2>
 <a href="{{ path('imie_skills_course_index') }}"><span class="glyphicon glyphicon-menu-left"> Retour</a>
-<hr/>
 <form method="post" action="{{ path('imie_skills_course_add') }}" {{ form_enctype(form) }}>
   {{ form(form) }}
 </form>

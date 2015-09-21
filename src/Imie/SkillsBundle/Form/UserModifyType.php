@@ -28,7 +28,7 @@ class UserModifyType extends AbstractType
             ->add('userAddress')
             ->add('userDescription')
             ->add('image',  new ImageType())
-            ->add('Add', 'submit')
+            ->add('Modifier', 'submit')
         ;
     }
 

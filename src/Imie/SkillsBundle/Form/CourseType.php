@@ -28,7 +28,7 @@ class CourseType extends AbstractType
                 'class' => 'ImieSkillsBundle:School',
                 'choice_label' => 'schoolName'
             ))
-            ->add('envoyer','submit')
+            ->add('Ajouter','submit')
         ;
     }
 
