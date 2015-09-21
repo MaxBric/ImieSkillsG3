@@ -70,8 +70,6 @@ class User extends BaseUser
      */
     private $userPhoneNumber;
 
-     * @Assert\NotBlank()
-
     /**
      * @var string
      *
@@ -87,8 +85,6 @@ class User extends BaseUser
      */
     private $userEnable;
 
-     * @Assert\NotBlank()
-     * @Assert\NotBlank()
 
     /**
      * @var string
