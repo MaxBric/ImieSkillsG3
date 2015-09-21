@@ -14,7 +14,6 @@ class UserType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-<<<<<<< HEAD
         ->add('userFirstName')
         ->add('userLastName')
         ->add('userBirthday', 'date', array(
@@ -36,24 +35,6 @@ class UserType extends AbstractType {
         'invalid_message' => 'fos_user.password.mismatch',
         ))
         ->add('Add', 'submit')
-=======
-            ->add('userFirstName')
-            ->add('userLastName')
-            ->add('userBirthday', 'date', array(
-              'format' => "ddMMyyyy"
-            ))
-            ->add('userPhoneNumber', 'text')
-            ->add('userMail', 'email')
-            ->add('userAddress')
-            ->add('userEnable')
-            ->add('userLogin')
-            ->add('userPassword', 'password')
-            ->add('userDescription')
-            ->add('image',  new ImageType(), array(
-                'required' => false
-            ))
-            ->add('Ajouter', 'submit')
->>>>>>> cf10b660188dc23902d7f07f1d4abd27fa1588e8
         ;
     }
 
