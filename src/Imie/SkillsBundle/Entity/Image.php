@@ -114,9 +114,6 @@ class Image {
             return;
         }
 
-        // vous devez lancer une exception ici si le fichier ne peut pas
-        // être déplacé afin que l'entité ne soit pas persistée dans la
-        // base de données comme le fait la méthode move() de UploadedFile
         $this->file->move($this->getUploadRootDir(), $this->id.'.'.$this->file->guessExtension());
 
         unset($this->file);
