@@ -37,7 +37,7 @@ class SearchController extends Controller {
             array_push($search->results, $skillRepo->getSkillsByNames($form["text"]->getData()));
           }
         }
-        // var_dump($search);die();
+        var_dump($search);die();
         return $this->render('ImieSkillsBundle:Search:index.html.twig', array(
           'search' => $search,
           'form' => $form->createView()

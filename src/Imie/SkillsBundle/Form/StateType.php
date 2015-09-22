@@ -21,7 +21,7 @@ class StateType extends AbstractType
             ->add('Valider', 'submit')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
