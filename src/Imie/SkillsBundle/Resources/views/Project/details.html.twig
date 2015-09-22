@@ -1,34 +1,39 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
+<ol class="breadcrumb">
+  <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
+  <li><a href="{{ path('imie_skills_project_index') }}">Liste des projets</a></li>
+  <li class="active">Détail du projet</li>
+</ol>
 <h2><span class="glyphicon glyphicon-blackboard"></span> Détail du projet</h2>
 <hr/>
 <a class="btn btn-primary" href="{{ path('imie_skills_project_index') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
 <a class="btn btn-primary" href="{{ path('imie_skills_project_modify', {id:project.id}) }}" role="button"><span class="glyphicon glyphicon-cog"></span> Modifier</a>
-  <hr/>
-  <h3>Nom du projet : {{ project.projectName }}</h3>{% if project.image is not null %}<img src="{{ asset(project.image.webPath) }}" alt="{{ asset(project.image.imageAlt) }}" width="100" height="100">{% endif %}
-  <hr/>
-  <p>Phase d'avancement : {{ project.state.statut }}</p>
-  <p>Progression de la phase en cours : {{ project.projectProgress }} %</p>
-  <p>Date de départ estimée : {{ project.projectEstimatedStart|date('d/m/y') }}</p>
-  <p>Date de fin estimée : {{ project.projectEstimatedEnd|date('d/m/y') }}</p>
-  <p>Date de départ réelle :  {{ project.projectStart|date('d/m/y') }}</p>
-  <p>Date de fin réelle : {{ project.projectEnd|date('d/m/y') }}</p>
-  <p>Description : {{ project.projectDescription }}</p>
-  <h3>Compétences demandées :</h3>
-  <ul>
-    {% for skill in project.skills if project.skills is defined %}
-    <li>{{ skill.skillName }}</li>
-    {% endfor %}
-  </ul>
-  <h3>Chef de projet : {% if project.manager is not null %}{{ project.manager.userFullName }}{% else %}A recruter{% endif %}</h3>
-  <h3>Équipe :</h3>
-  <ul>
-    {% if project.users is not null %}
-    {% for user in project.users if project.users is defined %}
-    <li>{{ user.userFullName }}</li>
-    {% endfor %}
-    {% else %}A recruter
-    {% endif %}
-  </ul>
-  {% endblock article %}
+<hr/>
+<h3>Nom du projet : {{ project.projectName }}</h3>{% if project.image is not null %}<img src="{{ asset(project.image.webPath) }}" alt="{{ asset(project.image.imageAlt) }}" width="100" height="100">{% endif %}
+<hr/>
+<p>Phase d'avancement : {{ project.state.statut }}</p>
+<p>Progression de la phase en cours : {{ project.projectProgress }} %</p>
+<p>Date de départ estimée : {{ project.projectEstimatedStart|date('d/m/y') }}</p>
+<p>Date de fin estimée : {{ project.projectEstimatedEnd|date('d/m/y') }}</p>
+<p>Date de départ réelle :  {{ project.projectStart|date('d/m/y') }}</p>
+<p>Date de fin réelle : {{ project.projectEnd|date('d/m/y') }}</p>
+<p>Description : {{ project.projectDescription }}</p>
+<h3>Compétences demandées :</h3>
+<ul>
+  {% for skill in project.skills if project.skills is defined %}
+  <li>{{ skill.skillName }}</li>
+  {% endfor %}
+</ul>
+<h3>Chef de projet : {% if project.manager is not null %}{{ project.manager.userFullName }}{% else %}A recruter{% endif %}</h3>
+<h3>Équipe :</h3>
+<ul>
+  {% if project.users is not null %}
+  {% for user in project.users if project.users is defined %}
+  <li>{{ user.userFullName }}</li>
+  {% endfor %}
+  {% else %}A recruter
+  {% endif %}
+</ul>
+{% endblock article %}

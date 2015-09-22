@@ -25,7 +25,7 @@ class SearchType extends AbstractType
         'choices' => array('Project' => 'Projet', 'User' => 'Utilisateur', 'Skill' => 'Compétence'),
         'multiple' => true
       ))
-      ->add('Add', 'submit')
+      ->add('Ajouter', 'submit')
       ;
     }
 

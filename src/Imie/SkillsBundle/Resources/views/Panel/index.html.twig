@@ -1,41 +1,52 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
+<ol class="breadcrumb">
+  <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
+  <li class="active">Panneau d'administration</li>
+</ol>
 <h2><span class="glyphicon glyphicon-wrench"></span> Panneau d'administration</h2>
 <hr/>
+<a class="btn btn-primary" href="{{ path('imie_skills_home') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
+<hr/>
 <table class="table table-striped">
+  <thead>
+    <th>Listes</th>
+    <th>Formulaires d'ajout</th>
+  </thead>
   <tbody>
     <tr>
-      <td><a href="{{ path('imie_skills_school_index') }}"><span class="glyphicon glyphicon-eye-open"></span> Toutes les écoles</a></td>
+      <td><a href="{{ path('imie_skills_school_index') }}"><span class="glyphicon glyphicon-eye-open"></span> Liste des écoles</a></td>
       <td><a href="{{ path('imie_skills_school_add') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter une école</a></td>
     </tr>
     <tr>
-      <td><a href="{{ path('imie_skills_course_index') }}"><span class="glyphicon glyphicon-eye-open"></span> Toutes les formations</a></td>
+      <td><a href="{{ path('imie_skills_course_index') }}"><span class="glyphicon glyphicon-eye-open"></span> Liste des formations</a></td>
       <td><a href="{{ path('imie_skills_course_add') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter une formation</a></td>
     </tr>
     <tr>
-      <td><a href="{{ path('imie_skills_promo_index') }}"><span class="glyphicon glyphicon-eye-open"></span> Toutes les promos</a></td>
+      <td><a href="{{ path('imie_skills_promo_index') }}"><span class="glyphicon glyphicon-eye-open"></span> Liste des promos</a></td>
       <td><a href="{{ path('imie_skills_promo_add') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter une promo</a></td>
     </tr>
     <tr class="info">
-      <td><a href="{{ path('imie_skills_project_index') }}"><span class="glyphicon glyphicon-eye-open"></span> Tous les projets</a></td>
+      <td><a href="{{ path('imie_skills_project_index') }}"><span class="glyphicon glyphicon-eye-open"></span> Liste des projets</a></td>
       <td><a href="{{ path('imie_skills_project_add') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter un projet</a></td>
     </tr>
     <tr>
-      <td><a href="{{ path('imie_skills_state_index') }}"><span class="glyphicon glyphicon-eye-open"></span> Toutes les étapes</a></td>
+      <td><a href="{{ path('imie_skills_state_index') }}"><span class="glyphicon glyphicon-eye-open"></span> Liste des étapes</a></td>
       <td><a href="{{ path('imie_skills_state_add') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter une étape</a></td>
     </tr>
     <tr>
-      <td><a href="{{ path('imie_skills_skill_index') }}"><span class="glyphicon glyphicon-eye-open"></span> Toutes les compétences</a></td>
+      <td><a href="{{ path('imie_skills_skill_index') }}"><span class="glyphicon glyphicon-eye-open"></span> Liste des compétences</a></td>
       <td><a href="{{ path('imie_skills_skill_add') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter une compétence</a></td>
     </tr>
     <tr class="info">
-      <td><a href="{{ path('imie_skills_user_index') }}"><span class="glyphicon glyphicon-eye-open"></span> Tous les utilisateurs</a></td>
+      <td><a href="{{ path('imie_skills_user_index') }}"><span class="glyphicon glyphicon-eye-open"></span> Liste des utilisateurs</a></td>
       <td><a href="{{ path('imie_skills_user_add') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter un utilisateur</a></td>
     </tr>
     <tr>
-      <td><a href="{{ path('imie_skills_notification_index') }}"><span class="glyphicon glyphicon-eye-open"></span> Toutes les notifications</a></td>
+      <td><a href="{{ path('imie_skills_notification_index') }}"><span class="glyphicon glyphicon-eye-open"></span> Liste des notifications</a></td>
       <td><a href="{{ path('imie_skills_notification_add') }}"><span class="glyphicon glyphicon-send"></span> Envoyer une notification</a></td>
     </tr>
   </tbody>
-  {% endblock article %}
+</table>
+{% endblock article %}

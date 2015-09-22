@@ -11,19 +11,21 @@
   <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
 <body>
-  <nav class="navbar navbar-default navbar-fixed-top" id="imie-header">
+  <nav class="navbar navbar-default navbar-fixed-top">
     {% block menu %}
     {% include 'menu.html.twig' %}
     {% endblock menu %}
   </nav>
-  <main class="container" id="imie-main">
+  <main class="container">
     {% block body %}
     {% endblock body %}
   </main>
-  <nav class="navbar navbar-default navbar-fixed-bottom" id="imie-footer">
+  <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
-      <span>IMIE Skills</span>
-      <span> - </span>
+      <a href="{{ path('imie_skills_home') }}">IMIE Skills</a>
+      <span> - © 2015 - </span>
+      <a href="http://imie-ecole-informatique.fr" target="imie-nantes">IMIE Nantes</a>
+      <span> - DL11 - </span>
       <a href="{{ path('imie_skills_contact') }}"><span class="glyphicon glyphicon-envelope"></span> Contact</a>
     </div>
   </nav>

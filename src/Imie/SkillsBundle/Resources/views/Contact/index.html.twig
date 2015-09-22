@@ -1,0 +1,20 @@
+{% extends 'ImieSkillsBundle::layout.html.twig' %}
+
+{% block article %}
+<ol class="breadcrumb">
+  <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
+  <li class="active">Contact</li>
+</ol>
+<h2><span class="glyphicon glyphicon-enveloppe"></span> Contact</h2>
+<hr/>
+<a class="btn btn-primary" href="{{ path('imie_skills_home') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
+<hr/>
+<h3><span class="glyphicon glyphicon-pencil"></span> Contacter un administrateur</h3>
+
+<hr/>
+<h3 id="imie-skills-credits-title"><span class="glyphicon glyphicon-sunglasses"></span> Crédits</h3>
+<div id="imie-skills-credits-content">
+  <div>IMIE Skills a été conçu dans l'amour en 2015 par un groupe de la promo DL11 composé de :</div>
+  <div>Sarah TOUATI, Jean NGUON, Jonathan DODARD, Maxence BRICAULT & Jocelyn BERNARD</div>
+</div>
+{% endblock article %}
