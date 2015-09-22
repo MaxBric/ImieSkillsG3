@@ -37,7 +37,7 @@ class Level
 
     /**
     * @var id
-    * @ORM\Column(name="userid")
+    * @ORM\Column(name="userId")
     * @ORM\OneToMany(targetEntity="User")
     */
     private $userId;

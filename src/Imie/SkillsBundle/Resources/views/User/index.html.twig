@@ -20,15 +20,16 @@
     <tr>
       <td><a href="{{ path('imie_skills_user_details', {id:user.id})}}">{{ user.userFullName }}</a></td>
       <td>{{ user.userAddress }}</td>
-      <td>{{ user.userMail }}</td>
+      <td>{{ user.Email }}</td>
       <td>{{ user.userPhoneNumber }}</td>
       <td>{{ user.userBirthday|date('d/m/Y') }}</td>
       <td>{{ user.userDescription }}</td>
-      <td><ul>
-        {% for skill in user.skills if user.skills is defined %}
+      <td>{% if user.skills %}<ul>
+        {% for skill in user.skills %}
         <li>{{ skill.skillName }}</li>
         {% endfor %}
-      </ul></td>
+        
+      </ul>{% endif %}</td>
       <td><a href="{{ path('imie_skills_user_modify', {id:user.id}) }}"><span class="glyphicon glyphicon-cog"></span></a></td>
       <td><a href="{{ path('imie_skills_user_delete', {id:user.id}) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
       <hr/>

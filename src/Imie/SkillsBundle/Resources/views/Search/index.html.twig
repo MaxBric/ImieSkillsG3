@@ -10,11 +10,15 @@
 <table class="table table-striped">
   <thead>
     <!-- <td></td> -->
-    <td>Parent</td>
-    <td>Description</td>
+    <td>Name</td>
+    <!-- <td>Description</td> -->
   </thead>
   <tbody>
-
+{% for result in search.results %}
+<tr>
+  <td>{{ result.projectName }}</td>
+</tr>
+{% endfor %}
   </tbody>
 </table>
 {% endif %}

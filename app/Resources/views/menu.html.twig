@@ -14,7 +14,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="{{ path('imie_skills_notification_index') }}"><span class="glyphicon glyphicon-bell"></span></a></li>
-        <li><a class="btn btn-default" href="{{ path('imie_skills_search') }} role="button"><span class="glyphicon glyphicon-search"></span> Recherche</a></li>
+        <li><a class="btn btn-default" href="{{ path('imie_skills_search') }}" role="button"><span class="glyphicon glyphicon-search"></span> Recherche</a></li>
           <li>
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
             <span>Connecté en tant que {{ app.user.username }}</span>
