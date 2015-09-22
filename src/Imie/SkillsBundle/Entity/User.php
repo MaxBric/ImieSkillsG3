@@ -5,6 +5,8 @@ namespace Imie\SkillsBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Imie\SkillsBundle\Entity\Notification;
 use Imie\SkillsBundle\Entity\Promo;
+use Imie\SkillsBundle\Entity\UserSkill;
+use Imie\SkillsBundle\Entity\Skill;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
@@ -105,8 +107,10 @@ class User extends BaseUser {
     private $joinedProjects;
 
     /**
-     * @var \Level
-     * @ORM\OneToMany(targetEntity="Level", mappedBy="userId")
+     * @var \UserSkill
+     * @ORM\OneToMany(targetEntity="UserSkill", mappedBy="userId")
+     * @ORM\JoinColumn(name="userId", referencedColumnName="id")
+     *
      */
     private $skills;
 
@@ -118,15 +122,9 @@ class User extends BaseUser {
 
     /**
      * @var \Promo
-     * @ORM\OneToMany(targetEntity="Level", mappedBy="userId")
+     * @ORM\ManyToOne(targetEntity="Promo", inversedBy="users")
      */
     private $promo;
-
-    /**
-     * @var \Rank
-     * @ORM\OneToMany(targetEntity="Rank", mappedBy="users")
-     */
-    private $rank;
 
     /**
      * @var string
@@ -373,36 +371,7 @@ class User extends BaseUser {
         return $this->joinedProjects;
     }
 
-    /**
-     * Add skills
-     *
-     * @param \Imie\SkillsBundle\Entity\Level $skills
-     * @return User
-     */
-    public function addSkill(\Imie\SkillsBundle\Entity\Level $skills) {
-        $this->skills[] = $skills;
-
-        return $this;
-    }
-
-    /**
-     * Remove skills
-     *
-     * @param \Imie\SkillsBundle\Entity\Level $skills
-     */
-    public function removeSkill(\Imie\SkillsBundle\Entity\Level $skills) {
-        $this->skills->removeElement($skills);
-    }
-
-    /**
-     * Get skills
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getSkills() {
-        return $this->skills;
-    }
-
+   
     /**
      * Add notifications
      *
@@ -433,35 +402,7 @@ class User extends BaseUser {
         return $this->notifications;
     }
 
-    /**
-     * Add promo
-     *
-     * @param \Imie\SkillsBundle\Entity\Level $promo
-     * @return User
-     */
-    public function addPromo(\Imie\SkillsBundle\Entity\Level $promo) {
-        $this->promo[] = $promo;
-
-        return $this;
-    }
-
-    /**
-     * Remove promo
-     *
-     * @param \Imie\SkillsBundle\Entity\Level $promo
-     */
-    public function removePromo(\Imie\SkillsBundle\Entity\Level $promo) {
-        $this->promo->removeElement($promo);
-    }
-
-    /**
-     * Get promo
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPromo() {
-        return $this->promo;
-    }
+   
 
     public function setUserFullName() {
         $this->userFullName = $this->userFirstName . ' ' . $this->userLastName;
@@ -494,34 +435,60 @@ class User extends BaseUser {
         return $this->image;
     }
 
+
     /**
-     * Add rank
+     * Set promo
      *
-     * @param \Imie\SkillsBundle\Entity\Rank $rank
+     * @param \Imie\SkillsBundle\Entity\Promo $promo
      * @return User
      */
-    public function addRank(\Imie\SkillsBundle\Entity\Rank $rank) {
-        $this->rank[] = $rank;
+    public function setPromo(\Imie\SkillsBundle\Entity\Promo $promo = null)
+    {
+        $this->promo = $promo;
 
         return $this;
     }
 
     /**
-     * Remove rank
+     * Get promo
      *
-     * @param \Imie\SkillsBundle\Entity\Rank $rank
+     * @return \Imie\SkillsBundle\Entity\Promo 
      */
-    public function removeRank(\Imie\SkillsBundle\Entity\Rank $rank) {
-        $this->rank->removeElement($rank);
+    public function getPromo()
+    {
+        return $this->promo;
     }
 
     /**
-     * Get rank
+     * Add skills
+     *
+     * @param \Imie\SkillsBundle\Entity\UserSkill $skills
+     * @return User
+     */
+    public function addSkill(\Imie\SkillsBundle\Entity\UserSkill $skills)
+    {
+        $this->skills[] = $skills;
+
+        return $this;
+    }
+
+    /**
+     * Remove skills
+     *
+     * @param \Imie\SkillsBundle\Entity\UserSkill $skills
+     */
+    public function removeSkill(\Imie\SkillsBundle\Entity\UserSkill $skills)
+    {
+        $this->skills->removeElement($skills);
+    }
+
+    /**
+     * Get skills
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getRank() {
-        return $this->rank;
+    public function getSkills()
+    {
+        return $this->skills;
     }
-
 }

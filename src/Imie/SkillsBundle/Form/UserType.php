@@ -39,7 +39,10 @@ class UserType extends AbstractType {
                     'second_options' => array('label' => 'Confirmer mot de passe'),
                     'invalid_message' => 'fos_user.password.mismatch',
                 ))
-                ->add('Ajouter', 'submit')
+                ->add('userDescription', null, array(
+                    'label' => 'Description'
+                ))
+                ->add('Valider', 'submit')
         ;
     }
 
