@@ -15,16 +15,14 @@
 {% if search %}
 <table class="table table-striped">
   <thead>
-    <!-- <td></td> -->
     <td>Name</td>
-    <!-- <td>Description</td> -->
   </thead>
   <tbody>
-{% for result in search.results %}
-<tr>
-  <td>{{ result.projectName }}</td>
-</tr>
-{% endfor %}
+    {% for result in search if results is defined %}
+    <tr>
+      <td>{{ result.projectName }}</td>
+    </tr>
+    {% endfor %}
   </tbody>
 </table>
 {% endif %}

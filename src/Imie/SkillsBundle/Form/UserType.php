@@ -42,7 +42,7 @@ class UserType extends AbstractType {
                 ->add('userDescription', null, array(
                     'label' => 'Description'
                 ))
-                ->add('Valider', 'submit')
+                ->add('Ajouter', 'submit')
         ;
     }
 
