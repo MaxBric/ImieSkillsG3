@@ -95,10 +95,6 @@ class Promo
         return $this->users;
     }
 
-
-
-    
-
     /**
      * Set course
      *
