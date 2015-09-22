@@ -17,15 +17,14 @@
   <div class="collapse navbar-collapse">
     <ul class="nav navbar-nav">
       <li><a href="{{ path('imie_skills_project_index') }}"><span class="glyphicon glyphicon-blackboard"></span> Liste des projets</a></li>
-      {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-      <li><a href="{{ path('imie_skills_user_details', {'id': 1}) }}"><span class="glyphicon glyphicon-user"></span> {{ app.user.username }}</a></li>
-      {% endif %}
+      <li><a href="{{ path('imie_skills_user_details', {'id': 1}) }}"><span class="glyphicon glyphicon-user"></span> Mon profil</a></li>
       <li class="active"><a href="{{ path('imie_skills_panel') }}"><span class="glyphicon glyphicon-wrench"></span> Panneau d'administration</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="{{ path('imie_skills_notification_index') }}"><span class="glyphicon glyphicon-bell"></span></a></li>
       <li><a href="{{ path('imie_skills_search') }}"><span class="glyphicon glyphicon-search"></span> Recherche</a></li>
       <li>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         <a href="{{ path('fos_user_security_logout') }}"><span class="glyphicon glyphicon-log-out"></span> Déconnexion</a>
         {% else %}
         <a href="{{ path('fos_user_security_login') }}"><span class="glyphicon glyphicon-log-in"></span> Connexion</a>

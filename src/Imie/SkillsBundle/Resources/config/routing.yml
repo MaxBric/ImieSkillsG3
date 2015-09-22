@@ -155,6 +155,7 @@ imie_skills_user_addSkill:
     path:    /user/addSkill
     defaults: { _controller: ImieSkillsBundle:User:addSkill }
 
+
 # -------- NOTIFICATION --------
 
 imie_skills_notification_index:
