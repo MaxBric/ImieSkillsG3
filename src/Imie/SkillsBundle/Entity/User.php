@@ -69,6 +69,7 @@ class User extends BaseUser {
      * @ORM\Column(name="userPhoneNumber", type="integer", unique=true)
      * @Assert\NotBlank()
      * @Assert\Length(
+     *      min = "0",
      *      max = "10")
      */
     private $userPhoneNumber;
@@ -465,10 +466,10 @@ class User extends BaseUser {
      * @param \Imie\SkillsBundle\Entity\UserSkill $skills
      * @return User
      */
-    public function addSkill(\Imie\SkillsBundle\Entity\UserSkill $skills)
+    public function addSkill($skill, $level)
     {
-        $this->skills[] = $skills;
-
+        $this->skills[$skill] = $level;
+     
         return $this;
     }
 
@@ -491,4 +492,8 @@ class User extends BaseUser {
     {
         return $this->skills;
     }
+    
+ 
+
+
 }

@@ -56,12 +56,20 @@ class UserController extends Controller {
         if ($form->isValid()) {
             try {
                 $em = $this->getDoctrine()->getManager();
-                $user = $this->get('security.token_storage')->getToken()->getUser();
+                $currentUser = $this->get('security.token_storage')->getToken()->getUser();
+
+                $repo = $em->getRepository('ImieSkillsBundle:User');
+                $user = $repo->getUserById($currentUser->getId());
                 $userSkill->setUserId($user->getId());
                 $userSkill->setSkillId($form->get('skillId')->getData()->getId());
 
+
+
+                $user->addSkill($form->get('skillId')->getData()->getSkillName(), $form->get('level')->getData());
+
                 $em->persist($userSkill);
                 $em->flush();
+
                 return $this->redirect($this->generateUrl('imie_skills_user_addSkill'));
             } catch (\Doctrine\DBAL\DBALException $e) {
                 echo $e->getMessage();
@@ -81,8 +89,8 @@ class UserController extends Controller {
         $currentUser = $this->get('security.token_storage')->getToken()->getUser()->getId();
 
         return $this->render('ImieSkillsBundle:User:details.html.twig', array(
-            'user' => $user,
-            'currentUser' => $currentUser));
+                    'user' => $user,
+                    'currentUser' => $currentUser));
     }
 
     public function modifyAction(Request $req, $id) {

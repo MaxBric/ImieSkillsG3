@@ -22,4 +22,15 @@
 <span>Date de naissance : </span><span>{{ user.userBirthday|date('d/m/Y') }}</span><br/>
 <hr/>
 <span>Description : </span><span>{{ user.userDescription }}</span>
+<hr/>
+    <h3>Compétences</h3>
+    <ul>
+    {#    {% if user.skills %}
+            {% for user in user.skills %}
+                <li>{{ user. }}</li>
+                {% endfor %}
+        {% endif %}#}
+    </ul>
+    <hr/>
+    <h3>Projets en cours</h3>
 {% endblock article %}
