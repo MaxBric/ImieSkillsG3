@@ -57,9 +57,6 @@ class UserController extends Controller {
             try {
                 $em = $this->getDoctrine()->getManager();
                 $user = $this->get('security.token_storage')->getToken()->getUser();
-                var_dump($form);                var_dump($user);
-
-
                 $userSkill->setUserId($user->getId());
                 $userSkill->setSkillId($form->get('skillId')->getData()->getId());
 
