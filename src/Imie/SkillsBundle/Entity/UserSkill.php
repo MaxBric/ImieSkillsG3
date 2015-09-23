@@ -24,7 +24,6 @@ class UserSkill
     /**
      * @var integer
      *
-     * @ORM\Column(name="userId", type="integer")
      * @ORM\ManyToOne(targetEntity="User", inversedBy="skills")
      */
     private $userId;
@@ -32,8 +31,7 @@ class UserSkill
     /**
      * @var integer
      *
-     * @ORM\Column(name="skillId", type="integer")
-     * @ORM\ManyToOne(targetEntity="SKill", inversedBy="users")
+     * @ORM\ManyToOne(targetEntity="Skill", inversedBy="users")
      */
     private $skillId;
 

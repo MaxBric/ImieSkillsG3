@@ -30,7 +30,7 @@ class Promo
 
     /**
      * @ORM\OneToMany(targetEntity="User", mappedBy="promo")
-     * @ORM\Column(nullable=true)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $users;
 

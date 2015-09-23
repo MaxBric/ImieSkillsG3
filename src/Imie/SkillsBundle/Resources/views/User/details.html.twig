@@ -1,13 +1,13 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-<h2><span class="glyphicon glyphicon-user"></span> Détails de l'utilisateur</h2>
-<hr/>
-<a class="btn btn-primary" href="{{ path('imie_skills_user_index') }}"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
-  <a href="{{ path('imie_skills_user_modify', {id: user.id}) }}"><span class="glyphicon glyphicon-cog"></span> Modifier</a>
-  {% if user.id == currentUser %}
-  <a href="{{ path('imie_skills_user_addSkill') }}"><span class="glyphicon glyphicon-cog"></span> Ajouter des compétences</a>
-  {% endif %}
+    <h2><span class="glyphicon glyphicon-user"></span> Détails de l'utilisateur</h2>
+    <hr/>
+    <a class="btn btn-primary" href="{{ path('imie_skills_user_index') }}"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
+    <a href="{{ path('imie_skills_user_modify', {id: user.id}) }}"><span class="glyphicon glyphicon-cog"></span> Modifier</a>
+    {% if user.id == currentUser %}
+        <a href="{{ path('imie_skills_user_addSkill') }}"><span class="glyphicon glyphicon-cog"></span> Ajouter des compétences</a>
+    {% endif %}
     <hr/>
     <span><h3>{{ user.userFirstName }} {{ user.userLastName }}</h3></span>
     <hr/>
@@ -17,4 +17,15 @@
     <span>Date de naissance : </span><span>{{ user.userBirthday|date('d/m/Y') }}</span><br/>
     <hr/>
     <span>Description : </span><span>{{ user.userDescription }}</span>
-    {% endblock article %}
+    <hr/>
+    <h3>Compétences</h3>
+    <ul>
+    {#    {% if user.skills %}
+            {% for user in user.skills %}
+                <li>{{ user. }}</li>
+                {% endfor %}
+        {% endif %}#}
+    </ul>
+    <hr/>
+    <h3>Projets en cours</h3>
+{% endblock article %}
