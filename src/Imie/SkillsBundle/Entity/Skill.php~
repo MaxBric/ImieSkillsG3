@@ -5,8 +5,6 @@ namespace Imie\SkillsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Imie\SkillsBundle\Entity\UserSkill;
-use Imie\SkillsBundle\Entity\User;
 
 /**
  * Skill
@@ -50,7 +48,6 @@ class Skill
     /**
      * @var \UserSkill
      * @ORM\OneToMany(targetEntity="UserSkill", mappedBy="skillId")
-     * @ORM\JoinColumn(name="skillId", referencedColumnName="id")
      */
     private $users;
 
@@ -133,44 +130,4 @@ class Skill
         return $this->skillParentId;
     }
    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add users
-     *
-     * @param \Imie\SkillsBundle\Entity\UserSkill $users
-     * @return Skill
-     */
-    public function addUser(\Imie\SkillsBundle\Entity\UserSkill $users)
-    {
-        $this->users[] = $users;
-
-        return $this;
-    }
-
-    /**
-     * Remove users
-     *
-     * @param \Imie\SkillsBundle\Entity\UserSkill $users
-     */
-    public function removeUser(\Imie\SkillsBundle\Entity\UserSkill $users)
-    {
-        $this->users->removeElement($users);
-    }
-
-    /**
-     * Get users
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getUsers()
-    {
-        return $this->users;
-    }
 }

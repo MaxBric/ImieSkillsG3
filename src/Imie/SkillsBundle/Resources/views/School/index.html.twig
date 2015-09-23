@@ -1,24 +1,27 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-<h2>Liste des ecoles</h2>
-<a href="{{ path('imie_skills_school_add') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter une formation</a>
+<ol class="breadcrumb">
+  <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
+  <li class="active">Liste des écoles</li>
+</ol>
+<h2><span class="glyphicon glyphicon-education"></span> Liste des écoles</h2>
+<hr/>
+<a class="btn btn-primary" href="{{ path('imie_skills_home') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
+<a class="btn btn-primary" href="{{ path('imie_skills_school_add') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter une école</a>
 <hr/>
 <table class="table table-striped">
   <thead>
     <th>Nom</th>
   </thead>
   <tbody>
-
-    {% for schools in school %}
+    {% for school in schools if schools is defined %}
     <tr>
-        <td>{{ schools.promoName }}</td>
-      <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
-      <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
+      <td>{{ school.promoName }}</td>
+      <td><a href="{{ path('imie_skills_school_modify', {id:school.id}) }}"><span class="glyphicon glyphicon-cog"></span></a></td>
+      <td><a href="{{ path('imie_skills_school_delete', {id:school.id}) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
 {% endblock article %}
-
-
