@@ -9,26 +9,27 @@ security:
         ROLE_SUPER_ADMIN:   [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
-        in_memory:
-            memory:
-                users:
-                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+#        in_memory:
+#            memory:
+#                users:
+#                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+#                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+#                    super-admin: { password: superadminpass, roles: [ 'ROLE_SUPER_ADMIN' ] }
  
         main:
             id: fos_user.user_provider.username
 
     firewalls:
-        users:
-            pattern: ^/
-            anonymous: true
-            logout: true
-            form_login:
-                login_path: fos_user_security_login
-                check_path: fos_user_security_check
-            logout:
-                path:       fos_user_security_logout
-                target:     /
+#        users:
+#            pattern: ^/
+#            anonymous: true
+#            logout: true
+#            form_login:
+#                login_path: fos_user_security_login
+#                check_path: fos_user_security_check
+#            logout:
+#                path:       fos_user_security_logout
+#                target:     /
         
         main:
             pattern:        ^/
@@ -52,5 +53,5 @@ security:
             
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/users, roles: ROLE_SUPER_ADMIN }
+        - { path: ^/super-admin, roles: ROLE_SUPER_ADMIN }
         - { path: ^/admin, roles: ROLE_ADMIN }
