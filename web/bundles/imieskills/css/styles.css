@@ -12,6 +12,10 @@ a:hover {
   text-decoration: none;
 }
 
+ul {
+  list-style-type: none;
+}
+
 #imie-skills-home-title, #imie-home-logo {
   text-align: center;
 }

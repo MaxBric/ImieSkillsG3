@@ -121,8 +121,9 @@ class UserController extends Controller {
             }
         }
 
-        return $this->render('ImieSkillsBundle:User:add.html.twig', array(
-                    'form' => $form->createView()
+        return $this->render('ImieSkillsBundle:User:modify.html.twig', array(
+                    'form' => $form->createView(),
+                    'id' => $id
         ));
     }
 
