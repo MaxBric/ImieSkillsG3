@@ -18,7 +18,9 @@
     <ul class="nav navbar-nav">
       <li><a href="{{ path('imie_skills_project_index') }}"><span class="glyphicon glyphicon-blackboard"></span> Liste des projets</a></li>
       <li><a href="{{ path('imie_skills_user_details', {'id': 1}) }}"><span class="glyphicon glyphicon-user"></span> Mon profil</a></li>
+        {% if is_granted("ROLE_ADMIN") %}
       <li class="active"><a href="{{ path('imie_skills_panel') }}"><span class="glyphicon glyphicon-wrench"></span> Panneau d'administration</a></li>
+        {% endif %}
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="{{ path('imie_skills_notification_index') }}"><span class="glyphicon glyphicon-bell"></span></a></li>

@@ -9,10 +9,27 @@ security:
         ROLE_SUPER_ADMIN:   [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
+        in_memory:
+            memory:
+                users:
+                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+ 
         main:
             id: fos_user.user_provider.username
 
     firewalls:
+        users:
+            pattern: ^/
+            anonymous: true
+            logout: true
+            form_login:
+                login_path: fos_user_security_login
+                check_path: fos_user_security_check
+            logout:
+                path:       fos_user_security_logout
+                target:     /
+        
         main:
             pattern:        ^/
             anonymous:      true
@@ -22,16 +39,16 @@ security:
                 check_path: fos_user_security_check
             logout:
                 path:       fos_user_security_logout
-                target:     /platform
+                target:     /
             remember_me:
                 key:        %secret%
         main_login:
-            # Cette expression régulière permet de prendre /login (mais pas /login_check !)
             pattern:   ^/login$
-            anonymous: true # On autorise alors les anonymes sur ce pare-feu
+            anonymous: true 
         main:
             anonymous: ~
-        
+            
+    
             
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
