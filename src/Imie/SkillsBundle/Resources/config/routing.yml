@@ -203,6 +203,21 @@ imie_skills_notification_delete:
     requirements:
         id: \d+
 
+# -------- Level --------
+
+imie_skills_level_index:
+    path:    /level/index
+    defaults: {_controller: ImieSkillsBundle:Level:index }
+
+imie_skills_level_add:
+    path:    /level/add
+    defaults: {_controller: ImieSkillsBundle:Level:add }
+
+imie_skills_level_delete:
+    path:    /level/delete/{id}
+    defaults : {_controller: ImieSkillsBundle:Level:delete }
+    requirements:
+        id: \d+
 
 # -------- MISC. --------
 
