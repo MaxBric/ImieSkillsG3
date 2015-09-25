@@ -31,16 +31,14 @@ class UserController extends Controller {
             try {
                 $em = $this->getDoctrine()->getManager();
                 $user->setUserFullName();
-                $tab = array($form->get('roles')->getData());
+                $isAdmin = array($form->get('isAdmin')->getData());
+                foreach ($isAdmin as $valid) {
+                    if ($valid === true) {
 
-                foreach ($tab as $roles) {
-                    foreach ($roles as $role) {
-                        if ($role === "ROLE_ADMIN") {
-                            $user->setSuperAdmin(true);
-                        }
+                        $user->addRole("ROLE_ADMIN");
+                        $user->setSuperAdmin(true);
                     }
                 }
-
                 $em->persist($user);
                 $em->flush();
                 return $this->redirect($this->generateUrl('imie_skills_user_add'));

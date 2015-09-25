@@ -122,6 +122,12 @@ class User extends BaseUser {
     private $notifications;
 
     /**
+     * @var bool
+     * @ORM\Column(name="is_admin", type="string", length=255)
+     */
+    private $isAdmin;
+
+    /**
      * @var \Promo
      * @ORM\ManyToOne(targetEntity="Promo", inversedBy="users")
      */
@@ -137,6 +143,7 @@ class User extends BaseUser {
 
     public function __construct() {
         parent::__construct();
+        $this->isAdmin = false;
         $this->createdProjects = new ArrayCollection();
         $this->managedProjects = new ArrayCollection();
         $this->joinedProjects = new ArrayCollection();
@@ -260,7 +267,6 @@ class User extends BaseUser {
         return $this->userAddress;
     }
 
-
     /**
      * Set userDescription
      *
@@ -373,7 +379,6 @@ class User extends BaseUser {
         return $this->joinedProjects;
     }
 
-   
     /**
      * Add notifications
      *
@@ -403,8 +408,6 @@ class User extends BaseUser {
     public function getNotifications() {
         return $this->notifications;
     }
-
-   
 
     public function setUserFullName() {
         $this->userFullName = $this->userFirstName . ' ' . $this->userLastName;
@@ -443,8 +446,7 @@ class User extends BaseUser {
      * @param \Imie\SkillsBundle\Entity\Promo $promo
      * @return User
      */
-    public function setPromo(\Imie\SkillsBundle\Entity\Promo $promo = null)
-    {
+    public function setPromo(\Imie\SkillsBundle\Entity\Promo $promo = null) {
         $this->promo = $promo;
 
         return $this;
@@ -455,8 +457,7 @@ class User extends BaseUser {
      *
      * @return \Imie\SkillsBundle\Entity\Promo 
      */
-    public function getPromo()
-    {
+    public function getPromo() {
         return $this->promo;
     }
 
@@ -466,11 +467,10 @@ class User extends BaseUser {
      * @param \Imie\SkillsBundle\Entity\UserSkill $skills
      * @return User
      */
-    public function addSkill($userSkill)
-    {
+    public function addSkill($userSkill) {
         $this->skills[] = $userSkill;
-        
-     
+
+
         return $this;
     }
 
@@ -479,8 +479,7 @@ class User extends BaseUser {
      *
      * @param \Imie\SkillsBundle\Entity\UserSkill $skills
      */
-    public function removeSkill(\Imie\SkillsBundle\Entity\UserSkill $skills)
-    {
+    public function removeSkill(\Imie\SkillsBundle\Entity\UserSkill $skills) {
         $this->skills->removeElement($skills);
     }
 
@@ -489,9 +488,31 @@ class User extends BaseUser {
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getSkills()
-    {
+    public function getSkills() {
         return $this->skills;
     }
-    
+
+
+    /**
+     * Set isAdmin
+     *
+     * @param string $isAdmin
+     * @return User
+     */
+    public function setIsAdmin($isAdmin)
+    {
+        $this->isAdmin = $isAdmin;
+
+        return $this;
+    }
+
+    /**
+     * Get isAdmin
+     *
+     * @return string 
+     */
+    public function getIsAdmin()
+    {
+        return $this->isAdmin;
+    }
 }
