@@ -9,8 +9,8 @@
 <hr/>
 <h2><span class="glyphicon glyphicon-user"></span> Détails de l'utilisateur</h2>
 <a class="btn btn-primary" href="{{ path('imie_skills_user_index') }}"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
-<a class="btn btn-primary" href="{{ path('imie_skills_user_modify', {id:user.id}) }}"><span class="glyphicon glyphicon-cog"></span> Modifier</a>
-{% if user.id == currentUser %}
+{% if user.id == app.user.id %}
+<a class="btn btn-primary" href="{{ path('imie_skills_user_modify', {id:app.user.id}) }}"><span class="glyphicon glyphicon-cog"></span> Modifier</a>
 <a class="btn btn-primary" href="{{ path('imie_skills_user_addSkill') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter une compétence</a>
 {% endif %}
 <hr/>
