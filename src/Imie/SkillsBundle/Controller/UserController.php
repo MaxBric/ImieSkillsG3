@@ -5,8 +5,9 @@ namespace Imie\SkillsBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Imie\SkillsBundle\Entity\User;
+use Imie\SkillsBundle\Entity\UserSkill;
 use Imie\SkillsBundle\Form\UserType;
-use Imie\SkillsBundle\Form\UserModifyType;
+use Imie\SkillsBundle\Form\UserSkillType;
 
 class UserController extends Controller {
 
@@ -18,7 +19,6 @@ class UserController extends Controller {
         return $this->render('ImieSkillsBundle:User:index.html.twig', array('users' => $users));
     }
 
-
     public function addAction(Request $req) {
         $user = new User();
 
@@ -29,8 +29,9 @@ class UserController extends Controller {
         $form->handleRequest($req);
         if ($form->isValid()) {
             try {
-                $user->setUserFullName();
                 $em = $this->getDoctrine()->getManager();
+                $user->setUserFullName();
+
                 $em->persist($user);
                 $em->flush();
                 return $this->redirect($this->generateUrl('imie_skills_user_add'));
@@ -44,20 +45,59 @@ class UserController extends Controller {
         ));
     }
 
+    public function addSkillAction(Request $req) {
+        $userSkill = new UserSkill();
+
+        $form = $this->createForm(new UserSkillType(), $userSkill, array(
+            'action' => $this->generateUrl('imie_skills_user_addSkill')
+        ));
+
+        $form->handleRequest($req);
+        if ($form->isValid()) {
+            try {
+                $em = $this->getDoctrine()->getManager();
+                $currentUser = $this->get('security.token_storage')->getToken()->getUser();
+                
+                $repo = $em->getRepository('ImieSkillsBundle:User');
+                $user = $repo->getUserById($currentUser->getId());
+                $userSkill->setUserId($user->getId());
+                $userSkill->setSkillId($form->get('skillId')->getData()->getId());
+                
+                
+                
+                $user->addSkill($form->get('skillId')->getData()->getSkillName(), $form->get('level')->getData());
+
+                $em->persist($userSkill);
+                $em->flush();
+                
+                return $this->redirect($this->generateUrl('imie_skills_user_addSkill'));
+            } catch (\Doctrine\DBAL\DBALException $e) {
+                echo $e->getMessage();
+            }
+        }
+
+        return $this->render('ImieSkillsBundle:UserSkill:addSkill.html.twig', array(
+                    'form' => $form->createView()
+        ));
+    }
+
     public function detailsAction($id) {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('ImieSkillsBundle:User');
 
         $user = $repo->getUserById($id);
+        $currentUser = $this->get('security.token_storage')->getToken()->getUser()->getId();
 
-        return $this->render('ImieSkillsBundle:User:details.html.twig', array('user' => $user));
+        return $this->render('ImieSkillsBundle:User:details.html.twig', array(
+                    'user' => $user,
+                    'currentUser' => $currentUser));
     }
 
     public function modifyAction(Request $req, $id) {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('ImieSkillsBundle:User');
         $userToModify = $repo->findOneById($id);
-        $form = $this->createForm(new UserModifyType(), $userToModify, array(
+        $form = $this->createForm(new UserType(), $userToModify, array(
             'action' => $this->generateUrl('imie_skills_user_modify', array(
                 'id' => $id
             ))
@@ -65,7 +105,13 @@ class UserController extends Controller {
         $form->handleRequest($req);
         if ($form->isValid()) {
             try {
-                $user->setUserFullName();
+                $userToModify->setUserFullName();
+                $skills = $form->get('skills')->getData();
+
+                foreach ($skills as $skill) {
+                    $userToModify->addSkill($skill);
+                }
+
                 $em->persist($userToModify);
                 $em->flush();
                 $req->getSession()->getFlashBag()->add('success', 'Utilisateur modifié');

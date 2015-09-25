@@ -1,8 +1,13 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
+<ol class="breadcrumb">
+  <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
+  <li class="active">Liste des compétences</li>
+</ol>
 <h2><span class="glyphicon glyphicon-knight"></span> Liste des compétences</h2>
 <hr/>
+<a class="btn btn-primary" href="{{ path('imie_skills_home') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
 <a class="btn btn-primary" href="{{ path('imie_skills_skill_add') }}" role="button"><span class="glyphicon glyphicon-plus"></span> Ajouter une compétence</a>
 <hr/>
 <table class="table table-striped">

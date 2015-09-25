@@ -22,6 +22,7 @@ class ProjectController extends Controller {
 
     public function addAction(Request $req) {
         $project = new Project();
+       
 
         $form = $this->createForm(new ProjectType(), $project, array(
             'action' => $this->generateUrl('imie_skills_project_add')
@@ -36,14 +37,15 @@ class ProjectController extends Controller {
                 foreach ($users as $user) {
                     $user->addJoinedProject($project);
                 }
+                if($project->getImage()){
                 $project->getImage()->setImageAlt($project->getProjectName());
-                var_dump($project);
+                }
                 $em->persist($project);
                 $em->flush();
 
                 $req->getSession()->getFlashBag()->add('success', 'Projet créé !');
 
-//                return $this->redirect($this->generateUrl('imie_skills_project_index'));
+                return $this->redirect($this->generateUrl('imie_skills_project_index'));
             } catch (\Doctrine\DBAL\DBALException $e) {
                 echo $e->getMessage();
             }

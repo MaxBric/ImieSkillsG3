@@ -18,7 +18,7 @@ class StateType extends AbstractType
             ->add('statut', null, array(
                     'label' => 'Etape des projets'
                 ))
-            ->add('Valider', 'submit')
+            ->add('Ajouter', 'submit')
         ;
     }
 

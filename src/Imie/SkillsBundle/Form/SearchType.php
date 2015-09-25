@@ -17,7 +17,7 @@ class SearchType extends AbstractType
     $builder
     ->add('text', null, array(
       'attr' => array(
-      'placeholder' => 'Entrer nom de projet, nom d\'utilisateur ou compétence.'
+      'placeholder' => 'Entrer un nom de projet, un nom d\'utilisateur ou une compétence...'
       ),
       'label' => false)
       )
@@ -25,7 +25,7 @@ class SearchType extends AbstractType
         'choices' => array('Project' => 'Projet', 'User' => 'Utilisateur', 'Skill' => 'Compétence'),
         'multiple' => true
       ))
-      ->add('Add', 'submit')
+      ->add('Ajouter', 'submit')
       ;
     }
 

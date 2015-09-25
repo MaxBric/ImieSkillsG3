@@ -5,6 +5,8 @@ namespace Imie\SkillsBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Imie\SkillsBundle\Entity\Notification;
 use Imie\SkillsBundle\Entity\Promo;
+use Imie\SkillsBundle\Entity\UserSkill;
+use Imie\SkillsBundle\Entity\Skill;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
@@ -67,6 +69,7 @@ class User extends BaseUser {
      * @ORM\Column(name="userPhoneNumber", type="integer", unique=true)
      * @Assert\NotBlank()
      * @Assert\Length(
+     *      min = "0",
      *      max = "10")
      */
     private $userPhoneNumber;
@@ -105,8 +108,10 @@ class User extends BaseUser {
     private $joinedProjects;
 
     /**
-     * @var \Level
-     * @ORM\OneToMany(targetEntity="Level", mappedBy="userId")
+     * @var \UserSkill
+     * @ORM\OneToMany(targetEntity="UserSkill", mappedBy="userId")
+     * @ORM\JoinColumn(name="userId", referencedColumnName="id")
+     *
      */
     private $skills;
 
@@ -118,7 +123,7 @@ class User extends BaseUser {
 
     /**
      * @var \Promo
-     * @ORM\OneToMany(targetEntity="Level", mappedBy="userId")
+     * @ORM\ManyToOne(targetEntity="Promo", inversedBy="users")
      */
     private $promo;
 
@@ -367,36 +372,7 @@ class User extends BaseUser {
         return $this->joinedProjects;
     }
 
-    /**
-     * Add skills
-     *
-     * @param \Imie\SkillsBundle\Entity\Level $skills
-     * @return User
-     */
-    public function addSkill(\Imie\SkillsBundle\Entity\Level $skills) {
-        $this->skills[] = $skills;
-
-        return $this;
-    }
-
-    /**
-     * Remove skills
-     *
-     * @param \Imie\SkillsBundle\Entity\Level $skills
-     */
-    public function removeSkill(\Imie\SkillsBundle\Entity\Level $skills) {
-        $this->skills->removeElement($skills);
-    }
-
-    /**
-     * Get skills
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getSkills() {
-        return $this->skills;
-    }
-
+   
     /**
      * Add notifications
      *
@@ -427,35 +403,7 @@ class User extends BaseUser {
         return $this->notifications;
     }
 
-    /**
-     * Add promo
-     *
-     * @param \Imie\SkillsBundle\Entity\Level $promo
-     * @return User
-     */
-    public function addPromo(\Imie\SkillsBundle\Entity\Level $promo) {
-        $this->promo[] = $promo;
-
-        return $this;
-    }
-
-    /**
-     * Remove promo
-     *
-     * @param \Imie\SkillsBundle\Entity\Level $promo
-     */
-    public function removePromo(\Imie\SkillsBundle\Entity\Level $promo) {
-        $this->promo->removeElement($promo);
-    }
-
-    /**
-     * Get promo
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPromo() {
-        return $this->promo;
-    }
+   
 
     public function setUserFullName() {
         $this->userFullName = $this->userFirstName . ' ' . $this->userLastName;
@@ -488,4 +436,67 @@ class User extends BaseUser {
         return $this->image;
     }
 
+<<<<<<< HEAD
+=======
+
+    /**
+     * Set promo
+     *
+     * @param \Imie\SkillsBundle\Entity\Promo $promo
+     * @return User
+     */
+    public function setPromo(\Imie\SkillsBundle\Entity\Promo $promo = null)
+    {
+        $this->promo = $promo;
+
+        return $this;
+    }
+
+    /**
+     * Get promo
+     *
+     * @return \Imie\SkillsBundle\Entity\Promo 
+     */
+    public function getPromo()
+    {
+        return $this->promo;
+    }
+
+    /**
+     * Add skills
+     *
+     * @param \Imie\SkillsBundle\Entity\UserSkill $skills
+     * @return User
+     */
+    public function addSkill($skill, $level)
+    {
+        $this->skills[$skill] = $level;
+     
+        return $this;
+    }
+
+    /**
+     * Remove skills
+     *
+     * @param \Imie\SkillsBundle\Entity\UserSkill $skills
+     */
+    public function removeSkill(\Imie\SkillsBundle\Entity\UserSkill $skills)
+    {
+        $this->skills->removeElement($skills);
+    }
+
+    /**
+     * Get skills
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSkills()
+    {
+        return $this->skills;
+    }
+    
+ 
+
+
+>>>>>>> 180a37950b1e099305845e2e0565d0784a3df489
 }

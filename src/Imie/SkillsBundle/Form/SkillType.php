@@ -28,7 +28,7 @@ class SkillType extends AbstractType {
                     'required' => false,
                     'label' => 'Domaine de la compétence'
                 ))
-                ->add('Valider', 'submit')
+                ->add('Ajouter', 'submit')
         ;
     }
 

@@ -1,24 +1,28 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-<h2>Recherche</h2>
+<ol class="breadcrumb">
+  <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
+  <li class="active">Recherche</li>
+</ol>
+<h2><span class="glyphicon glyphicon-search"></span> Recherche</h2>
+<hr/>
+<a class="btn btn-primary" href="{{ path('imie_skills_home') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
 <hr/>
 <form method="post" action="{{ path('imie_skills_search') }}" {{ form_enctype(form) }}>
   {{ form(form) }}
 </form>
-  {% if search %}
+{% if search %}
 <table class="table table-striped">
   <thead>
-    <!-- <td></td> -->
     <td>Name</td>
-    <!-- <td>Description</td> -->
   </thead>
   <tbody>
-{% for result in search.results %}
-<tr>
-  <td>{{ result.projectName }}</td>
-</tr>
-{% endfor %}
+    {% for result in search if results is defined %}
+    <tr>
+      <td>{{ result.projectName }}</td>
+    </tr>
+    {% endfor %}
   </tbody>
 </table>
 {% endif %}
