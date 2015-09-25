@@ -57,23 +57,18 @@ class UserController extends Controller {
             try {
                 $em = $this->getDoctrine()->getManager();
                 $repo = $em->getRepository('ImieSkillsBundle:User');
-                
+
                 $currentUser = $this->get('security.token_storage')->getToken()->getUser();
                 $user = $repo->getUserById($currentUser->getId());
-                
-                $userSkill->setUser($user);
-                
-                $userSkill->setSkill($form->get('skill')->getData());
-                
-                $userSkill->setLevel($form->get('level')->getData()->getLevel());
-                
 
+                $userSkill->setUser($user);
+                $userSkill->setSkill($form->get('skill')->getData());
+                $userSkill->setLevel($form->get('level')->getData()->getLevel());
                 $currentUser->addSkill($userSkill);
-                
+
                 $em->persist($userSkill);
                 $em->flush();
-                
-                
+
                 return $this->redirect($this->generateUrl('imie_skills_user_addSkill'));
             } catch (\Doctrine\DBAL\DBALException $e) {
                 echo $e->getMessage();
