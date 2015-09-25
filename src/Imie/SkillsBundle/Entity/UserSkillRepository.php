@@ -12,4 +12,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserSkillRepository extends EntityRepository
 {
+    public function getUserSkillById($id) {
+        return $qb = $this->createQueryBuilder('us')
+                ->where('us.id = :id')
+                ->setParameter('id', $id)
+                ->getQuery()
+                ->getSingleResult();
+    }
 }

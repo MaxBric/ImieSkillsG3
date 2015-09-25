@@ -24,7 +24,7 @@ class UserType extends AbstractType {
                     'format' => "ddMMyyyy",
                     'label' => 'Date de naissance'
                 ))
-                ->add('userPhoneNumber', 'integer', array(
+                ->add('userPhoneNumber', 'text', array(
                     'label' => 'Numéro de téléphone'
                 ))
                 ->add('userAddress', null, array(

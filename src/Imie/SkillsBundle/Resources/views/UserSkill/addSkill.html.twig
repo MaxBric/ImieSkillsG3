@@ -3,7 +3,7 @@
 {% block article %}
 <h2><span class="glyphicon glyphicon-user"></span> Ajout des compétences</h2>
 <hr/>
-<a class="btn btn-primary" href="{{ path('imie_skills_user_index') }}"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
+<a class="btn btn-primary" href="{{ path('imie_skills_user_details', {id: app.user.id}) }}"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
   <hr/>
   <form method="post" action="{{ path('imie_skills_user_addSkill') }}" {{ form_enctype(form) }}>
     {{ form(form) }}
