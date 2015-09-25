@@ -1,30 +1,28 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-    <ol class="breadcrumb">
-        <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
-        <li><a href="{{ path('imie_skills_project_index') }}">Liste des utilisateurs</a></li>
-        <li class="active">Détails de l'utilisateur</li>
-    </ol>
-    <hr/>
-    <h2><span class="glyphicon glyphicon-user"></span> Détails de l'utilisateur</h2>
-    <a class="btn btn-primary" href="{{ path('imie_skills_user_index') }}"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
-    {% if user.id == app.user.id %}
-    <a class="btn btn-primary" href="{{ path('imie_skills_user_modify', {id: user.id}) }}"><span class="glyphicon glyphicon-cog"></span> Modifier</a>
-    {% endif %}
-    {% if user.id == app.user.id %}
-        <a href="{{ path('imie_skills_user_addSkill') }}"><span class="glyphicon glyphicon-cog"></span> Ajouter des compétences</a>
-    {% endif %}
-    <hr/>
-    <span><h3>{{ user.userFirstName }} {{ user.userLastName }}</h3></span>
-    <hr/>
-    <span>Adresse postale : </span><span>{{ user.userAddress }}</span><br/>
-    <span>Email : </span><span>{{ user.Email }}</span><br/>
-    <span>Téléphone : </span><span>{{ user.userPhoneNumber }}</span><br/>
-    <span>Date de naissance : </span><span>{{ user.userBirthday|date('d/m/Y') }}</span><br/>
-    <hr/>
-    <span>Description : </span><span>{{ user.userDescription }}</span>
-    <hr/>
+<ol class="breadcrumb">
+  <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
+  <li><a href="{{ path('imie_skills_user_index') }}">Liste des utilisateurs</a></li>
+  <li class="active">Détails de l'utilisateur</li>
+</ol>
+<hr/>
+<h2><span class="glyphicon glyphicon-user"></span> Détails de l'utilisateur</h2>
+<a class="btn btn-primary" href="{{ path('imie_skills_user_index') }}"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
+<a class="btn btn-primary" href="{{ path('imie_skills_user_modify', {id:user.id}) }}"><span class="glyphicon glyphicon-cog"></span> Modifier</a>
+{% if user.id == currentUser %}
+<a class="btn btn-primary" href="{{ path('imie_skills_user_addSkill') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter une compétence</a>
+{% endif %}
+<hr/>
+<span><h3>{{ user.userFirstName }} {{ user.userLastName }}</h3></span>
+<hr/>
+<span>Adresse postale : </span><span>{{ user.userAddress }}</span><br/>
+<span>Email : </span><span>{{ user.Email }}</span><br/>
+<span>Téléphone : </span><span>{{ user.userPhoneNumber }}</span><br/>
+<span>Date de naissance : </span><span>{{ user.userBirthday|date('d/m/Y') }}</span><br/>
+<hr/>
+<span>Description : </span><span>{{ user.userDescription }}</span>
+<hr/>
     <h3>Compétences</h3>
     {% if user.skills %}
         <ul>

@@ -65,16 +65,11 @@ class UserController extends Controller {
                 $userSkill->setUser($user);
 
                 $userSkill->setSkill($form->get('skill')->getData());
-
                 $userSkill->setLevel($form->get('level')->getData()->getLevel());
-
-
                 $currentUser->addSkill($userSkill);
 
                 $em->persist($userSkill);
                 $em->flush();
-
-
                 return $this->redirect($this->generateUrl('imie_skills_user_addSkill'));
             } catch (\Doctrine\DBAL\DBALException $e) {
                 echo $e->getMessage();
@@ -141,7 +136,7 @@ class UserController extends Controller {
             }
         }
 
-        return $this->render('ImieSkillsBundle:User:update.html.twig', array(
+        return $this->render('ImieSkillsBundle:User:modify.html.twig', array(
                     'form' => $form->createView()
         ));
     }
