@@ -15,24 +15,24 @@ class UserType extends AbstractType {
   public function buildForm(FormBuilderInterface $builder, array $options) {
     $builder
     ->add('userFirstName', null, array(
-                    'label' => 'Prénom'
+                    'label' => 'Prénom :'
     ))
     ->add('userLastName', null, array(
-                    'label' => 'Nom'
+                    'label' => 'Nom :'
     ))
     ->add('userBirthday', 'date', array(
       'format' => "ddMMyyyy",
-                    'label' => 'Date de naissance'
+                    'label' => 'Date de naissance :'
     ))
                 ->add('userPhoneNumber', 'integer', array(
-                    'label' => 'Numéro de téléphone'
+                    'label' => 'Numéro de téléphone :'
     ))
     ->add('userAddress', null, array(
-                    'label' => 'Adresse Postale'
+                    'label' => 'Adresse postale :'
     ))
                 ->add('roles')
-                ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
-                ->add('username', null, array('label' => 'Pseudo', 'translation_domain' => 'FOSUserBundle'))
+                ->add('email', 'email', array('label' => 'Email :', 'translation_domain' => 'FOSUserBundle'))
+                ->add('username', null, array('label' => 'Pseudo :', 'translation_domain' => 'FOSUserBundle'))
     ->add('plainPassword', 'repeated', array(
       'type' => 'password',
       'options' => array('translation_domain' => 'FOSUserBundle'),
@@ -41,9 +41,11 @@ class UserType extends AbstractType {
       'invalid_message' => 'fos_user.password.mismatch',
     ))
     ->add('userDescription', null, array(
-                    'label' => 'Description'
+                    'label' => 'Description :'
     ))
-                ->add('Ajouter', 'submit')
+    ->add('Valider', 'submit', array(
+      'attr' => array('class' => 'btn btn-primary'),
+    ))
     ;
   }
 
@@ -62,5 +64,4 @@ class UserType extends AbstractType {
   public function getName() {
     return 'imie_skillsbundle_user';
   }
-
 }
