@@ -14,7 +14,7 @@ class CourseRepository extends EntityRepository
 {
   public function getCoursesOrderedById() {
     return $this->createQueryBuilder('c')
-    ->orderBy('c.id')
+    ->orderBy('c.school')
     ->getQuery()
     ->getResult();
   }

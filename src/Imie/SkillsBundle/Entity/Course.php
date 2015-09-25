@@ -28,7 +28,7 @@ class Course
      */
     private $course;
     /**
-     * @ORM\OneToMany(targetEntity="Promo", mappedBy="course")
+     * @ORM\OneToMany(targetEntity="Promo", mappedBy="course", cascade={"remove"})
      */
     private $promos;
     /**

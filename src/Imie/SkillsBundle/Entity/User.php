@@ -437,6 +437,8 @@ class User extends BaseUser {
         return $this->image;
     }
 
+<<<<<<< HEAD
+=======
 
     /**
      * Set promo
@@ -498,4 +500,5 @@ class User extends BaseUser {
  
 
 
+>>>>>>> 180a37950b1e099305845e2e0565d0784a3df489
 }

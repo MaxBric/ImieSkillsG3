@@ -30,7 +30,7 @@ class School
     private $schoolName;
     /**
      * @var \Courses
-     * @ORM\OneToMany(targetEntity="Course", mappedBy="school")
+     * @ORM\OneToMany(targetEntity="Course", mappedBy="school", cascade={"remove"})
      */
     private $courses;
 
