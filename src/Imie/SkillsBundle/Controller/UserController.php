@@ -52,6 +52,7 @@ class UserController extends Controller {
         ));
     }
 
+    //assigne skill exist 
     public function addSkillAction(Request $req) {
         $userSkill = new UserSkill();
 
@@ -69,13 +70,13 @@ class UserController extends Controller {
                 $user = $repo->getUserById($currentUser->getId());
 
                 $userSkill->setUser($user);
+
                 $userSkill->setSkill($form->get('skill')->getData());
                 $userSkill->setLevel($form->get('level')->getData()->getLevel());
                 $currentUser->addSkill($userSkill);
 
                 $em->persist($userSkill);
                 $em->flush();
-
                 return $this->redirect($this->generateUrl('imie_skills_user_addSkill'));
             } catch (\Doctrine\DBAL\DBALException $e) {
                 echo $e->getMessage();
@@ -87,16 +88,35 @@ class UserController extends Controller {
         ));
     }
 
+    //delete skill assigned
+    public function deleteSkillAction(Request $req, $id) {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('ImieSkillsBundle:UserSkill');
+        $userSkill = $repo->getUserSkillById($id);
+        $currentUser = $this->get('security.token_storage')->getToken()->getUser()->getId();
+        try {
+
+            $em->remove($userSkill);
+            $em->flush();
+            $req->getSession()->getFlashBag()->add('success', 'Compétence supprimée');
+        } catch (\Doctrine\DBAL\DBALException $e) {
+            $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de la suppression :'
+                    . PHP_EOL . $e->getMessage());
+        }
+        return $this->redirect($this->generateUrl('imie_skills_user_details', array(
+        'id' => $currentUser
+        )));
+    }
+
     public function detailsAction($id) {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('ImieSkillsBundle:User');
 
         $user = $repo->getUserById($id);
-        $currentUser = $this->get('security.token_storage')->getToken()->getUser()->getId();
 
         return $this->render('ImieSkillsBundle:User:details.html.twig', array(
-                    'user' => $user,
-                    'currentUser' => $currentUser));
+                    'user' => $user
+                ));
     }
 
     public function modifyAction(Request $req, $id) {
@@ -112,11 +132,6 @@ class UserController extends Controller {
         if ($form->isValid()) {
             try {
                 $userToModify->setUserFullName();
-                $skills = $form->get('skills')->getData();
-
-                foreach ($skills as $skill) {
-                    $userToModify->addSkill($skill);
-                }
 
                 $em->persist($userToModify);
                 $em->flush();
@@ -129,8 +144,7 @@ class UserController extends Controller {
         }
 
         return $this->render('ImieSkillsBundle:User:modify.html.twig', array(
-                    'form' => $form->createView(),
-                    'id' => $id
+                    'form' => $form->createView()
         ));
     }
 
