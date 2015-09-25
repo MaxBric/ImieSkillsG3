@@ -11,7 +11,7 @@
 <a class="btn btn-primary" href="{{ path('imie_skills_user_index') }}"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
 {% if user.id == app.user.id %}
 <a class="btn btn-primary" href="{{ path('imie_skills_user_modify', {id:app.user.id}) }}"><span class="glyphicon glyphicon-cog"></span> Modifier</a>
-<a class="btn btn-primary" href="{{ path('imie_skills_user_addSkill') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter une compétence</a>
+<a class="btn btn-primary" href="{{ path('imie_skills_user_addSkill') }}"><span class="glyphicon glyphicon-plus"></span> Assigner une compétence</a>
 {% endif %}
 <hr/>
 <span><h3>{{ user.userFirstName }} {{ user.userLastName }}</h3></span>
@@ -23,18 +23,18 @@
 <hr/>
 <span>Description : </span><span>{{ user.userDescription }}</span>
 <hr/>
-    <h3>Compétences</h3>
-    {% if user.skills %}
-        <ul>
-            {% for tabSkill in user.skills %}
-                <li>{{ tabSkill.skill.skillName }} {{ tabSkill.level }}
-                    {% if user.id == app.user.id %}
-                        <a href="{{ path('imie_skills_user_deleteSkill', {id: tabSkill.id}) }}"><span class="glyphicon glyphicon-trash"></span></a>
-                        {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
+<h3>Compétences</h3>
+{% if user.skills %}
+<ul>
+  {% for tabSkill in user.skills %}
+  <li>{{ tabSkill.skill.skillName }} {{ tabSkill.level }}
+    {% if user.id == app.user.id %}
+    <a href="{{ path('imie_skills_user_deleteSkill', {id: tabSkill.id}) }}"><span class="glyphicon glyphicon-trash"></span></a>
     {% endif %}
-    <hr/>
-    <h3>Projets en cours</h3>
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+<hr/>
+<h3>Projets en cours</h3>
 {% endblock article %}
