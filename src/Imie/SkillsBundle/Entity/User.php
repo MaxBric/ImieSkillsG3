@@ -123,12 +123,6 @@ class User extends BaseUser {
     private $promo;
 
     /**
-     * @var \Rank
-     * @ORM\OneToMany(targetEntity="Rank", mappedBy="users")
-     */
-    private $rank;
-
-    /**
      * @var string
      *
      * @ORM\OneToOne(targetEntity="Image", cascade={"persist", "remove"})
@@ -492,36 +486,6 @@ class User extends BaseUser {
      */
     public function getImage() {
         return $this->image;
-    }
-
-    /**
-     * Add rank
-     *
-     * @param \Imie\SkillsBundle\Entity\Rank $rank
-     * @return User
-     */
-    public function addRank(\Imie\SkillsBundle\Entity\Rank $rank) {
-        $this->rank[] = $rank;
-
-        return $this;
-    }
-
-    /**
-     * Remove rank
-     *
-     * @param \Imie\SkillsBundle\Entity\Rank $rank
-     */
-    public function removeRank(\Imie\SkillsBundle\Entity\Rank $rank) {
-        $this->rank->removeElement($rank);
-    }
-
-    /**
-     * Get rank
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getRank() {
-        return $this->rank;
     }
 
 }

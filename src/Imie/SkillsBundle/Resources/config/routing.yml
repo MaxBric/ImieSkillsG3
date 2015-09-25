@@ -9,14 +9,21 @@ imie_skills_school_index:
     path:    /school/index
     defaults : {_controller: ImieSkillsBundle:School:index }
 
+imie_skills_school_modify:
+    path:    /school/modify/{id}
+    defaults: { _controller: ImieSkillsBundle:School:modify }
+    requirements:
+        id: \d+
+
 imie_skills_school_add:
     path:    /school/add
     defaults : {_controller: ImieSkillsBundle:School:add }
 
 imie_skills_school_delete:
-    path:    /school/delete
+    path:    /school/delete/{id}
     defaults : {_controller: ImieSkillsBundle:School:delete }
-
+    requirements:
+        id:  \d+
 
 # -------- COURSE --------
 
@@ -28,9 +35,17 @@ imie_skills_course_add:
     path:    /course/add
     defaults : {_controller: ImieSkillsBundle:Course:add }
 
+imie_skills_course_modify:
+    path:    /course/modify/{id}
+    defaults: { _controller: ImieSkillsBundle:Course:modify }
+    requirements:
+        id: \d+
+
 imie_skills_course_delete:
-    path:    /course/delete
+    path:    /course/delete/{id}
     defaults : {_controller: ImieSkillsBundle:Course:delete }
+    requirements:
+        id: \d+
 
 
 # -------- PROMO --------
@@ -43,10 +58,17 @@ imie_skills_promo_add:
     path:    /promo/add
     defaults : {_controller: ImieSkillsBundle:Promo:add }
 
+imie_skills_promo_modify:
+    path:    /promo/modify/{id}
+    defaults: { _controller: ImieSkillsBundle:Promo:modify }
+    requirements:
+        id: \d+
+
 imie_skills_promo_delete:
     path:    /promo/delete
     defaults : {_controller: ImieSkillsBundle:Promo:delete }
-
+    requirements:
+        id: \d+
 
 # -------- PROJECT --------
 

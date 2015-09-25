@@ -19,16 +19,16 @@ class CourseType extends AbstractType
     {
         $builder
             ->add('course')
-            ->add('promos', 'entity', array(
-                'class' => 'ImieSkillsBundle:Promo',
-                'choice_label' => 'promoName',
-                'multiple' => true
-            ))
+//            ->add('promos', 'entity', array(
+//                'class' => 'ImieSkillsBundle:Promo',
+//                'choice_label' => 'promoName',
+//                'multiple' => true
+//            ))
             ->add('school', 'entity', array(
                 'class' => 'ImieSkillsBundle:School',
                 'choice_label' => 'schoolName'
             ))
-            ->add('Ajouter','submit')
+            ->add('Valider','submit')
         ;
     }
 

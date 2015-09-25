@@ -14,9 +14,14 @@ class CourseController extends Controller
             ->getManager()
             ->getRepository('ImieSkillsBundle:Course')
             ->getCoursesOrderedById();
+//        $schools = $this->getDoctrine()
+//            ->getManager()
+//            ->getRepository('ImieSkillsBundle:Course')
+//            ->getSchoolsOrderedById();
 
         return $this->render('ImieSkillsBundle:Course:index.html.twig', array(
-            'courses' => $courses
+            'courses' => $courses,
+//            'schools' => $schools
         ));
 
     }
@@ -45,5 +50,55 @@ class CourseController extends Controller
         return $this->render('ImieSkillsBundle:Course:add.html.twig', array(
             'form' => $form->createView()
         ));
+    }
+
+    public function modifyAction(Request $req, $id) {
+
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('ImieSkillsBundle:Course');
+        $courseToModify = $repo->findOneById($id);
+        $form = $this->createForm(new CourseType(), $courseToModify, array(
+            'action' => $this->generateUrl('imie_skills_course_modify', array(
+                'id' => $id
+            ))
+        ));
+
+        $form->handleRequest($req);
+
+        if ($form->isValid()) {
+            try {
+                $em->flush();
+                $req->getSession()->getFlashBag()->add('success', 'course modifié');
+                return $this->redirect($this->generateUrl('imie_skills_course_index'));
+            } catch (\Doctrine\DBAL\DBALException $e) {
+                $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de la suppression :'
+                    . PHP_EOL . $e->getMessage());
+            }
+        }
+
+        return $this->render('ImieSkillsBundle:course:update.html.twig', array(
+            'form' => $form->createView(),
+            'id' => $id
+        ));
+    }
+
+    public function deleteAction(Request $req, $id) {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $repo = $em->getRepository('ImieSkillsBundle:Course');
+
+        $course = $repo->findOneById($id);
+        try {
+            $em->remove($course);
+            $em->flush();
+
+            $req->getSession()->getFlashBag()->add('success', 'Course supprimé');
+        } catch (\Doctrine\DBAL\DBALException $e) {
+            $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de la suppression :'
+                . PHP_EOL . $e->getMessage());
+        }
+
+        return $this->redirect($this->generateUrl('imie_skills_course_index'));
     }
 }
