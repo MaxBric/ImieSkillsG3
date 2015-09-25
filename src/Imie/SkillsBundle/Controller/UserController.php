@@ -31,6 +31,15 @@ class UserController extends Controller {
             try {
                 $em = $this->getDoctrine()->getManager();
                 $user->setUserFullName();
+                $tab = array($form->get('roles')->getData());
+
+                foreach ($tab as $roles) {
+                    foreach ($roles as $role) {
+                        if ($role === "ROLE_ADMIN") {
+                            $user->setSuperAdmin(true);
+                        }
+                    }
+                }
 
                 $em->persist($user);
                 $em->flush();

@@ -30,6 +30,7 @@ class UserType extends AbstractType {
                 ->add('userAddress', null, array(
                     'label' => 'Adresse Postale'
                 ))
+                ->add('roles')
                 ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
                 ->add('username', null, array('label' => 'Pseudo', 'translation_domain' => 'FOSUserBundle'))
                 ->add('plainPassword', 'repeated', array(
