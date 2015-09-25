@@ -1,0 +1,16 @@
+{% extends 'ImieSkillsBundle::layout.html.twig' %}
+
+{% block article %}
+<ol class="breadcrumb">
+  <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
+  <li><a href="{{ path('imie_skills_level_index') }}">Liste des niveaux</a></li>
+  <li class="active">Ajout d'une compétence</li>
+</ol>
+<h2><span class="glyphicon glyphicon-knight"></span> Ajout d'un niveau</h2>
+<hr/>
+<a class="btn btn-primary" href="{{ path('imie_skills_level_index') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
+<hr/>
+<form method="post" action="{{ path('imie_skills_level_add') }}" {{ form_enctype(form) }}>
+  {{ form(form) }}
+</form>
+{% endblock article %}

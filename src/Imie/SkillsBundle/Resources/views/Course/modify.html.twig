@@ -5,7 +5,7 @@
     <hr/>
     <a class="btn btn-primary" href="{{ path('imie_skills_course_index') }}"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
     <hr/>
-    <form method="post" action="{{ path('imie_skills_course_modify', {id: id}) }}" {{ form_enctype(form) }}>
+    <form method="post" action="{{ path('imie_skills_course_modify', {id:id}) }}" {{ form_enctype(form) }}>
         {{ form(form) }}
     </form>
 {% endblock article %}

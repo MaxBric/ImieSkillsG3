@@ -18,7 +18,7 @@
     <td>Name</td>
   </thead>
   <tbody>
-    {% for result in search if results is defined %}
+    {% for result in search if search is defined %}
     <tr>
       <td>{{ result.projectName }}</td>
     </tr>
