@@ -17,13 +17,13 @@ class SchoolType extends AbstractType
     {
         $builder
             ->add('schoolName')
-            ->add('courses', 'entity', array(
-                'class' => 'ImieSkillsBundle:Course',
-                'choice_label' => 'course',
-                'multiple' =>true,
-                'required'=>false
-            ))
-            ->add('Ajouter','submit')
+//            ->add('courses', 'entity', array(
+//                'class' => 'ImieSkillsBundle:Course',
+//                'choice_label' => 'course',
+//                'multiple' =>true,
+//                'required'=>false
+//            ))
+            ->add('Valider','submit')
         ;
     }
 

@@ -26,14 +26,14 @@ class UserSkill
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="skills")
      */
-    private $userId;
+    private $user;
 
     /**
      * @var integer
      *
      * @ORM\ManyToOne(targetEntity="Skill", inversedBy="users")
      */
-    private $skillId;
+    private $skill;
 
     /**
      * @var integer
@@ -53,52 +53,7 @@ class UserSkill
         return $this->id;
     }
 
-    /**
-     * Set userId
-     *
-     * @param integer $userId
-     * @return UserSkill
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Get userId
-     *
-     * @return integer 
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
-    /**
-     * Set skillId
-     *
-     * @param integer $skillId
-     * @return UserSkill
-     */
-    public function setSkillId($skillId)
-    {
-        $this->skillId = $skillId;
-
-        return $this;
-    }
-
-    /**
-     * Get skillId
-     *
-     * @return integer 
-     */
-    public function getSkillId()
-    {
-        return $this->skillId;
-    }
-
+   
     /**
      * Set level
      *
@@ -120,5 +75,51 @@ class UserSkill
     public function getLevel()
     {
         return $this->level;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Imie\SkillsBundle\Entity\User $user
+     * @return UserSkill
+     */
+    public function setUser(\Imie\SkillsBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Imie\SkillsBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set skill
+     *
+     * @param \Imie\SkillsBundle\Entity\Skill $skill
+     * @return UserSkill
+     */
+    public function setSkill(\Imie\SkillsBundle\Entity\Skill $skill = null)
+    {
+        $this->skill = $skill;
+
+        return $this;
+    }
+
+    /**
+     * Get skill
+     *
+     * @return \Imie\SkillsBundle\Entity\Skill 
+     */
+    public function getSkill()
+    {
+        return $this->skill;
     }
 }

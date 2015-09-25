@@ -14,16 +14,16 @@ class UserSkillType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-                ->add('skillId', 'entity', array(
+                ->add('skill', 'entity', array(
                     'class' => 'ImieSkillsBundle:Skill',
                     'choice_label' => 'skillName',
                     'label' => 'Compétence'
                 ))
-                ->add('level', 'number', array(
-                    'attr' => array(
-                        'min' => 0,
-                        'max' => 5
-                    )
+                ->add('level', 'entity', array(
+                    'class' => 'ImieSkillsBundle:Level',
+                    'choice_label' => 'level',
+                    'choice_value' => 'id',
+                    'label' => 'Niveau'
                 ))
                 ->add('Valider', 'submit')
         ;

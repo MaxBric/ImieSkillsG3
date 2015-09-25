@@ -13,25 +13,17 @@
 <table class="table table-striped">
   <thead>
     <th>Nom</th>
-    <th>Adresse</th>
     <th>Mail</th>
-    <th>Téléphone</th>
-    <th>Anniversaire</th>
-    <th>Description</th>
     <th>Compétences</th>
   </thead>
   <tbody>
     {% for user in users if users is defined %}
     <tr>
       <td><a href="{{ path('imie_skills_user_details', {id:user.id})}}">{{ user.userFullName }}</a></td>
-      <td>{{ user.userAddress }}</td>
       <td>{{ user.Email }}</td>
-      <td>{{ user.userPhoneNumber }}</td>
-      <td>{{ user.userBirthday|date('d/m/Y') }}</td>
-      <td>{{ user.userDescription }}</td>
       <td>{% if user.skills %}<ul>
-        {% for skill in user.skills %}
-        <li>{{ skill.skillName }}</li>
+        {% for tabSkill in user.skills %}
+        <li>{{ tabSkill.skill.skillName }}</li>
         {% endfor %}
       </ul>{% endif %}</td>
       <td><a href="{{ path('imie_skills_user_modify', {id:user.id}) }}"><span class="glyphicon glyphicon-cog"></span></a></td>

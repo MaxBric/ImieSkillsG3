@@ -109,8 +109,8 @@ class User extends BaseUser {
 
     /**
      * @var \UserSkill
-     * @ORM\OneToMany(targetEntity="UserSkill", mappedBy="userId")
-     * @ORM\JoinColumn(name="userId", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="UserSkill", mappedBy="user")
+     * @ORM\JoinColumn(name="skill", referencedColumnName="id")
      *
      */
     private $skills;
@@ -142,6 +142,7 @@ class User extends BaseUser {
         $this->joinedProjects = new ArrayCollection();
         $this->notifications = new ArrayCollection();
         $this->userBirthday = new \DateTime('now');
+        $this->enabled = true;
     }
 
     /**
@@ -436,7 +437,6 @@ class User extends BaseUser {
         return $this->image;
     }
 
-
     /**
      * Set promo
      *
@@ -466,9 +466,10 @@ class User extends BaseUser {
      * @param \Imie\SkillsBundle\Entity\UserSkill $skills
      * @return User
      */
-    public function addSkill($skill, $level)
+    public function addSkill($userSkill)
     {
-        $this->skills[$skill] = $level;
+        $this->skills[] = $userSkill;
+        
      
         return $this;
     }
@@ -493,7 +494,4 @@ class User extends BaseUser {
         return $this->skills;
     }
     
- 
-
-
 }

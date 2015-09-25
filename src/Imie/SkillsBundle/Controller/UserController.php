@@ -56,16 +56,15 @@ class UserController extends Controller {
         if ($form->isValid()) {
             try {
                 $em = $this->getDoctrine()->getManager();
-                $currentUser = $this->get('security.token_storage')->getToken()->getUser();
-
                 $repo = $em->getRepository('ImieSkillsBundle:User');
+
+                $currentUser = $this->get('security.token_storage')->getToken()->getUser();
                 $user = $repo->getUserById($currentUser->getId());
-                $userSkill->setUserId($user->getId());
-                $userSkill->setSkillId($form->get('skillId')->getData()->getId());
 
-
-
-                $user->addSkill($form->get('skillId')->getData()->getSkillName(), $form->get('level')->getData());
+                $userSkill->setUser($user);
+                $userSkill->setSkill($form->get('skill')->getData());
+                $userSkill->setLevel($form->get('level')->getData()->getLevel());
+                $currentUser->addSkill($userSkill);
 
                 $em->persist($userSkill);
                 $em->flush();

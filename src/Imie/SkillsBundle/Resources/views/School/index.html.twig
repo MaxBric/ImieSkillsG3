@@ -17,9 +17,9 @@
   <tbody>
     {% for school in schools if schools is defined %}
     <tr>
-      <td>{{ school.promoName }}</td>
-      <td><a href="{{ path('imie_skills_school_modify', {id:school.id}) }}"><span class="glyphicon glyphicon-cog"></span></a></td>
-      <td><a href="{{ path('imie_skills_school_delete', {id:school.id}) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
+        <td>{{ schools.schoolName }}</td>
+      <td><a href="{{ path('imie_skills_school_modify', {id:schools.id}) }}"><span class="glyphicon glyphicon-cog"></span></a></td>
+      <td><a href="{{ path('imie_skills_school_delete', {id:schools.id}) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
     </tr>
     {% endfor %}
   </tbody>
