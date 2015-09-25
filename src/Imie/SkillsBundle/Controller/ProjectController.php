@@ -1,5 +1,4 @@
 <?php
-
 namespace Imie\SkillsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -25,8 +24,7 @@ class ProjectController extends Controller {
        
 
         $form = $this->createForm(new ProjectType(), $project, array(
-            'action' => $this->generateUrl('imie_skills_project_add')
-        ));
+            'action' => $this->generateUrl('imie_skills_project_add')));
 
         $form->handleRequest($req);
         if ($form->isValid()) {
@@ -47,7 +45,7 @@ class ProjectController extends Controller {
 
                 return $this->redirect($this->generateUrl('imie_skills_project_index'));
             } catch (\Doctrine\DBAL\DBALException $e) {
-                echo $e->getMessage();
+               echo $e->getMessage();
             }
         }
         return $this->render('ImieSkillsBundle:Project:add.html.twig', array(

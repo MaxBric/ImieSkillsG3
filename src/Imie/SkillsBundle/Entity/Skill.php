@@ -49,8 +49,8 @@ class Skill
     
     /**
      * @var \UserSkill
-     * @ORM\OneToMany(targetEntity="UserSkill", mappedBy="skillId")
-     * @ORM\JoinColumn(name="skillId", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="UserSkill", mappedBy="skill")
+     * @ORM\JoinColumn(name="user", referencedColumnName="id")
      */
     private $users;
 
