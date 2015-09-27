@@ -43,13 +43,10 @@ class UserType extends AbstractType {
                 ->add('userDescription', null, array(
                     'label' => 'Description :'
                 ))
-                ->add('image', new ImageType(), array(
-                    'required' => false,
-                    'label' => 'Image :'
+                ->add('isAdmin', 'checkbox', array(
+                    'label' => 'Rendre Administrateur'
                 ))
-                ->add('Valider', 'submit', array(
-                    'attr' => array('class' => 'btn btn-primary'),
-                ))
+                ->add('Valider', 'submit')
         ;
     }
 
