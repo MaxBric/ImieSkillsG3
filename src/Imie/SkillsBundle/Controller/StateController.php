@@ -6,10 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Imie\SkillsBundle\Entity\State;
 use Imie\SkillsBundle\Form\StateType;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class StateController extends Controller {
 
     public function indexAction() {
+        if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException();
+        }
         $states = $this->getDoctrine()
                 ->getManager()
                 ->getRepository('ImieSkillsBundle:State')
@@ -21,6 +25,9 @@ class StateController extends Controller {
     }
 
     public function addAction(Request $req) {
+        if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException();
+        }
         $state = new State();
         $form = $this->createForm(new StateType(), $state, array(
             'action' => $this->generateUrl('imie_skills_state_add')
@@ -47,6 +54,9 @@ class StateController extends Controller {
     }
 
     public function detailsAction($id) {
+        if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException();
+        }
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('ImieSkillsBundle:STate');
 
@@ -56,6 +66,9 @@ class StateController extends Controller {
     }
 
     public function modifyAction(Request $req, $id) {
+        if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException();
+        }
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('ImieSkillsBundle:State');
         $stateToModify = $repo->findOneById($id);
@@ -84,6 +97,9 @@ class StateController extends Controller {
     }
 
     public function deleteAction(Request $req, $id) {
+        if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException();
+        }
         $em = $this->getDoctrine()->getManager();
 
         $repo = $em->getRepository('ImieSkillsBundle:State');

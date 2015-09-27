@@ -8,11 +8,14 @@ use Imie\SkillsBundle\Entity\User;
 use Imie\SkillsBundle\Entity\UserSkill;
 use Imie\SkillsBundle\Form\UserType;
 use Imie\SkillsBundle\Form\UserSkillType;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class UserController extends Controller {
 
     public function indexAction() {
-
+        if (false === $this->get('security.context')->isGranted('ROLE_USER')) {
+            throw new AccessDeniedException();
+        }
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('ImieSkillsBundle:User');
         $users = $repo->getUsersOrderedById();
@@ -20,6 +23,9 @@ class UserController extends Controller {
     }
 
     public function addAction(Request $req) {
+        if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException();
+        }
         $user = new User();
 
         $form = $this->createForm(new UserType(), $user, array(
@@ -40,6 +46,9 @@ class UserController extends Controller {
                         }
                     }
                 }
+                if ($user->getImage()) {
+                    $user->getImage()->setImageAlt($user->getUserFullName());
+                }
 
                 $em->persist($user);
                 $em->flush();
@@ -56,6 +65,9 @@ class UserController extends Controller {
 
     //assigne skill exist 
     public function addSkillAction(Request $req) {
+        if (false === $this->get('security.context')->isGranted('ROLE_USER')) {
+            throw new AccessDeniedException();
+        }
         $userSkill = new UserSkill();
 
         $form = $this->createForm(new UserSkillType(), $userSkill, array(
@@ -90,8 +102,52 @@ class UserController extends Controller {
         ));
     }
 
+    //update skill assigned
+    public function modifySkillAction(Request $req, $id) {
+        if ($id != $this->get('security.token_storage')->getToken()->getUser()->getId()) {
+            if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+                throw new AccessDeniedException();
+            }
+        }
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('ImieSkillsBundle:UserSkill');
+        $currentUser = $this->get('security.token_storage')->getToken()->getUser()->getId();
+        $userSkillToModify = $repo->findOneById($id);
+        $form = $this->createForm(new UserSkillType(), $userSkillToModify, array(
+            'action' => $this->generateUrl('imie_skills_user_modifySkill', array(
+                'id' => $id
+            ))
+        ));
+        $form->handleRequest($req);
+        if ($form->isValid()) {
+            try {
+                $userSkillToModify->setSkill($form->get('skill')->getData());
+                $userSkillToModify->setLevel($form->get('level')->getData()->getLevel());
+
+                $em->persist($userSkillToModify);
+                $em->flush();
+                $req->getSession()->getFlashBag()->add('success', 'Utilisateur modifié');
+                return $this->redirect($this->generateUrl('imie_skills_user_details', array(
+                                    'id' => $currentUser
+                )));
+            } catch (\Doctrine\DBAL\DBALException $e) {
+                $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de l\'ajout :'
+                        . PHP_EOL . $e->getMessage());
+            }
+        }
+        return $this->render('ImieSkillsBundle:UserSkill:modifySkill.html.twig', array(
+                    'form' => $form->createView(),
+                    'id' => $id
+        ));
+    }
+
     //delete skill assigned
     public function deleteSkillAction(Request $req, $id) {
+        if ($id != $this->get('security.token_storage')->getToken()->getUser()->getId()) {
+            if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+                throw new AccessDeniedException();
+            }
+        }
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('ImieSkillsBundle:UserSkill');
         $userSkill = $repo->getUserSkillById($id);
@@ -106,11 +162,14 @@ class UserController extends Controller {
                     . PHP_EOL . $e->getMessage());
         }
         return $this->redirect($this->generateUrl('imie_skills_user_details', array(
-        'id' => $currentUser
+                            'id' => $currentUser
         )));
     }
 
     public function detailsAction($id) {
+        if (false === $this->get('security.context')->isGranted('ROLE_USER')) {
+            throw new AccessDeniedException();
+        }
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('ImieSkillsBundle:User');
 
@@ -118,10 +177,16 @@ class UserController extends Controller {
 
         return $this->render('ImieSkillsBundle:User:details.html.twig', array(
                     'user' => $user
-                ));
+        ));
     }
 
     public function modifyAction(Request $req, $id) {
+
+        if ($id != $this->get('security.token_storage')->getToken()->getUser()->getId()) {
+            if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+                throw new AccessDeniedException();
+            }
+        }
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('ImieSkillsBundle:User');
         $userToModify = $repo->findOneById($id);
@@ -151,6 +216,9 @@ class UserController extends Controller {
     }
 
     public function deleteAction(Request $req, $id) {
+        if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException();
+        }
         $em = $this->getDoctrine()->getManager();
         $userRepo = $em->getRepository('ImieSkillsBundle:User');
         $userToDelete = $userRepo->getUserById($id);

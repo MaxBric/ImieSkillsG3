@@ -176,7 +176,13 @@ imie_skills_user_delete:
 imie_skills_user_addSkill:
     path:    /user/addSkill
     defaults: { _controller: ImieSkillsBundle:User:addSkill }
-    
+
+imie_skills_user_modifySkill:
+    path:    /user/modifySkill/{id}
+    defaults: { _controller: ImieSkillsBundle:User:modifySkill }
+    requirements:
+        id: \d+
+
 imie_skills_user_deleteSkill:
     path:    /user/deleteSkill/{id}
     defaults: { _controller: ImieSkillsBundle:User:deleteSkill }

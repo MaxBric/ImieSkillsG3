@@ -5,10 +5,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Imie\SkillsBundle\Entity\Project;
 use Imie\SkillsBundle\Form\ProjectType;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ProjectController extends Controller {
 
     public function indexAction() {
+        if (false === $this->get('security.context')->isGranted('ROLE_USER')) {
+            throw new AccessDeniedException();
+        }
         $projects = $this->getDoctrine()
                 ->getManager()
                 ->getRepository('ImieSkillsBundle:Project')
@@ -20,6 +24,9 @@ class ProjectController extends Controller {
     }
 
     public function addAction(Request $req) {
+        if (false === $this->get('security.context')->isGranted('ROLE_USER')) {
+            throw new AccessDeniedException();
+        }
         $project = new Project();
        
 
@@ -31,13 +38,19 @@ class ProjectController extends Controller {
             try {
                 $em = $this->getDoctrine()->getManager();
                 $users = $form->get('users')->getData();
-
+                
+                $currentUser = $this->get('security.token_storage')->getToken()->getUser();
+                
+                $project->setCreator($currentUser);
+                
                 foreach ($users as $user) {
                     $user->addJoinedProject($project);
                 }
+                
                 if($project->getImage()){
                 $project->getImage()->setImageAlt($project->getProjectName());
                 }
+                
                 $em->persist($project);
                 $em->flush();
 
@@ -54,6 +67,9 @@ class ProjectController extends Controller {
     }
 
     public function detailsAction($id) {
+        if (false === $this->get('security.context')->isGranted('ROLE_USER')) {
+            throw new AccessDeniedException();
+        }
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('ImieSkillsBundle:Project');
 
@@ -63,6 +79,11 @@ class ProjectController extends Controller {
     }
 
     public function modifyAction(Request $req, $id) {
+        if ($id != $this->get('security.token_storage')->getToken()->getUser()->getId()) {
+            if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+                throw new AccessDeniedException();
+            }
+        }
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('ImieSkillsBundle:Project');
         $projectToModify = $repo->findOneById($id);
@@ -84,13 +105,18 @@ class ProjectController extends Controller {
             }
         }
 
-        return $this->render('ImieSkillsBundle:Project:update.html.twig', array(
+        return $this->render('ImieSkillsBundle:Project:modify.html.twig', array(
                     'form' => $form->createView(),
                     'id' => $id
         ));
     }
 
     public function deleteAction(Request $req, $id) {
+        if ($id != $this->get('security.token_storage')->getToken()->getUser()->getId()) {
+            if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+                throw new AccessDeniedException();
+            }
+        }
         $em = $this->getDoctrine()->getManager();
 
         $repo = $em->getRepository('ImieSkillsBundle:Project');
