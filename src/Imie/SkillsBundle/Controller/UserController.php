@@ -62,7 +62,7 @@ class UserController extends Controller {
         ));
     }
 
-    //assigne skill exist 
+    //assigne skill exist
     public function addSkillAction(Request $req) {
         if (false === $this->get('security.context')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException();

@@ -9,15 +9,22 @@ security:
         ROLE_SUPER_ADMIN:   [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
-
+        chain_provider:
+            chain:
+                providers: [in_memory, main]
+        in_memory:
+            memory:
+                users:
+                    admin: {password: adminPass, roles: [ROLE_ADMIN]}
         main:
             id: fos_user.user_provider.username
 
     firewalls:
+          
         main:
             pattern:        ^/
             anonymous:      true
-            provider:       main
+            provider:       chain_provider
             form_login:
                 login_path: fos_user_security_login
                 check_path: fos_user_security_check
@@ -31,6 +38,8 @@ security:
             anonymous: true 
         main:
             anonymous: ~
+            
+      
             
     
             

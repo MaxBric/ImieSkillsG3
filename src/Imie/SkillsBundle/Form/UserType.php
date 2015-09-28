@@ -36,8 +36,8 @@ class UserType extends AbstractType {
                 ->add('plainPassword', 'repeated', array(
                     'type' => 'password',
                     'options' => array('translation_domain' => 'FOSUserBundle'),
-                    'first_options' => array('label' => 'Mot de passe'),
-                    'second_options' => array('label' => 'Confirmer mot de passe'),
+                    'first_options' => array('label' => 'Mot de passe :'),
+                    'second_options' => array('label' => 'Confirmer mot de passe :'),
                     'invalid_message' => 'fos_user.password.mismatch',
                 ))
                 ->add('userDescription', null, array(
@@ -51,7 +51,13 @@ class UserType extends AbstractType {
                     'required' => false,
                     'label' => 'Image :'
                 ))
-                ->add('Valider', 'submit')
+                ->add('image', new ImageType(), array(
+                    'required' => false,
+                    'label' => 'Image :'
+                ))
+                ->add('Valider', 'submit', array(
+                    'attr' => array('class' => 'btn btn-primary'),
+                ))
         ;
     }
 

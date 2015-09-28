@@ -18,7 +18,11 @@
             <ul class="nav navbar-nav">
                 <li><a href="{{ path('imie_skills_project_index') }}"><span class="glyphicon glyphicon-blackboard"></span> Liste des projets</a></li>
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                    <li><a href="{{ path('imie_skills_user_details', {'id': app.user.id}) }}"><span class="glyphicon glyphicon-user"></span> Mon profil</a></li>
+                    {#ajouter admin#}
+                        {%if app.user.id is defined%}
+                        <li><a href="{{ path('imie_skills_user_details', {'id': app.user.id}) }}"><span class="glyphicon glyphicon-user"></span> Mon profil</a></li>
+                        {%endif%}
+                    {#fin ajouter admin#}
                     {%endif%}
                     {% if is_granted("ROLE_ADMIN") %}
                     <li class="active"><a href="{{ path('imie_skills_panel') }}"><span class="glyphicon glyphicon-wrench"></span> Panneau d'administration</a></li>

@@ -22,7 +22,15 @@ class UserRepository extends EntityRepository {
     public function getUsersByNames($name) {
         return $this->createQueryBuilder('u')
                         ->where('u.userFullName LIKE :name')
-                        ->setParameter('name', $name)
+                        ->setParameter('name', '%'.$name.'%')
+                        ->getQuery()
+                        ->getResult();
+    }
+
+    public function getUsersBySkill($skill) {
+        return $this->createQueryBuilder('u')
+                        ->where('u.skills.skillName LIKE :skill')
+                        ->setParameter('skill', '%'.$skill.'%')
                         ->getQuery()
                         ->getResult();
     }

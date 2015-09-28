@@ -127,13 +127,15 @@ class Project {
     protected $image;
     
     /**
+     * @var \Notification
      * @ORM\OneToMany(targetEntity="Notification", mappedBy="notificationProject")
      */
-    private $notificationProjects;
+    protected $projectNotifications;
 
     public function __construct() {
         $this->skills = new ArrayCollection();
         $this->users = new ArrayCollection();
+        $this->projectNotifications = new ArrayCollection();
         $this->projectEstimatedEnd = new \DateTime('now');
         $this->projectEstimatedStart = new \DateTime('now');
     }
@@ -488,35 +490,35 @@ class Project {
 
 
     /**
-     * Add notificationProjects
+     * Add projectNotifications
      *
-     * @param \Imie\SkillsBundle\Entity\Notification $notificationProjects
+     * @param \Imie\SkillsBundle\Entity\Notification $projectNotifications
      * @return Project
      */
-    public function addNotificationProject(\Imie\SkillsBundle\Entity\Notification $notificationProjects)
+    public function addProjectNotification(\Imie\SkillsBundle\Entity\Notification $projectNotifications)
     {
-        $this->notificationProjects[] = $notificationProjects;
+        $this->projectNotifications[] = $projectNotifications;
 
         return $this;
     }
 
     /**
-     * Remove notificationProjects
+     * Remove projectNotifications
      *
-     * @param \Imie\SkillsBundle\Entity\Notification $notificationProjects
+     * @param \Imie\SkillsBundle\Entity\Notification $projectNotifications
      */
-    public function removeNotificationProject(\Imie\SkillsBundle\Entity\Notification $notificationProjects)
+    public function removeProjectNotification(\Imie\SkillsBundle\Entity\Notification $projectNotifications)
     {
-        $this->notificationProjects->removeElement($notificationProjects);
+        $this->projectNotifications->removeElement($projectNotifications);
     }
 
     /**
-     * Get notificationProjects
+     * Get projectNotifications
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getNotificationProjects()
+    public function getProjectNotifications()
     {
-        return $this->notificationProjects;
+        return $this->projectNotifications;
     }
 }

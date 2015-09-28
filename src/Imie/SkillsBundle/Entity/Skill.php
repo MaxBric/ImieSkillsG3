@@ -36,7 +36,6 @@ class Skill
 
     /**
      * @var string
-     *
      * @ORM\Column(name="skillDescription", type="string", length=255,nullable=true)
      */
     private $skillDescription;
@@ -54,7 +53,7 @@ class Skill
      * @ORM\JoinColumn(nullable=true)
      */
     private $skillChilds;
-    
+
     /**
      * @var \UserSkill
      * @ORM\OneToMany(targetEntity="UserSkill", mappedBy="skill")
@@ -118,7 +117,7 @@ class Skill
         return $this->skillDescription;
     }
 
-   
+
     /**
      * Constructor
      */
@@ -153,7 +152,7 @@ class Skill
     /**
      * Get users
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUsers()
     {

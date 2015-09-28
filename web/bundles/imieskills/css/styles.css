@@ -12,15 +12,54 @@ a:hover {
   text-decoration: none;
 }
 
+h3 {
+  margin-top: 0px;
+}
+
 ul {
   list-style-type: none;
 }
 
-#imie-skills-home-title, #imie-home-logo {
+#user-page-head {
+  padding-top: 70px;
+  padding-bottom: 210px;
+}
+
+.user-page-table {
+  margin-top: 35px;
+  margin-bottom: 140px;
+}
+
+#project-square {
+  width: 256px;
+  height: 256px;
+  background-color: #5cb85c;
+}
+
+#home-square {
+  width: 256px;
+  height: 256px;
+  background-color: #f0ad4e;
+}
+
+#profile-square {
+  width: 256px;
+  height: 256px;
+  background-color: #d9534f;
+}
+
+#home-title {
   text-align: center;
 }
 
-#imie-header-logo {
+#header-logo {
   padding-top: 0px;
   padding-bottom: 0px;
+}
+
+.notification_div {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    background: blue;
 }

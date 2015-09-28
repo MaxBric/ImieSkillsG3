@@ -1,63 +1,61 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-    <ol class="breadcrumb">
-        <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
-        <li class="active">Liste des utilisateurs</li>
-    </ol>
-    <h2><span class="glyphicon glyphicon-user"></span> Liste des utilisateurs</h2>
-    <hr/>
-    <a class="btn btn-primary" href="{{ path('imie_skills_home') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
-    {% if is_granted("ROLE_ADMIN") %}
-    <a class="btn btn-primary" href="{{ path('imie_skills_user_add') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter un utilisateur</a>
-    {% endif %}
-    <hr/>
-    <table class="table table-striped">
-        <thead>
-        <th>Nom</th>
-        <th>Mail</th>
-        <th>Compétences</th>
-        <th></th>
-        <th></th>
-    </thead>
-    <tbody>
-        {% for user in users if users is defined %}
-            <tr>
-                <td><a href="{{ path('imie_skills_user_details', {id:user.id})}}">{{ user.userFullName }}</a></td>
-                <td>{{ user.Email }}</td>
-                <td>{% if user.skills %}
-                    <ul>
-                        {% for tabSkill in user.skills %}
-                            <li>{{ tabSkill.skill.skillName }}</li>
-                            {% endfor %}
-                    </ul>{% endif %}</td>
-                    {% if (user.id == app.user.id or is_granted("ROLE_ADMIN"))%}
-                    <td><a href="{{ path('imie_skills_user_modify', {id:user.id}) }}"><span class="glyphicon glyphicon-cog"></span></a></td>
-                    {% else %}
-                    <td></td>
-                        {% endif %}
-                        {% if is_granted("ROLE_ADMIN") %}
-                    <td>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".{{user.id}}"><span class="glyphicon glyphicon-trash"></span></button>
-                        <div class="modal fade {{user.id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-                            <div class="modal-dialog modal-sm">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        Supprimer {{ user.userFullName }} ?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                                        <a href="{{ path('imie_skills_user_delete', {id:user.id}) }}"><button type="button" class="btn btn-primary">Confirmer</button></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                    {% else %}
-                    <td></td>
-                {%endif %}
-            </tr>
+<ol class="breadcrumb">
+  <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
+  <li class="active">Liste des utilisateurs</li>
+</ol>
+<h2><span class="glyphicon glyphicon-user"></span> Liste des utilisateurs</h2>
+<hr/>
+<a class="btn btn-primary" href="{{ path('imie_skills_home') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
+{% if is_granted("ROLE_ADMIN") %}
+<a class="btn btn-primary" href="{{ path('imie_skills_user_add') }}" role="button"><span class="glyphicon glyphicon-plus"></span> Ajouter un utilisateur</a>
+{% endif %}
+<hr/>
+<table class="table table-striped">
+  <thead>
+    <th class="col-md-2">Nom</th>
+    <th class="col-md-3">Mail</th>
+    <th class="col-md-5">Compétences</th>
+    <th class="col-md-1">Modifier</th>
+    <th class="col-md-1">Supprimer</th>
+  </thead>
+  <tbody>
+    {% for user in users if users is defined %}
+    <tr>
+      <td><a href="{{ path('imie_skills_user_details', {id:user.id})}}">{{ user.userFullName }}</a></td>
+      <td>{{ user.Email }}</td>
+      <td>{% if user.skills %}
+        <ul>
+          {% for tabSkill in user.skills %}
+          <li>{{ tabSkill.skill.skillName }}</li>
+          {% endfor %}
+        </ul>{% endif %}</td>
+        {% if (user.id == app.user.id or is_granted("ROLE_ADMIN"))%}
+        <td><a class="btn btn-warning" href="{{ path('imie_skills_user_modify', {id:user.id}) }}" role="button"><span class="glyphicon glyphicon-cog"></span></button></td>
+          {% else %}
+          <td></td>
+          {% endif %}
+          {% if is_granted("ROLE_ADMIN") %}
+          <td>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".user{{user.id}}"><span class="glyphicon glyphicon-trash"></span></button>
+            <div class="modal fade user{{user.id}}" tabindex="-1" role="dialog">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                  <div class="modal-body">Supprimer {{ user.userFullName }} ?</div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <a class="btn btn-danger" href="{{ path('imie_skills_user_delete', {id:user.id}) }}" role="button">Confirmer</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+          {% else %}
+          <td></td>
+          {%endif %}
+        </tr>
         {% endfor %}
-    </tbody>
-</table>
-{% endblock article %}
+      </tbody>
+    </table>
+    {% endblock article %}
