@@ -18,6 +18,8 @@ use FOS\UserBundle\Model\User as BaseUser;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Imie\SkillsBundle\Entity\UserRepository")
  * @UniqueEntity("userPhoneNumber")
+ * @UniqueEntity("email")
+ * @UniqueEntity("username")
  */
 class User extends BaseUser {
 
@@ -66,10 +68,11 @@ class User extends BaseUser {
     /**
      * @var integer
      *
-     * @ORM\Column(name="userPhoneNumber", type="integer", unique=true)
+     * @ORM\Column(name="userPhoneNumber", type="string", length=10, unique=true)
      * @Assert\NotBlank()
+     * @Assert\Regex(pattern="/\d+/")
      * @Assert\Length(
-     *      min = "0",
+     *      min = "10",
      *      max = "10")
      */
     private $userPhoneNumber;
@@ -148,7 +151,7 @@ class User extends BaseUser {
         $this->managedProjects = new ArrayCollection();
         $this->joinedProjects = new ArrayCollection();
         $this->notifications = new ArrayCollection();
-        $this->userBirthday = new \DateTime('now');
+        $this->userBirthday = new \DateTime();
         $this->enabled = true;
     }
 

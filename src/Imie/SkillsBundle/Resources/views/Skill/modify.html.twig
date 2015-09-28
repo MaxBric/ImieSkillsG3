@@ -8,7 +8,7 @@
 </ol>
 <h2><span class="glyphicon glyphicon-blackboard"> Modification de la compétence</h2>
   <hr/>
-  <a class="btn btn-primary" href="{{ path('imie_skills_skill_modify'), {id:skill.id}}}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
+  <a class="btn btn-primary" href="{{ path('imie_skills_skill_index')}}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
   <hr/>
   <form method="post" action="{{ path('imie_skills_skill_modify', {id:id}) }}" {{ form_enctype(form) }}>
     {{ form(form) }}

@@ -66,7 +66,7 @@ class ProjectType extends AbstractType {
       'choice_value' => 'id',
       'multiple' => true,
       'required' => false,
-      'label' => 'Équipe :'
+      'label' => 'Équipe : (vous faites déjà partie de l\'équipe en tant que Fondateur)'
     ))
     ->add('image', new ImageType(), array(
       'required' => false,
