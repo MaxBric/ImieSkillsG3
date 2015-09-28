@@ -20,15 +20,6 @@ ul {
   list-style-type: none;
 }
 
-#imie-skills-home-title, #imie-home-logo {
-  text-align: center;
-}
-
-#imie-header-logo {
-  padding-top: 0px;
-  padding-bottom: 0px;
-}
-
 #user-page-head {
   padding-top: 70px;
   padding-bottom: 210px;
@@ -37,4 +28,31 @@ ul {
 .user-page-table {
   margin-top: 35px;
   margin-bottom: 140px;
+}
+
+#project-square {
+  width: 256px;
+  height: 256px;
+  background-color: #5cb85c;
+}
+
+#home-square {
+  width: 256px;
+  height: 256px;
+  background-color: #f0ad4e;
+}
+
+#profile-square {
+  width: 256px;
+  height: 256px;
+  background-color: #d9534f;
+}
+
+#home-title {
+  text-align: center;
+}
+
+#header-logo {
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
