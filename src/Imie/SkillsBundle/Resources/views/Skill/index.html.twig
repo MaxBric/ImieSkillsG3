@@ -22,7 +22,7 @@
     {% for skill in skills if skills is defined %}
     <tr>
       <td>{{ skill.skillName }}</a></td>
-      <td>{% if skill.skillParentId is not null %}{{ skill.}}{%endif %}</td>
+      <td>{% if skill.skillParent is not null %}{{ skill.skillParent.skillName}}{%endif %}</td>
       <td>{{ skill.skillDescription }}</td>
       {% if is_granted("ROLE_ADMIN") %}
       <td><a class="btn btn-warning" href="{{ path('imie_skills_skill_modify', {id:skill.id}) }}" role="button"><span class="glyphicon glyphicon-cog"></span></a></td>

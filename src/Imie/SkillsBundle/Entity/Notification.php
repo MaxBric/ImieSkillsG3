@@ -1,9 +1,9 @@
 <?php
 
 namespace Imie\SkillsBundle\Entity;
+
 use Imie\SkillsBundle\Entity\NotificationType;
 use Imie\SkillsBundle\Entity\User;
-
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -48,6 +48,13 @@ class Notification {
      * @ORM\ManyToOne(targetEntity="NotificationType")
      */
     private $notificationType;
+ 
+
+    /**
+     * @var \Project
+     * @ORM\ManyToOne(targetEntity="Project", inversedBy="notificationProjects")
+     */
+    private $notificationProject;
 
     /**
      * @var \User
@@ -58,15 +65,81 @@ class Notification {
     public function __construct() {
         $this->notificationDate = new \DateTime("now");
     }
+
     /**
      * Get id
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
+
+    /**
+     * Set notificationDate
+     *
+     * @param \DateTime $notificationDate
+     * @return Notification
+     */
+    public function setNotificationDate($notificationDate) {
+        $this->notificationDate = $notificationDate;
+
+        return $this;
+    }
+
+    /**
+     * Get notificationDate
+     *
+     * @return \DateTime
+     */
+    public function getNotificationDate() {
+        return $this->notificationDate;
+    }
+
+   
+
+    /**
+     * Get notificationUser
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNotificationUser() {
+        return $this->notificationUser;
+    }
+
+    /**
+     * Set notificationUser
+     *
+     * @param \Imie\SkillsBundle\Entity\User $notificationUser
+     * @return Notification
+     */
+    public function setNotificationUser(\Imie\SkillsBundle\Entity\User $notificationUser = null) {
+        $this->notificationUser = $notificationUser;
+
+        return $this;
+    }
+
+    /**
+     * Set notificationProject
+     *
+     * @param \Imie\SkillsBundle\Entity\Project $notificationProject
+     * @return Notification
+     */
+    public function setNotificationProject(\Imie\SkillsBundle\Entity\Project $notificationProject = null) {
+        $this->notificationProject = $notificationProject;
+
+        return $this;
+    }
+
+    /**
+     * Get notificationProject
+     *
+     * @return \Imie\SkillsBundle\Entity\Project 
+     */
+    public function getNotificationProject() {
+        return $this->notificationProject;
+    }
+
 
     /**
      * Set notificationName
@@ -84,34 +157,11 @@ class Notification {
     /**
      * Get notificationName
      *
-     * @return string
+     * @return string 
      */
     public function getNotificationName()
     {
         return $this->notificationName;
-    }
-
-    /**
-     * Set notificationDate
-     *
-     * @param \DateTime $notificationDate
-     * @return Notification
-     */
-    public function setNotificationDate($notificationDate)
-    {
-        $this->notificationDate = $notificationDate;
-
-        return $this;
-    }
-
-    /**
-     * Get notificationDate
-     *
-     * @return \DateTime
-     */
-    public function getNotificationDate()
-    {
-        return $this->notificationDate;
     }
 
     /**
@@ -130,7 +180,7 @@ class Notification {
     /**
      * Get notificationDescription
      *
-     * @return string
+     * @return string 
      */
     public function getNotificationDescription()
     {
@@ -153,33 +203,10 @@ class Notification {
     /**
      * Get notificationType
      *
-     * @return \Imie\SkillsBundle\Entity\NotificationType
+     * @return \Imie\SkillsBundle\Entity\NotificationType 
      */
     public function getNotificationType()
     {
         return $this->notificationType;
-    }
-
-    /**
-     * Get notificationUser
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getNotificationUser()
-    {
-        return $this->notificationUser;
-    }
-
-    /**
-     * Set notificationUser
-     *
-     * @param \Imie\SkillsBundle\Entity\User $notificationUser
-     * @return Notification
-     */
-    public function setNotificationUser(\Imie\SkillsBundle\Entity\User $notificationUser = null)
-    {
-        $this->notificationUser = $notificationUser;
-
-        return $this;
     }
 }

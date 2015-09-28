@@ -17,7 +17,7 @@ class SkillController extends Controller {
         $skills = $this->getDoctrine()
                 ->getManager()
                 ->getRepository('ImieSkillsBundle:Skill')
-                ->getSkillsOrderedById();
+                ->getSkillsOrderedByName();
 
         return $this->render('ImieSkillsBundle:Skill:index.html.twig', array(
                     'skills' => $skills

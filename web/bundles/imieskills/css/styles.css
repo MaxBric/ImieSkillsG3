@@ -72,3 +72,10 @@ ul {
   padding-top: 0px;
   padding-bottom: 0px;
 }
+
+.notification_div {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    background: blue;
+}
