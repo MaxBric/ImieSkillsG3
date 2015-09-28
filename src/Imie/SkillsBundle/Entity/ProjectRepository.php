@@ -20,8 +20,8 @@ class ProjectRepository extends EntityRepository {
   }
   public function getProjectsByNames($name) {
     return $this->createQueryBuilder('p')
-    ->where('p.projectName LIKE :name') 
-    ->setParameter('name', $name)
+    ->where('p.projectName LIKE :name')
+    ->setParameter('name', '%'.$name.'%')
     ->getQuery()
     ->getResult();
   }
