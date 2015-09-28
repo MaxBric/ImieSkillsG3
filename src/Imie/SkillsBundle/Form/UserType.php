@@ -22,7 +22,8 @@ class UserType extends AbstractType {
                 ))
                 ->add('userBirthday', 'date', array(
                     'format' => "ddMMyyyy",
-                    'label' => 'Date de naissance :'
+                    'widget'=> 'text',
+                    'label' => 'Date de naissance (dd/mm/yyyy) :'
                 ))
                 ->add('userPhoneNumber', 'text', array(
                     'label' => 'Numéro de téléphone :'
@@ -30,7 +31,6 @@ class UserType extends AbstractType {
                 ->add('userAddress', null, array(
                     'label' => 'Adresse postale :'
                 ))
-                ->add('roles')
                 ->add('email', 'email', array('label' => 'Email :', 'translation_domain' => 'FOSUserBundle'))
                 ->add('username', null, array('label' => 'Pseudo :', 'translation_domain' => 'FOSUserBundle'))
                 ->add('plainPassword', 'repeated', array(
@@ -44,7 +44,12 @@ class UserType extends AbstractType {
                     'label' => 'Description :'
                 ))
                 ->add('isAdmin', 'checkbox', array(
-                    'label' => 'Rendre Administrateur'
+                    'label' => 'Rendre Administrateur',
+                    'required' => false,
+                ))
+                ->add('image', new ImageType(), array(
+                    'required' => false,
+                    'label' => 'Image :'
                 ))
                 ->add('Valider', 'submit')
         ;

@@ -13,7 +13,7 @@
     <table class="table table-striped">
         <thead>
         <th>Nom</th>
-        <th>Parent</th>
+        <th>Domaine</th>
         <th>Description</th>
         <th></th>
         <th></th>
@@ -22,7 +22,7 @@
         {% for skill in skills if skills is defined %}
             <tr>
                 <td>{{ skill.skillName }}</a></td>
-                <td>{% if skill.skillParentId is not null %}{{ skill.skillParentId}}{%endif %}</td>
+                <td>{% if skill.skillParent is not null %}{{ skill.skillParent.skillName}}{%endif %}</td>
                 <td>{{ skill.skillDescription }}</td>
                 {% if is_granted("ROLE_ADMIN") %}
                     <td><a href="{{ path('imie_skills_skill_modify', {id:skill.id}) }}"><span class="glyphicon glyphicon-cog"></span></a></td>

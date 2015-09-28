@@ -126,7 +126,7 @@ class User extends BaseUser {
 
     /**
      * @var bool
-     * @ORM\Column(name="is_admin", type="string", length=255)
+     * @ORM\Column(name="is_admin", type="boolean", length=255)
      */
     private $isAdmin;
 
