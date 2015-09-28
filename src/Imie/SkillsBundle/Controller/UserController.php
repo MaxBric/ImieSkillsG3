@@ -23,9 +23,9 @@ class UserController extends Controller {
     }
 
     public function addAction(Request $req) {
-        if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedException();
-        }
+//        if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+//            throw new AccessDeniedException();
+//        }
         $user = new User();
 
         $form = $this->createForm(new UserType(), $user, array(

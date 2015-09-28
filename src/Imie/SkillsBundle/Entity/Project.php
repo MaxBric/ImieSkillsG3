@@ -125,10 +125,17 @@ class Project {
      * 
      */
     protected $image;
+    
+    /**
+     * @var \Notification
+     * @ORM\OneToMany(targetEntity="Notification", mappedBy="notificationProject")
+     */
+    protected $projectNotifications;
 
     public function __construct() {
         $this->skills = new ArrayCollection();
         $this->users = new ArrayCollection();
+        $this->projectNotifications = new ArrayCollection();
         $this->projectEstimatedEnd = new \DateTime('now');
         $this->projectEstimatedStart = new \DateTime('now');
     }
@@ -481,4 +488,37 @@ class Project {
         }
     }
 
+
+    /**
+     * Add projectNotifications
+     *
+     * @param \Imie\SkillsBundle\Entity\Notification $projectNotifications
+     * @return Project
+     */
+    public function addProjectNotification(\Imie\SkillsBundle\Entity\Notification $projectNotifications)
+    {
+        $this->projectNotifications[] = $projectNotifications;
+
+        return $this;
+    }
+
+    /**
+     * Remove projectNotifications
+     *
+     * @param \Imie\SkillsBundle\Entity\Notification $projectNotifications
+     */
+    public function removeProjectNotification(\Imie\SkillsBundle\Entity\Notification $projectNotifications)
+    {
+        $this->projectNotifications->removeElement($projectNotifications);
+    }
+
+    /**
+     * Get projectNotifications
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProjectNotifications()
+    {
+        return $this->projectNotifications;
+    }
 }

@@ -25,8 +25,30 @@ class NotificationController extends Controller {
         return $this->render('ImieSkillsBundle:Notification:details.html.twig', array('notification' => $notification));
     }
 
+    public function invitationAction() {
+        try {
+            $em = $this->getDoctrine()->getManager();
+            //user
+            $repoUser = $em->getRepository('ImieSkillsBundle:User');
+            $currentUser = $this->get('security.token_storage')->getToken()->getUser();
+            $user = $repo->getUserById($currentUser->getId());
+            
+            $userNotification->setNotificationUSer($user);
+            $currentUser->addNotifications($userNotification);
+            
+            //project
+            $repoProject = $em->getRepository('ImieSkillsBundle:Project');
+//            $currentProject= $t
+            
+            $em->persist($userNotification);
+            $em->flush();
+            return $this->redirect($this->generateUrl('imie_skills_user_addSkill'));
+        } catch (\Doctrine\DBAL\DBALException $e) {
+            echo $e->getMessage();
+        }
+    }
 
-    public function addAction(Request $req){
+    public function addAction(Request $req) {
         $notification = new Notification();
 
         $form = $this->createForm(new NotificationType(), $notification, array(
@@ -39,7 +61,7 @@ class NotificationController extends Controller {
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($notification);
                 $em->flush();
-                $req->getSession()->getFlashBag()->add('success', 'Produit ajouté');
+                $req->getSession()->getFlashBag()->add('success', 'Notification ajouté');
                 return $this->redirect($this->generateUrl('imie_skills_notification_index'));
             } catch (\Doctrine\DBAL\DBALException $e) {
                 $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de l\'ajout :'

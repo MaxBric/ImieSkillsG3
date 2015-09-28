@@ -39,6 +39,7 @@
     <p>Description : {{ project.projectDescription }}</p>
     <hr/>
     <h3>Compétences demandées :</h3>
+
     <table class="table table-striped">
         <tbody>
             {% for skill in project.skills if project.skills is defined %}
@@ -51,21 +52,22 @@
     <hr/>
     <h3>Chef de projet : {% if project.manager is not null %}{{ project.manager.userFullName }}{% else %}A recruter{% endif %}</h3>
     <h3>Équipe :</h3>
-    <table class="table table-striped">
-        <tbody>
-            {% if project.users is not null %}
-                {% for user in project.users if project.users is defined %}
-                    <tr>
-                        <td>{{ user.userFullName }}</td>
-                        <td>
-                            {% for skill in user.skills %}
-                                <ul>{{ skill.skill.skillName }} {{skill.level}}</ul>
-                            {% endfor %}
-                        </td>
-                    </tr>
-                {% endfor %}
-            {% else %}A recruter
-            {% endif %}
-        </tbody>
-    </table>
+    <tbody>
+        {% if project.users is not null %}
+            {% for user in project.users if project.users is defined %}
+                <tr>
+                    <td>{{ user.userFullName }}</td>
+                    <td>
+                        {% for skill in user.skills %}
+                            <ul>{{ skill.skill.skillName }} {{skill.level}}</ul>
+                        {% endfor %}
+                    </td>
+                    <td><a href="{{ path('imie_skills_notification_invitation',{id_project:project.id), {id_user:user.id})}}"><button type="button" class="btn btn-primary" id="notification">envoyer une invitation</button></a></td><br/>
+        </tr>
+    {% endfor %}
+{% else %}A recruter
+{% endif %}
+
+</tbody>
+</table>
 {% endblock article %}
