@@ -1,45 +1,44 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-    <ol class="breadcrumb">
-        <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
-        <li class="active">Liste des étapes</li>
-    </ol>
-    <h2><span class="glyphicon glyphicon-tasks"></span> Liste des étapes</h2>
-    <hr/>
-    <a class="btn btn-primary" href="{{ path('imie_skills_home') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
-    <a class="btn btn-primary" href="{{ path('imie_skills_state_add') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter une étape</a>
-    <hr/>
-    <table class="table table-striped">
-        <thead>
-        <th>Nom</th>
-        <th></th>
-        <th></th>
-    </thead>
-    <tbody>
-        {% for state in states if states is defined %}
-            <tr>
-                <td>{{ state.statut }}</a></td>
-                {% if is_granted("ROLE_ADMIN") %}
-                    <td><a href="{{ path('imie_skills_state_modify', {id:state.id}) }}"><span class="glyphicon glyphicon-cog"></span></a></td>
-                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target=".{{state.id}}"><span class="glyphicon glyphicon-trash"></span></button>
-                        <div class="modal fade {{state.id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-                            <div class="modal-dialog modal-sm">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        Supprimer {{ state.statut }} ?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                                        <a href="{{ path('imie_skills_state_delete', {id:state.id}) }}"><button type="button" class="btn btn-primary">Confirmer</button></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                {% endif %}
-            </tr>
-        {% endfor %}
-    </tbody>
+<ol class="breadcrumb">
+  <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
+  <li class="active">Liste des étapes</li>
+</ol>
+<h2><span class="glyphicon glyphicon-tasks"></span> Liste des étapes</h2>
+<hr/>
+<a class="btn btn-primary" href="{{ path('imie_skills_home') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
+<a class="btn btn-primary" href="{{ path('imie_skills_state_add') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter une étape</a>
+<hr/>
+<table class="table table-striped">
+  <thead>
+    <th class="col-md-10">Nom</th>
+    <th class="col-md-1">Modifier</th>
+    <th class="col-md-1">Supprimer</th>
+  </thead>
+  <tbody>
+    {% for state in states if states is defined %}
+    <tr>
+      <td>{{ state.statut }}</a></td>
+      {% if is_granted("ROLE_ADMIN") %}
+      <td><a class="btn btn-warning" href="{{ path('imie_skills_state_modify', {id:state.id}) }}" role="button"><span class="glyphicon glyphicon-cog"></span></a></td>
+      <td>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".state{{state.id}}"><span class="glyphicon glyphicon-trash"></span></button>
+        <div class="modal fade state{{state.id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-body">Supprimer {{ state.statut }} ?</div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <a class="btn btn-danger" href="{{ path('imie_skills_state_delete', {id:state.id}) }}">Confirmer</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
 {% endblock article %}

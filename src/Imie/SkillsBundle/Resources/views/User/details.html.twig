@@ -1,158 +1,159 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-    <ol class="breadcrumb">
-        <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
-        <li><a href="{{ path('imie_skills_user_index') }}">Liste des utilisateurs</a></li>
-        <li class="active">Détails de l'utilisateur</li>
-    </ol>
-    <hr/>
-    <h2><span class="glyphicon glyphicon-user"></span> Détails de l'utilisateur</h2>
-    <a class="btn btn-primary" href="{{ path('imie_skills_user_index') }}"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
-    {% if (user.id == app.user.id or is_granted("ROLE_ADMIN")) %}
-        <a class="btn btn-primary" href="{{ path('imie_skills_user_modify', {id:app.user.id}) }}"><span class="glyphicon glyphicon-cog"></span> Modifier</a>
-        <a class="btn btn-primary" href="{{ path('imie_skills_project_add') }}" role="button"><span class="glyphicon glyphicon-plus"></span> Ajouter un projet</a>
-        <a class="btn btn-primary" href="{{ path('imie_skills_user_addSkill') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter une compétence</a>
+<ol class="breadcrumb">
+  <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
+  <li><a href="{{ path('imie_skills_user_index') }}">Liste des utilisateurs</a></li>
+  <li class="active">Détails de l'utilisateur</li>
+</ol>
+<hr/>
+<h2><span class="glyphicon glyphicon-user"></span> Détails de l'utilisateur</h2>
+<a class="btn btn-primary" href="{{ path('imie_skills_user_index') }}"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
+{% if (user.id == app.user.id or is_granted("ROLE_ADMIN")) %}
+<a class="btn btn-warning" href="{{ path('imie_skills_user_modify', {id:app.user.id}) }}"><span class="glyphicon glyphicon-cog"></span> Modifier</a>
+<a class="btn btn-info" href="{{ path('imie_skills_project_add') }}" role="button"><span class="glyphicon glyphicon-plus"></span> Ajouter un projet</a>
+<a class="btn btn-info" href="{{ path('imie_skills_user_addSkill') }}" role="button"><span class="glyphicon glyphicon-plus"></span> Ajouter une compétence</a>
+{% endif %}
+{% if is_granted("ROLE_ADMIN") %}
+<button type="button" class="btn btn-danger" data-toggle="modal" data-target=".user"><span class="glyphicon glyphicon-trash"></span></button>
+<div class="modal fade user" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">Supprimer {{ user.userFullName }} ?</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+        <a class="btn btn-danger" href="{{ path('imie_skills_user_delete', {id:user.id}) }}" role="button">Confirmer</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+<hr/>
+<div id="user-page-head">
+  <div class="col-md-2">
+    {% if user.image %}
+    <img src="{{ asset(user.image.webPath) }}" alt="{{ asset(user.image.imageAlt) }}" width="128" height="128" class="img-circle">
     {% endif %}
-    {% if is_granted("ROLE_ADMIN") %}
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".user"><span class="glyphicon glyphicon-trash"></span></button>
-        <div class="modal fade user" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        Supprimer {{ user.userFullName }} ?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                        <a href="{{ path('imie_skills_user_delete', {id:user.id}) }}"><button type="button" class="btn btn-primary">Confirmer</button></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {%endif %}
-    <hr/>
-    <span><h3>{{ user.userFirstName }} {{ user.userLastName }}</h3>{% if user.image %}<img src="{{ asset(user.image.webPath) }}" alt="{{ asset(user.image.imageAlt) }}" width="100" height="100">{% endif %}</span>
-    <hr/>
-    <span>Adresse postale : </span><span>{{ user.userAddress }}</span><br/>
-    <span>Email : </span><span>{{ user.Email }}</span><br/>
-    <span>Téléphone : </span><span>{{ user.userPhoneNumber }}</span><br/>
-    <span>Date de naissance : </span><span>{{ user.userBirthday|date('d/m/Y') }}</span><br/>
-    <hr/>
-    <span>Description : </span><span>{{ user.userDescription }}</span>
-    <hr/>
-    <h3>Compétences</h3>
-
+  </div>
+  <div class="col-md-5">
+    <div><h3>{{ user.userFullName }}</h3></div>
+    <div><b>Adresse postale :</b> {{ user.userAddress }}</div>
+    <div><b>Email :</b> {{ user.email }}</div>
+    <div><b>Téléphone :</b> {{ user.userPhoneNumber }}</div>
+    <div><b>Date de naissance :</b> {{ user.userBirthday|date('d/m/Y') }}</div>
+    <div><b>Description :</b> {{ user.userDescription }}</div>
+  </div>
+  <div class="col-md-5">
+    <h4>Compétences</h4>
     <table class="table table-striped">
-        <thead>
-        <th>Nom</th>
-        <th>Niveau</th>
-        <th></th>
-        <th></th>
-    </thead>
-    <tbody>
+      <thead>
+        <th class="col-md-4">Nom</th>
+        <th class="col-md-3">Niveau</th>
+        <th class="col-md-3">Modifier</th>
+        <th class="col-md-2">Supprimer</th>
+      </thead>
+      <tbody>
         {% for tabSkill in user.skills %}
-            <tr>
-                <td>{{ tabSkill.skill.skillName }}</td>
-                <td>{{ tabSkill.level }}</td>
-                {% if (user.id == app.user.id or is_granted("ROLE_ADMIN"))%}
-                    <td><a href="{{ path('imie_skills_user_modifySkill', {id:tabSkill.id}) }}"><span class="glyphicon glyphicon-cog"></span></a></td>
-                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target=".{{tabSkill.id}}"><span class="glyphicon glyphicon-trash"></span></button>
-                        <div class="modal fade {{tabSkill.id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-                            <div class="modal-dialog modal-sm">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        Supprimer {{ tabSkill.skill.skillName }} {{ tabSkill.level }} ?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                                        <a href="{{ path('imie_skills_user_deleteSkill', {id: tabSkill.id}) }}"><button type="button" class="btn btn-primary">Confirmer</button></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                {% else %}
-                    <td></td>
-                    <td></td>
-                {% endif %}
-            </tr>
+        <tr>
+          <td>{{ tabSkill.skill.skillName }}</td>
+          <td>{{ tabSkill.level }}</td>
+          {% if (user.id == app.user.id or is_granted("ROLE_ADMIN"))%}
+          <td><a class="btn btn-warning" href="{{ path('imie_skills_user_modifySkill', {id:tabSkill.id}) }}" role="button"><span class="glyphicon glyphicon-cog"></span></a></td>
+          <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target=".skill{{tabSkill.id}}"><span class="glyphicon glyphicon-trash"></span></button>
+            <div class="modal fade skill{{tabSkill.id}}" tabindex="-1" role="dialog">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                  <div class="modal-body">Supprimer {{ tabSkill.skill.skillName }} niveau {{ tabSkill.level }} ?</div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <a class="btn btn-danger" href="{{ path('imie_skills_user_deleteSkill', {id: tabSkill.id}) }}" role="button">Confirmer</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+          {% else %}
+          <td></td>
+          <td></td>
+          {% endif %}
+        </tr>
         {% endfor %}
-    </tbody>
-</table>
+      </tbody>
+    </table>
+  </div>
+</div>
 <hr/>
 {% if (user.createdProjects or user.managedProjects or joinedProjects) %}
-    <h3>Projets dont votre rôle est Fondateur</h3>
-    <table class="table table-striped">
-        <thead>
-        <th>Nom</th>
-        <th>Chef de projet</th>
-        <th>Phase</th>
-        <th></th>
-        <th></th>
-    </thead>
-    <tbody>
-        {% for proj in user.createdProjects %}
-            <tr>
-                <td><a href="{{ path('imie_skills_project_details', {id:proj.id})}}">{{ proj.projectName }}</a></td>
-                <td>{% if proj.manager is not null %}{{ proj.manager.userFullName }}{% else %}A recruter{% endif %}</td>
-                <td>{{ proj.state.statut }}</td>
-                <td><a href="{{ path('imie_skills_project_modify', {id:proj.id}) }}"><span class="glyphicon glyphicon-cog"></span></a></td>
-                <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target=".{{proj.id}}"><span class="glyphicon glyphicon-trash"></span></button>
-                    <div class="modal fade {{proj.id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-                        <div class="modal-dialog modal-sm">
-                            <div class="modal-content">
-                                <div class="modal-body">
-                                    Supprimer {{ proj.projectName }} ?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                                    <a href="{{ path('imie_skills_project_delete', {id:proj.id}) }}"><button type="button" class="btn btn-primary">Confirmer</button></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        {% endfor %}
-    </tbody>
+<h4>Projets dont votre rôle est Fondateur</h4>
+<table class="table table-striped user-page-table">
+  <thead>
+    <th class="col-md-6">Nom</th>
+    <th class="col-md-3">Chef de projet</th>
+    <th class="col-md-1">Phase</th>
+    <th class="col-md-1">Modifier</th>
+    <th class="col-md-1">Supprimer</th>
+  </thead>
+  <tbody>
+    {% for proj in user.createdProjects %}
+    <tr>
+      <td><a href="{{ path('imie_skills_project_details', {id:proj.id})}}">{{ proj.projectName }}</a></td>
+      <td>{% if proj.manager is not null %}{{ proj.manager.userFullName }}{% else %}À recruter{% endif %}</td>
+      <td>{{ proj.state.statut }}</td>
+      <td><a class="btn btn-warning" href="{{ path('imie_skills_project_modify', {id:proj.id}) }}" role="button"><span class="glyphicon glyphicon-cog"></span></a></td>
+      <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target=".project{{proj.id}}"><span class="glyphicon glyphicon-trash"></span></button>
+        <div class="modal fade project{{proj.id}}" tabindex="-1" role="dialog">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-body">Supprimer {{ proj.projectName }} ?</div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <a class="btn btn-danger" href="{{ path('imie_skills_project_delete', {id:proj.id}) }}" role="button">Confirmer</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
 <hr/>
-<h3>Projets dont votre rôle est Chef de projet</h3>
-<table class="table table-striped">
-    <thead>
-    <th>Nom</th>
-    <th>Fondateur</th>
-    <th>Phase</th>
-</thead>
-<tbody>
+<h4>Projets dont votre rôle est Chef de projet</h4>
+<table class="table table-striped user-page-table">
+  <thead>
+    <th class="col-md-3">Nom</th>
+    <th class="col-md-6">Fondateur</th>
+    <th class="col-md-3">Phase</th>
+  </thead>
+  <tbody>
     {% for proj in user.managedProjects %}
-        <tr>
-            <td><a href="{{ path('imie_skills_project_details', {id:proj.id})}}">{{ proj.projectName }}</a></td>
-            <td>{{ proj.creator.userFullName }}</td>
-            <td>{{ proj.state.statut }}</td>
-        </tr>
+    <tr>
+      <td><a href="{{ path('imie_skills_project_details', {id:proj.id})}}">{{ proj.projectName }}</a></td>
+      <td>{{ proj.creator.userFullName }}</td>
+      <td>{{ proj.state.statut }}</td>
+    </tr>
     {% endfor %}
-</tbody>
+  </tbody>
 </table>
 <hr/>
-<h3>Projets dont votre rôle est Autre</h3>
-<table class="table table-striped">
-    <thead>
-    <th>Nom</th>
-    <th>Fondateur</th>
-    <th>Chef de projet</th>
-    <th>Phase</th>
-</thead>
-<tbody>
+<h4>Projets dont votre rôle est Autre</h4>
+<table class="table table-striped user-page-table">
+  <thead>
+    <th class="col-md-3">Nom</th>
+    <th class="col-md-3">Fondateur</th>
+    <th class="col-md-3">Chef de projet</th>
+    <th class="col-md-3">Phase</th>
+  </thead>
+  <tbody>
     {% for proj in user.joinedProjects %}
-        <tr>
-            <td><a href="{{ path('imie_skills_project_details', {id:proj.id})}}">{{ proj.projectName }}</a></td>
-            <td>{{ proj.creator.userFullName }}</td>
-            <td>{% if proj.manager is not null %}{{ proj.manager.userFullName }}{% else %}A recruter{% endif %}</td>
-            <td>{{ proj.state.statut }}</td>
-        </tr>
+    <tr>
+      <td><a href="{{ path('imie_skills_project_details', {id:proj.id})}}">{{ proj.projectName }}</a></td>
+      <td>{{ proj.creator.userFullName }}</td>
+      <td>{% if proj.manager is not null %}{{ proj.manager.userFullName }}{% else %}À recruter{% endif %}</td>
+      <td>{{ proj.state.statut }}</td>
+    </tr>
     {% endfor %}
-</tbody>
-</table>    
+  </tbody>
+</table>
 {% endif %}
 {% endblock article %}

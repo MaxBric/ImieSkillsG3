@@ -1,50 +1,48 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-    <ol class="breadcrumb">
-        <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
-        <li class="active">Liste des compétences</li>
-    </ol>
-    <h2><span class="glyphicon glyphicon-knight"></span> Liste des compétences</h2>
-    <hr/>
-    <a class="btn btn-primary" href="{{ path('imie_skills_home') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
-    <a class="btn btn-primary" href="{{ path('imie_skills_skill_add') }}" role="button"><span class="glyphicon glyphicon-plus"></span> Ajouter une compétence</a>
-    <hr/>
-    <table class="table table-striped">
-        <thead>
-        <th>Nom</th>
-        <th>Parent</th>
-        <th>Description</th>
-        <th></th>
-        <th></th>
-    </thead>
-    <tbody>
-        {% for skill in skills if skills is defined %}
-            <tr>
-                <td>{{ skill.skillName }}</a></td>
-                <td>{% if skill.skillParentId is not null %}{{ skill.skillParentId}}{%endif %}</td>
-                <td>{{ skill.skillDescription }}</td>
-                {% if is_granted("ROLE_ADMIN") %}
-                    <td><a href="{{ path('imie_skills_skill_modify', {id:skill.id}) }}"><span class="glyphicon glyphicon-cog"></span></a></td>
-                    <td>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".{{skill.id}}"><span class="glyphicon glyphicon-trash"></span></button>
-                        <div class="modal fade {{skill.id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-                            <div class="modal-dialog modal-sm">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        Supprimer {{ skill.skillName }} ?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                                        <a href="{{ path('imie_skills_skill_delete', {id:skill.id}) }}"><button type="button" class="btn btn-primary">Confirmer</button></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                {% endif %}
-            </tr>
-        {% endfor %}
-    </tbody>
+<ol class="breadcrumb">
+  <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
+  <li class="active">Liste des compétences</li>
+</ol>
+<h2><span class="glyphicon glyphicon-knight"></span> Liste des compétences</h2>
+<hr/>
+<a class="btn btn-primary" href="{{ path('imie_skills_home') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
+<a class="btn btn-primary" href="{{ path('imie_skills_skill_add') }}" role="button"><span class="glyphicon glyphicon-plus"></span> Ajouter une compétence</a>
+<hr/>
+<table class="table table-striped">
+  <thead>
+    <th class="col-md-3">Nom</th>
+    <th class="col-md-3">Parent</th>
+    <th class="col-md-4">Description</th>
+    <th class="col-md-1">Modifier</th>
+    <th class="col-md-1">Supprimer</th>
+  </thead>
+  <tbody>
+    {% for skill in skills if skills is defined %}
+    <tr>
+      <td>{{ skill.skillName }}</a></td>
+      <td>{% if skill.skillParentId is not null %}{{ skill.}}{%endif %}</td>
+      <td>{{ skill.skillDescription }}</td>
+      {% if is_granted("ROLE_ADMIN") %}
+      <td><a class="btn btn-warning" href="{{ path('imie_skills_skill_modify', {id:skill.id}) }}" role="button"><span class="glyphicon glyphicon-cog"></span></a></td>
+      <td>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".skill{{skill.id}}"><span class="glyphicon glyphicon-trash"></span></button>
+        <div class="modal fade skill{{skill.id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-body">Supprimer {{ skill.skillName }} ?</div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <a class="btn btn-danger" href="{{ path('imie_skills_skill_delete', {id:skill.id}) }}" role="button">Confirmer</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
 {% endblock article %}

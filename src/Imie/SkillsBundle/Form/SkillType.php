@@ -17,6 +17,7 @@ class SkillType extends AbstractType {
       'label' => 'Nom de la compétence:'
     ))
     ->add('skillDescription', null, array(
+      'required' => false,
       'label' => 'Description :'
     ))
     ->add('skillParentId', 'entity', array(
