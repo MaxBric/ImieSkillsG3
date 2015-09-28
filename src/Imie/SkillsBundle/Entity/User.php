@@ -52,7 +52,7 @@ class User extends BaseUser {
      * @var string
      *
      * @ORM\Column(name="userFullName", type="string", length=255)
-     * 
+     *
      */
     private $userFullName;
 
@@ -126,7 +126,7 @@ class User extends BaseUser {
 
     /**
      * @var bool
-     * @ORM\Column(name="is_admin", type="string", length=255)
+     * @ORM\Column(name="is_admin", type="boolean", length=255)
      */
     private $isAdmin;
 
@@ -458,7 +458,7 @@ class User extends BaseUser {
     /**
      * Get promo
      *
-     * @return \Imie\SkillsBundle\Entity\Promo 
+     * @return \Imie\SkillsBundle\Entity\Promo
      */
     public function getPromo() {
         return $this->promo;
@@ -489,7 +489,7 @@ class User extends BaseUser {
     /**
      * Get skills
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSkills() {
         return $this->skills;
@@ -512,7 +512,7 @@ class User extends BaseUser {
     /**
      * Get isAdmin
      *
-     * @return string 
+     * @return string
      */
     public function getIsAdmin()
     {
