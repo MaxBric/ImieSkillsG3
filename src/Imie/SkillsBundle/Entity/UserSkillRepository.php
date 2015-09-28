@@ -19,4 +19,11 @@ class UserSkillRepository extends EntityRepository
                 ->getQuery()
                 ->getSingleResult();
     }
+    public function getUsersBySkill($skill) {
+        return $this->createQueryBuilder('s')
+                        ->where('s.skill LIKE :skill')
+                        ->setParameter('skill', 1)
+                        ->getQuery()
+                        ->getResult();
+    }
 }

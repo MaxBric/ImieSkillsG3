@@ -12,16 +12,72 @@
 <form method="post" action="{{ path('imie_skills_search') }}" {{ form_enctype(form) }}>
   {{ form(form) }}
 </form>
-{% if search %}
+{% set proj = false %}
+{% set usr = false %}
+
+{% for results in search.results if search is defined %}
+{% for result in results %}
+{% if result.projectName is defined %}
+{% set proj = true %}
+{% endif %}
+{% if result.userFullName is defined %}
+{% set usr = true %}
+{% endif %}
+{% endfor %}
+{% endfor %}
+{% if usr is defined %}
+{% endif %}
+{% if proj == true  %}
+<h3>Projets</h3>
 <table class="table table-striped">
   <thead>
-    <td>Name</td>
+    <td></td>
+    <td>Nom du projet</td>
+    <td>Description</td>
+    <td>Créateur</td>
+    <td>Chef de projet</td>
+    <td>Avancement</td>
   </thead>
   <tbody>
-    {% for result in search if search is defined %}
+    {% for results in search.results if search is defined %}
+    {% for result in results %}
+    {% if result.projectName is defined  %}
     <tr>
-      <td>{{ result.projectName }}</td>
+      <td>{% if result.image is not null %}<img src="{{ asset(result.image.webPath) }}" alt="{{ asset(result.image.imageAlt) }}" width="100" height="100">{% endif %}</td>
+      <td><a href="{{ path('imie_skills_project_details', {id:result.id})}}">{{ result.projectName }}</a></td>
+      <td>{{ result.projectDescription }}</td>
+      <td>{{ result.creator }}</td>
+      <td>{{ result.manager }}</td>
+      <td>{{ result.projectProgress }} %</td>
     </tr>
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+  </tbody>
+</table>
+<hr/>
+{% endif %}
+{% if usr == true %}
+<h3>Utilisateurs</h3>
+<table class="table table-striped">
+  <thead>
+    <td></td>
+    <td>Nom d'utilisateur</td>
+    <td>Description</td>
+    <td>Promo</td>
+  </thead>
+  <tbody>
+    {% for results in search.results if search is defined %}
+    {% for result in results %}
+    {% if result.userName is defined  %}
+    <tr>
+      <td>{% if result.image is not null %}<img src="{{ asset(result.image.webPath) }}" alt="{{ asset(result.image.imageAlt) }}" width="100" height="100">{% endif %}</td>
+      <td><a href="{{ path('imie_skills_user_details', {id:result.id})}}">{{ result.userFullName }}</a></td>
+      <td>{{ result.userDescription }}</td>
+      <td>{{ result.promo }}</td>
+    </tr>
+    {% endif %}
+    {% endfor %}
     {% endfor %}
   </tbody>
 </table>

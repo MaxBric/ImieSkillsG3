@@ -34,13 +34,16 @@ class SearchController extends Controller {
           }
           if ($search->type[$this->i] === 'Skill') {
             $skillRepo = $em->getRepository('ImieSkillsBundle:Skill');
-            array_push($search->results, $skillRepo->getSkillsByNames($form["text"]->getData()));
+            $skillId  = $skillRepo->getSkillByName($form["text"]->getData())->getId();
+            var_dump($skillId);die();
+            $userSkillRepo = $em->getRepository('ImieSkillsBundle:UserSkill');
+            array_push($search->results, $skillRepo->getUsersBySkill($form["text"]->getData()));
           }
         }
-        var_dump($search);die();
+        // var_dump($search);die();
         return $this->render('ImieSkillsBundle:Search:index.html.twig', array(
-          'search' => $search,
-          'form' => $form->createView()
+          'form' => $form->createView(),
+          'search' => $search
         ));
       } catch (\Doctrine\DBAL\DBALException $e) {
         echo $e->getMessage();
