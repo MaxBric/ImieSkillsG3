@@ -20,36 +20,52 @@ ul {
   list-style-type: none;
 }
 
-#user-page-head {
+#project-page-head, #user-page-head {
   padding-top: 70px;
   padding-bottom: 210px;
 }
 
-.user-page-table {
+.project-page-table, .user-page-table {
   margin-top: 35px;
   margin-bottom: 140px;
 }
 
+#project-square, #search-square, #user-square, #logo-square, #title-square {
+  width: 320px;
+  height: 320px;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 21px;
+  margin-right: 21px;
+  margin-bottom: 21px;
+  margin-left: 21px;
+}
+
 #project-square {
-  width: 256px;
-  height: 256px;
   background-color: #5cb85c;
 }
 
-#home-square {
-  width: 256px;
-  height: 256px;
+#search-square {
+  background-color: #5bc0de;
+}
+
+#user-square {
   background-color: #f0ad4e;
 }
 
-#profile-square {
-  width: 256px;
-  height: 256px;
+#logo-square img{
+  width: 320px;
+  height: 320px;
+}
+
+#title-square {
   background-color: #d9534f;
 }
 
-#home-title {
-  text-align: center;
+#home-page-content h1 {
+  margin: 21px;
+  padding: 21px;
+  color: white;
 }
 
 #header-logo {

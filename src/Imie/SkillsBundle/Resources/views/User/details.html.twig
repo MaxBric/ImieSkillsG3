@@ -36,12 +36,12 @@
     {% endif %}
   </div>
   <div class="col-md-5">
-    <div><h3>{{ user.userFullName }}</h3></div>
-    <div><b>Adresse postale :</b> {{ user.userAddress }}</div>
-    <div><b>Email :</b> {{ user.email }}</div>
-    <div><b>Téléphone :</b> {{ user.userPhoneNumber }}</div>
-    <div><b>Date de naissance :</b> {{ user.userBirthday|date('d/m/Y') }}</div>
-    <div><b>Description :</b> {{ user.userDescription }}</div>
+    <p><h3>{{ user.userFullName }}</h3></p>
+    <p><b>Adresse postale :</b> {{ user.userAddress }}</p>
+    <p><b>Email :</b> {{ user.email }}</p>
+    <p><b>Téléphone :</b> {{ user.userPhoneNumber }}</p>
+    <p><b>Date de naissance :</b> {{ user.userBirthday|date('d/m/Y') }}</p>
+    <p><b>Description :</b> {{ user.userDescription }}</p>
   </div>
   <div class="col-md-5">
     <h4>Compétences</h4>
