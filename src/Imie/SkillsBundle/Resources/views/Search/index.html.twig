@@ -44,7 +44,7 @@
     {% if result.projectName is defined  %}
     <tr>
       <td>{% if result.image is not null %}<img src="{{ asset(result.image.webPath) }}" alt="{{ asset(result.image.imageAlt) }}" width="100" height="100">{% endif %}</td>
-      <td><a href="{{ path('imie_skills_project_details', {id: result.id})}}">{{ result.projectName }}</a></td>
+      <td><a href="{{ path('imie_skills_project_details', {id:result.id})}}">{{ result.projectName }}</a></td>
       <td>{{ result.projectDescription }}</td>
       <td>{{ result.creator }}</td>
       <td>{{ result.manager }}</td>
@@ -72,7 +72,7 @@
     {% if result.userName is defined  %}
     <tr>
       <td>{% if result.image is not null %}<img src="{{ asset(result.image.webPath) }}" alt="{{ asset(result.image.imageAlt) }}" width="100" height="100">{% endif %}</td>
-      <td><a href="{{ path('imie_skills_user_details', {id: result.id})}}">{{ result.userFullName }}</a></td>
+      <td><a href="{{ path('imie_skills_user_details', {id:result.id})}}">{{ result.userFullName }}</a></td>
       <td>{{ result.userDescription }}</td>
       <td>{{ result.promo }}</td>
     </tr>

@@ -33,7 +33,10 @@ class SearchController extends Controller {
             array_push($search->results, $projectRepo->getProjectsByNames($form["text"]->getData()));
           }
           if ($search->type[$this->i] === 'Skill') {
-            $skillRepo = $em->getRepository('ImieSkillsBundle:User');
+            $skillRepo = $em->getRepository('ImieSkillsBundle:Skill');
+            $skillId  = $skillRepo->getSkillByName($form["text"]->getData())->getId();
+            var_dump($skillId);die();
+            $userSkillRepo = $em->getRepository('ImieSkillsBundle:UserSkill');
             array_push($search->results, $skillRepo->getUsersBySkill($form["text"]->getData()));
           }
         }
