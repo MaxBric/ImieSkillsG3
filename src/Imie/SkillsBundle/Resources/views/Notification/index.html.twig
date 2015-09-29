@@ -17,11 +17,13 @@
     </thead>
     <tbody>
         {% for notification in notifications if notifications is defined %}
-            <tr>
-                <td><a href="{{ path('imie_skills_notification_details', {id:notification.id}) }}">{{ notification.notificationName }}</a></td>
-                <td>{{ notification.notificationDescription }}</td>
-                <td><a href="{{ path('imie_skills_notification_delete', {id:notification.id}) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
-            </tr>
+            {%if app.user.id is sameas(notification.notificationAdressee.id) %}
+                <tr>
+                    <td><a href="{{ path('imie_skills_notification_details', {id:notification.id}) }}">{{ notification.notificationName }}</a></td>
+                    <td>{{ notification.notificationDescription }}</td>
+                    <td><a href="{{ path('imie_skills_notification_delete', {id:notification.id}) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
+                </tr>
+            {% endif %}
         {% endfor %}
     </tbody>
 </table>
