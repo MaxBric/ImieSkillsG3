@@ -33,6 +33,9 @@
                     <li><a href="{{ path('imie_skills_notification_index',{'id':app.user.id}) }}"><span class="glyphicon glyphicon-bell"></span></a></li>
                         {% endif %}
                 <li><a href="{{ path('imie_skills_search') }}"><span class="glyphicon glyphicon-search"></span> Recherche</a></li>
+                <li>{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                  <a href="{{ path('imie_skills_user_details', {'id': app.user.id}) }}"><img src="{{ asset(app.user.image.webPath) }}" alt="{{ asset(app.user.image.imageAlt) }}" width="20" height="20" class="img-circle"> {{ app.user.userFullName }}</a>
+                 {% endif %}</li>
                 <li>
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         <a href="{{ path('fos_user_security_logout') }}"><span class="glyphicon glyphicon-log-out"></span> Déconnexion</a>
