@@ -49,4 +49,12 @@ class UserRepository extends EntityRepository {
                 ->getSingleResult();
     }
 
+    public function getUsersByPromoId($id) {
+        return $qb = $this->createQueryBuilder('u')
+            ->where('u.promo = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+    }
+
 }
