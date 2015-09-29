@@ -16,7 +16,7 @@
       {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
       {#ajouter admin#}
       {%if app.user.id is defined%}
-      <li><a href="{{ path('imie_skills_user_details', {'id': app.user.id}) }}"><span class="glyphicon glyphicon-user"></span> Mon profil</a></li>
+      <li><a href="{{ path('imie_skills_user_details', {'id':app.user.id}) }}"><span class="glyphicon glyphicon-user"></span> Mon profil</a></li>
       {%endif%}
       {#fin ajouter admin#}
       {%endif%}
@@ -29,13 +29,21 @@
       <li><a href="{{ path('imie_skills_notification_index',{'id':app.user.id}) }}"><span class="glyphicon glyphicon-bell"></span></a></li>
       {% endif %}
       <li><a href="{{ path('imie_skills_search') }}"><span class="glyphicon glyphicon-search"></span> Recherche</a></li>
+      {% if app.user.id is defined %}
+      <li>
+        <a href="{{ path('imie_skills_user_details', {'id':app.user.id}) }}" id="header-user-picture">{% if app.user.image %}<img src="{{ asset(app.user.image.webPath) }}" alt="{{ asset(app.user.image.imageAlt) }}" width="36" height="36" class="img-circle">{% endif %}</a>
+      </li>
+      <li>
+        <a href="{{ path('imie_skills_user_details', {'id':app.user.id}) }}" id="header-user-name">{{app.user.userFullName}}</a>
+      </li>
+      {% endif %}
       <li>
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         <a href="{{ path('fos_user_security_logout') }}"><span class="glyphicon glyphicon-log-out"></span> Déconnexion</a>
         {% else %}
         <a href="{{ path('fos_user_security_login') }}"><span class="glyphicon glyphicon-log-in"></span> Connexion</a>
-        {% endif %}
       </li>
+      {% endif %}
     </ul>
   </div>
 </div>

@@ -9,6 +9,7 @@ use Imie\SkillsBundle\Entity\UserSkill;
 use Imie\SkillsBundle\Form\UserType;
 use Imie\SkillsBundle\Form\UserSkillType;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Imie\SkillsBundle\Form\UserModifyType;
 
 class UserController extends Controller {
 
@@ -23,9 +24,9 @@ class UserController extends Controller {
     }
 
     public function addAction(Request $req) {
-//        if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
-//            throw new AccessDeniedException();
-//        }
+        if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException();
+        }
         $user = new User();
 
         $form = $this->createForm(new UserType(), $user, array(
@@ -189,7 +190,12 @@ class UserController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('ImieSkillsBundle:User');
         $userToModify = $repo->findOneById($id);
-        $form = $this->createForm(new UserType(), $userToModify, array(
+        if($this->get('security.context')->isGranted('ROLE_ADMIN')){
+            $type = new UserType();
+        } else {
+            $type = new UserModifyType();
+        }
+        $form = $this->createForm($type, $userToModify, array(
             'action' => $this->generateUrl('imie_skills_user_modify', array(
                 'id' => $id
             ))
@@ -203,7 +209,7 @@ class UserController extends Controller {
                 $em->flush();
                 $req->getSession()->getFlashBag()->add('success', 'Utilisateur modifié');
                 return $this->redirect($this->generateUrl('imie_skills_user_details', array(
-                  'id' => $id
+                    'id' => $id
                 )));
             } catch (\Doctrine\DBAL\DBALException $e) {
                 $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de l\'ajout :'

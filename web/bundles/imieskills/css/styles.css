@@ -1,6 +1,17 @@
-#header-logo {
+
+#header-logo, #header-user-picture {
 	padding-top: 0px;
 	padding-bottom: 0px;
+
+}
+
+#header-user-picture {
+	margin-top: 8px;
+	padding-right: 8px;
+}
+
+#header-user-name {
+	padding-left: 0;
 }
 
 body {

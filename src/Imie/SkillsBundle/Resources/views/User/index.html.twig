@@ -33,7 +33,7 @@
           <li>{{ tabSkill.skill.skillName }}</li>
           {% endfor %}
         </ul>{% endif %}</td>
-        {% if (user.id == app.user.id or is_granted("ROLE_ADMIN"))%}
+        {% if ((is_granted("ROLE_ADMIN")) or (user.id == app.user.id)) %}
         <td><a class="btn btn-warning" href="{{ path('imie_skills_user_modify', {id:user.id}) }}" role="button"><span class="glyphicon glyphicon-cog"></span></button></td>
           {% else %}
           <td></td>
@@ -55,7 +55,7 @@
           </td>
           {% else %}
           <td></td>
-          {%endif %}
+          {% endif %}
         </tr>
         {% endfor %}
       </tbody>

@@ -5,7 +5,6 @@ namespace Imie\SkillsBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Imie\SkillsBundle\Form\ImageType;
 
 class ProjectType extends AbstractType {
   /**

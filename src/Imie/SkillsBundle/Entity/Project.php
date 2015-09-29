@@ -100,7 +100,7 @@ class Project {
 
     /**
      * @var \User
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="joinedProjects")
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="joinedProjects", indexBy="id")
      */
     private $users;
 
