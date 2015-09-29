@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class UserType extends AbstractType {
 
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -22,7 +23,8 @@ class UserType extends AbstractType {
                 ))
                 ->add('userBirthday', 'date', array(
                     'format' => "ddMMyyyy",
-                    'label' => 'Date de naissance :'
+                    'widget'=> 'text',
+                    'label' => 'Date de naissance (dd/mm/yyyy) :'
                 ))
                 ->add('userPhoneNumber', 'text', array(
                     'label' => 'Numéro de téléphone :'
@@ -43,17 +45,27 @@ class UserType extends AbstractType {
                     'label' => 'Description :'
                 ))
                 ->add('isAdmin', 'checkbox', array(
-                    'label' => 'Rendre Administrateur'
+                    'label' => 'Rendre Administrateur',
+                    'required' => false,
                 ))
                 ->add('image', new ImageType(), array(
                     'required' => false,
                     'label' => 'Image :'
+                ))
+                ->add('image', new ImageType(), array(
+                    'required' => false,
+                    'label' => 'Image :'
+                ))
+                ->add('promo', 'entity', array(
+                    'class' => 'ImieSkillsBundle:Promo',
+                    'choice_label' => 'promoFullName'
                 ))
                 ->add('Valider', 'submit', array(
                     'attr' => array('class' => 'btn btn-primary'),
                 ))
         ;
     }
+
 
     /**
      * @param OptionsResolverInterface $resolver

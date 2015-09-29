@@ -30,7 +30,7 @@ class Promo
 
     /**
      * @ORM\OneToMany(targetEntity="User", mappedBy="promo")
-     * @ORM\Column(nullable=true)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $users;
 
@@ -38,6 +38,14 @@ class Promo
      * @ORM\ManyToOne(targetEntity="Course", inversedBy="promos")
      */
     private $course;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="promoFullName", type="string", length=255)
+     *
+     */
+    private $promoFullName;
 
     /**
      * Get id

@@ -15,12 +15,6 @@ class SchoolType extends AbstractType {
   public function buildForm(FormBuilderInterface $builder, array $options) {
     $builder
     ->add('schoolName')
-    //            ->add('courses', 'entity', array(
-    //                'class' => 'ImieSkillsBundle:Course',
-    //                'choice_label' => 'course',
-    //                'multiple' =>true,
-    //                'required'=>false
-    //            ))
     ->add('Valider','submit', array(
       'attr' => array('class' => 'btn btn-primary'),
     ))

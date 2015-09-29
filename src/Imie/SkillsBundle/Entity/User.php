@@ -378,6 +378,7 @@ class User extends BaseUser {
      */
     public function removeJoinedProject(\Imie\SkillsBundle\Entity\Project $joinedProjects) {
         $this->joinedProjects->removeElement($joinedProjects);
+        $joinedProjects->removeUser($this);
     }
 
     /**

@@ -40,6 +40,14 @@ class Promo
     private $course;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="promoFullName", type="string", length=255)
+     *
+     */
+    private $promoFullName;
+
+    /**
      * Get id
      *
      * @return integer
@@ -116,5 +124,58 @@ class Promo
     public function getCourse()
     {
         return $this->course;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set promoFullName
+     *
+     * @param string $promoFullName
+     * @return Promo
+     */
+    public function setPromoFullName()
+    {
+        $this->promoFullName = $this->course->getSchool()->getSchoolName().' - '.$this->course->getCourse().' - '.$this->getPromoName();
+
+        return $this;
+    }
+
+    /**
+     * Get promoFullName
+     *
+     * @return string 
+     */
+    public function getPromoFullName()
+    {
+        return $this->promoFullName;
+    }
+
+    /**
+     * Add users
+     *
+     * @param \Imie\SkillsBundle\Entity\User $users
+     * @return Promo
+     */
+    public function addUser(\Imie\SkillsBundle\Entity\User $users)
+    {
+        $this->users[] = $users;
+
+        return $this;
+    }
+
+    /**
+     * Remove users
+     *
+     * @param \Imie\SkillsBundle\Entity\User $users
+     */
+    public function removeUser(\Imie\SkillsBundle\Entity\User $users)
+    {
+        $this->users->removeElement($users);
     }
 }

@@ -23,9 +23,9 @@ class UserController extends Controller {
     }
 
     public function addAction(Request $req) {
-        // if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
-        //     throw new AccessDeniedException();
-        // }
+//        if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+//            throw new AccessDeniedException();
+//        }
         $user = new User();
 
         $form = $this->createForm(new UserType(), $user, array(
@@ -106,7 +106,7 @@ class UserController extends Controller {
         if ($id != $this->get('security.token_storage')->getToken()->getUser()->getId()) {
             if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
                 throw new AccessDeniedException();
-            }
+            } 
         }
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('ImieSkillsBundle:UserSkill');

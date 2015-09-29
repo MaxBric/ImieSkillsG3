@@ -6,16 +6,31 @@
 </ol>
 <h2><span class="glyphicon glyphicon-home"></span> Bienvenue</h2>
 <hr/>
-<div class="col-md-3" id="project-square">
-
-</div>
-<div class="col-md-3" id="home-square">
-  <img src="{{ asset('bundles/imieskills/images/ImieLogo.png') }}" alt="ImieLogo">
-</div>
-<div class="col-md-3" id="profile-square">
-
-</div>
-<div class="col-md-4">
-<h1 id="home-title">IMIE Skills</h1>
+<div id="home-page-content">
+ {%if app.user.id is defined%} <a href="{{ path('imie_skills_project_add') }}">
+    <div id="project-square">
+      <h1>Créer un projet</h1>
+    </div>
+  </a>
+  <a href="{{ path('imie_skills_search') }}">
+    <div id="search-square">
+      <h1>Rechercher un projet, un profil ou une compétence</h1>
+    </div>
+  </a>
+  <a href="{{ path('imie_skills_user_details', {'id': app.user.id}) }}">
+    <div id="user-square">
+      <h1>Accéder à mon profil</h1>
+    </div>
+  </a>{% endif %}
+  <a href="{{ path('imie_skills_home') }}">
+    <div id="imie-skills-square">
+      <img src="{{ asset('bundles/imieskills/images/ImieSkillsLogo.png') }}" alt="ImieSkillsLogo">
+    </div>
+  </a>
+  <a href="http://imie-ecole-informatique.fr" target="imie-nantes">
+    <div id="imie-square">
+      <img src="{{ asset('bundles/imieskills/images/ImieLogo.png') }}" alt="ImieLogo">
+    </div>
+  </a>
 </div>
 {% endblock article %}

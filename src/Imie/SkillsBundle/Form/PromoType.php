@@ -17,9 +17,9 @@ class PromoType extends AbstractType {
     ->add('promoName', 'text')
     ->add('course','entity', array(
       'class' => 'ImieSkillsBundle:Course',
-      'choice_label' => 'course'
+      'choice_label' => 'courseFullName'
     ))
-    ->add('Ajouter','submit', array(
+    ->add('Valider','submit', array(
       'attr' => array('class' => 'btn btn-primary'),
     ))
     ;

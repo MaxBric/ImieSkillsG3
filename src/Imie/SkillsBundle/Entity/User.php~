@@ -156,8 +156,12 @@ class User extends BaseUser {
         $this->createdProjects = new ArrayCollection();
         $this->managedProjects = new ArrayCollection();
         $this->joinedProjects = new ArrayCollection();
+<<<<<<< HEAD
         $this->sentNotifications = new ArrayCollection();
         $this->receivedNotifications = new ArrayCollection();
+=======
+        $this->notifications = new ArrayCollection();
+>>>>>>> 70448f424ed106d4e5364f31b8f39bc388d2e787
         $this->userBirthday = new \DateTime();
         $this->enabled = true;
     }
@@ -378,6 +382,7 @@ class User extends BaseUser {
      */
     public function removeJoinedProject(\Imie\SkillsBundle\Entity\Project $joinedProjects) {
         $this->joinedProjects->removeElement($joinedProjects);
+        $joinedProjects->removeUser($this);
     }
 
     /**

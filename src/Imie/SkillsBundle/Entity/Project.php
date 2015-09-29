@@ -136,8 +136,6 @@ class Project {
         $this->skills = new ArrayCollection();
         $this->users = new ArrayCollection();
         $this->projectNotifications = new ArrayCollection();
-        $this->projectEstimatedEnd = new \DateTime('now');
-        $this->projectEstimatedStart = new \DateTime('now');
     }
 
     /**

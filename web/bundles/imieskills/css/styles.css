@@ -1,3 +1,8 @@
+#header-logo {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
 body {
   padding-top: 70px;
   padding-bottom: 70px;
@@ -20,46 +25,56 @@ ul {
   list-style-type: none;
 }
 
-#user-page-head {
+#project-page-head, #user-page-head {
   padding-top: 70px;
   padding-bottom: 210px;
 }
 
-.user-page-table {
+.project-page-table, .user-page-table {
   margin-top: 35px;
   margin-bottom: 140px;
 }
 
+#project-square, #search-square, #user-square, #imie-square, #imie-skills-square {
+  width: 320px;
+  height: 320px;
+  display: inline-block;
+  vertical-align: top;
+  margin: 21px;
+}
+
+
 #project-square {
-  width: 256px;
-  height: 256px;
   background-color: #5cb85c;
 }
 
-#home-square {
-  width: 256px;
-  height: 256px;
+#search-square {
+  background-color: #5bc0de;
+}
+
+#user-square {
   background-color: #f0ad4e;
 }
 
-#profile-square {
-  width: 256px;
-  height: 256px;
-  background-color: #d9534f;
+#imie-skills-square img, #imie-square img {
+  width: 320px;
+  height: 320px;
 }
 
-#home-title {
-  text-align: center;
+#header-logo:hover, #project-square:hover, #search-square:hover, #user-square:hover, #imie-skills-square img:hover, #imie-square img:hover {
+  opacity: 0.7;
 }
 
-#header-logo {
-  padding-top: 0px;
-  padding-bottom: 0px;
+#home-page-content h1 {
+  margin: 7px;
+  padding: 7px;
+  text-align: right;
+  color: white;
 }
 
 .notification_div {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    background: blue;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background: blue;
 }

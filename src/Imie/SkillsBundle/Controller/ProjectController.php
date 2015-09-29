@@ -79,14 +79,17 @@ class ProjectController extends Controller {
     }
 
     public function modifyAction(Request $req, $id) {
-        if ($id != $this->get('security.token_storage')->getToken()->getUser()->getId()) {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('ImieSkillsBundle:Project');
+        
+        $projectToModify = $repo->findOneById($id);
+        
+        $creatorId = $projectToModify->getCreator()->getId();
+        if ($creatorId != $this->get('security.token_storage')->getToken()->getUser()->getId()) {
             if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
                 throw new AccessDeniedException();
             }
         }
-        $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository('ImieSkillsBundle:Project');
-        $projectToModify = $repo->findOneById($id);
         $form = $this->createForm(new ProjectType(), $projectToModify, array(
             'action' => $this->generateUrl('imie_skills_project_modify', array(
                 'id' => $id
@@ -96,9 +99,17 @@ class ProjectController extends Controller {
 
         if ($form->isValid()) {
             try {
+                $users = $form->get('users')->getData();
+                
+                foreach ($users as $user) {
+                    $user->addJoinedProject($projectToModify);
+                }
+                
                 $em->flush();
                 $req->getSession()->getFlashBag()->add('success', 'Projet modifié');
-                return $this->redirect($this->generateUrl('imie_skills_project_index'));
+                return $this->redirect($this->generateUrl('imie_skills_project_details', array(
+                    'id' => $id
+                )));
             } catch (\Doctrine\DBAL\DBALException $e) {
                 $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de la suppression :'
                         . PHP_EOL . $e->getMessage());
@@ -112,16 +123,17 @@ class ProjectController extends Controller {
     }
 
     public function deleteAction(Request $req, $id) {
-        if ($id != $this->get('security.token_storage')->getToken()->getUser()->getId()) {
-            if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
-                throw new AccessDeniedException();
-            }
-        }
         $em = $this->getDoctrine()->getManager();
 
         $repo = $em->getRepository('ImieSkillsBundle:Project');
 
         $project = $repo->findOneById($id);
+        $creatorId = $project->getCreator()->getId();
+        if ($creatorId != $this->get('security.token_storage')->getToken()->getUser()->getId()) {
+            if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+                throw new AccessDeniedException();
+            }
+        }
         try {
             $em->remove($project);
             $em->flush();
@@ -135,4 +147,32 @@ class ProjectController extends Controller {
         return $this->redirect($this->generateUrl('imie_skills_project_index'));
     }
 
+    public function deleteUserAction(Request $req, $id1, $id2) {
+        $em = $this->getDoctrine()->getManager();
+        $projectRepo = $em->getRepository('ImieSkillsBundle:Project');
+        $userRepo = $em->getRepository('ImieSkillsBundle:User');
+
+        $project = $projectRepo->findOneById($id1);
+        $user = $userRepo->getUserById($id2);
+        
+        $creatorId = $project->getCreator()->getId();
+        if ($creatorId != $this->get('security.token_storage')->getToken()->getUser()->getId()) {
+            if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+                throw new AccessDeniedException();
+            }
+        }
+        try {
+            $user->removeJoinedProject($project);
+            $em->flush();
+
+            $req->getSession()->getFlashBag()->add('success', 'Projet supprimé');
+        } catch (\Doctrine\DBAL\DBALException $e) {
+            $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de la suppression :'
+                    . PHP_EOL . $e->getMessage());
+        }
+
+        return $this->redirect($this->generateUrl('imie_skills_project_details', array(
+            'id' => $id1
+        )));
+    }
 }
