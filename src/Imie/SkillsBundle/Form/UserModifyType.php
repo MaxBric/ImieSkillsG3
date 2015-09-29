@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class UserType extends AbstractType {
+class UserModifyType extends AbstractType {
 
 
     /**
@@ -44,17 +44,9 @@ class UserType extends AbstractType {
                 ->add('userDescription', null, array(
                     'label' => 'Description :'
                 ))
-                ->add('isAdmin', 'checkbox', array(
-                    'label' => 'Rendre Administrateur',
-                    'required' => false,
-                ))
                 ->add('image', new ImageType(), array(
                     'required' => false,
                     'label' => 'Image :'
-                ))
-                ->add('promo', 'entity', array(
-                    'class' => 'ImieSkillsBundle:Promo',
-                    'choice_label' => 'promoFullName'
                 ))
                 ->add('Valider', 'submit', array(
                     'attr' => array('class' => 'btn btn-primary'),

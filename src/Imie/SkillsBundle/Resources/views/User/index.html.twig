@@ -24,7 +24,7 @@
   <tbody>
     {% for user in users if users is defined %}
     <tr>
-      <td><a href="{{ path('imie_skills_user_details', {id:user.id})}}"><img src="{{ asset(user.image.webPath) }}" alt="{{ asset(user.image.imageAlt) }}" width="48" height="48" class="img-circle"></a></td>
+      <td><a href="{{ path('imie_skills_user_details', {id:user.id})}}">{% if user.image %}<img src="{{ asset(user.image.webPath) }}" alt="{{ asset(user.image.imageAlt) }}" width="48" height="48" class="img-circle">{% endif %}</a></td>
       <td><a href="{{ path('imie_skills_user_details', {id:user.id})}}">{{ user.userFullName }}</a></td>
       <td>{{ user.promo.course.course }}</td>
       <td>{% if user.skills %}
@@ -33,7 +33,7 @@
           <li>{{ tabSkill.skill.skillName }}</li>
           {% endfor %}
         </ul>{% endif %}</td>
-        {% if (user.id == app.user.id or is_granted("ROLE_ADMIN"))%}
+        {% if ((is_granted("ROLE_ADMIN")) or (user.id == app.user.id)) %}
         <td><a class="btn btn-warning" href="{{ path('imie_skills_user_modify', {id:user.id}) }}" role="button"><span class="glyphicon glyphicon-cog"></span></button></td>
           {% else %}
           <td></td>
@@ -55,7 +55,7 @@
           </td>
           {% else %}
           <td></td>
-          {%endif %}
+          {% endif %}
         </tr>
         {% endfor %}
       </tbody>

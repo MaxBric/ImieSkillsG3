@@ -1,4 +1,5 @@
 <?php
+
 namespace Imie\SkillsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -28,7 +29,7 @@ class ProjectController extends Controller {
             throw new AccessDeniedException();
         }
         $project = new Project();
-       
+
 
         $form = $this->createForm(new ProjectType(), $project, array(
             'action' => $this->generateUrl('imie_skills_project_add')));
@@ -38,19 +39,19 @@ class ProjectController extends Controller {
             try {
                 $em = $this->getDoctrine()->getManager();
                 $users = $form->get('users')->getData();
-                
+
                 $currentUser = $this->get('security.token_storage')->getToken()->getUser();
-                
+
                 $project->setCreator($currentUser);
-                
+
                 foreach ($users as $user) {
                     $user->addJoinedProject($project);
                 }
-                
-                if($project->getImage()){
-                $project->getImage()->setImageAlt($project->getProjectName());
+
+                if ($project->getImage()) {
+                    $project->getImage()->setImageAlt($project->getProjectName());
                 }
-                
+
                 $em->persist($project);
                 $em->flush();
 
@@ -58,7 +59,7 @@ class ProjectController extends Controller {
 
                 return $this->redirect($this->generateUrl('imie_skills_project_index'));
             } catch (\Doctrine\DBAL\DBALException $e) {
-               echo $e->getMessage();
+                echo $e->getMessage();
             }
         }
         return $this->render('ImieSkillsBundle:Project:add.html.twig', array(
@@ -81,9 +82,9 @@ class ProjectController extends Controller {
     public function modifyAction(Request $req, $id) {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('ImieSkillsBundle:Project');
-        
+
         $projectToModify = $repo->findOneById($id);
-        
+
         $creatorId = $projectToModify->getCreator()->getId();
         if ($creatorId != $this->get('security.token_storage')->getToken()->getUser()->getId()) {
             if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
@@ -99,20 +100,30 @@ class ProjectController extends Controller {
 
         if ($form->isValid()) {
             try {
-                $users = $form->get('users')->getData();
-                
-                foreach ($users as $user) {
-                    $user->addJoinedProject($projectToModify);
+            $users = $form->get('users')->getData();
+
+            foreach ($users as $user) {
+                $projs = $user->getJoinedProjects();
+                foreach ($projs as $proj) {
+                    if ($proj == $projectToModify) {
+                        $user->removeJoinedProject($projectToModify);
+                    }
                 }
-                
-                $em->flush();
-                $req->getSession()->getFlashBag()->add('success', 'Projet modifié');
-                return $this->redirect($this->generateUrl('imie_skills_project_details', array(
-                    'id' => $id
-                )));
-            } catch (\Doctrine\DBAL\DBALException $e) {
-                $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de la suppression :'
-                        . PHP_EOL . $e->getMessage());
+                $user->addJoinedProject($projectToModify);
+            }
+
+            if ($projectToModify->getImage()) {
+                $projectToModify->getImage()->setImageAlt($projectToModify->getProjectName());
+            }
+
+            $em->flush();
+            $req->getSession()->getFlashBag()->add('success', 'Projet modifié');
+            return $this->redirect($this->generateUrl('imie_skills_project_details', array(
+                                'id' => $id
+            )));
+            } catch (\Exception $e) {
+            $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de la suppression :'
+                    . $e->getMessage());
             }
         }
 
@@ -154,7 +165,7 @@ class ProjectController extends Controller {
 
         $project = $projectRepo->findOneById($id1);
         $user = $userRepo->getUserById($id2);
-        
+
         $creatorId = $project->getCreator()->getId();
         if ($creatorId != $this->get('security.token_storage')->getToken()->getUser()->getId()) {
             if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
@@ -172,7 +183,8 @@ class ProjectController extends Controller {
         }
 
         return $this->redirect($this->generateUrl('imie_skills_project_details', array(
-            'id' => $id1
+                            'id' => $id1
         )));
     }
+
 }
