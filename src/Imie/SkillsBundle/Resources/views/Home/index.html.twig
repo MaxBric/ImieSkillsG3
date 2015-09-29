@@ -7,8 +7,7 @@
 <h2><span class="glyphicon glyphicon-home"></span> Bienvenue</h2>
 <hr/>
 <div id="home-page-content">
-  {% if app.user.id is defined %}
-  <a href="{{ path('imie_skills_project_add') }}">
+ {%if app.user.id is defined%} <a href="{{ path('imie_skills_project_add') }}">
     <div id="project-square">
       <h1>Créer un projet</h1>
     </div>
@@ -22,7 +21,7 @@
     <div id="user-square">
       <h1>Accéder à mon profil</h1>
     </div>
-  </a>
+  </a>{% endif %}
   <a href="{{ path('imie_skills_home') }}">
     <div id="imie-skills-square">
       <img src="{{ asset('bundles/imieskills/images/ImieSkillsLogo.png') }}" alt="ImieSkillsLogo">
@@ -33,6 +32,5 @@
       <img src="{{ asset('bundles/imieskills/images/ImieLogo.png') }}" alt="ImieLogo">
     </div>
   </a>
-  {% endif %}
 </div>
 {% endblock article %}

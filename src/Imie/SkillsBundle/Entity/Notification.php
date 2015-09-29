@@ -26,20 +26,20 @@ class Notification {
     /**
      * @var string
      *
-     * @ORM\Column(name="notificationName", type="string", length=255)
+     * @ORM\Column(name="notification_name", type="string", length=255)
      */
     private $notificationName;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="notificationDate", type="datetime")
+     * @ORM\Column(name="notification_date", type="datetime")
      */
     private $notificationDate;
 
     /**
      * @var string
-     * @ORM\Column(name="notificationDescription", type="string")
+     * @ORM\Column(name="notification_description", type="string")
      */
     private $notificationDescription;
 
@@ -52,15 +52,22 @@ class Notification {
 
     /**
      * @var \Project
-     * @ORM\ManyToOne(targetEntity="Project", inversedBy="notificationProjects")
+     * @ORM\ManyToOne(targetEntity="Project", inversedBy="projectNotifications")
      */
     private $notificationProject;
 
     /**
      * @var \User
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="notifications")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="sentNotifications")
      */
-    private $notificationUser;
+    private $notificationSender;
+    
+    /**
+     * @var \User
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="receivedNotifications")
+     */
+    private $notificationAdressee;
+    
 
     public function __construct() {
         $this->notificationDate = new \DateTime("now");
@@ -208,5 +215,51 @@ class Notification {
     public function getNotificationType()
     {
         return $this->notificationType;
+    }
+
+    /**
+     * Set notificationSender
+     *
+     * @param \Imie\SkillsBundle\Entity\User $notificationSender
+     * @return Notification
+     */
+    public function setNotificationSender(\Imie\SkillsBundle\Entity\User $notificationSender = null)
+    {
+        $this->notificationSender = $notificationSender;
+
+        return $this;
+    }
+
+    /**
+     * Get notificationSender
+     *
+     * @return \Imie\SkillsBundle\Entity\User 
+     */
+    public function getNotificationSender()
+    {
+        return $this->notificationSender;
+    }
+
+    /**
+     * Set notificationAdressee
+     *
+     * @param \Imie\SkillsBundle\Entity\User $notificationAdressee
+     * @return Notification
+     */
+    public function setNotificationAdressee(\Imie\SkillsBundle\Entity\User $notificationAdressee = null)
+    {
+        $this->notificationAdressee = $notificationAdressee;
+
+        return $this;
+    }
+
+    /**
+     * Get notificationAdressee
+     *
+     * @return \Imie\SkillsBundle\Entity\User 
+     */
+    public function getNotificationAdressee()
+    {
+        return $this->notificationAdressee;
     }
 }

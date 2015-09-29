@@ -26,7 +26,7 @@ class NotificationType extends AbstractType {
                     'choice_value' => 'id',
                     'label' => 'Type notification',
                 ))
-                ->add('notificationUser', 'entity', array(
+                ->add('notificationAdressee', 'entity', array(
                     'class' => 'ImieSkillsBundle:User',
                     'choice_label' => 'userFullName',
                     'choice_value' => 'id',
@@ -37,6 +37,7 @@ class NotificationType extends AbstractType {
                     'choice_label' => 'projectName',
                     'choice_value' => 'id',
                     'label' => 'projet concerné',
+                    'required' => false,
                 ))
                 ->add('Envoyer', 'submit', array(
                     'attr' => array('class' => 'btn btn-primary'),

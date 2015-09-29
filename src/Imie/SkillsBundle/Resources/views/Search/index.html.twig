@@ -42,7 +42,7 @@
     {% for result in results %}
     {% if result.projectName is defined  %}
     <tr>
-      <td><a href="{{ path('imie_skills_project_details', {id:result.id})}}"><img src="{{ asset(result.image.webPath) }}" alt="{{ asset(result.image.imageAlt) }}" width="48" height="48" class="img-rounded"></a></td>
+      <td>{% if result.image is not null %}<a href="{{ path('imie_skills_project_details', {id:result.id})}}"><img src="{{ asset(result.image.webPath) }}" alt="{{ asset(result.image.imageAlt) }}" width="48" height="48" class="img-rounded"></a>{% endif %}</td>
       <td><a href="{{ path('imie_skills_project_details', {id:result.id})}}">{{ result.projectName }}</a></td>
       <td>{{ result.projectDescription }}</td>
       <td>{{ result.creator }}</td>

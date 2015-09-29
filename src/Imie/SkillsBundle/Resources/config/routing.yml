@@ -116,6 +116,13 @@ imie_skills_project_delete:
     requirements:
         id: \d+
 
+imie_skills_project_deleteUser:
+    path:    /project/deleteUser/{id1}/{id2}
+    defaults: { _controller: ImieSkillsBundle:Project:deleteUser }
+    requirements:
+        id1: \d+
+        id2: \d+
+
 
 # -------- STATE --------
 
@@ -212,6 +219,7 @@ imie_skills_user_deleteSkill:
 imie_skills_notification_index:
     path:    /notification/index/
     defaults: {_controller: ImieSkillsBundle:Notification:index }
+
 
 imie_skills_notification_add:
     path:    /notification/add

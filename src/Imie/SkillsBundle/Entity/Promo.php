@@ -141,7 +141,7 @@ class Promo
      */
     public function setPromoFullName()
     {
-        $this->promoFullName = $this->course->getSchool()->getSchoolName().' - '.$this->course->getCourse().' - '.$this->getPromoName();
+        $this->promoFullName = $this->course->getSchool()->getSchoolName().' - '.$this->course->getCourse().$this->getPromoName();
 
         return $this;
     }
