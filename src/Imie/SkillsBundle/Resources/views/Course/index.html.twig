@@ -20,7 +20,7 @@
   <tbody>
     {% for course in courses if courses is defined%}
     <tr>
-      <td><a href="{{ path('imie_skills_course_detail', {id:course.id}) }}">{{ course.course }}</span></a></td>
+      <td><a href="{{ path('imie_skills_course_details', {id:course.id}) }}">{{ course.course }}</span></a></td>
       <td>{{ course.school.schoolName }}</td>
       <td><a class="btn btn-warning" href="{{ path('imie_skills_course_modify', {id:course.id}) }}" role="button"><span class="glyphicon glyphicon-cog"></span></a></td>
       <td>

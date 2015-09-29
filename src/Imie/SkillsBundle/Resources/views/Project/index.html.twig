@@ -42,7 +42,7 @@
         <div class="modal fade project{{project.id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
           <div class="modal-dialog modal-sm">
             <div class="modal-content">
-              <div class="modal-body">Supprimer {{ project.projectName }} ?</div>
+              <div class="modal-body">Supprimer le projet {{ project.projectName }} ?</div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
                 <a class="btn btn-danger" href="{{ path('imie_skills_project_delete', {id:project.id}) }}" role="button">Confirmer</a>

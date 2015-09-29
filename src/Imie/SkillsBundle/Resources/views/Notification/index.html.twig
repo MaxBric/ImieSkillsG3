@@ -21,7 +21,20 @@
     <tr>
       <td><a href="{{ path('imie_skills_notification_details', {id:notification.id}) }}">{{ notification.notificationName }}</a></td>
       <td>{{ notification.notificationDescription }}</td>
-      <td><a class="btn btn-danger" href="{{ path('imie_skills_notification_delete', {id:notification.id}) }}" role="button"><span class="glyphicon glyphicon-trash"></span></a></td>
+      <td>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".notification{{notification.id}}"><span class="glyphicon glyphicon-trash"></span></button>
+        <div class="modal fade notification{{notification.id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-body">Supprimer la notification {{ notification.notificationName }} ?</div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <a class="btn btn-danger" href="{{ path('imie_skills_notification_delete', {id:notification.id}) }}">Confirmer</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
     </tr>
     {% endif %}
     {% endfor %}

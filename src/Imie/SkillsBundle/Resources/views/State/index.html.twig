@@ -27,7 +27,7 @@
         <div class="modal fade state{{state.id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
           <div class="modal-dialog modal-sm">
             <div class="modal-content">
-              <div class="modal-body">Supprimer {{ state.statut }} ?</div>
+              <div class="modal-body">Supprimer l'étape de projet {{ state.statut }} ?</div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
                 <a class="btn btn-danger" href="{{ path('imie_skills_state_delete', {id:state.id}) }}">Confirmer</a>

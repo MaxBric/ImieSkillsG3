@@ -19,7 +19,7 @@
 <div class="modal fade user" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
-      <div class="modal-body">Supprimer {{ user.userFullName }} ?</div>
+      <div class="modal-body">Supprimer l'utilisateur {{ user.userFullName }} ?</div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
         <a class="btn btn-danger" href="{{ path('imie_skills_user_delete', {id:user.id}) }}" role="button">Confirmer</a>
@@ -63,7 +63,7 @@
             <div class="modal fade skill{{tabSkill.id}}" tabindex="-1" role="dialog">
               <div class="modal-dialog modal-sm">
                 <div class="modal-content">
-                  <div class="modal-body">Supprimer {{ tabSkill.skill.skillName }} niveau {{ tabSkill.level }} ?</div>
+                  <div class="modal-body">Supprimer la compétence {{ tabSkill.skill.skillName }} de niveau {{ tabSkill.level }} ?</div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
                     <a class="btn btn-danger" href="{{ path('imie_skills_user_deleteSkill', {id: tabSkill.id}) }}" role="button">Confirmer</a>

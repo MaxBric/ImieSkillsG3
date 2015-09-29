@@ -18,7 +18,7 @@
   <tbody>
     {% for promo in course.promos %}
     <tr>
-      <td><a href="{{ path('imie_skills_promo_detail', {id:promo.id}) }}">{{ promo.promoName }}</span></a></td>
+      <td><a href="{{ path('imie_skills_promo_details', {id:promo.id}) }}">{{ promo.promoName }}</span></a></td>
       <td><a class="btn btn-warning" href="{{ path('imie_skills_promo_modify', {id:promo.id}) }}" role="button"><span class="glyphicon glyphicon-cog"></span></a></td>
       <td>
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".course{{course.id}}"><span class="glyphicon glyphicon-trash"></span></button>

@@ -19,7 +19,7 @@
   <tbody>
     {% for school in schools if schools is defined %}
     <tr>
-      <td><a href="{{ path('imie_skills_school_detail', {id:school.id}) }}">{{ school.schoolName }}</a></td>
+      <td><a href="{{ path('imie_skills_school_details', {id:school.id}) }}">{{ school.schoolName }}</a></td>
       <td><a class="btn btn-warning" href="{{ path('imie_skills_school_modify', {id:school.id}) }}" role="button"><span class="glyphicon glyphicon-cog"></span></a></td>
       <td>
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".school{{school.id}}"><span class="glyphicon glyphicon-trash"></span></button>

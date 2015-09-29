@@ -19,7 +19,20 @@
     {% for notificationType in notificationTypes if notificationTypes is defined %}
     <tr>
       <td><a href="{{ path('imie_skills_notification_type_details', {id:notificationType.id}) }}">{{ notificationType.notificationTypeName }}</a></td>
-      <td><a class="btn btn-danger" href="{{ path('imie_skills_notification_type_delete', {id:notificationType.id}) }}" role="button"><span class="glyphicon glyphicon-trash"></span></a></td>
+      <td>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".notificationType{{notificationType.id}}"><span class="glyphicon glyphicon-trash"></span></button>
+        <div class="modal fade notificationType{{notificationType.id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-body">Supprimer le type de notification {{ notificationType.notificationTypeName }} ?</div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <a class="btn btn-danger" href="{{ path('imie_skills_notification_type_delete', {id:notificationType.id}) }}">Confirmer</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
     </tr>
     {% endfor %}
   </tbody>

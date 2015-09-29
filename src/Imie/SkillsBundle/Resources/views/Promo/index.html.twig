@@ -20,7 +20,7 @@
   </thead>
   <tbody>
     {% for promo in promos if promos is defined %}
-    <td><a href="{{ path('imie_skills_promo_detail', {id:promo.id}) }}">{{ promo.promoName }}</span></a></td>
+    <td><a href="{{ path('imie_skills_promo_details', {id:promo.id}) }}">{{ promo.promoName }}</span></a></td>
     <td>{{ promo.course.course }}</td>
     <td>{{ promo.course.school.schoolName }}</td>
     <td><a class="btn btn-warning" href="{{ path('imie_skills_promo_modify', {id:promo.id}) }}" role="button"><span class="glyphicon glyphicon-cog"></span></a></td>
