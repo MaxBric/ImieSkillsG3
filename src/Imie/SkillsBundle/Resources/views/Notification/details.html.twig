@@ -11,7 +11,19 @@
     <a class="btn btn-primary" href="{{ path('imie_skills_notification_index') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
     <hr/>
     {%if notification is defined%}
-       {# <h3>{{ notification.notificationName }}</h3>
-        <p>{{ notification.notificationDescription }}</p>#}
+        <table>
+            <tr>
+                <th>titre </th>
+                <th>description</th>
+                <th>Envoyeur</th>
+                <th>Projet</th>
+            </tr>
+            <tr>
+                <td>{{ notification.notificationName }}</h3>
+                <td>{{ notification.notificationDescription }}</td>
+                <td>{{ notification.notificationSender}}</td>
+                <td>{{ notification.notificationProject.projectName}}</td>
+            </tr>
+        </table>
     {%endif%}
 {% endblock article %}
