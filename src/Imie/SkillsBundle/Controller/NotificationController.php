@@ -59,10 +59,10 @@ class NotificationController extends Controller {
     public function deleteAction($id, Request $req) {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('ImieSkillsBundle:Notification');
-        $notificationToDelete = $repo->findOneById($id);
+        $notificationToDelete = $repo->getNotificationById($id);
 
         try {
-            $em->delete($notificationToDelete);
+            $em->remove($notificationToDelete);
             $em->flush();
             $req->getSession()->getFlashBag()->add('success', 'Notification supprimée');
         } catch (\Doctrine\DBAL\DBALException $e) {

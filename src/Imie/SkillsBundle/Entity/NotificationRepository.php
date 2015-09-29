@@ -43,10 +43,10 @@ class NotificationRepository extends EntityRepository {
 
     public function getNotificationById($id) {
         return $this->createQueryBuilder('n')
-                        ->where('n.id =: id')
+                        ->where('n.id =:id')
                         ->setParameter('id', $id)
                         ->getQuery()
-                        ->getResult();
+                        ->getSingleResult();
     }
 
 }

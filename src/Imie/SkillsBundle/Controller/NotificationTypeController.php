@@ -56,10 +56,10 @@ class NotificationTypeController extends Controller {
     public function deleteAction($id, Request $req) {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('ImieSkillsBundle:NotificationType');
-        $notificationTypeToDelete = $repo->findOneById($id);
+        $notificationTypeToDelete = $repo->getNotificationTypeById($id);
 
         try {
-            $em->delete($notificationTypeToDelete);
+            $em->remove($notificationTypeToDelete);
             $em->flush();
             $req->getSession()->getFlashBag()->add('success', 'Type de notification supprimé');
         } catch (\Doctrine\DBAL\DBALException $e) {
