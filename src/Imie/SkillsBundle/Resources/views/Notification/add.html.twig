@@ -1,16 +1,16 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-    <ol class="breadcrumb">
-        <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
-        <li><a href="{{ path('imie_skills_notification_index',{'id':app.user.id}) }}">Liste des notifications</a></li>
-        <li class="active">Envoi d'une notification</li>
-    </ol>
-    <h2><span class="glyphicon glyphicon-send"></span> Envoi d'une notification</h2>
-    <hr/>
-    <a class="btn btn-primary" href="{{ path('imie_skills_notification_index') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
-    <hr/>
-    <form method="post" action="{{ path('imie_skills_notification_add') }}" {{ form_enctype(form) }}>
-        {{ form(form) }}
-    </form>
+<ol class="breadcrumb">
+  <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
+  <li><a href="{{ path('imie_skills_notification_index',{'id':app.user.id}) }}">Liste des notifications</a></li>
+  <li class="active">Envoi d'une notification</li>
+</ol>
+<h2><span class="glyphicon glyphicon-send"></span> Envoi d'une notification</h2>
+<hr/>
+<a class="btn btn-primary" href="{{ path('imie_skills_notification_index') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
+<hr/>
+<form method="post" action="{{ path('imie_skills_notification_add') }}" {{ form_enctype(form) }}>
+  {{ form(form) }}
+</form>
 {% endblock article %}

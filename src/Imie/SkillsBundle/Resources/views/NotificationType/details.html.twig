@@ -1,15 +1,13 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-    <ol class="breadcrumb">
-        <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
-        <li><a href="{{ path('imie_skills_notification_index') }}">Liste des types notifications</a></li>
-        <li class="active">Détail du type de notification</li>
-    </ol>
-    <h2><span class="glyphicon glyphicon-bell"></span> Détail du type notification</h2>
-    <hr/>
-    <a class="btn btn-primary" href="{{ path('imie_skills_notification_type_index') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
-    <hr/>
- {#       <h3>{{ notification.notificationName }}</h3>
-        <p>{{ notification.notificationDescription }}</p>#}
+<ol class="breadcrumb">
+  <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
+  <li><a href="{{ path('imie_skills_notification_index') }}">Liste des types notification</a></li>
+  <li class="active">Détails du type de notification</li>
+</ol>
+<h2><span class="glyphicon glyphicon-bell"></span> Détails du type de notification</h2>
+<hr/>
+<a class="btn btn-primary" href="{{ path('imie_skills_notification_type_index') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
+<hr/>
 {% endblock article %}

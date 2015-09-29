@@ -31,7 +31,7 @@ class NotificationTypeController extends Controller {
         $notification = new NotificationType();
 
         $form = $this->createForm(new NotificationTypeType(), $notification, array(
-            'action' => $this->generateUrl('imie_skills_notification_add')
+            'action' => $this->generateUrl('imie_skills_notification_type_add')
         ));
 
         $form->handleRequest($req);
@@ -56,12 +56,12 @@ class NotificationTypeController extends Controller {
     public function deleteAction($id, Request $req) {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('ImieSkillsBundle:NotificationType');
-        $notificationToDelete = $repo->findOneById($id);
+        $notificationTypeToDelete = $repo->findOneById($id);
 
         try {
-            $em->delete($notificationToDelete);
+            $em->delete($notificationTypeToDelete);
             $em->flush();
-            $req->getSession()->getFlashBag()->add('success', 'Type de Notification supprimée');
+            $req->getSession()->getFlashBag()->add('success', 'Type de notification supprimé');
         } catch (\Doctrine\DBAL\DBALException $e) {
             $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de la suppression :'
                     . PHP_EOL . $e->getMessage());

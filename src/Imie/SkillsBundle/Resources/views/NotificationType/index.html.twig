@@ -1,27 +1,27 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-    <ol class="breadcrumb">
-        <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
-        <li class="active">Liste des notifications</li>
-    </ol>
-    <h2><span class="glyphicon glyphicon-bell"></span> Liste des notifications</h2>
-    <hr/>
-    <a class="btn btn-primary" href="{{ path('imie_skills_home') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
-    <a class="btn btn-primary" href="{{ path('imie_skills_notification_add') }}" role="button"><span class="glyphicon glyphicon-send"></span> Envoyer une notification</a>
-    <hr/>
-    <table class="table table-striped">
-        <thead>
-        <th>Nom</th>
-        <th>Description</th>
-    </thead>
-    <tbody>
-        {% for notificationType in notificationTypes if notificationTypes is defined %}
-            <tr>
-                <td><a href="{{ path('imie_skills_notification_details', {id:notificationType.id}) }}">{{ notificationType.notificationTypeName }}</a></td>
-                <td><a href="{{ path('imie_skills_notification_delete', {id:notificationType.id}) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
-            </tr>
-        {% endfor %}
-    </tbody>
+<ol class="breadcrumb">
+  <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
+  <li class="active">Liste des types de notification</li>
+</ol>
+<h2><span class="glyphicon glyphicon-bell"></span> Liste des types de notification</h2>
+<hr/>
+<a class="btn btn-primary" href="{{ path('imie_skills_home') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
+<a class="btn btn-info" href="{{ path('imie_skills_notification_add') }}" role="button"><span class="glyphicon glyphicon-plus"></span> Ajouter un type de notification</a>
+<hr/>
+<table class="table table-striped">
+  <thead>
+    <th class="col-md-11">Nom</th>
+    <th class="col-md-1">Supprimer</th>
+  </thead>
+  <tbody>
+    {% for notificationType in notificationTypes if notificationTypes is defined %}
+    <tr>
+      <td><a href="{{ path('imie_skills_notification_type_details', {id:notificationType.id}) }}">{{ notificationType.notificationTypeName }}</a></td>
+      <td><a class="btn btn-danger" href="{{ path('imie_skills_notification_type_delete', {id:notificationType.id}) }}" role="button"><span class="glyphicon glyphicon-trash"></span></a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
 {% endblock article %}
