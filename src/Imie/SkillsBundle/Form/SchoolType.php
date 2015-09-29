@@ -14,7 +14,9 @@ class SchoolType extends AbstractType {
   */
   public function buildForm(FormBuilderInterface $builder, array $options) {
     $builder
-    ->add('schoolName')
+    ->add('schoolName', 'text', array(
+      'label' => 'Centre de formation :'
+    ))
     ->add('Valider','submit', array(
       'attr' => array('class' => 'btn btn-primary'),
     ))

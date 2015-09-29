@@ -1,30 +1,44 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-    {% for school in school %}
-        <ol class="breadcrumb">
-            <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
-            <li><a href="{{ path('imie_skills_school_index') }}">Liste des ecoles</a></li>
-            <li class="active">{{ school.schoolName }}</li>
-        </ol>
-        <h2><span class="glyphicon glyphicon-education"></span> {{ school.schoolName }}</h2>
-        <hr/>
-        <a class="btn btn-primary" href="{{ path('imie_skills_school_index') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
-        <a class="btn btn-primary" href="{{ path('imie_skills_course_add') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter une formation</a>
-        <hr/>
-        <table class="table table-striped">
-            <thead>
-            <th>Nom</th>
-            </thead>
-            <tbody>
-            {% for course in school.courses %}
-                <tr>
-                    <td><a href="{{ path('imie_skills_course_detail', {id:course.id}) }}">{{ course.course }}</span></a></td>
-                    <td><a href="{{ path('imie_skills_course_modify', {id:course.id}) }}"><span class="glyphicon glyphicon-cog"></span></a></td>
-                    <td><a href="{{ path('imie_skills_course_delete', {id:course.id}) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+{% for school in school %}
+<ol class="breadcrumb">
+  <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
+  <li><a href="{{ path('imie_skills_school_index') }}">Liste des centres de formation</a></li>
+  <li class="active">Détails du centre de formation</li>
+</ol>
+<h2><span class="glyphicon glyphicon-education"></span> Détails du centre de formation</h2>
+<hr/>
+<a class="btn btn-primary" href="{{ path('imie_skills_school_index') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
+<hr/>
+<table class="table table-striped">
+  <thead>
+    <th class="col-md-10">Cursus</th>
+    <th class="col-md-1">Modifier</th>
+    <th class="col-md-1">Supprimer</th>
+  </thead>
+  <tbody>
+    {% for course in school.courses %}
+    <tr>
+      <td><a href="{{ path('imie_skills_course_detail', {id:course.id}) }}">{{ course.course }}</span></a></td>
+      <td><a class="btn btn-warning" href="{{ path('imie_skills_course_modify', {id:course.id}) }}" role="button"><span class="glyphicon glyphicon-cog"></span></a></td>
+      <td>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".school{{school.id}}"><span class="glyphicon glyphicon-trash"></span></button>
+        <div class="modal fade school{{school.id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-body">Supprimer le centre de formation {{ school.schoolName }} ?</div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <a class="btn btn-danger" href="{{ path('imie_skills_school_delete', {id:school.id}) }}" role="button">Confirmer</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
     {% endfor %}
+  </tbody>
+</table>
+{% endfor %}
 {% endblock article %}

@@ -14,10 +14,13 @@ class PromoType extends AbstractType {
   */
   public function buildForm(FormBuilderInterface $builder, array $options) {
     $builder
-    ->add('promoName', 'text')
-    ->add('course','entity', array(
+    ->add('promoName', null, array(
+      'label' => 'Promo :'
+    ))
+    ->add('course', 'entity', array(
       'class' => 'ImieSkillsBundle:Course',
-      'choice_label' => 'courseFullName'
+      'choice_label' => 'courseFullName',
+      'label' => 'Cursus :'
     ))
     ->add('Valider','submit', array(
       'attr' => array('class' => 'btn btn-primary'),
