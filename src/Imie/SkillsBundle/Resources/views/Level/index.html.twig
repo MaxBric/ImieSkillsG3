@@ -8,7 +8,7 @@
 <h2><span class="glyphicon glyphicon-knight"></span> Liste des niveaux</h2>
 <hr/>
 <a class="btn btn-primary" href="{{ path('imie_skills_home') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
-<a class="btn btn-primary" href="{{ path('imie_skills_level_add') }}" role="button"><span class="glyphicon glyphicon-plus"></span> Ajouter un niveau</a>
+<a class="btn btn-info" href="{{ path('imie_skills_level_add') }}" role="button"><span class="glyphicon glyphicon-plus"></span> Ajouter un niveau</a>
 <hr/>
 <table class="table table-striped">
   <thead>
@@ -18,7 +18,7 @@
   <tbody>
     {% for level in levels if levels is defined %}
     <tr>
-      <td>{{ level.level }}</a></td>
+      <td>{{ level.level }}</td>
       <td>
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".level{{level.id}}"><span class="glyphicon glyphicon-trash"></span></button>
         <div class="modal fade level{{level.id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">

@@ -19,7 +19,7 @@ class SchoolController extends Controller
             ->getSchoolsOrderedById();
 
         return $this->render('ImieSkillsBundle:School:index.html.twig', array(
-            'school' => $schools
+            'schools' => $schools
         ));
     }
 
@@ -77,7 +77,7 @@ class SchoolController extends Controller
         if ($form->isValid()) {
             try {
                 $em->flush();
-                $req->getSession()->getFlashBag()->add('success', 'school modifié');
+                $req->getSession()->getFlashBag()->add('success', 'school modifiï¿½');
                 return $this->redirect($this->generateUrl('imie_skills_school_index'));
             } catch (\Doctrine\DBAL\DBALException $e) {
                 $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de la suppression :'
@@ -103,7 +103,7 @@ class SchoolController extends Controller
             $em->remove($school);
             $em->flush();
 
-            $req->getSession()->getFlashBag()->add('success', 'School supprimé');
+            $req->getSession()->getFlashBag()->add('success', 'School supprimï¿½');
         } catch (\Doctrine\DBAL\DBALException $e) {
             $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de la suppression :'
                 . PHP_EOL . $e->getMessage());

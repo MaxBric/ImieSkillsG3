@@ -202,7 +202,9 @@ class UserController extends Controller {
                 $em->persist($userToModify);
                 $em->flush();
                 $req->getSession()->getFlashBag()->add('success', 'Utilisateur modifié');
-                return $this->redirect($this->generateUrl('imie_skills_user_index'));
+                return $this->redirect($this->generateUrl('imie_skills_user_details', array(
+                  'id' => $id
+                )));
             } catch (\Doctrine\DBAL\DBALException $e) {
                 $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de l\'ajout :'
                         . PHP_EOL . $e->getMessage());

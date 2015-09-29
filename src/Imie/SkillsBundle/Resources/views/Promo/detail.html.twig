@@ -1,29 +1,40 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-
-    <ol class="breadcrumb">
-        <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
-        <li><a href="{{ path('imie_skills_promo_index') }}">Liste des eleves</a></li>
-        {#<li class="active">{{ user.promo.promoName }}</li>#}
-    </ol>
-    <h2><span class="glyphicon glyphicon-education"></span> Classe</h2>
-    <hr/>
-    <a class="btn btn-primary" href="{{ path('imie_skills_promo_index') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
-    <a class="btn btn-primary" href="{{ path('imie_skills_promo_add') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter une classe</a>
-    <hr/>
-    <table class="table table-striped">
-        <thead>
-        <th>Nom Prenom</th>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td><a href="{{ path('imie_skills_user_details', {id:user.id}) }}">{{ user.userFullName}}</span></a></td>
-                <td><a href="{{ path('imie_skills_user_modify', {id:user.id}) }}"><span class="glyphicon glyphicon-cog"></span></a></td>
-                {#<td><a href="{{ path('imie_skills_user_delete', {id:user.id}) }}"><span class="glyphicon glyphicon-trash"></span></a></td>#}
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<ol class="breadcrumb">
+  <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
+  <li><a href="{{ path('imie_skills_promo_index') }}">Liste des promos</a></li>
+  <li class="active">Détails de la promo</li>
+</ol>
+<h2><span class="glyphicon glyphicon-education"></span> Détails de la promo</h2>
+<hr/>
+<a class="btn btn-primary" href="{{ path('imie_skills_promo_index') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
+<hr/>
+<table class="table table-striped">
+  <thead>
+    <th class="col-md-1"></th>
+    <th class="col-md-11">Membres de la promo</th>
+  </thead>
+  <tbody>
+    {% for user in users %}
+    <tr>
+      <td><a href="{{ path('imie_skills_user_details', {id:user.id})}}"><img src="{{ asset(user.image.webPath) }}" alt="{{ asset(user.image.imageAlt) }}" width="48" height="48" class="img-circle"></a></td>
+      <td>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".promo{{promo.id}}"><span class="glyphicon glyphicon-trash"></span></button>
+        <div class="modal fade promo{{promo.id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-body">Supprimer la promo {{ promo.promoName }} ?</div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <a class="btn btn-danger" href="{{ path('imie_skills_promo_delete', {id:promo.id}) }}" role="button">Confirmer</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock article %}

@@ -1,11 +1,16 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-    <h2><span class="glyphicon glyphicon-user"></span> Modification d'une ecole</h2>
-    <hr/>
-    <a class="btn btn-primary" href="{{ path('imie_skills_school_index') }}"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
-    <hr/>
-    <form method="post" action="{{ path('imie_skills_school_modify', {id:id}) }}" {{ form_enctype(form) }}>
-        {{ form(form) }}
-    </form>
+<ol class="breadcrumb">
+  <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
+  <li><a href="{{ path('imie_skills_school_index') }}">Liste des centres de formation</a></li>
+  <li class="active">Modification d'un centre de formation</li>
+</ol>
+<h2><span class="glyphicon glyphicon-education"></span> Modification d'un centre de formation</h2>
+<hr/>
+<a class="btn btn-primary" href="{{ path('imie_skills_school_index') }}"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
+<hr/>
+<form method="post" action="{{ path('imie_skills_school_modify', {id:id}) }}" {{ form_enctype(form) }}>
+  {{ form(form) }}
+</form>
 {% endblock article %}
