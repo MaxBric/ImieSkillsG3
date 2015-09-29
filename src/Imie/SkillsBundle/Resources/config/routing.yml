@@ -195,6 +195,7 @@ imie_skills_notification_index:
     path:    /notification/index/
     defaults: {_controller: ImieSkillsBundle:Notification:index }
 
+
 imie_skills_notification_add:
     path:    /notification/add
     defaults: {_controller: ImieSkillsBundle:Notification:add }

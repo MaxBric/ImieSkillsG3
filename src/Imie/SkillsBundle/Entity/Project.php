@@ -125,7 +125,7 @@ class Project {
      * 
      */
     protected $image;
-    
+
     /**
      * @var \Notification
      * @ORM\OneToMany(targetEntity="Notification", mappedBy="notificationProject")
@@ -488,15 +488,13 @@ class Project {
         }
     }
 
-
     /**
      * Add projectNotifications
      *
      * @param \Imie\SkillsBundle\Entity\Notification $projectNotifications
      * @return Project
      */
-    public function addProjectNotification(\Imie\SkillsBundle\Entity\Notification $projectNotifications)
-    {
+    public function addProjectNotification(\Imie\SkillsBundle\Entity\Notification $projectNotifications) {
         $this->projectNotifications[] = $projectNotifications;
 
         return $this;
@@ -507,8 +505,7 @@ class Project {
      *
      * @param \Imie\SkillsBundle\Entity\Notification $projectNotifications
      */
-    public function removeProjectNotification(\Imie\SkillsBundle\Entity\Notification $projectNotifications)
-    {
+    public function removeProjectNotification(\Imie\SkillsBundle\Entity\Notification $projectNotifications) {
         $this->projectNotifications->removeElement($projectNotifications);
     }
 
@@ -517,8 +514,8 @@ class Project {
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getProjectNotifications()
-    {
+    public function getProjectNotifications() {
         return $this->projectNotifications;
     }
+
 }

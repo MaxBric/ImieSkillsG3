@@ -12,8 +12,7 @@ class NotificationController extends Controller {
     public function indexAction() {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('ImieSkillsBundle:Notification');
-        $notifications = $repo->getLastNotificationsOrderedByDate();
-
+        $notifications = $repo->getNotifs();
         return $this->render('ImieSkillsBundle:Notification:index.html.twig', array('notifications' => $notifications));
     }
 
@@ -23,29 +22,6 @@ class NotificationController extends Controller {
         $notification = $repo->findOneById($id);
 
         return $this->render('ImieSkillsBundle:Notification:details.html.twig', array('notification' => $notification));
-    }
-
-    public function invitationAction() {
-        try {
-            $em = $this->getDoctrine()->getManager();
-            //user
-            $repoUser = $em->getRepository('ImieSkillsBundle:User');
-            $currentUser = $this->get('security.token_storage')->getToken()->getUser();
-            $user = $repo->getUserById($currentUser->getId());
-            
-            $userNotification->setNotificationUSer($user);
-            $currentUser->addNotifications($userNotification);
-            
-            //project
-            $repoProject = $em->getRepository('ImieSkillsBundle:Project');
-//            $currentProject= $t
-            
-            $em->persist($userNotification);
-            $em->flush();
-            return $this->redirect($this->generateUrl('imie_skills_user_addSkill'));
-        } catch (\Doctrine\DBAL\DBALException $e) {
-            echo $e->getMessage();
-        }
     }
 
     public function addAction(Request $req) {
@@ -59,6 +35,12 @@ class NotificationController extends Controller {
         if ($form->isValid()) {
             try {
                 $em = $this->getDoctrine()->getManager();
+                $repoUser = $em->getRepository('ImieSkillsBundle:User');
+                $currentUser = $this->get('security.token_storage')->getToken()->getUser();
+                $sender = $repoUser->getUserById($currentUser->getId());
+                $notification->setNotificationSender($sender);
+                $sender->addSentNotification($notification);
+
                 $em->persist($notification);
                 $em->flush();
                 $req->getSession()->getFlashBag()->add('success', 'Notification ajouté');

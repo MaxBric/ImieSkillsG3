@@ -64,7 +64,6 @@
     {% endfor %}
     {% else %}À recruter
     {% endif %}
-<<<<<<< HEAD
     <hr/>
     <h3>Nom du projet : {{ project.projectName }}</h3>{% if project.image is not null %}<img src="{{ asset(project.image.webPath) }}" alt="{{ asset(project.image.imageAlt) }}" width="100" height="100">{% endif %}{% if project.creator.id == app.user.id %}<span>Vous êtes Fondateur de ce projet</span>{% endif %}
     <hr/>
@@ -108,8 +107,5 @@
 {% endif %}
 
 </tbody>
-=======
-  </tbody>
->>>>>>> 6bc1730bd42763fbea6d8b1c76cebc32e88abc7f
-</table>
+
 {% endblock article %}

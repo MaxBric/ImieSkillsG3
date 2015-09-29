@@ -10,6 +10,8 @@
     <hr/>
     <a class="btn btn-primary" href="{{ path('imie_skills_notification_index') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
     <hr/>
-        <h3>{{ notification.notificationName }}</h3>
-        <p>{{ notification.notificationDescription }}</p>
+    {%if notification is defined%}
+       {# <h3>{{ notification.notificationName }}</h3>
+        <p>{{ notification.notificationDescription }}</p>#}
+    {%endif%}
 {% endblock article %}
