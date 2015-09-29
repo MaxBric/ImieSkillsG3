@@ -14,17 +14,19 @@
 <hr/>
 <table class="table table-striped">
   <thead>
+    <th class="col-md-1"></th>
     <th class="col-md-2">Nom</th>
-    <th class="col-md-3">Mail</th>
-    <th class="col-md-5">Compétences</th>
+    <th class="col-md-3">Promo</th>
+    <th class="col-md-4">Compétences</th>
     <th class="col-md-1">Modifier</th>
     <th class="col-md-1">Supprimer</th>
   </thead>
   <tbody>
     {% for user in users if users is defined %}
     <tr>
+      <td><a href="{{ path('imie_skills_user_details', {id:user.id})}}"><img src="{{ asset(user.image.webPath) }}" alt="{{ asset(user.image.imageAlt) }}" width="48" height="48" class="img-circle"></a></td>
       <td><a href="{{ path('imie_skills_user_details', {id:user.id})}}">{{ user.userFullName }}</a></td>
-      <td>{{ user.Email }}</td>
+      <td>{{ user.promo.course.course }}</td>
       <td>{% if user.skills %}
         <ul>
           {% for tabSkill in user.skills %}

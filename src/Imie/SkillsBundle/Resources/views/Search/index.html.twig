@@ -14,7 +14,6 @@
 </form>
 {% set proj = false %}
 {% set usr = false %}
-
 {% for results in search.results if search is defined %}
 {% for result in results %}
 {% if result.projectName is defined %}
@@ -28,22 +27,22 @@
 {% if usr is defined %}
 {% endif %}
 {% if proj == true  %}
-<h3>Projets</h3>
+<h4>Projets</h4>
 <table class="table table-striped">
   <thead>
-    <td></td>
-    <td>Nom du projet</td>
-    <td>Description</td>
-    <td>Créateur</td>
-    <td>Chef de projet</td>
-    <td>Avancement</td>
+    <th class="col-md-1"></th>
+    <th class="col-md-2">Nom du projet</th>
+    <th class="col-md-2">Créateur</th>
+    <th class="col-md-2">Chef de projet</th>
+    <th class="col-md-4">Description</th>
+    <th class="col-md-1">Avancement</th>
   </thead>
   <tbody>
     {% for results in search.results if search is defined %}
     {% for result in results %}
     {% if result.projectName is defined  %}
     <tr>
-      <td>{% if result.image is not null %}<img src="{{ asset(result.image.webPath) }}" alt="{{ asset(result.image.imageAlt) }}" width="100" height="100">{% endif %}</td>
+      <td><a href="{{ path('imie_skills_project_details', {id:result.id})}}"><img src="{{ asset(result.image.webPath) }}" alt="{{ asset(result.image.imageAlt) }}" width="48" height="48" class="img-rounded"></a></td>
       <td><a href="{{ path('imie_skills_project_details', {id:result.id})}}">{{ result.projectName }}</a></td>
       <td>{{ result.projectDescription }}</td>
       <td>{{ result.creator }}</td>
@@ -58,23 +57,23 @@
 <hr/>
 {% endif %}
 {% if usr == true %}
-<h3>Utilisateurs</h3>
+<h4>Utilisateurs</h4>
 <table class="table table-striped">
   <thead>
-    <td></td>
-    <td>Nom d'utilisateur</td>
-    <td>Description</td>
-    <td>Promo</td>
+    <th class="col-md-1"></th>
+    <th class="col-md-2">Nom d'utilisateur</th>
+    <th class="col-md-1">Promo</th>
+    <th class="col-md-8">Description</th>
   </thead>
   <tbody>
     {% for results in search.results if search is defined %}
     {% for result in results %}
     {% if result.userName is defined  %}
     <tr>
-      <td>{% if result.image is not null %}<img src="{{ asset(result.image.webPath) }}" alt="{{ asset(result.image.imageAlt) }}" width="100" height="100">{% endif %}</td>
+      <td><a href="{{ path('imie_skills_user_details', {id:result.id})}}"><img src="{{ asset(result.image.webPath) }}" alt="{{ asset(result.image.imageAlt) }}" width="48" height="48" class="img-circle"></a></td>
       <td><a href="{{ path('imie_skills_user_details', {id:result.id})}}">{{ result.userFullName }}</a></td>
+      <td>{{ result.promo.course.course }}</td>
       <td>{{ result.userDescription }}</td>
-      <td>{{ result.promo }}</td>
     </tr>
     {% endif %}
     {% endfor %}

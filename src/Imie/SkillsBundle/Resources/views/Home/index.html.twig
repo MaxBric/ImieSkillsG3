@@ -17,18 +17,20 @@
       <h1>Rechercher un projet, un profil ou une compétence</h1>
     </div>
   </a>
-  <a href="{{ path('fos_user_security_login') }}">
+  <a href="{{ path('imie_skills_user_details', {'id': app.user.id}) }}">
     <div id="user-square">
       <h1>Accéder à mon profil</h1>
     </div>
   </a>
+  <a href="{{ path('imie_skills_home') }}">
+    <div id="imie-skills-square">
+      <img src="{{ asset('bundles/imieskills/images/ImieSkillsLogo.png') }}" alt="ImieSkillsLogo">
+    </div>
+  </a>
   <a href="http://imie-ecole-informatique.fr" target="imie-nantes">
-    <div id="logo-square">
+    <div id="imie-square">
       <img src="{{ asset('bundles/imieskills/images/ImieLogo.png') }}" alt="ImieLogo">
     </div>
   </a>
-  <div id="title-square">
-    <h1>IMIE Skills</h1>
-  </div>
 </div>
 {% endblock article %}

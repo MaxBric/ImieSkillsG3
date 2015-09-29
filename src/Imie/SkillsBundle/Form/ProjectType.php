@@ -64,6 +64,7 @@ class ProjectType extends AbstractType {
       'class' => 'ImieSkillsBundle:User',
       'choice_label' => 'userFullName',
       'choice_value' => 'id',
+      'multiple' => true,
       'required' => false,
       'label' => 'Équipe : (vous faites déjà partie de l\'équipe en tant que Fondateur)'
     ))
