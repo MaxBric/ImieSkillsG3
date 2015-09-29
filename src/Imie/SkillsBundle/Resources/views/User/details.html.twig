@@ -40,7 +40,7 @@
     <p><b>Téléphone :</b> {{ user.userPhoneNumber }}</p>
     <p><b>Email :</b> {{ user.email }}</p>
     <p><b>Date de naissance :</b> {{ user.userBirthday|date('d/m/Y') }}</p>
-    <p><b>Promo :</b> {{ user.promo.promoFullName }}</p>
+    <p><b>Promo :</b> {% if user.promo is not null %}{{ user.promo.promoFullName }}{% endif %}</p>
     <p><b>Description :</b> {{ user.userDescription }}</p>
   </div>
   <div class="col-md-5">
@@ -84,7 +84,7 @@
 </div>
 <hr/>
 {% if (user.createdProjects or user.managedProjects or joinedProjects) %}
-<h4>Projets dont votre rôle est Fondateur</h4>
+<h4>Projets dont vous êtes Fondateur</h4>
 <table class="table table-striped user-page-table">
   <thead>
     <th class="col-md-6">Nom</th>
@@ -118,7 +118,7 @@
   </tbody>
 </table>
 <hr/>
-<h4>Projets dont votre rôle est Chef de projet</h4>
+<h4>Projets dont vous êtes Chef de projet</h4>
 <table class="table table-striped user-page-table">
   <thead>
     <th class="col-md-3">Nom</th>
@@ -136,7 +136,7 @@
   </tbody>
 </table>
 <hr/>
-<h4>Projets dont votre rôle est Autre</h4>
+<h4>Projets dont vous faites parti</h4>
 <table class="table table-striped user-page-table">
   <thead>
     <th class="col-md-3">Nom</th>
