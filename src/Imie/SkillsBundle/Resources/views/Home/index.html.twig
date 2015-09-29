@@ -6,8 +6,29 @@
 </ol>
 <h2><span class="glyphicon glyphicon-home"></span> Bienvenue</h2>
 <hr/>
-<div id="imie-home-logo">
-  <img src="{{ asset('bundles/imieskills/images/ImieLogo.png') }}" alt="ImieLogo" width="256" height="256">
+<div id="home-page-content">
+  <a href="{{ path('imie_skills_project_add') }}">
+    <div id="project-square">
+      <h1>Créer un projet</h1>
+    </div>
+  </a>
+  <a href="{{ path('imie_skills_search') }}">
+    <div id="search-square">
+      <h1>Rechercher un projet, un profil ou une compétence</h1>
+    </div>
+  </a>
+  <a href="{{ path('fos_user_security_login') }}">
+    <div id="user-square">
+      <h1>Accéder à mon profil</h1>
+    </div>
+  </a>
+  <a href="http://imie-ecole-informatique.fr" target="imie-nantes">
+    <div id="logo-square">
+      <img src="{{ asset('bundles/imieskills/images/ImieLogo.png') }}" alt="ImieLogo">
+    </div>
+  </a>
+  <div id="title-square">
+    <h1>IMIE Skills</h1>
+  </div>
 </div>
-<h1 id="imie-skills-home-title">IMIE Skills</h1>
 {% endblock article %}

@@ -36,17 +36,24 @@ class Skill
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="skillDescription", type="string", length=255)
+     * @ORM\Column(name="skillDescription", type="string", length=255,nullable=true)
      */
     private $skillDescription;
 
     /**
-     * @var integer
-     * @ORM\Column(name="skillParentId", type="integer", nullable=true)
+     * @var object
+     * @ORM\ManyToOne(targetEntity="Skill", inversedBy="skillChilds")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $skillParentId;
+    private $skillParent;
     
+    /**
+     * @var arrayCollection $skillChilds
+     * @ORM\OneToMany(targetEntity="Skill", mappedBy="skillParent")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $skillChilds;
+
     /**
      * @var \UserSkill
      * @ORM\OneToMany(targetEntity="UserSkill", mappedBy="skill")
@@ -110,29 +117,7 @@ class Skill
         return $this->skillDescription;
     }
 
-    /**
-     * Set skillParentId
-     *
-     * @param integer $skillParentId
-     * @return Skill
-     */
-    public function setSkillParentId($skillParentId)
-    {
-        $this->skillParentId = $skillParentId->getId();
 
-        return $this;
-    }
-
-    /**
-     * Get skillParentId
-     *
-     * @return integer
-     */
-    public function getSkillParentId()
-    {
-        return $this->skillParentId;
-    }
-   
     /**
      * Constructor
      */
@@ -167,10 +152,66 @@ class Skill
     /**
      * Get users
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUsers()
     {
         return $this->users;
+    }
+
+    /**
+     * Set skillParent
+     *
+     * @param \Imie\SkillsBundle\Entity\Skill $skillParent
+     * @return Skill
+     */
+    public function setSkillParent(\Imie\SkillsBundle\Entity\Skill $skillParent = null)
+    {
+        $this->skillParent = $skillParent;
+
+        return $this;
+    }
+
+    /**
+     * Get skillParent
+     *
+     * @return \Imie\SkillsBundle\Entity\Skill 
+     */
+    public function getSkillParent()
+    {
+        return $this->skillParent;
+    }
+
+    /**
+     * Add skillChilds
+     *
+     * @param \Imie\SkillsBundle\Entity\Skill $skillChilds
+     * @return Skill
+     */
+    public function addSkillChild(\Imie\SkillsBundle\Entity\Skill $skillChilds)
+    {
+        $this->skillChilds[] = $skillChilds;
+
+        return $this;
+    }
+
+    /**
+     * Remove skillChilds
+     *
+     * @param \Imie\SkillsBundle\Entity\Skill $skillChilds
+     */
+    public function removeSkillChild(\Imie\SkillsBundle\Entity\Skill $skillChilds)
+    {
+        $this->skillChilds->removeElement($skillChilds);
+    }
+
+    /**
+     * Get skillChilds
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSkillChilds()
+    {
+        return $this->skillChilds;
     }
 }

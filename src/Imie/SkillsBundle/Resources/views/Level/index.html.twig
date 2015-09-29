@@ -1,42 +1,40 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-    <ol class="breadcrumb">
-        <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
-        <li class="active">Liste des niveaux</li>
-    </ol>
-    <h2><span class="glyphicon glyphicon-knight"></span> Liste des niveaux</h2>
-    <hr/>
-    <a class="btn btn-primary" href="{{ path('imie_skills_home') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
-    <a class="btn btn-primary" href="{{ path('imie_skills_level_add') }}" role="button"><span class="glyphicon glyphicon-plus"></span> Ajouter un niveau</a>
-    <hr/>
-    <table class="table table-striped">
-        <thead>
-        <th>Niveau</th>
-        <th></th>
-    </thead>
-    <tbody>
-        {% for level in levels if levels is defined %}
-            <tr>
-                <td>{{ level.level }}</a></td>
-                <td>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".{{level.id}}"><span class="glyphicon glyphicon-trash"></span></button>
-                    <div class="modal fade {{level.id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-                        <div class="modal-dialog modal-sm">
-                            <div class="modal-content">
-                                <div class="modal-body">
-                                    Supprimer {{ level.level }} ?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                                    <a href="{{ path('imie_skills_level_delete', {id:level.id}) }}"><button type="button" class="btn btn-primary">Confirmer</button></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        {% endfor %}
-    </tbody>
+<ol class="breadcrumb">
+  <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
+  <li class="active">Liste des niveaux</li>
+</ol>
+<h2><span class="glyphicon glyphicon-knight"></span> Liste des niveaux</h2>
+<hr/>
+<a class="btn btn-primary" href="{{ path('imie_skills_home') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
+<a class="btn btn-primary" href="{{ path('imie_skills_level_add') }}" role="button"><span class="glyphicon glyphicon-plus"></span> Ajouter un niveau</a>
+<hr/>
+<table class="table table-striped">
+  <thead>
+    <th class="col-md-11">Niveau</th>
+    <th class="col-md-1">Supprimer</th>
+  </thead>
+  <tbody>
+    {% for level in levels if levels is defined %}
+    <tr>
+      <td>{{ level.level }}</a></td>
+      <td>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".level{{level.id}}"><span class="glyphicon glyphicon-trash"></span></button>
+        <div class="modal fade level{{level.id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-body">Supprimer {{ level.level }} ?</div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <a class="btn btn-danger" href="{{ path('imie_skills_level_delete', {id:level.id}) }}" role="button">Confirmer</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
 {% endblock article %}

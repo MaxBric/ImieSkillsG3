@@ -4,12 +4,16 @@ namespace Imie\SkillsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * Project
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Imie\SkillsBundle\Entity\ProjectRepository")
+ * @UniqueEntity("projectName")
  */
 class Project {
 
@@ -26,6 +30,7 @@ class Project {
      * @var string
      *
      * @ORM\Column(name="projectName", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $projectName;
 
@@ -33,6 +38,8 @@ class Project {
      * @var \DateTime
      *
      * @ORM\Column(name="projectEstimatedEnd", type="datetime")
+     * @Assert\Date()
+     * @Assert\NotBlank()
      */
     private $projectEstimatedEnd;
 
@@ -40,6 +47,8 @@ class Project {
      * @var \DateTime
      *
      * @ORM\Column(name="projectStart", type="datetime", nullable=true)
+     * @Assert\Date()
+     * 
      */
     private $projectStart;
 
@@ -47,6 +56,7 @@ class Project {
      * @var \DateTime
      *
      * @ORM\Column(name="projectEnd", type="datetime", nullable=true)
+     * @Assert\Date()
      */
     private $projectEnd;
 
@@ -54,6 +64,8 @@ class Project {
      * @var \DateTime
      *
      * @ORM\Column(name="projectEstimatedStart", type="datetime")
+     * @Assert\Date()
+     * @Assert\NotBlank()
      */
     private $projectEstimatedStart;
 
@@ -61,6 +73,8 @@ class Project {
      * @var integer
      *
      * @ORM\Column(name="projectProgress", type="integer")
+     * @Assert\NotBlank()
+     *
      */
     private $projectProgress;
 
@@ -68,6 +82,7 @@ class Project {
      * @var string
      *
      * @ORM\Column(name="projectDescription", type="text")
+     * @Assert\NotBlank()
      */
     private $projectDescription;
 
@@ -92,18 +107,41 @@ class Project {
     /**
      * @var \State
      * @ORM\ManyToOne(targetEntity="State", inversedBy="projects")
+     * @Assert\NotBlank()
      */
     private $state;
 
     /**
      * @var \Skill
      * @ORM\ManyToMany(targetEntity="Skill")
+     * @Assert\NotBlank()
      */
     private $skills;
+
+    /**
+     * @var string
+     *
+     * @ORM\OneToOne(targetEntity="Image", cascade={"persist", "remove"})
+     * 
+     */
+    protected $image;
+    
+    /**
+<<<<<<< HEAD
+     * @ORM\OneToMany(targetEntity="Notification", mappedBy="notificationProject")
+     */
+    private $notificationProjects;
+=======
+     * @var \Notification
+     * @ORM\OneToMany(targetEntity="Notification", mappedBy="notificationProject")
+     */
+    protected $projectNotifications;
+>>>>>>> c24cae4d81c8dbd52957d14ec023deb13156f863
 
     public function __construct() {
         $this->skills = new ArrayCollection();
         $this->users = new ArrayCollection();
+        $this->projectNotifications = new ArrayCollection();
         $this->projectEstimatedEnd = new \DateTime('now');
         $this->projectEstimatedStart = new \DateTime('now');
     }
@@ -308,7 +346,19 @@ class Project {
      */
     public function addUser(\Imie\SkillsBundle\Entity\User $users) {
         $this->users[] = $users;
-  
+
+
+        return $this;
+    }
+
+    /**
+     * Set users
+     *
+     * @param \Imie\SkillsBundle\Entity\User $users
+     * @return Project
+     */
+    public function setUser(\Imie\SkillsBundle\Entity\User $users) {
+        $this->users[] = $users;
 
         return $this;
     }
@@ -404,6 +454,44 @@ class Project {
         $this->creator = $creator;
 
         return $this;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \Imie\SkillsBundle\Entity\Image $image
+     * @return Produit
+     */
+    public function setImage(\Imie\SkillsBundle\Entity\Image $image = null) {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Imie\SkillsBundle\Entity\Image 
+     */
+    public function getImage() {
+        return $this->image;
+    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContextInterface $context) {
+        if ($this->projectEstimatedStart > $this->projectEstimatedEnd) {
+            $context->addViolationAt(
+                    'projectEstimatedEnd', 'Cette date est invalide', array(), null
+            );
+        }
+
+        if ($this->projectStart > $this->projectEnd) {
+            $context->addViolationAt(
+                    'projectEnd', 'Cette date est invalide', array(), null
+            );
+        }
     }
 
 }

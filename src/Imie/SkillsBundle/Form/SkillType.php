@@ -17,9 +17,10 @@ class SkillType extends AbstractType {
       'label' => 'Nom de la compétence:'
     ))
     ->add('skillDescription', null, array(
-      'label' => 'Description :'
+      'label' => 'Description :',
+        'required' => false,
     ))
-    ->add('skillParentId', 'entity', array(
+    ->add('skillParent', 'entity', array(
       'class' => 'ImieSkillsBundle:Skill',
       'choice_label' => 'skillName',
       'choice_value' => 'id',
