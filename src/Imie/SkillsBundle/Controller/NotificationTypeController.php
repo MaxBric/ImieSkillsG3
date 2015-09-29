@@ -12,9 +12,9 @@ class NotificationTypeController extends Controller {
     public function indexAction() {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('ImieSkillsBundle:NotificationType');
-        $notifications = $repo->getLastNotificationsOrderedByDate();
+        $notificationTypes = $repo->getNotificationTypesOrderedById();
 
-        return $this->render('ImieSkillsBundle:NotificationType:index.html.twig', array('notifications' => $notifications));
+        return $this->render('ImieSkillsBundle:NotificationType:index.html.twig', array('notificationTypes' => $notificationTypes));
     }
 
     public function detailsAction($id) {
