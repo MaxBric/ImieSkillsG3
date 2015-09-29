@@ -52,7 +52,7 @@ class User extends BaseUser {
      * @var string
      *
      * @ORM\Column(name="userFullName", type="string", length=255)
-     * 
+     *
      */
     private $userFullName;
 
@@ -371,6 +371,7 @@ class User extends BaseUser {
      */
     public function removeJoinedProject(\Imie\SkillsBundle\Entity\Project $joinedProjects) {
         $this->joinedProjects->removeElement($joinedProjects);
+        $joinedProjects->removeUser($this);
     }
 
     /**
@@ -458,7 +459,7 @@ class User extends BaseUser {
     /**
      * Get promo
      *
-     * @return \Imie\SkillsBundle\Entity\Promo 
+     * @return \Imie\SkillsBundle\Entity\Promo
      */
     public function getPromo() {
         return $this->promo;
@@ -489,7 +490,7 @@ class User extends BaseUser {
     /**
      * Get skills
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSkills() {
         return $this->skills;
@@ -512,7 +513,7 @@ class User extends BaseUser {
     /**
      * Get isAdmin
      *
-     * @return string 
+     * @return string
      */
     public function getIsAdmin()
     {

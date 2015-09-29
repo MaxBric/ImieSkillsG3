@@ -52,7 +52,7 @@ class Notification {
 
     /**
      * @var \Project
-     * @ORM\ManyToOne(targetEntity="Project", inversedBy="notificationProjects")
+     * @ORM\ManyToOne(targetEntity="Project", inversedBy="projectNotifications")
      */
     private $notificationProject;
 
