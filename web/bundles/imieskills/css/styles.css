@@ -1,79 +1,114 @@
 #header-logo {
-  padding-top: 0px;
-  padding-bottom: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
 }
 
 body {
-  padding-top: 70px;
-  padding-bottom: 70px;
+	padding-top: 70px;
+	padding-bottom: 70px;
 }
 
 .navbar-fixed-bottom {
-  text-align: center;
-  padding-top: 15px;
+	text-align: center;
+	padding-top: 15px;
 }
 
 a:hover {
-  text-decoration: none;
+	text-decoration: none;
 }
 
 h3 {
-  margin-top: 0px;
+	margin-top: 0px;
 }
 
 ul {
-  list-style-type: none;
+	list-style-type: none;
 }
 
 #project-page-head, #user-page-head {
-  padding-top: 70px;
-  padding-bottom: 210px;
+	padding-top: 70px;
+	padding-bottom: 210px;
 }
 
 .project-page-table, .user-page-table {
-  margin-top: 35px;
-  margin-bottom: 140px;
+	margin-top: 35px;
+	margin-bottom: 140px;
 }
 
 #project-square, #search-square, #user-square, #imie-square, #imie-skills-square {
-  width: 320px;
-  height: 320px;
-  display: inline-block;
-  vertical-align: top;
-  margin: 21px;
+	width: 320px;
+	height: 320px;
+	display: inline-block;
+	vertical-align: top;
+	margin: 21px;
 }
 
 #project-square {
-  background-color: #5cb85c;
+	background-color: #5cb85c;
 }
 
 #search-square {
-  background-color: #5bc0de;
+	background-color: #5bc0de;
 }
 
 #user-square {
-  background-color: #f0ad4e;
+	background-color: #f0ad4e;
 }
 
 #imie-skills-square img, #imie-square img {
-  width: 320px;
-  height: 320px;
+	width: 320px;
+	height: 320px;
 }
 
 #header-logo:hover, #project-square:hover, #search-square:hover, #user-square:hover, #imie-skills-square img:hover, #imie-square img:hover {
-  opacity: 0.7;
+	opacity: 0.7;
 }
 
 #home-page-content h1 {
-  margin: 7px;
-  padding: 7px;
-  text-align: right;
-  color: white;
+	margin: 7px;
+	padding: 7px;
+	text-align: right;
+	color: white;
 }
 
 .notification_div {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  background: blue;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	background: blue;
+}
+
+.form-signin {
+	max-width: 330px;
+	padding: 15px;
+	margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+	margin-bottom: 10px;
+}
+.form-signin .checkbox {
+	font-weight: normal;
+}
+.form-signin .form-control {
+	position: relative;
+	height: auto;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 10px;
+	font-size: 16px;
+}
+.form-signin .form-control:focus {
+	z-index: 2;
+}
+.form-signin input[type="email"] {
+	margin-bottom: -1px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+	margin-bottom: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
 }
