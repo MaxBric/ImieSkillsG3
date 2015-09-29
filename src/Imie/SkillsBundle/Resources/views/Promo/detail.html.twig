@@ -1,0 +1,29 @@
+{% extends 'ImieSkillsBundle::layout.html.twig' %}
+
+{% block article %}
+
+    <ol class="breadcrumb">
+        <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
+        <li><a href="{{ path('imie_skills_promo_index') }}">Liste des eleves</a></li>
+        {#<li class="active">{{ user.promo.promoName }}</li>#}
+    </ol>
+    <h2><span class="glyphicon glyphicon-education"></span>promo</h2>
+    <hr/>
+    <a class="btn btn-primary" href="javascript:history.go(-1)" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
+    <a class="btn btn-primary" href="{{ path('imie_skills_promo_add') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter une classe</a>
+    <hr/>
+    <table class="table table-striped">
+        <thead>
+        <th>Nom Prenom</th>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td><a href="{{ path('imie_skills_user_details', {id:user.id}) }}">{{ user.userFullName}}</span></a></td>
+                <td><a href="{{ path('imie_skills_user_modify', {id:user.id}) }}"><span class="glyphicon glyphicon-cog"></span></a></td>
+                {#<td><a href="{{ path('imie_skills_user_delete', {id:user.id}) }}"><span class="glyphicon glyphicon-trash"></span></a></td>#}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock article %}

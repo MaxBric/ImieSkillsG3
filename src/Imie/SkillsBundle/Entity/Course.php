@@ -36,6 +36,7 @@ class Course
      */
     private $school;
 
+
     /**
      * Get id
      *
@@ -139,4 +140,5 @@ class Course
     {
         return $this->promos;
     }
+    
 }

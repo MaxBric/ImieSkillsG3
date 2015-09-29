@@ -39,7 +39,7 @@ class SchoolController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($school);
                 $em->flush();
-                return $this->redirect($this->generateUrl('imie_skills_school_add'));
+                return $this->redirect($this->generateUrl('imie_skills_school_index'));
             }
             catch (\Doctrine\DBAL\DBALException $e){
                 echo $e->getMessage();
@@ -48,6 +48,16 @@ class SchoolController extends Controller
 
         return $this->render('ImieSkillsBundle:School:add.html.twig', array(
             'form' => $form->createView()
+        ));
+    }
+
+    public function detailAction(Request $req, $id){
+        $school = $this->getDoctrine()
+            ->getRepository('ImieSkillsBundle:School')
+            ->getSchoolById($id);
+
+        return $this->render('ImieSkillsBundle:School:detail.html.twig',array(
+            'school'=>$school
         ));
     }
 
@@ -75,7 +85,7 @@ class SchoolController extends Controller
             }
         }
 
-        return $this->render('ImieSkillsBundle:school:update.html.twig', array(
+        return $this->render('ImieSkillsBundle:school:modify.html.twig', array(
             'form' => $form->createView(),
             'id' => $id
         ));

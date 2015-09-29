@@ -3,22 +3,22 @@
 {% block article %}
     <h2><span class="glyphicon glyphicon-education"></span> Liste des formations</h2>
     <hr/>
+    <a class="btn btn-primary" href="javascript:history.go(-1)" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
     <a class="btn btn-primary" href="{{ path('imie_skills_course_add') }}" role="button"><span class="glyphicon glyphicon-plus"></span> Ajouter une formation</a>
-
     <hr/>
 
     <table class="table table-striped">
       <thead>
-        <th>Formation</th>
-        <th>Ecole</th>
+      <th>Ecole</th>
+      <th>Formation</th>
       </thead>
       <tbody>
         {% for course in courses %}
         <tr>
-          <td>{{ course.course }}</td>
-          <td>{{ course.school.schoolName }}</td>
-          <td><a href="{{ path('imie_skills_course_modify', {id:course.id}) }}"><span class="glyphicon glyphicon-cog"></span></a></td>
-          <td><a href="{{ path('imie_skills_course_delete', {id:course.id}) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
+            <td>{{ course.school.schoolName }}</td>
+            <td><a href="{{ path('imie_skills_course_detail', {id:course.id}) }}">{{ course.course }}</span></a></td>
+            <td><a href="{{ path('imie_skills_course_modify', {id:course.id}) }}"><span class="glyphicon glyphicon-cog"></span></a></td>
+            <td><a href="{{ path('imie_skills_course_delete', {id:course.id}) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
         </tr>
         {% endfor %}
       </tbody>
