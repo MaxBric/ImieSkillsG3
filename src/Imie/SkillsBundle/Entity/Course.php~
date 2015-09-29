@@ -28,13 +28,21 @@ class Course
      */
     private $course;
     /**
-     * @ORM\OneToMany(targetEntity="Promo", mappedBy="course")
+     * @ORM\OneToMany(targetEntity="Promo", mappedBy="course", cascade={"remove"})
      */
     private $promos;
     /**
      * @ORM\ManyToOne(targetEntity="School", inversedBy="courses")
      */
     private $school;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="courseFullName", type="string", length=255)
+     *
+     */
+    private $courseFullName;
 
     /**
      * Get id
@@ -139,4 +147,5 @@ class Course
     {
         return $this->promos;
     }
+    
 }

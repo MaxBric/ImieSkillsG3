@@ -14,17 +14,23 @@ class CourseController extends Controller
             ->getManager()
             ->getRepository('ImieSkillsBundle:Course')
             ->getCoursesOrderedById();
-//        $schools = $this->getDoctrine()
-//            ->getManager()
-//            ->getRepository('ImieSkillsBundle:Course')
-//            ->getSchoolsOrderedById();
 
         return $this->render('ImieSkillsBundle:Course:index.html.twig', array(
             'courses' => $courses,
-//            'schools' => $schools
         ));
 
     }
+
+    public function detailAction(Request $req, $id){
+        $course = $this->getDoctrine()
+            ->getRepository('ImieSkillsBundle:Course')
+            ->getCourseById($id);
+
+        return $this->render('ImieSkillsBundle:Course:detail.html.twig',array(
+            'course'=>$course
+        ));
+    }
+
     public function addAction(Request $req){
 
         $course = new Course();
@@ -38,9 +44,10 @@ class CourseController extends Controller
         if($form->isValid()){
             try{
                 $em = $this->getDoctrine()->getManager();
+                $course->setCourseFullName();
                 $em->persist($course);
                 $em->flush();
-                return $this->redirect($this->generateUrl('imie_skills_course_add'));
+                return $this->redirect($this->generateUrl('imie_skills_course_index'));
             }
             catch (\Doctrine\DBAL\DBALException $e){
                 echo $e->getMessage();
@@ -76,7 +83,7 @@ class CourseController extends Controller
             }
         }
 
-        return $this->render('ImieSkillsBundle:course:update.html.twig', array(
+        return $this->render('ImieSkillsBundle:course:modify.html.twig', array(
             'form' => $form->createView(),
             'id' => $id
         ));

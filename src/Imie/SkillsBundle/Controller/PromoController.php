@@ -33,9 +33,10 @@ class PromoController extends Controller
         if($form->isValid()){
             try{
                 $em = $this->getDoctrine()->getManager();
+                $promo->setPromoFullName();
                 $em->persist($promo);
                 $em->flush();
-                return $this->redirect($this->generateUrl('imie_skills_promo_add'));
+                return $this->redirect($this->generateUrl('imie_skills_promo_index'));
             }
             catch (\Doctrine\DBAL\DBALException $e){
                 echo $e->getMessage();
@@ -43,6 +44,17 @@ class PromoController extends Controller
         }
         return $this->render('ImieSkillsBundle:Promo:add.html.twig', array(
             'form' => $form->createView()
+        ));
+    }
+
+    public function detailAction(Request $req, $id){
+
+        $users = $this->getDoctrine()
+            ->getRepository('ImieSkillsBundle:User')
+            ->getUsersByPromoId($id);
+
+        return $this->render('ImieSkillsBundle:Promo:detail.html.twig',array(
+            'users'=>$users
         ));
     }
 
@@ -70,14 +82,13 @@ class PromoController extends Controller
             }
         }
 
-        return $this->render('ImieSkillsBundle:promo:update.html.twig', array(
+        return $this->render('ImieSkillsBundle:promo:modify.html.twig', array(
             'form' => $form->createView(),
             'id' => $id
         ));
     }
 
     public function deleteAction(Request $req, $id) {
-
         $em = $this->getDoctrine()->getManager();
 
         $repo = $em->getRepository('ImieSkillsBundle:Promo');

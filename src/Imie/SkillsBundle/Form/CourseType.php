@@ -16,11 +16,6 @@ class CourseType extends AbstractType {
   public function buildForm(FormBuilderInterface $builder, array $options) {
     $builder
     ->add('course')
-    //            ->add('promos', 'entity', array(
-    //                'class' => 'ImieSkillsBundle:Promo',
-    //                'choice_label' => 'promoName',
-    //                'multiple' => true
-    //            ))
     ->add('school', 'entity', array(
       'class' => 'ImieSkillsBundle:School',
       'choice_label' => 'schoolName'

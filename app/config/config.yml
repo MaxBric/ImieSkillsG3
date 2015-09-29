@@ -9,7 +9,7 @@ parameters:
     locale: en
 
 framework:
-    
+
     #esi:             ~
     translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
@@ -37,7 +37,7 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     form:
-        resources : ['bootstrap_3_layout.html.twig']
+        resources: ['bootstrap_3_layout.html.twig']
 
 
 # Assetic Configuration
@@ -87,6 +87,6 @@ swiftmailer:
 # fos user
 
 fos_user:
-    db_driver:     orm                       
-    firewall_name: main                      
+    db_driver:     orm
+    firewall_name: main
     user_class:    Imie\SkillsBundle\Entity\User

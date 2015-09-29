@@ -1,23 +1,25 @@
 {% extends 'ImieSkillsBundle::layout.html.twig' %}
 
 {% block article %}
-<<<<<<< HEAD
-    <h2>Liste des formations</h2>
-    <a href="{{ path('imie_skills_promo_add') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter une formation</a>
-    <hr/>
-    <a href="#"><span class="glyphicon glyphicon-cog"></span></a>
-    <a href="#"><span class="glyphicon glyphicon-cog"></span></a>
-    <a href="#"><span class="glyphicon glyphicon-cog"></span></a>
-    <hr/>
+<ol class="breadcrumb">
+  <li><a href="{{ path('imie_skills_home') }}">Accueil</a></li>
+   <li class="active">Liste des classes</li>
+</ol>
+  <h2><span class="glyphicon glyphicon-education"></span> Liste des classes</h2>
+   <hr/>
+    <a class="btn btn-primary" href="{{ path('imie_skills_panel') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
+    <a class="btn btn-primary" href="{{ path('imie_skills_promo_add') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter une formation</a>
     <table class="table table-striped">
         <thead>
         <th>Formation</th>
-        <th>promo</th>
+        <th>Promo</th>
+        <th>Ecole</th>
         </thead>
         <tbody>
         {% for promo in promos %}
                 <td>{{ promo.course.course }}</td>
-                <td>{{ promo.promoName }}</td>
+                <td><a href="{{ path('imie_skills_promo_detail', {id:promo.id}) }}">{{ promo.promoName }}</span></a></td>
+                <td>{{ promo.course.school.schoolName }}</td>
                 <td><a href="{{ path('imie_skills_promo_modify', {id:promo.id}) }}"><span class="glyphicon glyphicon-cog"></span></a></td>
                 <td><a href="{{ path('imie_skills_promo_delete', {id:promo.id}) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
             </tr>

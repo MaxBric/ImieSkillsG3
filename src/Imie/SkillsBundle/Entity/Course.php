@@ -37,6 +37,14 @@ class Course
     private $school;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="courseFullName", type="string", length=255)
+     *
+     */
+    private $courseFullName;
+
+    /**
      * Get id
      *
      * @return integer
@@ -138,5 +146,29 @@ class Course
     public function getPromos()
     {
         return $this->promos;
+    }
+    
+
+    /**
+     * Set courseFullName
+     *
+     * @param string $courseFullName
+     * @return Course
+     */
+    public function setCourseFullName()
+    {
+        $this->courseFullName = $this->school->getSchoolName().' - '.$this->getCourse();
+
+        return $this;
+    }
+
+    /**
+     * Get courseFullName
+     *
+     * @return string 
+     */
+    public function getCourseFullName()
+    {
+        return $this->courseFullName;
     }
 }

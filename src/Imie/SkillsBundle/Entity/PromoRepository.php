@@ -14,7 +14,7 @@ class promoRepository extends EntityRepository
 {
   public function getPromosOrderedById() {
     return $this->createQueryBuilder('p')
-    ->orderBy('p.id')
+    ->orderBy('p.course')
     ->getQuery()
     ->getResult();
   }
