@@ -56,12 +56,12 @@ class UserType extends AbstractType {
                     'required' => false,
                     'label' => 'Image :'
                 ))
-                ->add('Valider', 'submit', array(
-                    'attr' => array('class' => 'btn btn-primary'),
-                ))
                 ->add('promo', 'entity', array(
                     'class' => 'ImieSkillsBundle:Promo',
-                    'choice_label' => 'promoName'
+                    'choice_label' => 'promoFullName'
+                ))
+                ->add('Valider', 'submit', array(
+                    'attr' => array('class' => 'btn btn-primary'),
                 ))
         ;
     }

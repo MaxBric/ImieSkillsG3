@@ -33,9 +33,10 @@ class PromoController extends Controller
         if($form->isValid()){
             try{
                 $em = $this->getDoctrine()->getManager();
+                $promo->setPromoFullName();
                 $em->persist($promo);
                 $em->flush();
-                return $this->redirect($this->generateUrl('imie_skills_promo_add'));
+                return $this->redirect($this->generateUrl('imie_skills_promo_index'));
             }
             catch (\Doctrine\DBAL\DBALException $e){
                 echo $e->getMessage();

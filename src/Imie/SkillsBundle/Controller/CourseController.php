@@ -44,6 +44,7 @@ class CourseController extends Controller
         if($form->isValid()){
             try{
                 $em = $this->getDoctrine()->getManager();
+                $course->setCourseFullName();
                 $em->persist($course);
                 $em->flush();
                 return $this->redirect($this->generateUrl('imie_skills_course_index'));

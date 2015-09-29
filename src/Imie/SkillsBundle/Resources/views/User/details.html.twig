@@ -10,7 +10,7 @@
 <h2><span class="glyphicon glyphicon-user"></span> Détails de l'utilisateur</h2>
 <a class="btn btn-primary" href="{{ path('imie_skills_user_index') }}"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
 {% if (user.id == app.user.id or is_granted("ROLE_ADMIN")) %}
-<a class="btn btn-warning" href="{{ path('imie_skills_user_modify', {id:app.user.id}) }}"><span class="glyphicon glyphicon-cog"></span> Modifier</a>
+<a class="btn btn-warning" href="{{ path('imie_skills_user_modify', {id:user.id}) }}"><span class="glyphicon glyphicon-cog"></span> Modifier</a>
 <a class="btn btn-info" href="{{ path('imie_skills_project_add') }}" role="button"><span class="glyphicon glyphicon-plus"></span> Ajouter un projet</a>
 <a class="btn btn-info" href="{{ path('imie_skills_user_addSkill') }}" role="button"><span class="glyphicon glyphicon-plus"></span> Ajouter une compétence</a>
 {% endif %}

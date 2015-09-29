@@ -7,9 +7,9 @@
             <li><a href="{{ path('imie_skills_school_index') }}">Liste des ecoles</a></li>
             <li class="active">{{ school.schoolName }}</li>
         </ol>
-        <h2><span class="glyphicon glyphicon-education"></span>{{ school.schoolName }}</h2>
+        <h2><span class="glyphicon glyphicon-education"></span> {{ school.schoolName }}</h2>
         <hr/>
-        <a class="btn btn-primary" href="javascript:history.go(-1)" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
+        <a class="btn btn-primary" href="{{ path('imie_skills_school_index') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
         <a class="btn btn-primary" href="{{ path('imie_skills_course_add') }}"><span class="glyphicon glyphicon-plus"></span> Ajouter une formation</a>
         <hr/>
         <table class="table table-striped">
