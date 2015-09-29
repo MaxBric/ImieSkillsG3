@@ -38,26 +38,24 @@ class SearchController extends Controller {
                     }
                     if ($search->type[$this->i] === 'Skill') {
                         $skillRepo = $em->getRepository('ImieSkillsBundle:Skill');
-                        $skillId = $skillRepo->getSkillByName($form["text"]->getData())->getId();
-                        var_dump($skillId);
-                        die();
-                        $userSkillRepo = $em->getRepository('ImieSkillsBundle:UserSkill');
-                        array_push($search->results, $skillRepo->getUsersBySkill($form["text"]->getData()));
+                        var_dump($skillRepo->getSkillByName($form["text"]->getData()));
+                        if ($skillRepo->getSkillByName($form["text"]->getData())) {
+                            var_dump($skillId);
+                            die();
+                            $skillId = $skillRepo->getSkillByName($form["text"]->getData())->getId();
+                            $userSkillRepo = $em->getRepository('ImieSkillsBundle:UserSkill');
+                            array_push($search->results, $skillRepo->getUsersBySkill($form["text"]->getData()));
+                        }
                     }
                 }
-                // var_dump($search);die();
                 return $this->render('ImieSkillsBundle:Search:index.html.twig', array(
-                            'form' => $form->createView(),
-                            'search' => $search
+                            'search' => $search,
+                            'form' => $form->createView()
                 ));
             } catch (\Doctrine\DBAL\DBALException $e) {
                 echo $e->getMessage();
             }
         }
-        return $this->render('ImieSkillsBundle:Search:index.html.twig', array(
-                    'search' => $search,
-                    'form' => $form->createView()
-        ));
     }
 
 }

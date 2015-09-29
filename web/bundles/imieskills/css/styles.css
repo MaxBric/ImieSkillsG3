@@ -1,6 +1,11 @@
-#header-logo {
+#header-logo, #header-user-picture {
   padding-top: 0px;
   padding-bottom: 0px;
+}
+
+#header-user-picture {
+  margin-top: 8px;
+  margin-right: 0;
 }
 
 body {
@@ -42,7 +47,6 @@ ul {
   vertical-align: top;
   margin: 21px;
 }
-
 
 #project-square {
   background-color: #5cb85c;

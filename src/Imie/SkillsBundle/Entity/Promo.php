@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * promo
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Imie\SkillsBundle\Entity\promoRepository")
+ * @ORM\Entity(repositoryClass="Imie\SkillsBundle\Entity\PromoRepository")
  */
 class Promo
 {
@@ -119,7 +119,7 @@ class Promo
     /**
      * Get course
      *
-     * @return \Imie\SkillsBundle\Entity\Course 
+     * @return \Imie\SkillsBundle\Entity\Course
      */
     public function getCourse()
     {
@@ -141,7 +141,7 @@ class Promo
      */
     public function setPromoFullName()
     {
-        $this->promoFullName = $this->course->getSchool()->getSchoolName().' - '.$this->course->getCourse().' - '.$this->getPromoName();
+        $this->promoFullName = $this->course->getSchool()->getSchoolName().' - '.$this->course->getCourse().$this->getPromoName();
 
         return $this;
     }
@@ -149,7 +149,7 @@ class Promo
     /**
      * Get promoFullName
      *
-     * @return string 
+     * @return string
      */
     public function getPromoFullName()
     {

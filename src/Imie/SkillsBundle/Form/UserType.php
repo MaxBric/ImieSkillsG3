@@ -44,6 +44,10 @@ class UserType extends AbstractType {
                 ->add('userDescription', null, array(
                     'label' => 'Description :'
                 ))
+                ->add('promo', 'entity', array(
+                    'class' => 'ImieSkillsBundle:Promo',
+                    'choice_label' => 'promoFullName'
+                ))
                 ->add('isAdmin', 'checkbox', array(
                     'label' => 'Rendre Administrateur',
                     'required' => false,
@@ -51,10 +55,6 @@ class UserType extends AbstractType {
                 ->add('image', new ImageType(), array(
                     'required' => false,
                     'label' => 'Image :'
-                ))
-                ->add('promo', 'entity', array(
-                    'class' => 'ImieSkillsBundle:Promo',
-                    'choice_label' => 'promoFullName'
                 ))
                 ->add('Valider', 'submit', array(
                     'attr' => array('class' => 'btn btn-primary'),

@@ -58,9 +58,16 @@ class Notification {
 
     /**
      * @var \User
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="notifications")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="sentNotifications")
      */
-    private $notificationUser;
+    private $notificationSender;
+    
+    /**
+     * @var \User
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="receivedNotification")
+     */
+    private $notificationAdressee;
+    
 
     public function __construct() {
         $this->notificationDate = new \DateTime("now");

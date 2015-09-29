@@ -214,11 +214,13 @@ imie_skills_user_deleteSkill:
     requirements:
         id: \d+
 
+
 # -------- NOTIFICATION --------
 
 imie_skills_notification_index:
     path:    /notification/index/
     defaults: {_controller: ImieSkillsBundle:Notification:index }
+
 
 imie_skills_notification_add:
     path:    /notification/add
@@ -234,8 +236,9 @@ imie_skills_notification_delete:
     defaults : {_controller: ImieSkillsBundle:Notification:delete }
     requirements:
         id: \d+
-        
-# -------- Notification Level ---------
+
+
+# -------- Notification Type ---------
 imie_skills_notification_type_index:
     path:    /notificationType/index/
     defaults: {_controller: ImieSkillsBundle:NotificationType:index }
@@ -244,16 +247,16 @@ imie_skills_notification_type_add:
     path:    /notificationType/add
     defaults: {_controller: ImieSkillsBundle:NotificationType:add }
 
-
 imie_skills_notification_type_details:
     path:    /notificationType/{id}
-    defaults: {_controller: ImieSkillsBundle:Notification:details }
+    defaults: {_controller: ImieSkillsBundle:NotificationType:details }
 
 imie_skills_notification_type_delete:
     path:    /notificationType/delete/{id}
     defaults : {_controller: ImieSkillsBundle:NotificationType:delete }
     requirements:
         id: \d+
+
 
 # -------- Level --------
 
@@ -270,6 +273,7 @@ imie_skills_level_delete:
     defaults : {_controller: ImieSkillsBundle:Level:delete }
     requirements:
         id: \d+
+
 
 # -------- MISC. --------
 
@@ -290,4 +294,3 @@ imie_skills_contact:
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
-

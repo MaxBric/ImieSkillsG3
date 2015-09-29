@@ -120,9 +120,15 @@ class User extends BaseUser {
 
     /**
      * @var \Notification
-     * @ORM\OneToMany(targetEntity="Notification", mappedBy="notificationUser")
+     * @ORM\OneToMany(targetEntity="Notification", mappedBy="notificationSender")
      */
-    private $notifications;
+    private $sentNotifications;
+    
+    /**
+     * @var \Notification
+     * @ORM\OneToMany(targetEntity="Notification", mappedBy="notificationAdressee")
+     */
+    private $receivedNotifications;
 
     /**
      * @var bool
@@ -150,7 +156,8 @@ class User extends BaseUser {
         $this->createdProjects = new ArrayCollection();
         $this->managedProjects = new ArrayCollection();
         $this->joinedProjects = new ArrayCollection();
-        $this->notifications = new ArrayCollection();
+        $this->sentNotifications = new ArrayCollection();
+        $this->receivedNotifications = new ArrayCollection();
         $this->userBirthday = new \DateTime();
         $this->enabled = true;
     }
@@ -518,5 +525,71 @@ class User extends BaseUser {
     public function getIsAdmin()
     {
         return $this->isAdmin;
+    }
+
+    /**
+     * Add sentNotifications
+     *
+     * @param \Imie\SkillsBundle\Entity\Notification $sentNotifications
+     * @return User
+     */
+    public function addSentNotification(\Imie\SkillsBundle\Entity\Notification $sentNotifications)
+    {
+        $this->sentNotifications[] = $sentNotifications;
+
+        return $this;
+    }
+
+    /**
+     * Remove sentNotifications
+     *
+     * @param \Imie\SkillsBundle\Entity\Notification $sentNotifications
+     */
+    public function removeSentNotification(\Imie\SkillsBundle\Entity\Notification $sentNotifications)
+    {
+        $this->sentNotifications->removeElement($sentNotifications);
+    }
+
+    /**
+     * Get sentNotifications
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSentNotifications()
+    {
+        return $this->sentNotifications;
+    }
+
+    /**
+     * Add receivedNotifications
+     *
+     * @param \Imie\SkillsBundle\Entity\Notification $receivedNotifications
+     * @return User
+     */
+    public function addReceivedNotification(\Imie\SkillsBundle\Entity\Notification $receivedNotifications)
+    {
+        $this->receivedNotifications[] = $receivedNotifications;
+
+        return $this;
+    }
+
+    /**
+     * Remove receivedNotifications
+     *
+     * @param \Imie\SkillsBundle\Entity\Notification $receivedNotifications
+     */
+    public function removeReceivedNotification(\Imie\SkillsBundle\Entity\Notification $receivedNotifications)
+    {
+        $this->receivedNotifications->removeElement($receivedNotifications);
+    }
+
+    /**
+     * Get receivedNotifications
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getReceivedNotifications()
+    {
+        return $this->receivedNotifications;
     }
 }

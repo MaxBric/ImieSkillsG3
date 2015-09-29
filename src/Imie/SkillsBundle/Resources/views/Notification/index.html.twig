@@ -8,20 +8,22 @@
 <h2><span class="glyphicon glyphicon-bell"></span> Liste des notifications</h2>
 <hr/>
 <a class="btn btn-primary" href="{{ path('imie_skills_home') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
-<a class="btn btn-primary" href="{{ path('imie_skills_notification_add') }}" role="button"><span class="glyphicon glyphicon-send"></span> Envoyer une notification</a>
+<a class="btn btn-info" href="{{ path('imie_skills_notification_add') }}" role="button"><span class="glyphicon glyphicon-send"></span> Envoyer une notification</a>
 <hr/>
 <table class="table table-striped">
   <thead>
-    <th>Nom</th>
-    <th>Description</th>
+    <th class="col-md-2">Nom</th>
+    <th class="col-md-10">Description</th>
   </thead>
   <tbody>
     {% for notification in notifications if notifications is defined %}
+    {%if app.user.id is sameas(notification.notificationAdressee.id) %}
     <tr>
       <td><a href="{{ path('imie_skills_notification_details', {id:notification.id}) }}">{{ notification.notificationName }}</a></td>
       <td>{{ notification.notificationDescription }}</td>
-      <td><a href="{{ path('imie_skills_notification_delete', {id:notification.id}) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
+      <td><a class="btn btn-danger" href="{{ path('imie_skills_notification_delete', {id:notification.id}) }}" role="button"><span class="glyphicon glyphicon-trash"></span></a></td>
     </tr>
+    {% endif %}
     {% endfor %}
   </tbody>
 </table>

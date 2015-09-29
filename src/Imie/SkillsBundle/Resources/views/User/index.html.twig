@@ -9,14 +9,14 @@
 <hr/>
 <a class="btn btn-primary" href="{{ path('imie_skills_home') }}" role="button"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
 {% if is_granted("ROLE_ADMIN") %}
-<a class="btn btn-primary" href="{{ path('imie_skills_user_add') }}" role="button"><span class="glyphicon glyphicon-plus"></span> Ajouter un utilisateur</a>
+<a class="btn btn-info" href="{{ path('imie_skills_user_add') }}" role="button"><span class="glyphicon glyphicon-plus"></span> Ajouter un utilisateur</a>
 {% endif %}
 <hr/>
 <table class="table table-striped">
   <thead>
     <th class="col-md-1"></th>
     <th class="col-md-2">Nom</th>
-    <th class="col-md-3">Promo</th>
+    {#<th class="col-md-3">Promo</th>#}
     <th class="col-md-4">Compétences</th>
     <th class="col-md-1">Modifier</th>
     <th class="col-md-1">Supprimer</th>
@@ -25,8 +25,8 @@
     {% for user in users if users is defined %}
     <tr>
       <td><a href="{{ path('imie_skills_user_details', {id:user.id})}}">{% if user.image %}<img src="{{ asset(user.image.webPath) }}" alt="{{ asset(user.image.imageAlt) }}" width="48" height="48" class="img-circle">{% endif %}</a></td>
-      <td><a href="{{ path('imie_skills_user_details', {id:user.id})}}">{{ user.userFullName }}</a></td>
-      <td>{{ user.promo.course.course }}</td>
+      <td><a href="{{ path('imie_skills_user_details', {id:user.id})}}">" "{{ user.userFullName }}</a></td>
+      {#<td>{{ user.promo.course }}</td>#}
       <td>{% if user.skills %}
         <ul>
           {% for tabSkill in user.skills %}
