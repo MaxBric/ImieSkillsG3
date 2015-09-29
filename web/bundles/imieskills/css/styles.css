@@ -5,7 +5,11 @@
 
 #header-user-picture {
   margin-top: 8px;
-  margin-right: 0;
+  padding-right: 8px;
+}
+
+#header-user-name {
+  padding-left: 0;
 }
 
 body {
