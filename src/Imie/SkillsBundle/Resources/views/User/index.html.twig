@@ -25,7 +25,7 @@
     {% for user in users if users is defined %}
     <tr>
       <td><a href="{{ path('imie_skills_user_details', {id:user.id})}}">{% if user.image %}<img src="{{ asset(user.image.webPath) }}" alt="{{ asset(user.image.imageAlt) }}" width="48" height="48" class="img-circle">{% endif %}</a></td>
-      <td><a href="{{ path('imie_skills_user_details', {id:user.id})}}">{{ user.userFullName }}</a></td>
+      <td><a href="{{ path('imie_skills_user_details', {id:user.id})}}">" "{{ user.userFullName }}</a></td>
       {#<td>{{ user.promo.course }}</td>#}
       <td>{% if user.skills %}
         <ul>
