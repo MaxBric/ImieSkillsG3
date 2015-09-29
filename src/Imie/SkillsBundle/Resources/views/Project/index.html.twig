@@ -34,7 +34,7 @@
         {% endfor %}
       </ul></td>
       {% if (project.creator.id == app.user.id or is_granted("ROLE_ADMIN")) %}
-      <td><a class="btn btn-warning" href="{{ path('imie_skills_project_modify', {id:project.id}) }}" role="button"><span class="glyphicon glyphicon-cog"></span></a></td>
+      <td><a class="btn btn-warning" href="{{ path('imie_skills_project_modify', {id:project.id}, {creatorId:project.creator.id}) }}" role="button"><span class="glyphicon glyphicon-cog"></span></a></td>
       <td>
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".project{{project.id}}"><span class="glyphicon glyphicon-trash"></span></button>
         <div class="modal fade project{{project.id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">

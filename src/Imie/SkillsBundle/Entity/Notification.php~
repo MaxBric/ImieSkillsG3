@@ -52,7 +52,7 @@ class Notification {
 
     /**
      * @var \Project
-     * @ORM\ManyToOne(targetEntity="Project", inversedBy="notificationProjects")
+     * @ORM\ManyToOne(targetEntity="Project", inversedBy="projectNotifications")
      */
     private $notificationProject;
 
@@ -140,4 +140,73 @@ class Notification {
         return $this->notificationProject;
     }
 
+
+    /**
+     * Set notificationName
+     *
+     * @param string $notificationName
+     * @return Notification
+     */
+    public function setNotificationName($notificationName)
+    {
+        $this->notificationName = $notificationName;
+
+        return $this;
+    }
+
+    /**
+     * Get notificationName
+     *
+     * @return string 
+     */
+    public function getNotificationName()
+    {
+        return $this->notificationName;
+    }
+
+    /**
+     * Set notificationDescription
+     *
+     * @param string $notificationDescription
+     * @return Notification
+     */
+    public function setNotificationDescription($notificationDescription)
+    {
+        $this->notificationDescription = $notificationDescription;
+
+        return $this;
+    }
+
+    /**
+     * Get notificationDescription
+     *
+     * @return string 
+     */
+    public function getNotificationDescription()
+    {
+        return $this->notificationDescription;
+    }
+
+    /**
+     * Set notificationType
+     *
+     * @param \Imie\SkillsBundle\Entity\NotificationType $notificationType
+     * @return Notification
+     */
+    public function setNotificationType(\Imie\SkillsBundle\Entity\NotificationType $notificationType = null)
+    {
+        $this->notificationType = $notificationType;
+
+        return $this;
+    }
+
+    /**
+     * Get notificationType
+     *
+     * @return \Imie\SkillsBundle\Entity\NotificationType 
+     */
+    public function getNotificationType()
+    {
+        return $this->notificationType;
+    }
 }

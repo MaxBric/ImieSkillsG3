@@ -98,6 +98,13 @@ imie_skills_project_delete:
     requirements:
         id: \d+
 
+imie_skills_project_deleteUser:
+    path:    /project/deleteUser/{id1}/{id2}
+    defaults: { _controller: ImieSkillsBundle:Project:deleteUser }
+    requirements:
+        id1: \d+
+        id2: \d+
+
 
 # -------- STATE --------
 
