@@ -6,8 +6,8 @@
   <li><a href="{{ path('imie_skills_user_index') }}">Liste des utilisateurs</a></li>
   <li class="active">Détails de l'utilisateur</li>
 </ol>
-<hr/>
 <h2><span class="glyphicon glyphicon-user"></span> Profil de {{ user.userFullName }}</h2>
+<hr/>
 <a class="btn btn-primary" href="{{ path('imie_skills_user_index') }}"><span class="glyphicon glyphicon-menu-left"></span> Retour</a>
 {% if (user.id == app.user.id or is_granted("ROLE_ADMIN")) %}
 <a class="btn btn-warning" href="{{ path('imie_skills_user_modify', {id:user.id}) }}"><span class="glyphicon glyphicon-cog"></span> Modifier</a>
