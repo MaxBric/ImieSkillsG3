@@ -58,7 +58,7 @@
     </div>
     <hr/>
     <div class="col-md-12 project-page-table">
-        <h3>Fondateur : {{ project.creator.userFullName }}</h3>
+        <h4>Fondateur : <a href="{{ path('imie_skills_user_details', {id:project.manager.id})}}">{{ project.creator.userFullName }}</a></h4>
         <h4>Chef de projet : {% if project.manager is not null %}<a href="{{ path('imie_skills_user_details', {id:project.manager.id})}}">{{ project.manager.userFullName }}</a>{% else %}À recruter{% endif %}</h4>
         <h4>Équipe :</h4>
         <table class="table table-striped">

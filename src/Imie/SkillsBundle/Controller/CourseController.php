@@ -14,11 +14,11 @@ class CourseController extends Controller {
     ->getRepository('ImieSkillsBundle:Course')
     ->getCoursesOrderedById();
     return $this->render('ImieSkillsBundle:Course:index.html.twig', array(
-      'courses' => $courses,
+      'courses' => $courses
     ));
   }
 
-  public function detailAsction(Request $req, $id) {
+  public function detailsAction(Request $req, $id) {
     $course = $this->getDoctrine()
     ->getRepository('ImieSkillsBundle:Course')
     ->getCourseById($id);

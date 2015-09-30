@@ -13,21 +13,23 @@
 <table class="table table-striped">
   <thead>
     <th class="col-md-1"></th>
-    <th class="col-md-11">Membres de la promo</th>
+    <th class="col-md-10">Membres de la promo</th>
+    <th class="col-md-1">Supprimer</th>
   </thead>
   <tbody>
-    {% for user in users %}
+    {% for user in users if users is defined %}
     <tr>
-      <td><a href="{{ path('imie_skills_user_details', {id:user.id})}}"><img src="{{ asset(user.image.webPath) }}" alt="{{ asset(user.image.imageAlt) }}" width="48" height="48" class="img-circle"></a></td>
+      <td><a href="{{ path('imie_skills_user_details', {id:user.id})}}">{% if user.image %}<img src="{{ asset(user.image.webPath) }}" alt="{{ asset(user.image.imageAlt) }}" width="48" height="48" class="img-circle">{% endif %}</a></td>
+      <td><a href="{{ path('imie_skills_user_details', {id:user.id})}}">{{ user.userFullName }}</a></td>
       <td>
-        <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".promo{{promo.id}}"><span class="glyphicon glyphicon-trash"></span></button>
-        <div class="modal fade promo{{promo.id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".promo{{user.promo.id}}"><span class="glyphicon glyphicon-trash"></span></button>
+        <div class="modal fade promo{{user.promo.id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
           <div class="modal-dialog modal-sm">
             <div class="modal-content">
-              <div class="modal-body">Supprimer la promo {{ promo.promoName }} ?</div>
+              <div class="modal-body">Supprimer la promo {{ user.promo.promoName }} ?</div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                <a class="btn btn-danger" href="{{ path('imie_skills_promo_delete', {id:promo.id}) }}" role="button">Confirmer</a>
+                <a class="btn btn-danger" href="{{ path('imie_skills_promo_delete', {id:user.promo.id}) }}" role="button">Confirmer</a>
               </div>
             </div>
           </div>

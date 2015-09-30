@@ -47,9 +47,7 @@ class ProjectController extends Controller {
           $em->persist($project);
           $em->flush();
           $req->getSession()->getFlashBag()->add('success', 'Projet ajouté');
-          return $this->redirect($this->generateUrl('imie_skills_project_details', array(
-            'id' => $id
-          )));
+          return $this->redirect($this->generateUrl('imie_skills_project_index'));
         } catch (\Doctrine\DBAL\DBALException $e) {
           $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de l\'ajout :'
           . PHP_EOL . $e->getMessage());
@@ -103,6 +101,7 @@ class ProjectController extends Controller {
           }
           $em->flush();
           $req->getSession()->getFlashBag()->add('success', 'Projet modifié');
+          return $this->redirect($this->generateUrl('imie_skills_project_index'));
         } catch (\Exception $e) {
           $req->getSession()->getFlashBag()->add('danger', 'Erreur lors de la modification :'
           . $e->getMessage());

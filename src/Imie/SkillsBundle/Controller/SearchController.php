@@ -8,13 +8,9 @@ use Imie\SkillsBundle\Entity\Search;
 use Imie\SkillsBundle\Form\SearchType;
 
 class SearchController extends Controller {
-
   public $i;
 
   public function indexAction(Request $req) {
-    if (false === $this->get('security.context')->isGranted('ROLE_USER')) {
-      throw new AccessDeniedException();
-    }
     $search = new Search();
 
     $form = $this->createForm(new SearchType(), $search, array(
@@ -26,8 +22,7 @@ class SearchController extends Controller {
       try {
         $em = $this->getDoctrine()->getManager();
         $em->persist($search);
-        for ($this->i = 0; $this->i < sizeof($search->type); $this->i++) {
-          // var_dump($search);die();
+        for ($this->i=0; $this->i < sizeof($search->type); $this->i++) {
           if ($search->type[$this->i] === 'User') {
             $userRepo = $em->getRepository('ImieSkillsBundle:User');
             array_push($search->results, $userRepo->getUsersByNames($form["text"]->getData()));
@@ -38,24 +33,27 @@ class SearchController extends Controller {
           }
           if ($search->type[$this->i] === 'Skill') {
             $skillRepo = $em->getRepository('ImieSkillsBundle:Skill');
-            var_dump($skillRepo->getSkillByName($form["text"]->getData()));
             if ($skillRepo->getSkillByName($form["text"]->getData())) {
-              var_dump($skillId);
-              die();
-              $skillId = $skillRepo->getSkillByName($form["text"]->getData())->getId();
+              $skillId  = $skillRepo->getSkillByName($form["text"]->getData())->getId();
               $userSkillRepo = $em->getRepository('ImieSkillsBundle:UserSkill');
               array_push($search->results, $skillRepo->getUsersBySkill($form["text"]->getData()));
             }
           }
         }
         return $this->render('ImieSkillsBundle:Search:index.html.twig', array(
-          'search' => $search,
-          'form' => $form->createView()
+          'form' => $form->createView(),
+          'search' => $search
         ));
       } catch (\Doctrine\DBAL\DBALException $e) {
         echo $e->getMessage();
       }
     }
+    return $this->render('ImieSkillsBundle:Search:index.html.twig', array(
+      'search' => $search,
+      'form' => $form->createView()
+    ));
   }
+
+
 
 }
